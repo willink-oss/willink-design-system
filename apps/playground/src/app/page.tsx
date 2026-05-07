@@ -1,6 +1,18 @@
 "use client";
 
-import { Badge, Button, Input, Label, Textarea } from "@willink-labs/react";
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Textarea,
+} from "@willink-labs/react";
 import { BRANDS, type Brand } from "@willink-labs/tailwind-preset";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -184,6 +196,78 @@ export default function Page() {
 
           <Button type="submit">送信する</Button>
         </form>
+      </section>
+
+      {/* ============================================================
+       * CARDS section — Feature / Club / Sponsor Plan 3 パターン
+       * ============================================================ */}
+      <section className="max-w-5xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold mb-2">Cards</h2>
+        <p className="text-sm text-muted mb-6">
+          compound (<code className="font-mono">Card / CardHeader / CardTitle /
+            CardDescription / CardContent / CardFooter</code>) + variants{" "}
+          <code className="font-mono">default / elevated</code>。
+          i-willink.com の Feature Card / clublink-platform の Club Card・Sponsor Plan
+          Card 3 パターンを 1 つの compound に集約可能。
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Feature Card 風 (i-willink.com) */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Feature Card</CardTitle>
+              <CardDescription>i-willink.com 風 — title + 説明文</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-fg">
+                サービスの特徴を簡潔に紹介。default variant (border のみ・shadow なし)。
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Club Card 風 (clublink-platform) */}
+          <Card variant="elevated">
+            <CardHeader>
+              <div className="flex gap-1.5 mb-1">
+                <Badge variant="default">スポーツ</Badge>
+                <Badge variant="outline">東京</Badge>
+              </div>
+              <CardTitle>i-Willink Running</CardTitle>
+              <CardDescription>
+                ランニング初心者から完走者まで、走る楽しさを共有するコミュニティ。
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
+              <Button variant="outline" size="sm">
+                詳細を見る
+              </Button>
+            </CardFooter>
+          </Card>
+
+          {/* Sponsor Plan Card 風 */}
+          <Card variant="elevated">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle>シルバー</CardTitle>
+                <Badge variant="success">人気</Badge>
+              </div>
+              <CardDescription>個人スポンサー向け</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-3xl font-bold">
+                ¥3,000<span className="text-base font-normal text-muted">/月</span>
+              </p>
+              <ul className="mt-3 space-y-1 text-sm text-fg">
+                <li>・公式 SNS へのお名前掲載</li>
+                <li>・年次イベント招待</li>
+                <li>・限定グッズ進呈</li>
+              </ul>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full">スポンサーになる</Button>
+            </CardFooter>
+          </Card>
+        </div>
       </section>
 
       {/* ============================================================

@@ -10,3 +10,15 @@ export { Badge, badgeVariants, type BadgeProps } from "./components/badge";
 export { Input, type InputProps } from "./components/input";
 export { Textarea, type TextareaProps } from "./components/textarea";
 export { Label, labelVariants, type LabelProps } from "./components/label";
+
+// PR4: Card (compound)
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cardVariants,
+  type CardProps,
+} from "./components/card";
