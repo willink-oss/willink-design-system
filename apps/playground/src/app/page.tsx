@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button } from "@willink-labs/react";
+import { Badge, Button, Input, Label, Textarea } from "@willink-labs/react";
 import { BRANDS, type Brand } from "@willink-labs/tailwind-preset";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -125,6 +125,65 @@ export default function Page() {
           <Badge variant="warning">Warning</Badge>
           <Badge variant="danger">Danger</Badge>
         </div>
+      </section>
+
+      {/* ============================================================
+       * FORM section — Input + Textarea + Label
+       * ============================================================ */}
+      <section className="max-w-5xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold mb-2">Form primitives</h2>
+        <p className="text-sm text-muted mb-6">
+          Input / Textarea / Label。error 状態は <code className="font-mono">aria-invalid</code> で。
+          Label の <code className="font-mono">required</code> prop で danger 色のアスタリスク表示。
+        </p>
+        <form
+          className="grid gap-4 max-w-md p-6 rounded-xl border border-border bg-bg"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <div className="space-y-1.5">
+            <Label htmlFor="ds-name" required>
+              お名前
+            </Label>
+            <Input id="ds-name" placeholder="山田 太郎" />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="ds-email" required>
+              メールアドレス
+            </Label>
+            <Input id="ds-email" type="email" placeholder="you@example.com" />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="ds-email-err" required>
+              メール (error 状態)
+            </Label>
+            <Input
+              id="ds-email-err"
+              type="email"
+              defaultValue="invalid"
+              aria-invalid
+              aria-describedby="ds-email-err-msg"
+            />
+            <p id="ds-email-err-msg" className="text-sm text-danger">
+              有効なメールアドレスを入力してください。
+            </p>
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="ds-message">お問い合わせ内容</Label>
+            <Textarea id="ds-message" rows={4} placeholder="どのようなご相談ですか?" />
+          </div>
+
+          <div className="space-y-1.5">
+            <Label htmlFor="ds-disabled" size="sm">
+              Disabled (読み取り専用例)
+            </Label>
+            <Input id="ds-disabled" disabled defaultValue="読み取り専用" />
+          </div>
+
+          <Button type="submit">送信する</Button>
+        </form>
       </section>
 
       {/* ============================================================
