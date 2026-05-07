@@ -1,10 +1,17 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
-  "$description": "i-Willink 本体ブランド (default) — purple 主軸",
+  "$description": "i-Willink 本体ブランド (default) — vibrant violet for premium tech. i-willink.com 本番準拠.",
   "brand": "i-willink",
   "color": {
-    "brand":    { "$value": "#7c3aed", "$type": "color", "$description": "purple-700" },
-    "brand-fg": { "$value": "#ffffff", "$type": "color" },
-    "accent":   { "$value": "#a855f7", "$type": "color", "$description": "purple-500" }
+    "brand":        { "$value": "#7c3aed", "$type": "color", "$description": "brand-600 (primary action)" },
+    "brand-fg":     { "$value": "#ffffff", "$type": "color" },
+    "brand-glow":   { "$value": "#8b5cf6", "$type": "color", "$description": "brand-500 (primary button shadow base)" },
+    "accent-cyan":  { "$value": "#06b6d4", "$type": "color", "$description": "AI tech accent" },
+    "accent-pink":  { "$value": "#ec4899", "$type": "color", "$description": "AI tech accent gradient terminus" }
+  },
+  "gradient": {
+    "subtle":  { "$value": "linear-gradient(to right bottom, #ffffff, #f5f3ff, #f0f9ff)", "$type": "gradient" },
+    "primary": { "$value": "linear-gradient(135deg, #7c3aed 0%, #2563eb 100%)",          "$type": "gradient" },
+    "ai":      { "$value": "linear-gradient(135deg, #06b6d4 0%, #8b5cf6 50%, #ec4899 100%)", "$type": "gradient" }
   }
 }

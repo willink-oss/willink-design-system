@@ -38,11 +38,22 @@ describe("primitive.json", () => {
     expect(primitive.color.neutral["50"].$value).toBe("#f8fafc");
     expect(primitive.color.neutral["950"].$value).toBe("#020617");
   });
+
+  it("brand scale is i-willink.com 準拠 (vibrant violet)", () => {
+    expect(primitive.color.brand["500"].$value).toBe("#8b5cf6");
+    expect(primitive.color.brand["600"].$value).toBe("#7c3aed");
+    expect(primitive.color.brand["700"].$value).toBe("#6d28d9");
+  });
+
+  it("has AI accent primitives (cyan + pink)", () => {
+    expect(primitive.color.cyan["500"].$value).toBe("#06b6d4");
+    expect(primitive.color.pink["500"].$value).toBe("#ec4899");
+  });
 });
 
 describe("semantic.json", () => {
-  it("has the 9 required semantic color slots", () => {
-    const required = ["bg", "fg", "muted", "border", "ring", "brand", "brand-fg", "accent"];
+  it("has the required semantic color slots", () => {
+    const required = ["bg", "fg", "muted", "border", "ring", "brand", "brand-fg", "brand-glow", "accent-cyan", "accent-pink"];
     for (const slot of required) {
       expect(semantic.color, `slot ${slot}`).toHaveProperty(slot);
     }
@@ -50,19 +61,29 @@ describe("semantic.json", () => {
 });
 
 describe("brand definitions", () => {
-  it("each brand defines brand / brand-fg / accent", () => {
+  it("each brand defines brand / brand-fg / brand-glow / accent-cyan / accent-pink", () => {
     for (const brandFile of [iWillink, clublink]) {
       expect(brandFile.color.brand.$value).toMatch(HEX);
       expect(brandFile.color["brand-fg"].$value).toMatch(HEX);
-      expect(brandFile.color.accent.$value).toMatch(HEX);
+      expect(brandFile.color["brand-glow"].$value).toMatch(HEX);
+      expect(brandFile.color["accent-cyan"].$value).toMatch(HEX);
+      expect(brandFile.color["accent-pink"].$value).toMatch(HEX);
     }
   });
 
-  it("i-willink brand is purple-700 #7c3aed", () => {
+  it("each brand has gradient definitions (subtle / primary / ai)", () => {
+    for (const brandFile of [iWillink, clublink]) {
+      expect(brandFile.gradient.subtle.$value).toMatch(/^linear-gradient/);
+      expect(brandFile.gradient.primary.$value).toMatch(/^linear-gradient/);
+      expect(brandFile.gradient.ai.$value).toMatch(/^linear-gradient/);
+    }
+  });
+
+  it("i-willink primary is brand-600 #7c3aed", () => {
     expect(iWillink.color.brand.$value).toBe("#7c3aed");
   });
 
-  it("clublink brand is blue-600 #2563eb", () => {
+  it("clublink primary is blue-600 #2563eb", () => {
     expect(clublink.color.brand.$value).toBe("#2563eb");
   });
 });

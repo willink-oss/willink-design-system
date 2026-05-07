@@ -2,16 +2,18 @@
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "$description": "Semantic tokens — 役割で命名。consumer は原則これを参照する。値は brand 軸ごとに上書きされる。default = i-willink",
   "color": {
-    "bg":        { "$value": "#ffffff",            "$type": "color", "$description": "ページ背景" },
-    "fg":        { "$value": "{color.neutral.900}", "$type": "color", "$description": "本文テキスト" },
-    "muted":     { "$value": "{color.neutral.500}", "$type": "color", "$description": "補助テキスト" },
-    "border":    { "$value": "{color.neutral.200}", "$type": "color", "$description": "区切り線・枠" },
-    "ring":      { "$value": "{color.brand}",       "$type": "color", "$description": "focus ring" },
-    "brand":     { "$value": "{color.purple.700}",  "$type": "color", "$description": "primary action / brand identity" },
-    "brand-fg":  { "$value": "{color.neutral.50}",  "$type": "color", "$description": "brand 上のテキスト" },
-    "accent":    { "$value": "{color.purple.500}",  "$type": "color", "$description": "secondary highlight" },
-    "success":   { "$value": "{color.green.600}",   "$type": "color" },
-    "warning":   { "$value": "{color.amber.600}",   "$type": "color" },
-    "danger":    { "$value": "{color.red.600}",     "$type": "color" }
+    "bg":           { "$value": "#ffffff",            "$type": "color", "$description": "ページ背景" },
+    "fg":           { "$value": "{color.neutral.900}", "$type": "color", "$description": "本文テキスト" },
+    "muted":        { "$value": "{color.neutral.500}", "$type": "color", "$description": "補助テキスト" },
+    "border":       { "$value": "{color.neutral.200}", "$type": "color", "$description": "区切り線・枠" },
+    "ring":         { "$value": "{color.brand}",       "$type": "color", "$description": "focus ring" },
+    "brand":        { "$value": "{color.brand.600}",   "$type": "color", "$description": "primary action / brand identity" },
+    "brand-fg":     { "$value": "#ffffff",             "$type": "color", "$description": "brand 上のテキスト" },
+    "brand-glow":   { "$value": "{color.brand.500}",   "$type": "color", "$description": "primary button shadow base" },
+    "accent-cyan":  { "$value": "{color.cyan.500}",    "$type": "color", "$description": "AI-tech accent (i-willink)" },
+    "accent-pink":  { "$value": "{color.pink.500}",    "$type": "color", "$description": "AI-tech accent gradient terminus (i-willink)" },
+    "success":      { "$value": "{color.green.600}",   "$type": "color" },
+    "warning":      { "$value": "{color.amber.600}",   "$type": "color" },
+    "danger":       { "$value": "{color.red.600}",     "$type": "color" }
   }
 }

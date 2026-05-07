@@ -2,7 +2,8 @@
  * @willink-labs/tailwind-preset
  *
  * Tailwind v4 preset for i-Willink Design System.
- * Default brand = i-willink (purple). Switch via `<html data-brand="clublink">` etc.
+ * Default brand = i-willink (vibrant violet, premium tech feel).
+ * Switch via `<html data-brand="clublink">` etc.
  *
  * Usage in consumer:
  *   @import "@willink-labs/tailwind-preset/preset.css";
@@ -24,40 +25,55 @@
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
 
-  /* === Primitive: purple (i-willink default) === */
-  --color-purple-50:  #faf5ff;
-  --color-purple-500: #a855f7;
-  --color-purple-600: #9333ea;
-  --color-purple-700: #7c3aed;
-  --color-purple-800: #6b21a8;
+  /* === Primitive: brand (vibrant violet — i-willink default) === */
+  --color-brand-50:  #f5f3ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-900: #4c1d95;
+  --color-brand-950: #2e1065;
 
-  /* === Primitive: blue (clublink) === */
+  /* === Primitive: blue (ClubLink primary + i-willink gradient secondary) === */
   --color-blue-50:  #eff6ff;
+  --color-blue-100: #dbeafe;
   --color-blue-500: #3b82f6;
   --color-blue-600: #2563eb;
   --color-blue-700: #1d4ed8;
 
-  /* === Primitive: green (clublink accent) === */
+  /* === Primitive: green (clublink accent / success) === */
+  --color-green-50:  #ecfdf5;
   --color-green-500: #10b981;
   --color-green-600: #059669;
+
+  /* === Primitive: AI accents (i-willink premium tech) === */
+  --color-cyan-500: #06b6d4;
+  --color-pink-500: #ec4899;
+  --color-sky-50:   #f0f9ff;
+  --color-sky-500:  #0ea5e9;
 
   /* === Primitive: feedback === */
   --color-red-600:   #dc2626;
   --color-amber-600: #d97706;
-  --color-sky-500:   #0ea5e9;
 
   /* === Semantic (default = i-willink) === */
-  --color-bg:       #ffffff;
-  --color-fg:       var(--color-neutral-900);
-  --color-muted:    var(--color-neutral-500);
-  --color-border:   var(--color-neutral-200);
-  --color-brand:    #7c3aed;
-  --color-brand-fg: #ffffff;
-  --color-accent:   #a855f7;
-  --color-ring:     var(--color-brand);
-  --color-success:  var(--color-green-600);
-  --color-warning:  var(--color-amber-600);
-  --color-danger:   var(--color-red-600);
+  --color-bg:           #ffffff;
+  --color-fg:           var(--color-neutral-900);
+  --color-muted:        var(--color-neutral-500);
+  --color-border:       var(--color-neutral-200);
+  --color-brand:        var(--color-brand-600);
+  --color-brand-fg:     #ffffff;
+  --color-brand-glow:   var(--color-brand-500);
+  --color-accent-cyan:  var(--color-cyan-500);
+  --color-accent-pink:  var(--color-pink-500);
+  --color-ring:         var(--color-brand);
+  --color-success:      var(--color-green-600);
+  --color-warning:      var(--color-amber-600);
+  --color-danger:       var(--color-red-600);
 
   /* === Radius === */
   --radius-sm:   0.25rem;
@@ -69,6 +85,7 @@
   /* === Shadow === */
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20px -5px rgba(124, 58, 237, 0.3);
 
   /* === Motion === */
   --duration-fast:    150ms;
@@ -78,7 +95,7 @@
   --ease-emphasized:  cubic-bezier(0.3, 0, 0, 1.1);
 
   /* === Typography === */
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans JP", sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans JP", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -87,15 +104,59 @@
  * ============================================================ */
 
 [data-brand="i-willink"] {
-  --color-brand:    #7c3aed;
-  --color-brand-fg: #ffffff;
-  --color-accent:   #a855f7;
+  --color-brand:       #7c3aed;
+  --color-brand-fg:    #ffffff;
+  --color-brand-glow:  #8b5cf6;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-pink: #ec4899;
+  --shadow-glow:       0 0 20px -5px rgba(124, 58, 237, 0.3);
 }
 
 [data-brand="clublink"] {
-  --color-brand:    #2563eb;
-  --color-brand-fg: #ffffff;
-  --color-accent:   #059669;
+  --color-brand:       #2563eb;
+  --color-brand-fg:    #ffffff;
+  --color-brand-glow:  #3b82f6;
+  --color-accent-cyan: #10b981;
+  --color-accent-pink: #059669;
+  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
+}
+
+/* ============================================================
+ * Gradient utilities (Tailwind v4 doesn't allow background-image in @theme)
+ * Brand-aware: gradients reference --color-brand-* and --color-accent-*
+ * so they automatically adapt when [data-brand] changes.
+ * ============================================================ */
+
+@utility bg-gradient-subtle {
+  background-image: linear-gradient(to right bottom, #ffffff, var(--color-brand-50), var(--color-sky-50));
+}
+
+@utility bg-gradient-primary {
+  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-blue-600) 100%);
+}
+
+@utility bg-gradient-ai {
+  background-image: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-brand-500) 50%, var(--color-accent-pink) 100%);
+}
+
+@utility text-gradient-primary {
+  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-blue-600) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+ * Animations
+ * ============================================================ */
+
+@keyframes willink-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-fade-up {
+  animation: willink-fade-up 0.5s var(--ease-standard) forwards;
 }
 
 /* ============================================================
