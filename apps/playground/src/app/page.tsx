@@ -1,6 +1,10 @@
 "use client";
 
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Badge,
   Button,
   Card,
@@ -199,6 +203,69 @@ export default function Page() {
       </section>
 
       {/* ============================================================
+       * ACCORDION (FAQ) section
+       * ============================================================ */}
+      <section className="max-w-5xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold mb-2">Accordion (FAQ)</h2>
+        <p className="text-sm text-muted mb-6">
+          Radix Accordion ラップ。<code className="font-mono">type=&quot;single&quot;</code>{" "}
+          (排他開閉) と <code className="font-mono">type=&quot;multiple&quot;</code>{" "}
+          (複数同時開閉) 両対応。キーボード操作 (Tab で trigger / ↑↓ で項目間移動 /
+          Enter or Space で開閉) + chevron 自動回転。
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="text-sm font-semibold mb-3 text-muted">single (collapsible)</h3>
+            <Accordion type="single" collapsible defaultValue="q1">
+              <AccordionItem value="q1">
+                <AccordionTrigger>i-Willink とは何ですか?</AccordionTrigger>
+                <AccordionContent>
+                  ソフトウェア開発と AI を活用したプロダクト開発を行う合同会社です。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q2">
+                <AccordionTrigger>受託開発は対応可能ですか?</AccordionTrigger>
+                <AccordionContent>
+                  WordPress 案件を中心に対応しています。詳しくはお問い合わせください。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q3">
+                <AccordionTrigger>請求書の発行はできますか?</AccordionTrigger>
+                <AccordionContent>
+                  はい。適格請求書発行事業者番号は T6010403028251 です。
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold mb-3 text-muted">multiple</h3>
+            <Accordion type="multiple" defaultValue={["q1", "q2"]}>
+              <AccordionItem value="q1">
+                <AccordionTrigger>機能 A について</AccordionTrigger>
+                <AccordionContent>
+                  この項目は初期状態で開いています。multiple では複数同時に開けます。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q2">
+                <AccordionTrigger>機能 B について</AccordionTrigger>
+                <AccordionContent>
+                  この項目も初期状態で開いています。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="q3">
+                <AccordionTrigger>機能 C について</AccordionTrigger>
+                <AccordionContent>
+                  この項目は閉じた状態。Tab + Space でトグル可能。
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
        * CARDS section — Feature / Club / Sponsor Plan 3 パターン
        * ============================================================ */}
       <section className="max-w-5xl mx-auto px-6 py-8">
@@ -379,7 +446,8 @@ export default function Page() {
 
       <footer className="max-w-5xl mx-auto px-6 py-12 text-xs text-muted border-t border-border mt-8">
         <p>
-          willink-design-system v0.1.0 — Phase 1 (Button + Badge ship 済)。
+          willink-design-system v0.1.0 — Phase 1 ship 完了 (Button / Badge / Input /
+          Textarea / Label / Card 6sub / Accordion 4primitive = 7 components)。
         </p>
         <p className="mt-1">
           Storybook 不採用。本ページが全コンポーネント・全 token のリファレンス実装。

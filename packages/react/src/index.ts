@@ -22,3 +22,11 @@ export {
   cardVariants,
   type CardProps,
 } from "./components/card";
+
+// PR5: Accordion (Radix)
+export {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./components/accordion";
