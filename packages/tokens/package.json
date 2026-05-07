@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tokens",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "i-Willink Design System tokens (DTCG-compatible JSON, single source of truth)",
   "license": "UNLICENSED",
   "private": false,
@@ -17,8 +17,17 @@
   "files": [
     "src"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
     "build": "echo \"tokens package: JSON only, no build step required\"",
     "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willink-labs/willink-design-system.git",
+    "directory": "packages/tokens"
   }
 }
