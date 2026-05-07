@@ -11,8 +11,8 @@
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm --filter playground dev",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "pnpm -r --if-present test",
+    "test:watch": "pnpm -F @willink-labs/react test:watch",
     "guardrails": "node ./scripts/check-guardrails.mjs"
   },
   "devDependencies": {

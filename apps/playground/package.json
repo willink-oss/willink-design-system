@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@willink-labs/react": "workspace:*",
     "@willink-labs/tailwind-preset": "workspace:*",
     "@willink-labs/tokens": "workspace:*",
     "lucide-react": "^0.460.0",
