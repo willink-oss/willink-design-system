@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge, Button } from "@willink-labs/react";
 import { BRANDS, type Brand } from "@willink-labs/tailwind-preset";
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -23,11 +24,11 @@ export default function Page() {
 
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
-            {/* Tagline */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold mb-8">
+            {/* Tagline (Badge コンポーネント差替後) */}
+            <Badge className="mb-8 gap-2 px-4 py-1.5 text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              willink-design-system v0.0.2 — Phase 0
-            </div>
+              willink-design-system v0.1.0 — Phase 1
+            </Badge>
 
             <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.15]">
               <span className="text-neutral-900">アイデアを、</span>
@@ -44,21 +45,18 @@ export default function Page() {
               でブランド軸を切替。
             </p>
 
-            {/* Brand toggle (= primary action) */}
+            {/* Brand toggle (Button asChild なしで直接 onClick) */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               {BRANDS.map((b) => (
-                <button
+                <Button
                   key={b}
+                  size="lg"
+                  variant={b === brand ? "default" : "outline"}
                   onClick={() => setBrand(b)}
-                  className={
-                    b === brand
-                      ? "px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 border border-transparent bg-brand text-brand-fg shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40"
-                      : "px-8 py-4 rounded-full font-bold transition-all flex items-center justify-center gap-2 border bg-white hover:bg-neutral-50 border-neutral-200 text-neutral-700"
-                  }
                 >
                   Brand: {b}
                   {b === brand && <ArrowRight className="w-4 h-4" />}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
@@ -66,32 +64,66 @@ export default function Page() {
       </section>
 
       {/* ============================================================
-       * BUTTONS section
+       * BUTTONS section — @willink-labs/react Button
        * ============================================================ */}
       <section className="max-w-5xl mx-auto px-6 py-16">
         <h2 className="text-2xl font-bold mb-2">Buttons</h2>
         <p className="text-sm text-muted mb-6">
-          Primary は brand-600 + brand-500/20 glow shadow。i-willink.com 本番準拠。
+          <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-neutral-100">
+            @willink-labs/react
+          </code>{" "}
+          ─ variants <code className="font-mono">default / outline / ghost / link</code>
+          、sizes <code className="font-mono">sm / md / lg</code>。
+          Primary は brand-600 + brand-500/20 glow shadow (i-willink.com 本番準拠)。
+        </p>
+
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-sm font-semibold mb-3 text-muted">Variants (size=md)</h3>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button>
+                Primary <ArrowRight className="w-4 h-4" />
+              </Button>
+              <Button variant="outline">Outline</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="link">Link button</Button>
+              <Button asChild>
+                <a href="#" onClick={(e) => e.preventDefault()}>
+                  asChild → &lt;a&gt;
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold mb-3 text-muted">Sizes (variant=default)</h3>
+            <div className="flex flex-wrap gap-3 items-center">
+              <Button size="sm">Small</Button>
+              <Button size="md">Medium</Button>
+              <Button size="lg">Large</Button>
+              <Button size="md" disabled>
+                Disabled
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================
+       * BADGES section — @willink-labs/react Badge
+       * ============================================================ */}
+      <section className="max-w-5xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold mb-2">Badges</h2>
+        <p className="text-sm text-muted mb-6">
+          variants <code className="font-mono">default / outline / success / warning / danger</code>
+          。default は brand-100 + brand-700 (subtle・brand 切替で自動追従)。
         </p>
         <div className="flex flex-wrap gap-3 items-center">
-          <button className="px-8 py-4 rounded-full font-bold flex items-center gap-2 border border-transparent bg-brand text-brand-fg shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 hover:bg-brand-700 transition-all">
-            Primary <ArrowRight className="w-4 h-4" />
-          </button>
-          <button className="px-8 py-4 rounded-full font-bold border border-neutral-200 bg-white text-neutral-700 hover:bg-neutral-50 transition-all">
-            Outline
-          </button>
-          <button className="px-8 py-4 rounded-full font-bold border border-transparent text-neutral-700 hover:bg-neutral-100 transition-all">
-            Ghost
-          </button>
-          <button className="px-6 py-3 rounded-full font-bold text-white bg-gradient-ai transition-all hover:opacity-90">
-            AI Gradient
-          </button>
-          <button className="px-6 py-3 rounded-full font-bold text-white bg-success">
-            Success
-          </button>
-          <button className="px-6 py-3 rounded-full font-bold text-white bg-danger">
-            Danger
-          </button>
+          <Badge>Default</Badge>
+          <Badge variant="outline">Outline</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="danger">Danger</Badge>
         </div>
       </section>
 
@@ -204,8 +236,7 @@ export default function Page() {
 
       <footer className="max-w-5xl mx-auto px-6 py-12 text-xs text-muted border-t border-border mt-8">
         <p>
-          willink-design-system v0.0.2 — Phase 0 + i-willink.com 本番準拠化
-          (brand スケール置換・AI accents 追加・グラデ 3 種・Noto Sans JP)。
+          willink-design-system v0.1.0 — Phase 1 (Button + Badge ship 済)。
         </p>
         <p className="mt-1">
           Storybook 不採用。本ページが全コンポーネント・全 token のリファレンス実装。
