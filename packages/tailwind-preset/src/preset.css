@@ -103,7 +103,7 @@
  * Brand axes — override semantic tokens via [data-brand="..."]
  * ============================================================ */
 
-[data-brand="i-willink"] {
+[data-brand="willink"] {
   --color-brand:       #7c3aed;
   --color-brand-fg:    #ffffff;
   --color-brand-glow:  #8b5cf6;

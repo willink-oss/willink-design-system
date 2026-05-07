@@ -1,7 +1,7 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
   "$description": "i-Willink 本体ブランド (default) — vibrant violet for premium tech. i-willink.com 本番準拠.",
-  "brand": "i-willink",
+  "brand": "willink",
   "color": {
     "brand":        { "$value": "#7c3aed", "$type": "color", "$description": "brand-600 (primary action)" },
     "brand-fg":     { "$value": "#ffffff", "$type": "color" },

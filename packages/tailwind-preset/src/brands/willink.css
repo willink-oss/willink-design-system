@@ -1,5 +1,5 @@
 /**
- * Force i-willink brand globally (skips data-brand attribute).
+ * Force willink brand globally (skips data-brand attribute).
  * Usage: import this AFTER preset.css in consumers that lock to a single brand.
  */
 :root {

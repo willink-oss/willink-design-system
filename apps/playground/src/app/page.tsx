@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [brand, setBrand] = useState<Brand>("i-willink");
+  const [brand, setBrand] = useState<Brand>("willink");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-brand", brand);

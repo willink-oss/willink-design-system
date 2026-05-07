@@ -10,7 +10,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./preset.css": "./src/preset.css",
-    "./brands/i-willink.css": "./src/brands/i-willink.css",
+    "./brands/willink.css": "./src/brands/willink.css",
     "./brands/clublink.css": "./src/brands/clublink.css"
   },
   "files": [

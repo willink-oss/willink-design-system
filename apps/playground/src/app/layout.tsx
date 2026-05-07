@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" data-brand="i-willink" className={notoSansJP.variable}>
+    <html lang="ja" data-brand="willink" className={notoSansJP.variable}>
       <body className="antialiased">{children}</body>
     </html>
   );

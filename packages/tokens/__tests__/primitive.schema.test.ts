@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import primitive from "../src/primitive.json" with { type: "json" };
 import semantic from "../src/semantic.json" with { type: "json" };
-import iWillink from "../src/brand/i-willink.json" with { type: "json" };
+import willink from "../src/brand/willink.json" with { type: "json" };
 import clublink from "../src/brand/clublink.json" with { type: "json" };
 
 const HEX = /^#[0-9a-f]{6}$/i;
@@ -62,7 +62,7 @@ describe("semantic.json", () => {
 
 describe("brand definitions", () => {
   it("each brand defines brand / brand-fg / brand-glow / accent-cyan / accent-pink", () => {
-    for (const brandFile of [iWillink, clublink]) {
+    for (const brandFile of [willink, clublink]) {
       expect(brandFile.color.brand.$value).toMatch(HEX);
       expect(brandFile.color["brand-fg"].$value).toMatch(HEX);
       expect(brandFile.color["brand-glow"].$value).toMatch(HEX);
@@ -72,7 +72,7 @@ describe("brand definitions", () => {
   });
 
   it("each brand has gradient definitions (subtle / primary / ai)", () => {
-    for (const brandFile of [iWillink, clublink]) {
+    for (const brandFile of [willink, clublink]) {
       expect(brandFile.gradient.subtle.$value).toMatch(/^linear-gradient/);
       expect(brandFile.gradient.primary.$value).toMatch(/^linear-gradient/);
       expect(brandFile.gradient.ai.$value).toMatch(/^linear-gradient/);
@@ -80,7 +80,7 @@ describe("brand definitions", () => {
   });
 
   it("i-willink primary is brand-600 #7c3aed", () => {
-    expect(iWillink.color.brand.$value).toBe("#7c3aed");
+    expect(willink.color.brand.$value).toBe("#7c3aed");
   });
 
   it("clublink primary is blue-600 #2563eb", () => {

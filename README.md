@@ -35,6 +35,8 @@ pnpm add @willink-labs/tailwind-preset
 </html>
 ```
 
+**Brand 軸キーは 1 単語**: `willink` / `clublink` のようにハイフンを含めない (ダブルクリック選択・grep の取り回し優先)。新ブランド追加時も同方針。
+
 ## Development
 
 ```bash

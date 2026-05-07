@@ -11,7 +11,7 @@
     ".": "./src/index.ts",
     "./primitive.json": "./src/primitive.json",
     "./semantic.json": "./src/semantic.json",
-    "./brand/i-willink.json": "./src/brand/i-willink.json",
+    "./brand/willink.json": "./src/brand/willink.json",
     "./brand/clublink.json": "./src/brand/clublink.json"
   },
   "files": [
