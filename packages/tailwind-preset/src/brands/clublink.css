@@ -1,0 +1,9 @@
+/**
+ * Force clublink brand globally (skips data-brand attribute).
+ * Usage: import this AFTER preset.css in consumers that lock to clublink.
+ */
+:root {
+  --color-brand:    #2563eb;
+  --color-brand-fg: #ffffff;
+  --color-accent:   #059669;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "willink-design-system",
+  "version": "0.0.1",
+  "private": true,
+  "description": "i-Willink 企業デザインシステム — Tokens + Tailwind v4 preset + shadcn 拡張 + Flutter ThemeData",
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter playground dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "guardrails": "node ./scripts/check-guardrails.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  }
+}

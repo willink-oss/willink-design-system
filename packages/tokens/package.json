@@ -1,0 +1,24 @@
+{
+  "name": "@willink-labs/tokens",
+  "version": "0.0.1",
+  "description": "i-Willink Design System tokens (DTCG-compatible JSON, single source of truth)",
+  "license": "UNLICENSED",
+  "private": false,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./primitive.json": "./src/primitive.json",
+    "./semantic.json": "./src/semantic.json",
+    "./brand/i-willink.json": "./src/brand/i-willink.json",
+    "./brand/clublink.json": "./src/brand/clublink.json"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "echo \"tokens package: JSON only, no build step required\"",
+    "test": "vitest run"
+  }
+}

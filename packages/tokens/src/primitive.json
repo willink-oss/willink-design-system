@@ -1,0 +1,94 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Primitive tokens — 素値・無意味。DS 全体で固定。consumer は原則これを直接参照しない。",
+  "color": {
+    "neutral": {
+      "50":  { "$value": "#f8fafc", "$type": "color" },
+      "100": { "$value": "#f1f5f9", "$type": "color" },
+      "200": { "$value": "#e2e8f0", "$type": "color" },
+      "300": { "$value": "#cbd5e1", "$type": "color" },
+      "400": { "$value": "#94a3b8", "$type": "color" },
+      "500": { "$value": "#64748b", "$type": "color" },
+      "600": { "$value": "#475569", "$type": "color" },
+      "700": { "$value": "#334155", "$type": "color" },
+      "800": { "$value": "#1e293b", "$type": "color" },
+      "900": { "$value": "#0f172a", "$type": "color" },
+      "950": { "$value": "#020617", "$type": "color" }
+    },
+    "purple": {
+      "50":  { "$value": "#faf5ff", "$type": "color" },
+      "100": { "$value": "#f3e8ff", "$type": "color" },
+      "200": { "$value": "#e9d5ff", "$type": "color" },
+      "300": { "$value": "#d8b4fe", "$type": "color" },
+      "400": { "$value": "#c084fc", "$type": "color" },
+      "500": { "$value": "#a855f7", "$type": "color" },
+      "600": { "$value": "#9333ea", "$type": "color" },
+      "700": { "$value": "#7c3aed", "$type": "color" },
+      "800": { "$value": "#6b21a8", "$type": "color" },
+      "900": { "$value": "#581c87", "$type": "color" },
+      "950": { "$value": "#3b0764", "$type": "color" }
+    },
+    "blue": {
+      "50":  { "$value": "#eff6ff", "$type": "color" },
+      "100": { "$value": "#dbeafe", "$type": "color" },
+      "200": { "$value": "#bfdbfe", "$type": "color" },
+      "300": { "$value": "#93c5fd", "$type": "color" },
+      "400": { "$value": "#60a5fa", "$type": "color" },
+      "500": { "$value": "#3b82f6", "$type": "color" },
+      "600": { "$value": "#2563eb", "$type": "color" },
+      "700": { "$value": "#1d4ed8", "$type": "color" },
+      "800": { "$value": "#1e40af", "$type": "color" },
+      "900": { "$value": "#1e3a8a", "$type": "color" },
+      "950": { "$value": "#172554", "$type": "color" }
+    },
+    "green": {
+      "50":  { "$value": "#ecfdf5", "$type": "color" },
+      "100": { "$value": "#d1fae5", "$type": "color" },
+      "200": { "$value": "#a7f3d0", "$type": "color" },
+      "300": { "$value": "#6ee7b7", "$type": "color" },
+      "400": { "$value": "#34d399", "$type": "color" },
+      "500": { "$value": "#10b981", "$type": "color" },
+      "600": { "$value": "#059669", "$type": "color" },
+      "700": { "$value": "#047857", "$type": "color" },
+      "800": { "$value": "#065f46", "$type": "color" },
+      "900": { "$value": "#064e3b", "$type": "color" },
+      "950": { "$value": "#022c22", "$type": "color" }
+    },
+    "red": {
+      "50":  { "$value": "#fef2f2", "$type": "color" },
+      "500": { "$value": "#ef4444", "$type": "color" },
+      "600": { "$value": "#dc2626", "$type": "color" },
+      "700": { "$value": "#b91c1c", "$type": "color" }
+    },
+    "amber": {
+      "50":  { "$value": "#fffbeb", "$type": "color" },
+      "500": { "$value": "#f59e0b", "$type": "color" },
+      "600": { "$value": "#d97706", "$type": "color" }
+    },
+    "sky": {
+      "50":  { "$value": "#f0f9ff", "$type": "color" },
+      "500": { "$value": "#0ea5e9", "$type": "color" },
+      "600": { "$value": "#0284c7", "$type": "color" }
+    }
+  },
+  "radius": {
+    "sm":   { "$value": "0.25rem", "$type": "dimension" },
+    "md":   { "$value": "0.5rem",  "$type": "dimension" },
+    "lg":   { "$value": "0.75rem", "$type": "dimension" },
+    "xl":   { "$value": "1rem",    "$type": "dimension" },
+    "full": { "$value": "9999px",  "$type": "dimension" }
+  },
+  "duration": {
+    "fast": { "$value": "150ms", "$type": "duration" },
+    "base": { "$value": "250ms", "$type": "duration" },
+    "slow": { "$value": "400ms", "$type": "duration" }
+  },
+  "easing": {
+    "standard":   { "$value": "cubic-bezier(0.2, 0, 0, 1)",   "$type": "cubicBezier" },
+    "emphasized": { "$value": "cubic-bezier(0.3, 0, 0, 1.1)", "$type": "cubicBezier" }
+  },
+  "shadow": {
+    "soft": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow" },
+    "md":   { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow" }
+  }
+}

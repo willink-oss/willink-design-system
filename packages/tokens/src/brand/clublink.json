@@ -1,0 +1,10 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "ClubLink — 地域クラブ × 応援者マーケットプレイス。blue + green 主軸",
+  "brand": "clublink",
+  "color": {
+    "brand":    { "$value": "#2563eb", "$type": "color", "$description": "blue-600" },
+    "brand-fg": { "$value": "#ffffff", "$type": "color" },
+    "accent":   { "$value": "#059669", "$type": "color", "$description": "green-600" }
+  }
+}

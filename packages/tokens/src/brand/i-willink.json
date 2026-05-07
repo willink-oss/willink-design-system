@@ -1,0 +1,10 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "i-Willink 本体ブランド (default) — purple 主軸",
+  "brand": "i-willink",
+  "color": {
+    "brand":    { "$value": "#7c3aed", "$type": "color", "$description": "purple-700" },
+    "brand-fg": { "$value": "#ffffff", "$type": "color" },
+    "accent":   { "$value": "#a855f7", "$type": "color", "$description": "purple-500" }
+  }
+}

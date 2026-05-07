@@ -1,0 +1,9 @@
+/**
+ * Force i-willink brand globally (skips data-brand attribute).
+ * Usage: import this AFTER preset.css in consumers that lock to a single brand.
+ */
+:root {
+  --color-brand:    #7c3aed;
+  --color-brand-fg: #ffffff;
+  --color-accent:   #a855f7;
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@willink-labs/tailwind-preset",
+  "version": "0.0.1",
+  "description": "Tailwind v4 preset for i-Willink Design System. Imports tokens via @theme and switches brand axes via [data-brand=...] selectors.",
+  "license": "UNLICENSED",
+  "private": false,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./preset.css": "./src/preset.css",
+    "./brands/i-willink.css": "./src/brands/i-willink.css",
+    "./brands/clublink.css": "./src/brands/clublink.css"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "echo \"tailwind-preset: CSS only, no build step required\""
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
+  }
+}
