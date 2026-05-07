@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tailwind-preset",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Tailwind v4 preset for i-Willink Design System. Imports tokens via @theme and switches brand axes via [data-brand=...] selectors.",
   "license": "UNLICENSED",
   "private": false,
@@ -16,10 +16,19 @@
   "files": [
     "src"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "scripts": {
     "build": "echo \"tailwind-preset: CSS only, no build step required\""
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willink-labs/willink-design-system.git",
+    "directory": "packages/tailwind-preset"
   }
 }
