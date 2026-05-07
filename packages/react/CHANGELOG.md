@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.2.1] — 2026-05-08
+
+Phase 3 着手中の運用負荷削減。consumer 側 PAT 設定 (NODE_AUTH_TOKEN) を不要にする。
+
+### Changed
+- 全 3 パッケージの `publishConfig.access` を `restricted` → `public` に変更
+- `.github/workflows/publish.yml` の publish コマンドを `--access public` に変更
+- 全 3 パッケージのバージョンを **0.2.1** に bump
+
+### Why public access?
+private 配布では consumer 追加ごとに以下が発生:
+1. 各 consumer リポの `.npmrc` に `_authToken=${NODE_AUTH_TOKEN}` 設定
+2. 各 CI/CD (Amplify Console 等) に `NODE_AUTH_TOKEN` 環境変数追加
+3. PAT 期限切れごとの全 consumer ローテーション
+
+1 人会社の運用負荷 > パッケージ tarball 公開のリスク (リポ自体は private 維持・shadcn 拡張 + token 駆動なので競合優位性低) と判断。**ADR-0005 起票**。
+
+### Migration for consumers
+```bash
+# .npmrc — auth 行を削除 (registry 行のみ残す)
+@willink-labs:registry=https://npm.pkg.github.com
+
+# package.json — version bump
+pnpm add @willink-labs/react@^0.2.1 @willink-labs/tailwind-preset@^0.2.1 @willink-labs/tokens@^0.2.1
+```
+
+`NODE_AUTH_TOKEN` 環境変数 (Amplify / CI) は削除可能。
+
 ## [0.2.0] — 2026-05-08
 
 Phase 3 着手前の hotfix リリース。
