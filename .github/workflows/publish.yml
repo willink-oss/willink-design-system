@@ -1,4 +1,4 @@
-name: Publish to npmjs.org
+name: Publish to npmjs.org (OIDC Trusted Publisher)
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
-    # id-token: write は将来 OIDC Trusted Publisher 移行用に残置
+    # Required for OIDC trusted publisher (npmjs.com 2024 GA)
     permissions:
       contents: read
       id-token: write
@@ -49,24 +49,17 @@ jobs:
       - name: Build all packages
         run: pnpm -r build
 
-      # 一時的に token-based publish (Plan B 経過):
-      # 1. ここで NPM_TOKEN (Granular・bypass 2fa) で初回 publish
-      # 2. publish 成功後 CEO が npmjs.com で Trusted Publisher 設定
-      # 3. workflow を OIDC 化 (--provenance + NODE_AUTH_TOKEN 削除) に再修正
+      # OIDC Trusted Publisher 経由で publish
+      # - NODE_AUTH_TOKEN 不要 (token 完全廃止・期限切れ概念なし)
+      # - --provenance フラグで Sigstore-based supply chain attestation 自動付与
       - name: Publish @willink-labs/tokens
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         working-directory: packages/tokens
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @willink-labs/tailwind-preset
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         working-directory: packages/tailwind-preset
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @willink-labs/react
-        run: npm publish --access public
+        run: npm publish --provenance --access public
         working-directory: packages/react
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -6,6 +6,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.2.5] — 2026-05-08
+
+Plan B Phase 2: OIDC Trusted Publisher で publish (token 完全廃止)。
+**CEO 指示「更新漏れが起きない仕組み」達成版**。
+
+### Changed
+- `.github/workflows/publish.yml`:
+  - publish step に `--provenance` フラグ復活 (Sigstore-based attestation 自動付与)
+  - `NODE_AUTH_TOKEN: secrets.NPM_TOKEN` 削除 (= token authentication 完全廃止)
+  - `permissions.id-token: write` 維持 (OIDC ID token 発行に必要)
+- 全 3 packages: 0.2.4 → 0.2.5 (token-free publish 検証バージョン)
+
+### CEO 既実施 (確認済)
+- npmjs.com 各 package settings → Trusted Publisher を設定:
+  - Repository: `willink-labs/willink-design-system`
+  - Workflow: `publish.yml`
+- Publishing access を「Require 2FA and disallow tokens (recommended)」に設定
+  → Token publishing 完全拒否 / OIDC Trusted Publisher のみ許可
+
+### Provenance attestation 自動付与
+全 publish に Sigstore-based provenance が付与され、consumer は npmjs.com 上で
+"Built and signed on GitHub Actions" バッジで供給元を検証可能。
+
+### Post-verify cleanup
+0.2.5 publish 動作確認後:
+- GitHub Actions org-level secret `NPM_TOKEN` を削除可能
+- npmjs.com の Granular access token (`willink-labs-publish-temporary`) を delete
+- 以降は **token rotation 不要・期限切れ概念なし**・新 consumer 追加コスト 0
+
 ## [0.2.4] — 2026-05-08
 
 Plan B: 初回 publish のみ Granular token (90 日) で実行 → 後続で OIDC 化。
