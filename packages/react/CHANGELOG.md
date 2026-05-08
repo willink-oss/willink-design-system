@@ -6,11 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
-## [0.2.6] — 2026-05-08
+## [0.2.7] — 2026-05-08
 
-OIDC Trusted Publisher で publish 確立 (token 完全廃止)。**CEO 指示「更新漏れが
-起きない仕組み」達成版**。0.2.5 で発生した npmjs.com の private repo 制約による
-provenance failure を回避。
+OIDC + token-free publish の最終確立版。0.2.6 で `npm publish` 直接実行により
+`workspace:*` の peerDeps が tarball にそのまま published され consumer install
+が `EUNSUPPORTEDPROTOCOL` で失敗。
+
+### Changed
+- `.github/workflows/publish.yml`:
+  - publish step を `npm publish --access public` → `pnpm -F <pkg> publish --access public --no-git-checks` に変更
+  - pnpm が publish 前に workspace:* を実バージョン (`^0.2.7` 等) に自動置換するため
+    consumer 側で正常 install 可能になる
+- 全 3 packages: 0.2.6 → 0.2.7
+
+### CEO の本来の目的は引き続き達成
+- ✅ token rotation 不要 (OIDC trusted publisher)
+- ✅ 90 日期限切れ概念なし
+- ✅ 監視 routine 不要
+- ✅ 新 consumer 追加コスト 0
+
+## [0.2.6] — 2026-05-08 [SUPERSEDED — workspace:* 解決漏れで consumer install fail]
+
+OIDC Trusted Publisher で publish 確立 (token 完全廃止)。0.2.5 で発生した npmjs.com の
+private repo 制約による provenance failure を回避。ただし `npm publish` 直接実行に
+切替えたため pnpm の workspace 解決が走らず、peerDeps の `workspace:*` が tarball
+にそのまま残り consumer install で `EUNSUPPORTEDPROTOCOL` 発生。0.2.7 で `pnpm publish`
+経由に戻して解決。
 
 ### Changed
 - `.github/workflows/publish.yml`:
