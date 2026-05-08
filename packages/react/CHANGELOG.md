@@ -6,10 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
-## [0.2.2] — 2026-05-08
+## [0.2.3] — 2026-05-08
+
+OIDC Trusted Publisher 採用。**publish 側 token も完全廃止**。
+
+### Why
+0.2.2 で npmjs.com publish に切替えたが、CEO の npmjs.com アカウント 2FA 有効化
+により Classic Automation token では `403 Two-factor authentication required` で
+publish failed。Granular access token は最大 90 日有効でローテーション運用が必要。
+
+代替として GitHub Actions OIDC Trusted Publisher (npmjs.com 2024 GA) を採用。
+**期限切れ概念がない短命 ID token** で publish 認証を行うため、token rotation 不要。
+**ADR-0007 起票**。
+
+### Changed
+- `.github/workflows/publish.yml`:
+  - `permissions.id-token: write` 追加 (OIDC 必須)
+  - `pnpm -F <pkg> publish` → `npm publish --provenance --access public` (各 package dir)
+  - `NODE_AUTH_TOKEN: secrets.NPM_TOKEN` 削除 (OIDC 認証で不要)
+  - Node.js version 20 → 24 (deprecation warning 対応)
+- 全 3 packages: 0.2.2 → 0.2.3 (publish 経路変更のため re-publish)
+
+### Provenance attestation 自動付与
+全 publish に **Sigstore-based provenance** が付与され、サプライチェーン安全性が向上。
+consumer は npmjs.com 上で「Built and signed on GitHub Actions」バッジを確認可能。
+
+### Migration for consumers
+変更なし — install コマンドは 0.2.2 と同じ:
+```bash
+pnpm add @willink-labs/react@^0.2.3 @willink-labs/tailwind-preset@^0.2.3 @willink-labs/tokens@^0.2.3
+```
+
+## [0.2.2] — 2026-05-08 [SUPERSEDED — publish failed by 2FA]
 
 GitHub Packages → **npmjs.com に移行**。consumer 側 auth (PAT / NODE_AUTH_TOKEN /
 .npmrc) を完全に不要化。**ADR-0006 起票**。
+
+(注: publish workflow run 25534973695 で 403 Two-factor authentication required で
+失敗。0.2.3 で OIDC Trusted Publisher に移行して解決)
 
 ### Changed
 - publish 先を `npm.pkg.github.com` → `registry.npmjs.org` に変更
