@@ -5,6 +5,36 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.2.0] — 2026-05-09
+
+Driven by feedback from the first round of consumer integration (Phase 5.3
+fit-ai · Phase 5.4 clubhouse). Both apps had local `AppSpacing` scales and
+multiple gradient presets that the 0.1.0 surface did not yet cover.
+
+### Added
+- `WillinkSpacing` — Material 3 4-multiple spacing scale
+  (xs=4 / sm=8 / md=16 / lg=24 / xl=32 / xxl=48). Importable as
+  `WillinkSpacing.md` etc., suitable for `EdgeInsets.all(...)`.
+- `WillinkBrandTokens.subtleGradient` — white → brand-50 → sky-50 diagonal,
+  mirrors the React preset's `bg-gradient-subtle`. For hero / large-surface
+  backgrounds that shouldn't overpower the foreground.
+- `WillinkBrandTokens.aiGradient` — cyan → brand-500 → pink, mirrors
+  `bg-gradient-ai`. For "AI"-flavored UI moments.
+
+### Changed
+- `WillinkBrandTokens` constructor now requires `subtleGradient` + `aiGradient`.
+  This is **a breaking change for direct callers** of the constructor. The
+  three named presets (`willink` / `clublink` / `fitai`) absorbed the change
+  internally, so consumer apps using `WillinkTheme.fromBrand(...)` are
+  unaffected. Per the 0.x convention, breaking changes ship in minor bumps.
+
+### Why not TextTheme override / dark factory yet
+fit-ai's AppTextStyles (7 sizes, including a non-Material 18px title) does
+not map cleanly onto Material 3's TextTheme. We're holding off on adding a
+DS-side TextTheme override until we can make the choice well — likely 0.3.0
+together with a dark factory, after one more sweep round on fit-ai informs
+the canonical scale.
+
 ## [0.1.0] — 2026-05-08
 
 Initial scaffold of the Flutter side of the i-Willink Design System.

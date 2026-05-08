@@ -21,3 +21,4 @@ export 'src/theme_extensions/willink_brand_tokens.dart'
     show WillinkBrandTokens;
 export 'src/tokens/primitive.dart' show WillinkPrimitives;
 export 'src/tokens/semantic.dart' show WillinkSemantics;
+export 'src/tokens/spacing.dart' show WillinkSpacing;

@@ -41,5 +41,29 @@ void main() {
       expect(WillinkBrandTokens.fitai.brandGlow,
           WillinkPrimitives.fitaiPrimary);
     });
+
+    test('all 3 brands carry subtleGradient + aiGradient (0.2.0+)', () {
+      for (final tokens in [
+        WillinkBrandTokens.willink,
+        WillinkBrandTokens.clublink,
+        WillinkBrandTokens.fitai,
+      ]) {
+        // subtle: white → brand-50 → sky-50 (3-stop)
+        expect(tokens.subtleGradient.colors.length, 3);
+        // ai: cyan → brand-500 → pink (3-stop)
+        expect(tokens.aiGradient.colors.length, 3);
+        expect(tokens.aiGradient.colors.first, WillinkPrimitives.cyan500);
+        expect(tokens.aiGradient.colors.last, WillinkPrimitives.pink500);
+      }
+    });
+
+    test('lerp interpolates the new gradient fields without throwing', () {
+      final lerped = WillinkBrandTokens.willink.lerp(
+        WillinkBrandTokens.clublink,
+        0.5,
+      );
+      expect(lerped.subtleGradient.colors.length, 3);
+      expect(lerped.aiGradient.colors.length, 3);
+    });
   });
 }

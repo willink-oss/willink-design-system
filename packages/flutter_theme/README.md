@@ -50,6 +50,41 @@ of the brands above or propose a new axis through the maintainers.
   `ThemeExtension`, accessible from any widget via
   `Theme.of(context).extension<WillinkBrandTokens>()!`.
 
+## Spacing
+
+Material 3 4-multiple scale. Use these everywhere you'd otherwise hard-code
+a `double` for padding / gap / margin:
+
+```dart
+Padding(padding: EdgeInsets.all(WillinkSpacing.md), child: ...)
+SizedBox(height: WillinkSpacing.lg)
+```
+
+| Token | dp | Typical use |
+|---|---|---|
+| `WillinkSpacing.xs` | 4 | icon ↔ label gap, dense rows |
+| `WillinkSpacing.sm` | 8 | chip gaps, compact layouts |
+| `WillinkSpacing.md` | 16 | default content padding |
+| `WillinkSpacing.lg` | 24 | section separator |
+| `WillinkSpacing.xl` | 32 | between page-level sections |
+| `WillinkSpacing.xxl` | 48 | hero blocks, top-of-page padding |
+
+## Brand-aware gradients
+
+`WillinkBrandTokens` (a `ThemeExtension`) exposes three gradient presets per
+brand:
+
+```dart
+final tokens = Theme.of(context).extension<WillinkBrandTokens>()!;
+Container(decoration: BoxDecoration(gradient: tokens.brandGradient));   // hero
+Container(decoration: BoxDecoration(gradient: tokens.subtleGradient)); // bg
+Container(decoration: BoxDecoration(gradient: tokens.aiGradient));     // AI moments
+```
+
+`brandGradient` rotates with the brand (i-Willink violet→blue, ClubLink
+blue→green, fit-ai blue→emerald). `subtleGradient` and `aiGradient` are
+brand-agnostic (white→brand-50→sky-50 / cyan→brand-500→pink).
+
 ## Token sync
 
 `WillinkPrimitives.*` constants must match
