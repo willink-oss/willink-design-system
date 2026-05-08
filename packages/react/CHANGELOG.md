@@ -6,9 +6,45 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.2.2] — 2026-05-08
+
+GitHub Packages → **npmjs.com に移行**。consumer 側 auth (PAT / NODE_AUTH_TOKEN /
+.npmrc) を完全に不要化。**ADR-0006 起票**。
+
+### Changed
+- publish 先を `npm.pkg.github.com` → `registry.npmjs.org` に変更
+- 全 3 パッケージの `publishConfig` から `registry` 行を削除 (default = npmjs.org)
+- `.github/workflows/publish.yml`:
+  - `registry-url: "https://registry.npmjs.org"` に変更
+  - `NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}` (org-level secret) に変更
+  - `permissions.packages: write` を削除 (npmjs は不要)
+- `.npmrc` (DS リポ root) を削除 (元々 consumer ではないため不要)
+
+### Why migrate?
+GitHub Packages npm registry は、パッケージ visibility=public でも、リポジトリ
+visibility=public でも、**install 時に常に PAT 認証を要求する** GitHub 仕様制約あり
+(https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)。
+
+willink-labs org は Enterprise plan で Package public 制限が初期設定されていた問題と、
+GitHub Packages の token 必須仕様の二重制約があり、CEO が初 consumer
+(clublink-platform) 移行時に PAT 運用の負荷を懸念。Phase 4 で複数 consumer に展開
+する際の運用コスト線形増加を構造的に防ぐため npmjs.com に移行。
+
+### Migration for consumers
+```bash
+# .npmrc は完全に削除可能 (registry 設定すら不要・default が npmjs.org)
+
+pnpm add @willink-labs/react@^0.2.2 \
+         @willink-labs/tailwind-preset@^0.2.2 \
+         @willink-labs/tokens@^0.2.2
+```
+
+`NODE_AUTH_TOKEN` 環境変数 (Amplify / CI) は **完全に削除** 可能。
+
 ## [0.2.1] — 2026-05-08
 
 Phase 3 着手中の運用負荷削減。consumer 側 PAT 設定 (NODE_AUTH_TOKEN) を不要にする。
+**(注: GitHub Packages の auth 必須仕様により実効しなかった・0.2.2 で npmjs.com 移行)**
 
 ### Changed
 - 全 3 パッケージの `publishConfig.access` を `restricted` → `public` に変更
