@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.4.0] — 2026-05-08
+
+### Changed
+- **Lockstep version bump** with `@willink-labs/tailwind-preset@0.4.0` and
+  `@willink-labs/tokens@0.4.0`. No code or API changes in this package —
+  every component from 0.3.0 still ships with the same props and behavior.
+- The auto-`@source` fix lives entirely in `@willink-labs/tailwind-preset`:
+  consumers no longer need `@source ".../node_modules/@willink-labs/..."`
+  lines next to their `@import` of `preset.css`. See the preset's CHANGELOG
+  for the technical writeup.
+
+### Why a coordinated minor bump
+The three packages (tokens / tailwind-preset / react) are tightly coupled via
+`peerDependencies: workspace:*`. Treating them as one versioned unit avoids
+version-mismatch surprises when consumers do `pnpm add @willink-labs/react`.
+
 ## [0.3.0] — 2026-05-08
 
 ### Changed

@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.4.0] — 2026-05-08
+
+### Added — `@source` is now automatic
+- New `safelist.css` (auto-imported from `preset.css`) lists every DS
+  component class via Tailwind v4's `@source inline()` directive. Because
+  `@source inline()` takes class names rather than filesystem paths, the
+  registration is portable across pnpm symlinks, npm tarballs, and
+  Turborepo hoisting — the precise failure mode that caused the 5/8 P0
+  regression on clublink.jp.
+- `safelist.css` is also exposed via `package.json` `exports` so consumers
+  can import it directly if they ever need the safelist without the rest
+  of the preset.
+
+### Changed — consumer setup is now one line
+- `README` Quick Start: removed the two `@source ".../node_modules/..."`
+  lines. The only required entry in the consumer's CSS is now:
+  ```css
+  @import "@willink-labs/tailwind-preset/preset.css";
+  ```
+- `preset.css` opening comment rewritten to reflect the one-line setup
+  and to point at `safelist.css` for the maintenance contract.
+
+### Backwards compatible
+- Consumers that still have the legacy `@source` lines from 0.3.x will
+  continue to build successfully — Tailwind treats duplicate registrations
+  as idempotent. We will remove those lines from clublink-platform and
+  i-willink.com in follow-up consumer PRs.
+
+### Why this approach (not a JS plugin)
+- The 0.3.0 changelog promised a "Tailwind v4 plugin that registers content
+  paths via the JS plugin API". Tailwind v4's documented plugin surface
+  does not expose programmatic content-path registration; the `@plugin`
+  directive only loads legacy v3-style plugins. `@source inline()` (a CSS
+  directive) is the v4-native mechanism for forcing class compilation, and
+  it solves the path-portability problem that blocked the 0.3.0-rc embed.
+
+### Lockstep version bump
+- Bumped together with `@willink-labs/tokens@0.4.0` and `@willink-labs/react@0.4.0`
+  to keep the three DS packages versioned as a single unit.
+
 ## [0.3.0] — 2026-05-08
 
 ### Documentation

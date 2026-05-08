@@ -1,0 +1,95 @@
+/**
+ * @willink-labs/tailwind-preset/safelist.css
+ *
+ * Forces Tailwind v4 to compile DS component classes regardless of consumer's
+ * source-scan settings. Imported automatically from preset.css so consumers
+ * do not need to write @source directives or know about node_modules paths.
+ *
+ * Why: Tailwind v4 excludes node_modules from default scanning, so cva-emitted
+ * class strings inside @willink-labs/react/dist/index.js would otherwise never
+ * be compiled. @source inline() takes class names (no paths), so it works
+ * portably across pnpm symlinks, npm tarballs, and Turborepo hoisting — the
+ * exact failure mode that caused the 5/8 P0 regression on clublink.jp.
+ *
+ * Maintenance rule: when adding a new DS component or cva variant in
+ * @willink-labs/react, add the required class names below. Verify by running
+ *   pnpm -r build && grep -rE '\.bg-brand|\.text-brand-fg' apps/playground/.next
+ * to confirm the safelist-emitted classes are present in the playground build.
+ */
+
+/* === Brand color utilities (semantic + scale) === */
+@source inline("{hover:,focus:,}bg-brand");
+@source inline("{hover:,focus:,}bg-brand-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("{hover:,focus:,}text-brand");
+@source inline("{hover:,focus:,}text-brand-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("text-brand-fg");
+@source inline("border-brand");
+@source inline("ring-brand");
+
+/* Brand shadow with arbitrary opacity (Button default variant) */
+@source inline("shadow-brand-500/20");
+@source inline("shadow-brand-500/40");
+@source inline("shadow-brand-600/20");
+@source inline("shadow-brand-600/40");
+@source inline("hover:shadow-brand-500/20");
+@source inline("hover:shadow-brand-500/40");
+@source inline("hover:shadow-brand-600/20");
+@source inline("hover:shadow-brand-600/40");
+
+/* === Semantic tokens (driven by [data-brand] / @theme) === */
+@source inline("bg-bg");
+@source inline("text-fg");
+@source inline("text-muted");
+@source inline("border-border");
+@source inline("ring-ring");
+@source inline("ring-offset-bg");
+
+/* === Focus-visible state for all interactive components === */
+@source inline("focus-visible:outline-none");
+@source inline("focus-visible:ring-2");
+@source inline("focus-visible:ring-ring");
+@source inline("focus-visible:ring-offset-2");
+@source inline("focus-visible:ring-offset-bg");
+
+/* === Disabled state === */
+@source inline("disabled:pointer-events-none");
+@source inline("disabled:opacity-50");
+
+/* === Neutral hovers (Button outline / ghost variants) === */
+@source inline("hover:bg-neutral-{50,100}");
+
+/* === Layout / display utilities used by DS components === */
+@source inline("inline-flex");
+@source inline("items-center");
+@source inline("justify-{center,between}");
+@source inline("gap-2");
+@source inline("flex");
+@source inline("flex-1");
+@source inline("whitespace-nowrap");
+@source inline("cursor-pointer");
+@source inline("overflow-hidden");
+@source inline("shrink-0");
+
+/* === Transitions / animations === */
+@source inline("transition-{all,colors,transform}");
+@source inline("duration-200");
+
+/* === Typography === */
+@source inline("font-{bold,semibold}");
+@source inline("text-{sm,base}");
+@source inline("underline-offset-4");
+@source inline("hover:underline");
+
+/* === Sizing (Button / Input / Accordion icons) === */
+@source inline("h-{4,8,10,14,auto}");
+@source inline("w-4");
+@source inline("px-{1,4,6,8}");
+@source inline("py-4");
+
+/* === Borders / radius / shadows === */
+@source inline("border");
+@source inline("border-b");
+@source inline("border-transparent");
+@source inline("last:border-b-0");
+@source inline("shadow-{lg,none}");
+@source inline("rounded-full");

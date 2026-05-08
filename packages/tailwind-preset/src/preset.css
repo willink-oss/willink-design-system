@@ -5,26 +5,21 @@
  * Default brand = i-willink (vibrant violet, premium tech feel).
  * Switch via `<html data-brand="clublink">` etc.
  *
- * Usage in consumer (REQUIRED — see README "Required @source setup"):
+ * Usage (one line — that's all):
  *   @import "@willink-labs/tailwind-preset/preset.css";
- *   @source "../../node_modules/@willink-labs/react/dist";
- *   @source "../../node_modules/@willink-labs/tailwind-preset/src";
  *
- * Why the @source lines on the consumer side: Tailwind v4 excludes
- * node_modules from default scanning, so cva-emitted class strings
- * inside @willink-labs/react/dist (bg-brand, shadow-brand-500/20,
- * text-brand-fg, hover:bg-brand-700, etc.) would otherwise never get
- * compiled into the consumer's CSS.
+ * No @source directives are required. The bundled safelist.css
+ * (auto-imported below) registers all DS class names via @source inline(),
+ * so cva-emitted classes from @willink-labs/react are always compiled,
+ * regardless of how your consumer's node_modules are laid out
+ * (pnpm symlinks / npm tarballs / Turborepo hoisting all work the same).
  *
- * Embedding @source here was attempted in 0.3.0-rc but does not work
- * reliably — Tailwind v4 resolves @source paths relative to the CSS
- * file location, but the path resolution semantics through pnpm
- * symlinks + npm published tarballs differ enough that DS-side
- * embedding is fragile. A future v0.4.0 will ship a proper Tailwind
- * v4 plugin that registers content paths via the JS plugin API.
+ * If you previously added `@source ".../node_modules/@willink-labs/..."`
+ * lines for 0.3.x, those continue to work but are no longer required.
  */
 
 @import "tailwindcss";
+@import "./safelist.css";
 
 @theme {
   /* === Primitive: neutral 50–950 === */

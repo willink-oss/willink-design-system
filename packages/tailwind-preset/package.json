@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tailwind-preset",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Tailwind v4 preset for i-Willink Design System. Imports tokens via @theme and switches brand axes via [data-brand=...] selectors.",
   "license": "UNLICENSED",
   "private": false,
@@ -10,6 +10,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./preset.css": "./src/preset.css",
+    "./safelist.css": "./src/safelist.css",
     "./brands/willink.css": "./src/brands/willink.css",
     "./brands/clublink.css": "./src/brands/clublink.css"
   },
