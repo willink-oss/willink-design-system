@@ -27,12 +27,31 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 
 `.npmrc` 設定や PAT は **一切不要**。npmjs.org の public package として誰でも取得可能。
 
-### 2. preset import
+### 2. preset import + Tailwind v4 `@source` 設定 (必須)
 
 ```css
 /* app/globals.css */
 @import "@willink-labs/tailwind-preset/preset.css";
+
+/* REQUIRED: Tell Tailwind v4 to scan DS sources.
+ * Tailwind v4 excludes node_modules from default scanning, so without
+ * these two @source lines the cva-emitted classes inside DS components
+ * (bg-brand, shadow-brand-500/20, text-brand-fg, hover:bg-brand-700,
+ * border-border, etc.) would never be compiled to CSS — components
+ * would render with no brand colors / shadows / borders in production.
+ *
+ * This is being made automatic in @willink-labs/tailwind-preset@0.4.0
+ * (Tailwind v4 plugin); until then, consumers must add these lines
+ * themselves. Confirmed regression on clublink.jp 2026-05-08, hotfixed
+ * same day in clublink-platform PR #19.
+ */
+@source "../../node_modules/@willink-labs/react/dist";
+@source "../../node_modules/@willink-labs/tailwind-preset/src";
 ```
+
+The `../../` paths assume `globals.css` lives at `apps/<app-name>/src/app/globals.css`
+(standard Next.js / Tailwind v4 layout). Adjust the relative depth to match your
+project — the targets are the two real folders inside `node_modules`.
 
 ### 3. brand 軸切替 + コンポーネント使用
 

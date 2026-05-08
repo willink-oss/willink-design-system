@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.3.0] — 2026-05-08
+
+### Changed
+- **Lockstep version bump** with `@willink-labs/tailwind-preset@0.3.0` and
+  `@willink-labs/tokens@0.3.0`. The DS as a whole moves to 0.3.0 to make the
+  preset.css fix (Tailwind v4 `@source` inclusion) easy to consume in a single
+  deps bump on the consumer side.
+- No code or API changes in this package — everything in 0.2.7 still works.
+  The fix lives in `@willink-labs/tailwind-preset`.
+
+### Why a coordinated minor bump
+The three packages (tokens / tailwind-preset / react) are tightly coupled via
+`peerDependencies: workspace:*`. Treating them as one versioned unit avoids
+version-mismatch surprises when consumers do `pnpm add @willink-labs/react`.
+
 ## [0.2.7] — 2026-05-08
 
 OIDC + token-free publish の最終確立版。0.2.6 で `npm publish` 直接実行により
