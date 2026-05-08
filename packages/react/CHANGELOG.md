@@ -6,9 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
-## [0.2.3] — 2026-05-08
+## [0.2.4] — 2026-05-08
 
-OIDC Trusted Publisher 採用。**publish 側 token も完全廃止**。
+Plan B: 初回 publish のみ Granular token (90 日) で実行 → 後続で OIDC 化。
+
+### Changed
+- workflow を一時的に token-based publish (`NODE_AUTH_TOKEN: secrets.NPM_TOKEN`) に戻す
+- `--provenance` フラグ一時削除
+- 全 3 packages: 0.2.3 → 0.2.4 (実 publish 用バージョン)
+
+### 背景
+0.2.3 で OIDC publish を計画したが、新規 org `willink-labs` には Trusted Publishers
+タブが UI 上存在しなかった (4 タブ: Packages / Members / Teams / Billing のみ)。
+npmjs.com の仕様で、Trusted Publisher 設定 UI は **既存 package が 1 つでも publish
+された後にしか表示されない**。
+
+打開策: ① 初回 publish を Granular token (90 日・bypass 2fa) で完遂 → ② package が
+npmjs.com に存在する状態で各 package settings から Trusted Publisher 設定 → ③ 0.2.5 で
+workflow を OIDC 化 (token 完全削除) という 3 段階 Plan B を採用。
+
+### Next (0.2.5 で予定)
+- npmjs.com で各 package settings → Trusted Publisher 設定 (CEO 手動)
+- workflow に `--provenance` 復活 + `NODE_AUTH_TOKEN` 削除
+- NPM_TOKEN secret 削除 → 期限切れ概念消滅 (CEO 指示「更新漏れが起きない仕組み」達成)
+
+## [0.2.3] — 2026-05-08 [SUPERSEDED — Trusted Publisher UI 未表示で publish 未実行]
+
+OIDC Trusted Publisher 採用予定だったが、新規 org に UI が表示されない仕様により
+publish 未実行。0.2.4 で Plan B 経過版を release。
 
 ### Why
 0.2.2 で npmjs.com publish に切替えたが、CEO の npmjs.com アカウント 2FA 有効化
