@@ -1,4 +1,4 @@
-name: Publish to npmjs.org
+name: Publish to npmjs.org (OIDC Trusted Publisher)
 
 on:
   push:
@@ -15,6 +15,11 @@ jobs:
   publish:
     runs-on: ubuntu-latest
 
+    # Required for OIDC trusted publisher (npmjs.com)
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +32,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           registry-url: "https://registry.npmjs.org"
           scope: "@willink-labs"
           cache: "pnpm"
@@ -44,17 +49,15 @@ jobs:
       - name: Build all packages
         run: pnpm -r build
 
+      # OIDC trusted publisher 経由で publish (NPM_TOKEN 不要・provenance 自動付与)
       - name: Publish @willink-labs/tokens
-        run: pnpm -F @willink-labs/tokens publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
+        working-directory: packages/tokens
 
       - name: Publish @willink-labs/tailwind-preset
-        run: pnpm -F @willink-labs/tailwind-preset publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
+        working-directory: packages/tailwind-preset
 
       - name: Publish @willink-labs/react
-        run: pnpm -F @willink-labs/react publish --no-git-checks --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
+        working-directory: packages/react
