@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish to npmjs.org
 
 on:
   push:
@@ -14,9 +14,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout
@@ -31,7 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          registry-url: "https://npm.pkg.github.com"
+          registry-url: "https://registry.npmjs.org"
           scope: "@willink-labs"
           cache: "pnpm"
 
@@ -50,14 +47,14 @@ jobs:
       - name: Publish @willink-labs/tokens
         run: pnpm -F @willink-labs/tokens publish --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @willink-labs/tailwind-preset
         run: pnpm -F @willink-labs/tailwind-preset publish --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @willink-labs/react
         run: pnpm -F @willink-labs/react publish --no-git-checks --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
