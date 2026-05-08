@@ -6,10 +6,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
-## [0.2.5] — 2026-05-08
+## [0.2.6] — 2026-05-08
+
+OIDC Trusted Publisher で publish 確立 (token 完全廃止)。**CEO 指示「更新漏れが
+起きない仕組み」達成版**。0.2.5 で発生した npmjs.com の private repo 制約による
+provenance failure を回避。
+
+### Changed
+- `.github/workflows/publish.yml`:
+  - `npm publish` から `--provenance` フラグを **削除**
+    (provenance attestation は npmjs.com 仕様で source repo が public 限定)
+  - `permissions.id-token: write` 維持 (OIDC ID token 発行に必要)
+  - `NODE_AUTH_TOKEN` は引き続き不要 (token-free)
+- 全 3 packages: 0.2.5 → 0.2.6
+
+### Provenance attestation の扱い
+- 現状: **不採用** (private repo 制約)
+- 将来: Phase 4+ で OSS 化判断時に再検討 ((internal ADR) 候補)
+- 影響: consumer は npmjs.com 上で「Built and signed on GitHub Actions」バッジを
+  確認できないが、install 自体は通常通り動作
+
+### CEO の本来の目的は達成
+- ✅ token rotation 不要 (OIDC で publish ごと自動再発行)
+- ✅ 90 日期限切れ概念なし
+- ✅ 監視 routine 不要
+- ✅ 新 consumer 追加コスト 0
+
+## [0.2.5] — 2026-05-08 [SUPERSEDED — provenance + private repo の組合せで failed]
 
 Plan B Phase 2: OIDC Trusted Publisher で publish (token 完全廃止)。
-**CEO 指示「更新漏れが起きない仕組み」達成版**。
+`--provenance` フラグが npmjs.com の private repo 制約で 422 エラー。0.2.6 で
+provenance を諦めて OIDC Trusted Publisher だけで publish する形に修正。
 
 ### Changed
 - `.github/workflows/publish.yml`:
