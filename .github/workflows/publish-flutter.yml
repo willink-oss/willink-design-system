@@ -1,0 +1,43 @@
+name: Publish willink_theme to pub.dev
+
+# Triggered by tags of the form `flutter-v*` (e.g. flutter-v0.1.0) or manual
+# workflow_dispatch. Independent from the existing publish.yml (which handles
+# the npm packages on tags `v*`).
+
+on:
+  push:
+    tags: ['flutter-v*']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: dart pub publish
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write   # required for pub.dev OIDC Trusted Publisher
+      contents: read
+    defaults:
+      run:
+        working-directory: packages/flutter_theme
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.22.0'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      - name: Dry-run publish (sanity)
+        run: dart pub publish --dry-run
+
+      - name: Publish to pub.dev (OIDC Trusted Publisher)
+        run: dart pub publish --force
