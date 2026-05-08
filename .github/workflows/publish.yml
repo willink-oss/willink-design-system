@@ -51,17 +51,15 @@ jobs:
 
       # OIDC Trusted Publisher 経由で publish
       # - NODE_AUTH_TOKEN 不要 (token 完全廃止・期限切れ概念なし)
+      # - pnpm publish 経由で workspace:* の peerDeps を実 version に自動置換
+      #   (npm publish 直接実行だと workspace:* が tarball にそのまま残り consumer install で fail する)
       # - Provenance attestation は npmjs.com 制約で source repo が public な場合のみ可能
       #   willink-design-system は private repo のため --provenance フラグは使用不可
-      #   Phase 4+ で OSS 化判断時に再検討 ((internal ADR) 候補)
       - name: Publish @willink-labs/tokens
-        run: npm publish --access public
-        working-directory: packages/tokens
+        run: pnpm -F @willink-labs/tokens publish --access public --no-git-checks
 
       - name: Publish @willink-labs/tailwind-preset
-        run: npm publish --access public
-        working-directory: packages/tailwind-preset
+        run: pnpm -F @willink-labs/tailwind-preset publish --access public --no-git-checks
 
       - name: Publish @willink-labs/react
-        run: npm publish --access public
-        working-directory: packages/react
+        run: pnpm -F @willink-labs/react publish --access public --no-git-checks
