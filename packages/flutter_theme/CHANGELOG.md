@@ -5,6 +5,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.2.1] — 2026-05-09
+
+### Fixed
+- `pubspec.yaml`: removed redundant `publish_to: https://pub.dev` (rejected
+  by pub.dev with `Invalid 'publish_to' value`). Default is now used.
+
+### Internal
+- First release via OIDC Trusted Publisher (publisher: `i-willink.com`).
+  All future versions can be released by pushing a `flutter-v{version}` tag.
+
 ## [0.2.0] — 2026-05-09
 
 Driven by feedback from the first round of consumer integration (Phase 5.3
