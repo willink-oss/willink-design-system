@@ -43,7 +43,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.460.0",
-    "tailwind-merge": "^2.5.4"
+    "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.0",
