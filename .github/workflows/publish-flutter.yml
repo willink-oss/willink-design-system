@@ -29,6 +29,12 @@ jobs:
           # Use stable channel (latest) to avoid SDK version drift.
           flutter-version: '3.29.0'
 
+      # Required for pub.dev OIDC Trusted Publisher authentication.
+      # subosito/flutter-action ships Dart but does NOT configure the
+      # GitHub OIDC token for pub.dev — dart-lang/setup-dart does that.
+      # Ref: https://dart.dev/tools/pub/automated-publishing
+      - uses: dart-lang/setup-dart@v1
+
       - name: Install dependencies
         run: flutter pub get
 
