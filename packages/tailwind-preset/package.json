@@ -31,5 +31,8 @@
     "type": "git",
     "url": "https://github.com/willink-labs/willink-design-system.git",
     "directory": "packages/tailwind-preset"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
   }
 }
