@@ -281,3 +281,22 @@
 @source inline("hover:bg-neutral-50");
 @source inline("hover:bg-brand-700");
 @source inline("text-{lg}");
+@source inline("shadow-{lg,md,none}");
+@source inline("rounded-{full}");
+
+/* === Slider / Progress / Separator (0.5.0+・Radix) === */
+@source inline("relative");
+@source inline("absolute");
+@source inline("h-{px,1.5,2,4}");
+@source inline("w-{px,4,full}");
+@source inline("touch-none");
+@source inline("select-none");
+@source inline("grow");
+@source inline("flex-1");
+@source inline("bg-neutral-200");
+@source inline("border-2");
+@source inline("border-brand");
+@source inline("transition-transform");
+@source inline("data-[disabled]:opacity-50");
+@source inline("disabled:pointer-events-none");
+@source inline("bg-border");

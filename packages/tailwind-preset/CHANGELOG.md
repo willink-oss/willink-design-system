@@ -8,6 +8,15 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Slider + Progress + Separator 用 safelist
+
+`safelist.css` に utility 系 component 用 utilities を inline 登録:
+- size: `h-{px,1.5,2,4}` / `w-{px,4,full}`
+- positioning: `relative` / `absolute` / `grow` / `flex-1`
+- color: `bg-neutral-200` / `bg-border` / `border-brand`
+- form: `touch-none` / `select-none` / `border-2`
+- state: `transition-transform` / `data-[disabled]:opacity-50` / `disabled:pointer-events-none`
+
 ### Added — Avatar + Tabs + AlertDialog 用 safelist + Dialog scale keyframes
 
 `preset.css` に Dialog scale keyframes を ship (AlertDialog でも共用):
@@ -134,6 +143,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 
 

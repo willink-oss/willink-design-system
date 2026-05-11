@@ -107,3 +107,11 @@ export {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./components/alert-dialog";
+// PR15: Slider (Radix・range input)
+export { Slider } from "./components/slider";
+
+// PR16: Progress (Radix・determinate/indeterminate progress bar)
+export { Progress } from "./components/progress";
+
+// PR17: Separator (Radix・horizontal/vertical divider)
+export { Separator } from "./components/separator";

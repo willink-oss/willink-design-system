@@ -8,6 +8,46 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Slider + Progress + Separator (utility 系 3 component)
+
+#### Slider (Radix-based)
+```tsx
+<Slider defaultValue={[50]} max={100} step={1} aria-label="volume" />
+<Slider defaultValue={[20, 80]} aria-label="range" />
+```
+- 単一値 / range 双方対応・thumb 数は value 配列長で自動判定
+- track: `bg-neutral-200`・range: `bg-brand`・thumb: white circle with brand border
+- キーボード矢印 / Home / End で値操作 (Radix 標準)
+
+#### Progress (Radix-based)
+```tsx
+<Progress value={65} max={100} aria-label="upload" />
+<Progress aria-label="loading" />  {/* indeterminate */}
+```
+- value 未指定時は indeterminate state
+- bar: `bg-neutral-200`・indicator: `bg-brand` の transform translateX で表現
+- data-state: `loading` / `complete` / `indeterminate` を Radix が自動制御
+
+#### Separator (Radix-based)
+```tsx
+<Separator />                                  {/* horizontal (default) */}
+<Separator orientation="vertical" className="h-6" />  {/* vertical */}
+<Separator decorative />                       {/* role=none・semantic ではない */}
+```
+- 1px line・`bg-border`
+- orientation prop で horizontal / vertical 切替
+- decorative=true (default) で screen reader が無視 (装飾的 divider)
+
+### Internal (test infra)
+- `src/test-setup.ts` に `ResizeObserver` polyfill を追加 (Slider 内部で
+  `@radix-ui/react-use-size` が ResizeObserver を要求し jsdom に未実装の
+  ため・no-op class で fallback)。
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (utility 系 component 用 safelist)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Added — Avatar + Tabs + AlertDialog component family
 
 #### Avatar (Radix-based)
