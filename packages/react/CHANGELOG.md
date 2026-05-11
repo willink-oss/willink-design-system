@@ -8,6 +8,66 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — DropdownMenu + Select component family (Radix-based)
+
+#### DropdownMenu
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem onSelect={openProfile}>Profile</DropdownMenuItem>
+    <DropdownMenuItem>
+      Settings <DropdownMenuShortcut>⌘,</DropdownMenuShortcut>
+    </DropdownMenuItem>
+    <DropdownMenuItem disabled>Billing</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+Exports: `DropdownMenu` / `DropdownMenuTrigger` / `DropdownMenuContent` /
+`DropdownMenuItem` / `DropdownMenuLabel` / `DropdownMenuSeparator` /
+`DropdownMenuShortcut` / `DropdownMenuGroup` / `DropdownMenuPortal` /
+`DropdownMenuSub` / `DropdownMenuRadioGroup`。
+
+`DropdownMenuItem` / `DropdownMenuLabel` には `inset?: boolean` prop
+(checkbox / radio item 用の左マージン)。
+
+#### Select
+
+```tsx
+<Select onValueChange={setPlan}>
+  <SelectTrigger><SelectValue placeholder="Choose plan" /></SelectTrigger>
+  <SelectContent>
+    <SelectLabel>Plans</SelectLabel>
+    <SelectItem value="standard">Standard</SelectItem>
+    <SelectItem value="premium">Premium</SelectItem>
+    <SelectSeparator />
+    <SelectItem value="enterprise">Enterprise</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+Exports: `Select` / `SelectTrigger` / `SelectValue` / `SelectContent` /
+`SelectItem` / `SelectLabel` / `SelectSeparator` / `SelectGroup`。
+
+- Trigger: `h-10 w-full` の Input 風 button + ChevronDown icon
+- Content: `position="popper"` (default) で trigger 直下に配置・width 自動追従
+  (`min-w-[var(--radix-select-trigger-width)]`)
+- Item: 左に Check icon (現在選択中のみ表示・absolute positioning)
+
+### Internal (test infra)
+- `src/test-setup.ts` に jsdom 用 polyfill 追加: `Element.prototype.hasPointerCapture` /
+  `setPointerCapture` / `releasePointerCapture` / `scrollIntoView` (Radix Select /
+  Tooltip 等の pointer 系イベントが jsdom で `TypeError` を投げる問題を解消)。
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (DropdownMenu / Select 用 utilities + 汎用 fade keyframes)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Added — Form control family (Switch + Checkbox + RadioGroup)
 
 3 つの form control を一括追加。Input / Textarea / Label と組合せて完全な form 構築が DS のみで可能に。

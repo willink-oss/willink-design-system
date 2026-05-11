@@ -207,3 +207,39 @@
 /* Indicator content alignment */
 @source inline("fill-current");
 @source inline("text-current");
+@source inline("shadow-{lg,md,none}");
+@source inline("rounded-{sm,md,full}");
+
+/* === DropdownMenu + Select (0.5.0+・Radix popover-style) === */
+@source inline("z-50");
+@source inline("min-w-32");
+@source inline("min-w-[var(--radix-select-trigger-width)]");
+@source inline("h-[var(--radix-select-trigger-height)]");
+@source inline("max-h-96");
+@source inline("h-{px,3.5,4,10}");
+@source inline("w-{3.5,4,full}");
+@source inline("p-1");
+@source inline("py-{1.5,2}");
+@source inline("px-{2,3}");
+@source inline("pl-8");
+@source inline("pr-2");
+@source inline("ml-auto");
+@source inline("-mx-1");
+@source inline("my-1");
+@source inline("relative");
+@source inline("absolute");
+@source inline("left-2");
+@source inline("opacity-70");
+@source inline("text-{xs,sm}");
+@source inline("font-semibold");
+@source inline("tracking-widest");
+@source inline("focus:bg-neutral-100");
+@source inline("focus:text-fg");
+@source inline("data-[disabled]:pointer-events-none");
+@source inline("data-[disabled]:opacity-50");
+@source inline("data-[state=open]:animate-fade-in");
+@source inline("data-[state=closed]:animate-fade-out");
+@source inline("data-[side=bottom]:translate-y-1");
+@source inline("data-[side=top]:-translate-y-1");
+@source inline("select-none");
+@source inline("placeholder:text-muted");

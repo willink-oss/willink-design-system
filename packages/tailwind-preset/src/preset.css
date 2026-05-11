@@ -204,6 +204,7 @@
  * `--ease-standard` / `--duration-fast` を使用し、ブランドモーション統一感を維持。
  * ============================================================ */
 /* === Generic fade in/out — Tooltip / Dialog overlay 等で共用 === */
+/* === Generic fade in/out — DropdownMenu / Select / Tooltip / Dialog overlay 等で共用 === */
 
 @keyframes willink-fade-in {
   from { opacity: 0; }

@@ -8,6 +8,11 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Generic fade keyframes + DropdownMenu/Select safelist
+
+`preset.css` に汎用 fade animation を追加 (DropdownMenu / Select / 将来の
+Tooltip / Popover / Dialog overlay 等で共用):
+
 ### Added — Form controls 用 safelist (`@willink-labs/react@0.5.0` Switch + Checkbox + RadioGroup 用)
 
 新 form control 3 種で使う Tailwind utilities を `safelist.css` に登録:
@@ -30,6 +35,19 @@ generic fade utility を `preset.css` に ship。 `--duration-fast` (150ms) +
 @keyframes willink-fade-in / willink-fade-out
 @utility animate-fade-in / animate-fade-out
 ```
+
+`safelist.css` に DropdownMenu / Select 用 utilities を inline 登録:
+- size: `min-w-32` / `max-h-96` / `min-w-[var(--radix-select-trigger-width)]` /
+  `h-[var(--radix-select-trigger-height)]` / `h-{px,3.5,4,10}` / `w-{3.5,4,full}`
+- spacing: `p-1` / `py-{1.5,2}` / `px-{2,3}` / `pl-8` / `pr-2` / `ml-auto` /
+  `-mx-1` / `my-1`
+- positioning: `relative` / `absolute` / `left-2` / `z-50`
+- typography: `text-{xs,sm}` / `font-semibold` / `tracking-widest`
+- state-driven: `data-[state={open,closed}]:animate-fade-{in,out}` /
+  `data-[side=bottom]:translate-y-1` / `data-[side=top]:-translate-y-1` /
+  `data-[disabled]:pointer-events-none` / `data-[disabled]:opacity-50`
+- focus: `focus:bg-neutral-100` / `focus:text-fg`
+- 他: `select-none` / `placeholder:text-muted` / `opacity-70`
 
 `safelist.css` に以下を追加 (Tooltip / Toast 用):
 - `bg-neutral-{50,100,900}` / `text-neutral-50`
@@ -102,6 +120,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 
 

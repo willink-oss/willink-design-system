@@ -61,3 +61,29 @@ export { Toaster, toast } from "./components/toast";
 export { Switch } from "./components/switch";
 export { Checkbox } from "./components/checkbox";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group";
+// PR10: DropdownMenu (Radix)
+export {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuTrigger,
+} from "./components/dropdown-menu";
+
+// PR11: Select (Radix)
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./components/select";
