@@ -5,6 +5,39 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.3.0] — 2026-05-11
+
+### Added — DS Phase 6 Flutter components (4 件)
+
+最初の component layer。Material 3 theme-aware で全 brand axis (willink /
+clublink / fitai) に追従。fit-ai mobile + clubhouse の重複実装
+(`EmptyState` / `ErrorState` / `LoadingState` / `SectionCard`) を
+willink_theme に一本化し、二重メンテを解消。
+
+- `WillinkEmptyState` — icon + title + description + optional CTA。
+  空データ scene 用。色は `colorScheme.onSurfaceVariant` / `outline` で
+  自動 brand 追従。
+- `WillinkErrorState` — エラー表示 + copy-to-clipboard + retry button。
+  `AsyncValue.when` の error branch 用。icon は `colorScheme.error`。
+- `WillinkLoadingState` — 3 variants:
+  - default (40px): full-screen loading
+  - `.compact()` (24px): inline within sections
+  - `.inline()` (16px): bare spinner for buttons / list rows / dense layouts
+- `WillinkSectionCard` — title + trailing + child の section surface。
+  React DS の `Card` compound に相当。Material 3 elevation tint。
+
+### Tests
+- 19 widget tests (`test/components_test.dart`) — total 33 pass.
+- `flutter analyze`: No issues found.
+
+### Consumer adoption plan
+- fit-ai mobile: dashboard (PR #1906 で部分採用) → 段階拡大
+- clubhouse: Phase 0 全画面 (single-PR migration 推奨)
+
+### Migration from 0.2.x
+No breaking changes. Existing token / theme API 完全互換。
+New widgets are opt-in (`WillinkEmptyState` 等を採用したい画面で import)。
+
 ## [0.2.1] — 2026-05-09
 
 ### Fixed
