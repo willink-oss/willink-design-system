@@ -87,3 +87,23 @@ export {
   SelectTrigger,
   SelectValue,
 } from "./components/select";
+// PR12: Avatar (Radix)
+export { Avatar, AvatarFallback, AvatarImage } from "./components/avatar";
+
+// PR13: Tabs (Radix)
+export { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/tabs";
+
+// PR14: AlertDialog (Radix・Dialog の confirmation variant)
+export {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  AlertDialogPortal,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/alert-dialog";

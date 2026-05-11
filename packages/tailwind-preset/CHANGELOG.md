@@ -8,6 +8,20 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Avatar + Tabs + AlertDialog 用 safelist + Dialog scale keyframes
+
+`preset.css` に Dialog scale keyframes を ship (AlertDialog でも共用):
+
+```css
+@keyframes willink-dialog-in / willink-dialog-out
+@utility animate-dialog-in / animate-dialog-out
+```
+
+`safelist.css` に Avatar / Tabs / AlertDialog 用 utilities を inline 登録:
+- Avatar: `relative` / `aspect-square` / `h-{4,5,8,10,12}` / `bg-neutral-100` / `font-medium`
+- Tabs: `data-[state=active]:bg-bg` / `data-[state=active]:text-fg` / `data-[state=active]:shadow-soft` / `transition-all` / `mt-2`
+- AlertDialog: Dialog と同様の positioning + dialog-in/out animations + `flex-col-reverse` / `sm:flex-row` / `sm:justify-end` / `hover:bg-brand-700` / `hover:bg-neutral-50`
+
 ### Added — Generic fade keyframes + DropdownMenu/Select safelist
 
 `preset.css` に汎用 fade animation を追加 (DropdownMenu / Select / 将来の
@@ -120,6 +134,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 
 

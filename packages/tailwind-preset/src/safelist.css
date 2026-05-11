@@ -113,6 +113,31 @@
 @source inline("group-data-[state=open]/trigger:block");
 
 /* Dialog overlay + content positioning (0.5.0+) */
+@source inline("shadow-{lg,md,soft,none}");
+@source inline("rounded-{sm,md,lg,full}");
+
+/* === Avatar / Tabs / AlertDialog (0.5.0+) === */
+/* Avatar */
+@source inline("relative");
+@source inline("h-{4,5,8,10,12}");
+@source inline("w-{full}");
+@source inline("aspect-square");
+@source inline("bg-neutral-100");
+@source inline("font-medium");
+
+/* Tabs */
+@source inline("bg-bg");
+@source inline("p-1");
+@source inline("py-1.5");
+@source inline("px-3");
+@source inline("text-sm");
+@source inline("transition-all");
+@source inline("data-[state=active]:bg-bg");
+@source inline("data-[state=active]:text-fg");
+@source inline("data-[state=active]:shadow-soft");
+@source inline("mt-2");
+
+/* AlertDialog (Dialog と類似・animation/positioning) */
 @source inline("fixed");
 @source inline("inset-0");
 @source inline("z-50");
@@ -137,6 +162,10 @@
 @source inline("hover:opacity-100");
 
 /* Dialog state-driven animations (driven by Radix data-state) */
+@source inline("max-w-md");
+@source inline("gap-4");
+@source inline("p-6");
+@source inline("space-y-2");
 @source inline("data-[state=open]:animate-fade-in");
 @source inline("data-[state=closed]:animate-fade-out");
 @source inline("data-[state=open]:animate-dialog-in");
@@ -243,3 +272,12 @@
 @source inline("data-[side=top]:-translate-y-1");
 @source inline("select-none");
 @source inline("placeholder:text-muted");
+@source inline("flex-col-reverse");
+@source inline("sm:flex-row");
+@source inline("sm:justify-end");
+@source inline("sm:space-x-2");
+@source inline("sm:text-left");
+@source inline("sm:mt-0");
+@source inline("hover:bg-neutral-50");
+@source inline("hover:bg-brand-700");
+@source inline("text-{lg}");

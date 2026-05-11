@@ -205,6 +205,7 @@
  * ============================================================ */
 /* === Generic fade in/out — Tooltip / Dialog overlay 等で共用 === */
 /* === Generic fade in/out — DropdownMenu / Select / Tooltip / Dialog overlay 等で共用 === */
+/* === Generic fade + Dialog scale (Tooltip / DropdownMenu / Select / Dialog / AlertDialog overlay 等で共用) === */
 
 @keyframes willink-fade-in {
   from { opacity: 0; }

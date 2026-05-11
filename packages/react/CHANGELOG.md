@@ -8,6 +8,73 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Avatar + Tabs + AlertDialog component family
+
+#### Avatar (Radix-based)
+
+```tsx
+<Avatar>
+  <AvatarImage src={user.avatarUrl} alt={user.name} />
+  <AvatarFallback>{user.initials}</AvatarFallback>
+</Avatar>
+```
+
+- 画像読込失敗時に AvatarFallback (テキスト or icon) を自動表示
+- default size `h-10 w-10`・className で override 可能
+- 3 export: Avatar / AvatarImage / AvatarFallback
+
+#### Tabs (Radix-based)
+
+```tsx
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Account form</TabsContent>
+  <TabsContent value="password">Password form</TabsContent>
+</Tabs>
+```
+
+- Section navigation・active tab を `data-[state=active]` で表現
+- `bg-neutral-100` の rail に `bg-bg` の active tab + `shadow-soft`
+- キーボード矢印キーで tab 移動 (Radix 標準)
+- 4 export: Tabs / TabsList / TabsTrigger / TabsContent
+
+#### AlertDialog (Radix-based・Dialog の confirmation variant)
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger>削除</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>本当に削除しますか?</AlertDialogTitle>
+      <AlertDialogDescription>この操作は取り消せません。</AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>キャンセル</AlertDialogCancel>
+      <AlertDialogAction onClick={handleDelete}>削除する</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+Dialog (PR #31) との違い:
+
+| 項目 | Dialog | AlertDialog |
+|---|---|---|
+| role | `dialog` | `alertdialog` (screen reader が緊急通知として読上げ) |
+| Action / Cancel | optional | **必須** (誤操作防止) |
+| Escape / overlay click | close する | **close しない** (Cancel button で明示的に閉じる) |
+| 用途 | 一般的 modal (form / preview / detail) | destructive action 確認 (削除 / 解約 / 不可逆操作) |
+
+11 export: AlertDialog / Trigger / Content / Action / Cancel / Header / Footer / Title / Description / Overlay / Portal。
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (Avatar / Tabs / AlertDialog 用 utilities + dialog scale keyframes)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Added — DropdownMenu + Select component family (Radix-based)
 
 #### DropdownMenu
