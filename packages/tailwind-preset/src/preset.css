@@ -199,12 +199,8 @@
 
 @utility animate-accordion-up {
   animation: accordion-up var(--duration-base) var(--ease-standard);
+}
 
-/* === Dialog overlay fade + content scale (used by @willink-labs/react Dialog)
- * `--ease-standard` / `--duration-fast` を使用し、ブランドモーション統一感を維持。
- * ============================================================ */
-/* === Generic fade in/out — Tooltip / Dialog overlay 等で共用 === */
-/* === Generic fade in/out — DropdownMenu / Select / Tooltip / Dialog overlay 等で共用 === */
 /* === Generic fade + Dialog scale (Tooltip / DropdownMenu / Select / Dialog / AlertDialog overlay 等で共用) === */
 
 @keyframes willink-fade-in {
@@ -238,13 +234,6 @@
 }
 @utility animate-dialog-out {
   animation: willink-dialog-out var(--duration-fast) var(--ease-standard);
-}
-@utility animate-fade-in {
-  animation: willink-fade-in var(--duration-fast) var(--ease-standard);
-}
-
-@utility animate-fade-out {
-  animation: willink-fade-out var(--duration-fast) var(--ease-standard);
 }
 
 /* ============================================================
