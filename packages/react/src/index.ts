@@ -30,3 +30,19 @@ export {
   AccordionItem,
   AccordionTrigger,
 } from "./components/accordion";
+
+// PR6: Dialog (Radix)
+export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+  dialogContentVariants,
+  type DialogContentProps,
+} from "./components/dialog";

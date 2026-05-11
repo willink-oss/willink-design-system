@@ -8,6 +8,29 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Dialog animation utilities + safelist (`@willink-labs/react@0.5.0` Dialog 用)
+
+`preset.css` に Dialog 用 keyframes + utilities を ship:
+
+- `@keyframes willink-fade-in/out` (overlay backdrop fade)
+- `@keyframes willink-dialog-in/out` (content scale + translate-50% 補正)
+- `@utility animate-fade-in` / `animate-fade-out`
+- `@utility animate-dialog-in` / `animate-dialog-out`
+
+すべて DS motion token (`--duration-fast` 150ms / `--ease-standard`) を
+使用し、ブランドモーション統一感を維持。Accordion keyframes (0.4.1) と
+同じパターン (consumer 側 workaround を不要化)。
+
+`safelist.css` に Dialog 用 layout / state-driven utilities を追加:
+
+- positioning: `fixed` / `inset-0` / `z-50` / `bg-black/50` / `left-[50%]`
+  / `top-[50%]` / `translate-x-[-50%]` / `translate-y-[-50%]`
+- size variants: `max-w-{sm,md,lg,2xl}` / `max-w-[95vw]`
+- close button: `absolute` / `right-4` / `top-4` / `rounded-sm` / `opacity-{70,100}`
+- state-driven animations: `data-[state={open,closed}]:animate-{fade,dialog}-{in,out}`
+- header/footer: `flex-col` / `flex-col-reverse` / `space-y-1.5` / `space-x-2` /
+  `sm:flex-row` / `sm:justify-end` / `sm:text-left`
+
 ### Added — fit-ai brand axis (3rd brand on React/CSS side)
 
 `[data-brand="fitai"]` ブロックを `preset.css` に追加し、fit-ai を React 側
@@ -50,6 +73,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 ## [0.4.1] — 2026-05-10
 

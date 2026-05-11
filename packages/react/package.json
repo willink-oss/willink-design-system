@@ -43,7 +43,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.5.0",
+    "@radix-ui/react-dialog": "^1.1.4"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.0",

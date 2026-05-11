@@ -111,3 +111,45 @@
 @source inline("group-data-[state=open]/trigger:rotate-180");
 @source inline("group-data-[state=open]/trigger:hidden");
 @source inline("group-data-[state=open]/trigger:block");
+
+/* Dialog overlay + content positioning (0.5.0+) */
+@source inline("fixed");
+@source inline("inset-0");
+@source inline("z-50");
+@source inline("bg-black/50");
+@source inline("left-[50%]");
+@source inline("top-[50%]");
+@source inline("translate-x-[-50%]");
+@source inline("translate-y-[-50%]");
+@source inline("grid");
+@source inline("gap-4");
+@source inline("p-6");
+@source inline("rounded-lg");
+@source inline("shadow-md");
+@source inline("border-border");
+@source inline("max-w-{sm,md,lg,2xl}");
+@source inline("max-w-[95vw]");
+@source inline("absolute");
+@source inline("right-4");
+@source inline("top-4");
+@source inline("rounded-sm");
+@source inline("opacity-{70,100}");
+@source inline("hover:opacity-100");
+
+/* Dialog state-driven animations (driven by Radix data-state) */
+@source inline("data-[state=open]:animate-fade-in");
+@source inline("data-[state=closed]:animate-fade-out");
+@source inline("data-[state=open]:animate-dialog-in");
+@source inline("data-[state=closed]:animate-dialog-out");
+
+/* Dialog header / footer / title / description */
+@source inline("flex-col");
+@source inline("flex-col-reverse");
+@source inline("space-y-1.5");
+@source inline("space-x-2");
+@source inline("sm:flex-row");
+@source inline("sm:justify-end");
+@source inline("sm:text-left");
+@source inline("text-{center,lg}");
+@source inline("leading-none");
+@source inline("tracking-tight");

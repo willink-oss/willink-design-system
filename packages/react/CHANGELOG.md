@@ -8,6 +8,62 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Dialog component (Radix-based)
+
+新しい component family。Radix Dialog (focus trap / Escape close / portal /
+scroll lock / a11y label) を base に、ブランドモーション (preset.css の
+duration / ease 統一) と size variant を統合。
+
+```tsx
+<Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent size="md">
+    <DialogHeader>
+      <DialogTitle>Confirm</DialogTitle>
+      <DialogDescription>Are you sure?</DialogDescription>
+    </DialogHeader>
+    <p>Body</p>
+    <DialogFooter>
+      <DialogClose>Cancel</DialogClose>
+      <Button>OK</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+#### Exports
+
+- `Dialog` (= Radix Root)
+- `DialogTrigger` / `DialogClose` / `DialogPortal` (= Radix passthrough)
+- `DialogOverlay` (full-screen backdrop with fade animation)
+- `DialogContent` (centered card with scale-in animation・size variant)
+- `DialogHeader` / `DialogFooter` / `DialogTitle` / `DialogDescription` (compound)
+- `dialogContentVariants` (cva)
+- `type DialogContentProps`
+
+#### `<DialogContent>` props
+
+| Prop | 型 | 説明 |
+|---|---|---|
+| `size` | `"sm" \| "md" \| "lg" \| "xl" \| "full"` | width 制御。default `md` (max-w-md 28rem) |
+| `closeButton` | `ReactNode \| false` | 右上 ✕ button を上書き or 非表示 |
+| `portal` | `boolean` | (default true) Portal でレンダ |
+| `overlay` | `boolean` | (default true) backdrop overlay 描画 |
+
+#### a11y
+
+- focus trap (Radix 標準)
+- Escape で close
+- 自動 `aria-labelledby` (DialogTitle と紐付け)
+- 自動 `aria-describedby` (DialogDescription と紐付け)
+- 右上 ✕ button は `aria-label="Close"` 付与済
+- axe 違反 0 (テスト確認済)
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (Dialog animation utilities + safelist)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Changed
 - **Lockstep version bump** with `@willink-labs/tailwind-preset@0.5.0` and
   `@willink-labs/tokens@0.5.0`. `@willink-labs/react` 自体に code 変更なし。

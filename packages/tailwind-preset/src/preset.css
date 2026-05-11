@@ -199,6 +199,42 @@
 
 @utility animate-accordion-up {
   animation: accordion-up var(--duration-base) var(--ease-standard);
+
+/* === Dialog overlay fade + content scale (used by @willink-labs/react Dialog)
+ * `--ease-standard` / `--duration-fast` を使用し、ブランドモーション統一感を維持。
+ * ============================================================ */
+
+@keyframes willink-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes willink-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes willink-dialog-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes willink-dialog-out {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to   { opacity: 0; transform: translate(-50%, -50%) scale(0.96); }
+}
+
+@utility animate-fade-in {
+  animation: willink-fade-in var(--duration-fast) var(--ease-standard);
+}
+@utility animate-fade-out {
+  animation: willink-fade-out var(--duration-fast) var(--ease-standard);
+}
+@utility animate-dialog-in {
+  animation: willink-dialog-in var(--duration-fast) var(--ease-standard);
+}
+@utility animate-dialog-out {
+  animation: willink-dialog-out var(--duration-fast) var(--ease-standard);
 }
 
 /* ============================================================
