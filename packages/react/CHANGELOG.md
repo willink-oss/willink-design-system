@@ -6,6 +6,65 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.5.0] — 2026-05-10
+
+### Added — Accordion API 拡張 (Issue #27 P1 + P2)
+
+**`AccordionItem` に visual variant** (cva・後方互換)
+
+\`\`\`tsx
+<AccordionItem variant="card">  // "flat" (default) | "card" | "bordered"
+\`\`\`
+
+- `flat` (default・0.4.x 動作と同等): 横一列フラット list (`border-b`)
+- `card`: rounded card 形式 (`rounded-xl border bg-bg shadow-soft mb-3`・open 時 `shadow-md`)
+- `bordered`: 全周 border (`rounded-md border mb-2`)
+
+variant 未指定時は `flat` が適用されるため**全 consumer 後方互換**。
+
+**`AccordionTrigger` に icon prop** (後方互換)
+
+\`\`\`tsx
+<AccordionTrigger icon={<Plus />}>...</AccordionTrigger>
+\`\`\`
+
+- 未指定: 既存の `ChevronDown` (rotate-180 on open) — **0.4.x 動作と同等**
+- 指定: custom icon を rendered as-is (rotation 等は consumer 制御)
+
+trigger button に `group/trigger` named group を追加。consumer が
+`group-data-[state=open]/trigger:` で trigger 状態に応じた表示切替を
+descendant 要素から target 可能 (Plus/Minus 切替 pattern):
+
+\`\`\`tsx
+<AccordionTrigger
+  icon={
+    <>
+      <Plus className="block group-data-[state=open]/trigger:hidden" />
+      <Minus className="hidden group-data-[state=open]/trigger:block" />
+    </>
+  }
+>
+  Question
+</AccordionTrigger>
+\`\`\`
+
+### Changed
+- `AccordionItem` 内部実装が cva ベースに切替 (variant 拡張のため)。
+  className override は 0.4.x と同様に動作 (cva 出力 + className が `cn()` で merge される)。
+- `accordionItemVariants` を named export として追加 (consumer が variant の
+  full class string を取得して composition したい場合のため)。
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (safelist に新 variant 用 utility 追加)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+### consumer 影響
+- **i-willink.com**: PR #212 で AccordionPrimitive 直接利用していた箇所を
+  0.5.0 採用後に DS API のみに置換可能 (`<AccordionTrigger icon={...} />`)
+- **clublink-platform**: 既存 flat list は無変更で動作。card 化したい場合は
+  `variant="card"` で opt-in
+- **internal-project-b**: 将来 DS adopt 時に variant prop が活用可能
+
 ## [0.4.1] — 2026-05-10
 
 ### Changed

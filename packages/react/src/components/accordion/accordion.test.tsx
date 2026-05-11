@@ -98,4 +98,88 @@ describe("Accordion", () => {
     const results = await axe(container);
     expect(results).toHaveNoViolations();
   });
+
+  describe("AccordionItem variants", () => {
+    it("defaults to flat variant (border-b・後方互換)", () => {
+      const { container } = render(<Sample type="single" />);
+      const items = container.querySelectorAll("[data-state]");
+      // First Item has border-b class for flat
+      expect(items[0]).toHaveClass("border-b");
+    });
+
+    it("supports card variant (rounded + shadow)", () => {
+      const { container } = render(
+        <Accordion type="single" collapsible>
+          <AccordionItem value="q1" variant="card">
+            <AccordionTrigger>Q1</AccordionTrigger>
+            <AccordionContent>A1</AccordionContent>
+          </AccordionItem>
+        </Accordion>,
+      );
+      const item = container.querySelector("[data-state]");
+      expect(item).toHaveClass("rounded-xl");
+      expect(item).toHaveClass("shadow-soft");
+      expect(item).not.toHaveClass("border-b");
+    });
+
+    it("supports bordered variant", () => {
+      const { container } = render(
+        <Accordion type="single" collapsible>
+          <AccordionItem value="q1" variant="bordered">
+            <AccordionTrigger>Q1</AccordionTrigger>
+            <AccordionContent>A1</AccordionContent>
+          </AccordionItem>
+        </Accordion>,
+      );
+      const item = container.querySelector("[data-state]");
+      expect(item).toHaveClass("rounded-md");
+      expect(item).toHaveClass("border");
+      expect(item).not.toHaveClass("border-b");
+    });
+  });
+
+  describe("AccordionTrigger icon prop", () => {
+    it("defaults to ChevronDown (後方互換・rotates on open)", () => {
+      const { container } = render(<Sample type="single" />);
+      // ChevronDown is a lucide svg
+      const svg = container.querySelector("button svg");
+      expect(svg).not.toBeNull();
+      expect(svg).toHaveClass("group-data-[state=open]/trigger:rotate-180");
+    });
+
+    it("renders custom icon when icon prop is provided", () => {
+      const { getByTestId } = render(
+        <Accordion type="single" collapsible>
+          <AccordionItem value="q1">
+            <AccordionTrigger icon={<span data-testid="custom-icon">+</span>}>
+              Q1
+            </AccordionTrigger>
+            <AccordionContent>A1</AccordionContent>
+          </AccordionItem>
+        </Accordion>,
+      );
+      expect(getByTestId("custom-icon")).toBeInTheDocument();
+    });
+
+    it("does not render default ChevronDown when custom icon provided", () => {
+      const { container } = render(
+        <Accordion type="single" collapsible>
+          <AccordionItem value="q1">
+            <AccordionTrigger icon={<span data-testid="custom-icon">+</span>}>
+              Q1
+            </AccordionTrigger>
+            <AccordionContent>A1</AccordionContent>
+          </AccordionItem>
+        </Accordion>,
+      );
+      // No svg should remain (lucide ChevronDown is a svg)
+      expect(container.querySelector("button svg")).toBeNull();
+    });
+
+    it("trigger has group/trigger class for state-aware descendants", () => {
+      render(<Sample type="single" />);
+      const q1 = screen.getByRole("button", { name: /Q1/ });
+      expect(q1).toHaveClass("group/trigger");
+    });
+  });
 });

@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.5.0] — 2026-05-10
+
+### Added — safelist で AccordionItem variant + Trigger group/trigger を保証 (Issue #27 P1+P2)
+
+`@willink-labs/react@0.5.0` で `AccordionItem` に variant prop (flat/card/bordered)・
+`AccordionTrigger` に `group/trigger` named group + icon prop が追加。これに
+伴い consumer の Tailwind v4 が node_modules を非スキャンの状況でも以下の
+class が compile されるよう `safelist.css` に inline 登録:
+
+- AccordionItem variant 用: `rounded-{md,xl}` / `shadow-{soft,md}` / `data-[state=open]:shadow-md` / `mb-{2,3}` / `last:mb-0` / `bg-bg`
+- AccordionTrigger group: `group/trigger` / `group-data-[state=open]/trigger:rotate-180` / `group-data-[state=open]/trigger:hidden` / `group-data-[state=open]/trigger:block`
+
+### Lockstep version bump
+- Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 ## [0.4.1] — 2026-05-10
 
 ### Fixed — Accordion アニメーションが consumer 側で動作しない問題 (Issue #27 P0)

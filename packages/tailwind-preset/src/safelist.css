@@ -97,3 +97,17 @@
 @source inline("last:border-b-0");
 @source inline("shadow-{lg,none}");
 @source inline("rounded-full");
+
+/* AccordionItem variants (0.5.0+・cva: flat / card / bordered) */
+@source inline("rounded-{md,xl}");
+@source inline("shadow-{soft,md}");
+@source inline("data-[state=open]:shadow-md");
+@source inline("mb-{2,3}");
+@source inline("last:mb-0");
+@source inline("bg-bg");
+
+/* AccordionTrigger group/trigger named-group + state-aware descendants */
+@source inline("group/trigger");
+@source inline("group-data-[state=open]/trigger:rotate-180");
+@source inline("group-data-[state=open]/trigger:hidden");
+@source inline("group-data-[state=open]/trigger:block");
