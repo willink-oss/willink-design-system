@@ -178,3 +178,32 @@
 @source inline("group-[.toast]:bg-neutral-100");
 @source inline("group-[.toast]:text-fg");
 @source inline("group-[.toast]:rounded-md");
+@source inline("rounded-{sm,full}");
+
+/* === Form controls (Switch + Checkbox + RadioGroup・0.5.0+) === */
+@source inline("peer");
+@source inline("h-{3.5,4,5,6}");
+@source inline("w-{3.5,4,5,11}");
+@source inline("aspect-square");
+@source inline("grid");
+@source inline("gap-2");
+@source inline("transition-{colors,transform}");
+
+/* Switch: thumb translation by data-state */
+@source inline("data-[state=checked]:translate-x-5");
+@source inline("data-[state=unchecked]:translate-x-0");
+@source inline("data-[state=checked]:bg-brand");
+@source inline("data-[state=unchecked]:bg-neutral-200");
+@source inline("pointer-events-none");
+@source inline("ring-0");
+
+/* Checkbox: brand fill on check */
+@source inline("data-[state=checked]:text-brand-fg");
+@source inline("data-[state=checked]:border-brand");
+
+/* Disabled state */
+@source inline("disabled:cursor-not-allowed");
+
+/* Indicator content alignment */
+@source inline("fill-current");
+@source inline("text-current");

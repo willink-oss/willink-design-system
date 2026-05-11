@@ -8,6 +8,55 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Form control family (Switch + Checkbox + RadioGroup)
+
+3 つの form control を一括追加。Input / Textarea / Label と組合せて完全な form 構築が DS のみで可能に。
+
+#### Switch (Radix-based)
+
+```tsx
+<Switch checked={enabled} onCheckedChange={setEnabled} aria-label="Notifications" />
+```
+
+- on/off 状態を data-state でアニメーション (translate-x で thumb 移動)
+- checked 時 `bg-brand`・unchecked 時 `bg-neutral-200`
+- focus ring + disabled state 完備
+
+#### Checkbox (Radix-based)
+
+```tsx
+<label className="flex items-center gap-2">
+  <Checkbox id="terms" checked={agreed} onCheckedChange={setAgreed} />
+  <span>利用規約に同意する</span>
+</label>
+```
+
+- checked 時 `bg-brand` + `text-brand-fg` + `lucide-react Check` icon 表示
+- aria-invalid 対応 (Input/Textarea と同パターン)
+
+#### RadioGroup + RadioGroupItem (Radix-based)
+
+```tsx
+<RadioGroup defaultValue="standard">
+  <label className="flex items-center gap-2">
+    <RadioGroupItem value="standard" />
+    <span>Standard</span>
+  </label>
+  <label className="flex items-center gap-2">
+    <RadioGroupItem value="premium" />
+    <span>Premium</span>
+  </label>
+</RadioGroup>
+```
+
+- 排他選択・キーボード矢印キーで選択切替 (Radix 標準)
+- checked 時 `border-brand` + 内部 dot icon 表示
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (form controls 用 utilities + safelist)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Added — Tooltip + Toast component family
 
 #### Tooltip (Radix-based)

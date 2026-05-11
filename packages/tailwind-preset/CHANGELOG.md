@@ -8,6 +8,18 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Form controls 用 safelist (`@willink-labs/react@0.5.0` Switch + Checkbox + RadioGroup 用)
+
+新 form control 3 種で使う Tailwind utilities を `safelist.css` に登録:
+
+- size: `h-{3.5,4,5,6}` / `w-{3.5,4,5,11}` / `aspect-square`
+- layout: `peer` / `grid` / `gap-2` / `pointer-events-none`
+- transform: `transition-{colors,transform}` / `ring-0`
+- Switch state-driven: `data-[state=checked]:translate-x-5` / `data-[state=unchecked]:translate-x-0` / `data-[state=checked]:bg-brand` / `data-[state=unchecked]:bg-neutral-200`
+- Checkbox state-driven: `data-[state=checked]:text-brand-fg` / `data-[state=checked]:border-brand`
+- disabled / indicator: `disabled:cursor-not-allowed` / `fill-current` / `text-current`
+- radius: `rounded-sm` (Checkbox) / `rounded-full` (Switch + RadioGroupItem)
+
 ### Added — `animate-fade-in` / `animate-fade-out` 汎用 utility + 関連 safelist
 
 `@willink-labs/react` の Tooltip / Dialog overlay / 将来 Popover 等で共用する
@@ -90,6 +102,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 
 

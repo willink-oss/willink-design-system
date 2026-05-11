@@ -57,3 +57,7 @@ export {
 
 // PR8: Toast (Sonner wrapper)
 export { Toaster, toast } from "./components/toast";
+// PR9: Form controls (Switch + Checkbox + RadioGroup・Radix)
+export { Switch } from "./components/switch";
+export { Checkbox } from "./components/checkbox";
+export { RadioGroup, RadioGroupItem } from "./components/radio-group";
