@@ -74,6 +74,10 @@
 @source inline("transition-{all,colors,transform}");
 @source inline("duration-200");
 
+/* Accordion height animations (driven by Radix data-state) */
+@source inline("data-[state=open]:animate-accordion-down");
+@source inline("data-[state=closed]:animate-accordion-up");
+
 /* === Typography === */
 @source inline("font-{bold,semibold}");
 @source inline("text-{sm,base}");

@@ -169,6 +169,29 @@
   animation: willink-fade-up 0.5s var(--ease-standard) forwards;
 }
 
+/* === Accordion height animation (used by @willink-labs/react Accordion)
+ * `--radix-accordion-content-height` is set automatically by Radix on the
+ * AccordionContent element when its open state changes.
+ * ============================================================ */
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+
+@utility animate-accordion-down {
+  animation: accordion-down var(--duration-base) var(--ease-standard);
+}
+
+@utility animate-accordion-up {
+  animation: accordion-up var(--duration-base) var(--ease-standard);
+}
+
 /* ============================================================
  * Dark mode — semantic tokens flip; primitives stay constant
  * ============================================================ */

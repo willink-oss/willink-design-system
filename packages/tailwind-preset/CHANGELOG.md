@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.4.1] — 2026-05-10
+
+### Fixed — Accordion アニメーションが consumer 側で動作しない問題 (Issue #27 P0)
+- `@willink-labs/react` の `AccordionContent` は `data-[state=open]:animate-accordion-down`
+  / `data-[state=closed]:animate-accordion-up` を emit していたが、`preset.css`
+  に該当の `@keyframes` および `@utility` 定義を ship していなかったため、consumer
+  全員でアコーディオン展開/折りたたみが瞬時切替になっていた。
+- Fix:
+  - `@keyframes accordion-down` / `accordion-up` を Radix の
+    `--radix-accordion-content-height` 連動で追加。
+  - `@utility animate-accordion-down` / `animate-accordion-up` を DS の motion
+    token (`--duration-base` / `--ease-standard`) で構成。consumer 側のブランド
+    モーション統一感を維持。
+  - `safelist.css` に `data-[state={open,closed}]:animate-accordion-{down,up}`
+    の `@source inline()` を追加し、Tailwind v4 の node_modules 非スキャン
+    制約下でも consumer の CSS bundle に正しく compile されるよう保証。
+- 影響: `clublink-platform` (Phase 3 で flat list のため気付かれず)、`i-willink.com`
+  (Phase 4.1.1 で発見・consumer 側 globals.css に workaround を投入済)、(internal-site-1)
+  (将来 DS 適用時)。consumer 側 workaround を 0.4.1 採用後に削除可能。
+
 ## [0.4.0] — 2026-05-08
 
 ### Added — `@source` is now automatic

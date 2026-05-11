@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.4.1] — 2026-05-10
+
+### Changed
+- **Lockstep version bump** with `@willink-labs/tailwind-preset@0.4.1`.
+  `@willink-labs/react` 自体に code 変更なし。
+- 0.4.1 採用で Accordion アニメーション (height keyframe + ease + duration)
+  が consumer 側で自動動作するようになる (Issue #27 P0 fix・preset.css 側の
+  bug fix を取り込むだけ)。
+
 ## [0.4.0] — 2026-05-08
 
 ### Changed
