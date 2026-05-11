@@ -8,6 +8,36 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — fit-ai brand axis (3rd brand on React/CSS side)
+
+`[data-brand="fitai"]` ブロックを `preset.css` に追加し、fit-ai を React 側
+3 番目のブランド軸として正規化。Flutter `WillinkBrand.fitai` (5/8 Phase 5.3
+で確立) と完全 mirror。
+
+- `--color-brand`: `#3b82f6` (blue-500・fitaiPrimary)
+- `--color-brand-fg`: `#ffffff`
+- `--color-brand-glow`: `#60a5fa` (blue-400)
+- `--color-accent-cyan`: `#5cdca8` (fit-ai 独自 emerald・shared palette には無し)
+- `--color-accent-pink`: `#8b5cf6` (brand-500 violet・cross-brand AI accent)
+- `--shadow-glow`: blue-500 30% glow
+
+新規 export:
+- `@willink-labs/tailwind-preset/brands/fitai.css` (single-brand lock 用)
+- `@willink-labs/tokens/brand/fitai.json` (codegen / TypeScript 値 import 用)
+
+### Why now
+
+- fit-ai (中核 SaaS) は Flutter 側で `WillinkBrand.fitai` が 5/8 既に稼働
+- React/CSS 側未実装が 5/10 i-willink-crew DS 続行検討で gap として顕在化
+- fit-ai 将来 Web 化 (admin / internal tool / staging dashboard 等) 時に
+  brand axis があれば即座に DS 適用可能
+- 「Flutter は揃ってるが React は揃ってない」二重メンテ状態を解消
+
+### Lockstep version bump
+
+- Bumped together with `@willink-labs/tokens@0.5.0` (`brand/fitai.json` 新規)
+  and `@willink-labs/react@0.5.0` (code 変更なし・lockstep)。
+
 ### Added — safelist で AccordionItem variant + Trigger group/trigger を保証 (Issue #27 P1+P2)
 
 `@willink-labs/react@0.5.0` で `AccordionItem` に variant prop (flat/card/bordered)・

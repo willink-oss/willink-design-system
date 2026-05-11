@@ -12,7 +12,8 @@
     "./preset.css": "./src/preset.css",
     "./safelist.css": "./src/safelist.css",
     "./brands/willink.css": "./src/brands/willink.css",
-    "./brands/clublink.css": "./src/brands/clublink.css"
+    "./brands/clublink.css": "./src/brands/clublink.css",
+    "./brands/fitai.css": "./src/brands/fitai.css"
   },
   "files": [
     "src"

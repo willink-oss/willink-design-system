@@ -131,6 +131,15 @@
   --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
 }
 
+[data-brand="fitai"] {
+  --color-brand:       #3b82f6;
+  --color-brand-fg:    #ffffff;
+  --color-brand-glow:  #60a5fa;
+  --color-accent-cyan: #5cdca8;
+  --color-accent-pink: #8b5cf6;
+  --shadow-glow:       0 0 20px -5px rgba(59, 130, 246, 0.3);
+}
+
 /* ============================================================
  * Gradient utilities (Tailwind v4 doesn't allow background-image in @theme)
  * Brand-aware: gradients reference --color-brand-* and --color-accent-*

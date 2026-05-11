@@ -3,6 +3,7 @@ import primitive from "../src/primitive.json" with { type: "json" };
 import semantic from "../src/semantic.json" with { type: "json" };
 import willink from "../src/brand/willink.json" with { type: "json" };
 import clublink from "../src/brand/clublink.json" with { type: "json" };
+import fitai from "../src/brand/fitai.json" with { type: "json" };
 
 const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -62,7 +63,7 @@ describe("semantic.json", () => {
 
 describe("brand definitions", () => {
   it("each brand defines brand / brand-fg / brand-glow / accent-cyan / accent-pink", () => {
-    for (const brandFile of [willink, clublink]) {
+    for (const brandFile of [willink, clublink, fitai]) {
       expect(brandFile.color.brand.$value).toMatch(HEX);
       expect(brandFile.color["brand-fg"].$value).toMatch(HEX);
       expect(brandFile.color["brand-glow"].$value).toMatch(HEX);
@@ -72,7 +73,7 @@ describe("brand definitions", () => {
   });
 
   it("each brand has gradient definitions (subtle / primary / ai)", () => {
-    for (const brandFile of [willink, clublink]) {
+    for (const brandFile of [willink, clublink, fitai]) {
       expect(brandFile.gradient.subtle.$value).toMatch(/^linear-gradient/);
       expect(brandFile.gradient.primary.$value).toMatch(/^linear-gradient/);
       expect(brandFile.gradient.ai.$value).toMatch(/^linear-gradient/);
@@ -85,5 +86,13 @@ describe("brand definitions", () => {
 
   it("clublink primary is blue-600 #2563eb", () => {
     expect(clublink.color.brand.$value).toBe("#2563eb");
+  });
+
+  it("fit-ai primary is blue-500 #3b82f6 (Flutter brand_axis 整合)", () => {
+    expect(fitai.color.brand.$value).toBe("#3b82f6");
+  });
+
+  it("fit-ai accent-cyan is custom emerald #5cdca8 (shared palette には無し)", () => {
+    expect(fitai.color["accent-cyan"].$value).toBe("#5cdca8");
   });
 });

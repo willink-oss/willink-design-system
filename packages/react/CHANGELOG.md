@@ -8,6 +8,13 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Changed
+- **Lockstep version bump** with `@willink-labs/tailwind-preset@0.5.0` and
+  `@willink-labs/tokens@0.5.0`. `@willink-labs/react` 自体に code 変更なし。
+- 0.5.0 採用で fit-ai brand axis (`[data-brand="fitai"]`) が利用可能になる
+  (preset.css 側で追加・consumer は HTML root 属性のみ変更で fit-ai brand
+  に切替可能)。
+
 ### Added — Accordion API 拡張 (Issue #27 P1 + P2)
 
 **`AccordionItem` に visual variant** (cva・後方互換)

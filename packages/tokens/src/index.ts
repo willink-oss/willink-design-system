@@ -3,6 +3,7 @@ import primitive from "./primitive.json" with { type: "json" };
 import semantic from "./semantic.json" with { type: "json" };
 import willink from "./brand/willink.json" with { type: "json" };
 import clublink from "./brand/clublink.json" with { type: "json" };
+import fitai from "./brand/fitai.json" with { type: "json" };
 
 export const tokens = {
   primitive,
@@ -10,6 +11,7 @@ export const tokens = {
   brand: {
     willink,
     clublink,
+    fitai,
   },
 } as const;
 

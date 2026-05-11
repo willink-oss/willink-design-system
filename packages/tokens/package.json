@@ -12,7 +12,8 @@
     "./primitive.json": "./src/primitive.json",
     "./semantic.json": "./src/semantic.json",
     "./brand/willink.json": "./src/brand/willink.json",
-    "./brand/clublink.json": "./src/brand/clublink.json"
+    "./brand/clublink.json": "./src/brand/clublink.json",
+    "./brand/fitai.json": "./src/brand/fitai.json"
   },
   "files": [
     "src"
