@@ -57,7 +57,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
     "sonner": "^1.7.4",
-    "tailwind-merge": "^3.5.0"
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@axe-core/react": "^4.10.0",
