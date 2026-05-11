@@ -8,6 +8,52 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — Tooltip + Toast component family
+
+#### Tooltip (Radix-based)
+
+```tsx
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@willink-labs/react";
+
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger>?</TooltipTrigger>
+    <TooltipContent>Help text</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+- Radix Tooltip primitives wrapped (Portal / position / arrow / a11y 全て継承)
+- DS choice: `delayDuration` default 300ms (Radix 標準 700ms より snappy)
+- Brand styling: `bg-neutral-900 text-neutral-50 rounded-md shadow-md`
+- Animation: `animate-fade-in/out` (preset.css の汎用 fade)
+- Exports: `Tooltip` / `TooltipTrigger` / `TooltipContent` / `TooltipPortal` / `TooltipProvider`
+
+#### Toast (Sonner wrapper)
+
+```tsx
+import { Toaster, toast } from "@willink-labs/react";
+
+// app root (e.g. layout.tsx)
+<Toaster />
+
+// anywhere
+toast.success("Saved");
+toast.error("Failed", { description: "Try again" });
+toast.promise(savePromise, { loading: "Saving...", success: "Saved", error: "Failed" });
+```
+
+- [Sonner](https://sonner.emilkowal.ski/) ベース (shadcn/ui 2024 推奨後継・Radix Toast より簡素)
+- Brand styling: bg-bg / text-fg / border-border / shadow-md / rounded-lg
+- action / cancel button も brand に統合 (`bg-brand text-brand-fg`)
+- `<Toaster />` を app 直下に 1 度配置すれば、コードの任意箇所から `toast()` 呼び出しで通知可能
+- Exports: `Toaster` / `toast`
+
+### Lockstep version bump
+- `@willink-labs/tailwind-preset@0.5.0` (Tooltip / Toast 用 utilities + animate-fade-in/out)
+- `@willink-labs/tokens@0.5.0` (code 変更なし・lockstep)
+
+
 ### Added — Dialog component (Radix-based)
 
 新しい component family。Radix Dialog (focus trap / Escape close / portal /

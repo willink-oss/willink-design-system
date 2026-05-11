@@ -46,3 +46,14 @@ export {
   dialogContentVariants,
   type DialogContentProps,
 } from "./components/dialog";
+// PR7: Tooltip (Radix)
+export {
+  Tooltip,
+  TooltipContent,
+  TooltipPortal,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./components/tooltip";
+
+// PR8: Toast (Sonner wrapper)
+export { Toaster, toast } from "./components/toast";

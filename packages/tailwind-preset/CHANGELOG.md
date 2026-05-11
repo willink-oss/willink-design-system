@@ -8,6 +8,23 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [0.5.0] — 2026-05-10
 
+### Added — `animate-fade-in` / `animate-fade-out` 汎用 utility + 関連 safelist
+
+`@willink-labs/react` の Tooltip / Dialog overlay / 将来 Popover 等で共用する
+generic fade utility を `preset.css` に ship。 `--duration-fast` (150ms) +
+`--ease-standard` で構成し、ブランドモーション統一。
+
+```css
+@keyframes willink-fade-in / willink-fade-out
+@utility animate-fade-in / animate-fade-out
+```
+
+`safelist.css` に以下を追加 (Tooltip / Toast 用):
+- `bg-neutral-{50,100,900}` / `text-neutral-50`
+- `text-xs` / `px-3` / `py-1.5` / `rounded-md` / `shadow-md`
+- `data-[state=delayed-open]:animate-fade-in` / `data-[state=closed]:animate-fade-out`
+- `group-[.toaster]:bg-bg` 等 Sonner Toast の group selector pattern (8 entries)
+
 ### Added — Dialog animation utilities + safelist (`@willink-labs/react@0.5.0` Dialog 用)
 
 `preset.css` に Dialog 用 keyframes + utilities を ship:
@@ -73,6 +90,7 @@ class が compile されるよう `safelist.css` に inline 登録:
 
 ### Lockstep version bump
 - Bumped together with `@willink-labs/tokens@0.5.0` and `@willink-labs/react@0.5.0`.
+
 
 
 ## [0.4.1] — 2026-05-10

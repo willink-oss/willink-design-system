@@ -153,3 +153,28 @@
 @source inline("text-{center,lg}");
 @source inline("leading-none");
 @source inline("tracking-tight");
+@source inline("shadow-{lg,md,none}");
+@source inline("rounded-{md,lg,full}");
+
+/* Tooltip (0.5.0+・Radix) */
+@source inline("z-50");
+@source inline("bg-neutral-{50,100,900}");
+@source inline("text-neutral-50");
+@source inline("text-xs");
+@source inline("px-3");
+@source inline("py-1.5");
+@source inline("data-[state=delayed-open]:animate-fade-in");
+@source inline("data-[state=closed]:animate-fade-out");
+
+/* Toast / Toaster (0.5.0+・Sonner wrapper) — group selector pattern */
+@source inline("group-[.toaster]:bg-bg");
+@source inline("group-[.toaster]:text-fg");
+@source inline("group-[.toaster]:border-border");
+@source inline("group-[.toaster]:shadow-md");
+@source inline("group-[.toaster]:rounded-lg");
+@source inline("group-[.toast]:text-muted");
+@source inline("group-[.toast]:bg-brand");
+@source inline("group-[.toast]:text-brand-fg");
+@source inline("group-[.toast]:bg-neutral-100");
+@source inline("group-[.toast]:text-fg");
+@source inline("group-[.toast]:rounded-md");
