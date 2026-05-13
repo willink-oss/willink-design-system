@@ -39,3 +39,37 @@ jobs:
 
       - name: pnpm audit (high+ fails the build)
         run: pnpm audit --prod --audit-level=high
+
+  # ---------------------------------------------------------------------------
+  # flutter-gate — packages/flutter_theme の analyze + test を PR で実行する。
+  # publish-flutter.yml は tag push 時のみ走るため、通常 PR で Flutter package を
+  # 壊しても publish タグまで気付けない gap を埋める (Issue #41)。
+  # ---------------------------------------------------------------------------
+  flutter-gate:
+    name: flutter-gate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: packages/flutter_theme
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          # publish-flutter.yml と同じ minimum SDK (pubspec.yaml sdk: ^3.7.0)
+          flutter-version: "3.29.0"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze (info-level warnings 含む全件を表示)
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      - name: Dry-run publish (sanity check — pub.dev compatibility 維持)
+        run: dart pub publish --dry-run
