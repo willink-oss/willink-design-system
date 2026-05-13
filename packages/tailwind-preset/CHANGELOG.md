@@ -6,6 +6,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.5.1] — 2026-05-13
+
+### Fixed — Safelist coverage for Slider / Progress / Separator (Issue #38)
+
+`safelist.css` の Slider / Progress / Separator セクションで以下のクラスが
+未登録だったため、consumer 側 (Tailwind v4 が `node_modules` を default scan
+しない構成) で **clublink.jp 5/8 P0 と同パターンの全崩れ** が発生する潜在的
+リスクを解消:
+
+- `h-full` — Slider Range (absolute) / Progress Indicator
+- `h-6` — Separator デフォルト垂直サイズ
+- `w-{2,6,12}` — 補助レイアウト
+- `block` — Separator base orientation
+
+### Audit notes
+
+Issue #38 で指摘された安全側 (consumer 側 `safelist` 配布契約) に揃えるため、
+slider / progress / separator の class を再 audit し `h-{px,1.5,2,4,6,full}`
++ `w-{px,2,4,6,12,full}` に拡張。playground production build で全 class
+(`.h-full` / `.h-6` / `.block`) が CSS bundle に compile されることを確認済。
+
+その他 component (Avatar / Tabs / Dialog / DropdownMenu / Tooltip 等)
+の class は既存 safelist で網羅されており追加 fix なし。
+
 ## [0.5.0] — 2026-05-10
 
 ### Added — Slider + Progress + Separator 用 safelist

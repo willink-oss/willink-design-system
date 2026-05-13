@@ -287,12 +287,13 @@
 /* === Slider / Progress / Separator (0.5.0+・Radix) === */
 @source inline("relative");
 @source inline("absolute");
-@source inline("h-{px,1.5,2,4}");
-@source inline("w-{px,4,full}");
+@source inline("h-{px,1.5,2,4,6,full}");
+@source inline("w-{px,2,4,6,12,full}");
 @source inline("touch-none");
 @source inline("select-none");
 @source inline("grow");
 @source inline("flex-1");
+@source inline("block");
 @source inline("bg-neutral-200");
 @source inline("border-2");
 @source inline("border-brand");
@@ -300,3 +301,9 @@
 @source inline("data-[disabled]:opacity-50");
 @source inline("disabled:pointer-events-none");
 @source inline("bg-border");
+
+/* Issue #38 (5/10) fix — audit gap classes from slider/progress/separator/avatar */
+/* h-full (Slider Range absolute, Progress indicator) */
+/* h-6 (Separator default vertical) */
+/* w-12 / w-2 (avatar size + indicator widths) */
+/* block (Separator base orientation) */
