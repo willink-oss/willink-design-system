@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.6.0] — 2026-05-13
+
+### Changed — Brand axis single-source-of-truth 整理 (Issue #40)
+
+`BRANDS` const export に `fitai` を追加し、3 brand 体制 (willink / clublink / fitai)
+の TS / JSON / CSS / Flutter 4 層の整合性を完全 align:
+
+- 修正前: `BRANDS = ["willink", "clublink"] as const` (tokens / CSS / Flutter には fitai があるのに TS export だけ漏れ)
+- 修正後: `BRANDS = ["willink", "clublink", "fitai"] as const`
+
+これは事実上 0.5.0 で完成すべき内容の追従修正。`Brand` type は
+`"willink" | "clublink"` → `"willink" | "clublink" | "fitai"` に拡張 (additive
+union expansion・既存 consumer の Brand value 比較は壊さない)。
+
+### Single source of truth 契約 (新規明文化)
+
+新規 brand 追加時の同期対象を `BRANDS` const 上のコメントに明文化:
+1. `@willink-labs/tokens` (`tokens.brand.<brand>`)
+2. `preset.css` (`[data-brand="<brand>"]` block)
+3. `brands/<brand>.css` (force-brand CSS file)
+4. Flutter `willink_theme` (`WillinkBrand.<brand>`)
+5. `packages/tokens/src/brand/<brand>.json` (Design Tokens W3C)
+
+### Lockstep version bump
+
+- Bumped together with `@willink-labs/tokens@0.6.0` (no schema change・lockstep)
+  and `@willink-labs/react@0.6.0` (no code change・lockstep)。
+
 ## [0.5.1] — 2026-05-13
 
 ### Fixed — Safelist coverage for Slider / Progress / Separator (Issue #38)

@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tailwind-preset",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Tailwind v4 preset for i-Willink Design System. Imports tokens via @theme and switches brand axes via [data-brand=...] selectors.",
   "license": "UNLICENSED",
   "private": false,
