@@ -19,21 +19,42 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 @import "@willink-labs/tailwind-preset/preset.css";
 ```
 
-ブランド軸を切替えたい場合は `<html data-brand="clublink">` を設定。デフォルトは `willink`。
+ブランド軸を切替えたい場合は `<html data-brand="clublink">` (または `"fitai"`) を設定。デフォルトは `willink`。
 
 ---
 
-## Components (Phase 1 ship 済)
+## Components (0.5.0・21 total)
+
+### Phase 0-3 core set (7・0.1.0-0.4.x)
 
 | Component | Variants | Sizes | Headless |
 |---|---|---|---|
 | `Button` | default / outline / ghost / link | sm / md / lg | Radix Slot (asChild) |
 | `Badge` | default / outline / success / warning / danger | — | — |
-| `Input` | — (`aria-invalid` で error) | — | native |
+| `Input` | — (`aria-invalid` で error border + focus ring) | — | native |
 | `Textarea` | — | — | native |
-| `Label` | — | sm / md | Radix Label |
-| `Card` | default / elevated | — | (compound) |
-| `Accordion` | single / multiple | — | Radix Accordion |
+| `Label` | — | sm / md (`required` で `*` 表示) | Radix Label |
+| `Card` | default / elevated | — | compound: Header / Title / Description / Content / Footer |
+| `Accordion` | single / multiple + AccordionItem variant (flat / card / bordered・0.5.0+) | — | Radix Accordion |
+
+### Phase 7+ expansion (14・0.5.0)
+
+| Component | API / Notes | Headless |
+|---|---|---|
+| `Dialog` | size variants (sm / md / lg / 2xl) + brand-tinted overlay + DS fade/scale motion | Radix Dialog |
+| `AlertDialog` | destructive confirmation pattern + Action / Cancel buttons | Radix AlertDialog |
+| `Avatar` | size sm / md / lg / xl + AvatarImage / AvatarFallback compound | Radix Avatar |
+| `Tabs` | data-brand aware indicator + animated active state | Radix Tabs |
+| `Tooltip` | TooltipProvider + delayed-open fade animation | Radix Tooltip |
+| `Toast` | Sonner wrapper with brand-tinted variants (success / error / info) | Sonner |
+| `DropdownMenu` | Item / Label / Separator / CheckboxItem with popover-style positioning | Radix DropdownMenu |
+| `Select` | trigger / content / item + brand focus ring | Radix Select |
+| `Switch` | data-state translation animation + brand fill on check | Radix Switch |
+| `Checkbox` | indicator content alignment + brand-fg check icon | Radix Checkbox |
+| `RadioGroup` | flat / horizontal layout + brand fill on check | Radix RadioGroup |
+| `Slider` | brand range + neutral track + disabled state | Radix Slider |
+| `Progress` | brand-filled indicator + animated transitions | Radix Progress |
+| `Separator` | horizontal / vertical orientation | Radix Separator |
 
 ---
 
@@ -76,7 +97,7 @@ import Link from "next/link";
 
 ### FormField composition pattern (推奨)
 
-Phase 1 では FormField wrapper コンポーネントを提供しないが、以下のパターンで誤用を防ぐ:
+FormField wrapper component は DS では提供しないが、以下のパターンで誤用を防ぐ:
 
 ```tsx
 function FormField({

@@ -43,7 +43,7 @@ export default function Page() {
             {/* Tagline (Badge コンポーネント差替後) */}
             <Badge className="mb-8 gap-2 px-4 py-1.5 text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              willink-design-system v0.1.0 — Phase 1
+              willink-design-system v0.5.0 — 21 components
             </Badge>
 
             <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.15]">
@@ -446,8 +446,10 @@ export default function Page() {
 
       <footer className="max-w-5xl mx-auto px-6 py-12 text-xs text-muted border-t border-border mt-8">
         <p>
-          willink-design-system v0.1.0 — Phase 1 ship 完了 (Button / Badge / Input /
-          Textarea / Label / Card 6sub / Accordion 4primitive = 7 components)。
+          willink-design-system v0.5.0 — 21 components (core 7: Button / Badge / Input /
+          Textarea / Label / Card / Accordion + Phase 7+ 14: Dialog / AlertDialog / Avatar /
+          Tabs / Tooltip / Toast / DropdownMenu / Select / Switch / Checkbox / RadioGroup /
+          Slider / Progress / Separator)。
         </p>
         <p className="mt-1">
           Storybook 不採用。本ページが全コンポーネント・全 token のリファレンス実装。
