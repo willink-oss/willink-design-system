@@ -16,6 +16,8 @@
 library;
 
 export 'src/brand_axis.dart' show WillinkBrand;
+export 'src/components/willink_button.dart'
+    show WillinkButton, WillinkButtonSize, WillinkButtonVariant;
 export 'src/components/willink_empty_state.dart' show WillinkEmptyState;
 export 'src/components/willink_error_state.dart' show WillinkErrorState;
 export 'src/components/willink_loading_state.dart' show WillinkLoadingState;

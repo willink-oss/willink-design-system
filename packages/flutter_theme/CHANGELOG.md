@@ -5,6 +5,33 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.4.0] — 2026-05-14
+
+### Added — WillinkButton component (1 component)
+
+Material 3 brand-aware button with variant / size / icon API:
+- variants: `filled` (default) / `outline` / `ghost`
+- sizes: `small` / `medium` / `large`
+- leadingIcon / trailingIcon support (8px gap)
+- fullWidth flag
+- automatic disabled state (when `onPressed == null` → opacity 0.5 + no ripple)
+- filled variant applies a brand-tinted glow shadow (`colorScheme.primary` at 30% alpha)
+- ghost variant uses `primaryContainer` as hover/pressed overlay
+
+Colors derive from `Theme.of(context).colorScheme` so the button follows the
+active brand axis (willink / clublink / fitai) automatically.
+
+採用想定先: clubhouse / fit-ai mobile (両者とも willink_theme 0.3.0 main 反映済)。
+
+### Migration from 0.3.x
+No breaking changes. Additive release — `WillinkButton` は opt-in。既存 4
+components の API は完全互換。
+
+### Verification
+- flutter analyze: 0 issues
+- flutter test: 39 tests pass (existing 33 + new 7 button tests)
+- dart pub publish --dry-run: clean
+
 ## [0.3.0] — 2026-05-11
 
 ### Added — DS Phase 6 Flutter components (4 件)
