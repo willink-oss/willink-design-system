@@ -172,4 +172,4 @@ pnpm -F @willink-labs/react test        # vitest + @testing-library + axe
 
 ## License
 
-UNLICENSED — i-Willink LLC 内部利用専用。
+MIT License — see [LICENSE](../../LICENSE) for details.

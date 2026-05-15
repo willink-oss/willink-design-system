@@ -111,3 +111,7 @@ canonical DTCG JSON.
 `0.x.x` — pre-1.0, minor bumps may include breaking changes. Pin with `~0.1.0`
 for exact-minor stability. Released as part of the same lockstep cadence as
 `@willink-labs/{tokens,tailwind-preset,react}`.
+
+## License
+
+MIT License — see [LICENSE](../../LICENSE) for details.
