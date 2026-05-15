@@ -307,3 +307,38 @@
 /* h-6 (Separator default vertical) */
 /* w-12 / w-2 (avatar size + indicator widths) */
 /* block (Separator base orientation) */
+
+/* === Skeleton (0.7.0+・loading placeholder・CSS animate-pulse のみ) === */
+@source inline("animate-pulse");
+@source inline("bg-neutral-200");
+@source inline("rounded-{md,full}");
+@source inline("rounded");
+
+/* === Sheet (0.7.0+・Radix Dialog ベース・side drawer 4 方向) === */
+/* Positioning (4 sides) */
+@source inline("fixed");
+@source inline("z-50");
+@source inline("inset-x-0");
+@source inline("inset-y-0");
+@source inline("top-0");
+@source inline("bottom-0");
+@source inline("left-0");
+@source inline("right-0");
+@source inline("h-full");
+@source inline("h-auto");
+@source inline("w-full");
+@source inline("w-3/4");
+@source inline("sm:max-w-sm");
+
+/* Border per side */
+@source inline("border");
+@source inline("border-border");
+@source inline("border-{t,b,l,r}");
+
+/* Slide animations driven by Radix data-state */
+@source inline("data-[state=open]:animate-sheet-in-{left,right,top,bottom}");
+@source inline("data-[state=closed]:animate-sheet-out-{left,right,top,bottom}");
+
+/* Overlay fade (shared with Dialog) */
+@source inline("data-[state=open]:animate-fade-in");
+@source inline("data-[state=closed]:animate-fade-out");

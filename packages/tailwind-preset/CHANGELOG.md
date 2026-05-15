@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.7.0] — 2026-05-14
+
+### Added — Skeleton + Sheet components (2 new・23 total)
+
+Skeleton (loading placeholder):
+- variants: `rect` (default) / `circle` / `text`
+- animate-pulse + bg-neutral-200
+
+Sheet (side drawer・Radix Dialog ベース):
+- side variants: `top` / `right` (default) / `bottom` / `left`
+- compound exports: Sheet / SheetTrigger / SheetContent / SheetHeader / SheetTitle / SheetDescription / SheetFooter
+- Dialog と同 motion token
+
+CSS additions:
+- `preset.css`: 8 `@keyframes` + 8 `@utility animate-sheet-{in,out}-{left,right,top,bottom}` (Sheet 用 slide)
+- `safelist.css`: Skeleton (animate-pulse / bg-neutral-200 / rounded-{md,full}) + Sheet (fixed / inset-{x,y}-0 / w-3/4 / sm:max-w-sm / border-{t,b,l,r} / data-[state]:animate-sheet-*) を `@source inline()` で登録
+
+採用想定: Skeleton 全 consumer (Loading state alternative) / Sheet mobile-first web (clubhouse 派生 web 等)。
+
+### Lockstep version bump
+- Bumped together with @willink-labs/react@0.7.0 and @willink-labs/tokens@0.7.0.
+
 ## [0.6.0] — 2026-05-13
 
 ### Changed — Brand axis single-source-of-truth 整理 (Issue #40)

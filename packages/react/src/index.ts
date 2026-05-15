@@ -115,3 +115,26 @@ export { Progress } from "./components/progress";
 
 // PR17: Separator (Radix・horizontal/vertical divider)
 export { Separator } from "./components/separator";
+
+// PR18: Skeleton (loading placeholder・CSS animate-pulse のみ)
+export {
+  Skeleton,
+  skeletonVariants,
+  type SkeletonProps,
+} from "./components/skeleton";
+
+// PR19: Sheet (Radix Dialog ベース・side drawer)
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetOverlay,
+  SheetPortal,
+  SheetTitle,
+  SheetTrigger,
+  sheetContentVariants,
+  type SheetContentProps,
+} from "./components/sheet";

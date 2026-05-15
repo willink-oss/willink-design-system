@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.7.0] — 2026-05-14
+
+### Added — Skeleton + Sheet components (2 new・23 total)
+
+Skeleton (loading placeholder):
+- variants: `rect` (default) / `circle` / `text`
+- animate-pulse + bg-neutral-200
+
+Sheet (side drawer・Radix Dialog ベース):
+- side variants: `top` / `right` (default) / `bottom` / `left`
+- compound exports: Sheet / SheetTrigger / SheetContent / SheetHeader / SheetTitle / SheetDescription / SheetFooter
+- Dialog と同 motion token
+
+採用想定: Skeleton 全 consumer (Loading state alternative) / Sheet mobile-first web (clubhouse 派生 web 等)。
+
+### Lockstep version bump
+- Bumped together with @willink-labs/tailwind-preset@0.7.0 and @willink-labs/tokens@0.7.0.
+
 ## [0.5.0] — 2026-05-10
 
 ### Added — Slider + Progress + Separator (utility 系 3 component)

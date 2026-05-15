@@ -236,6 +236,68 @@
   animation: willink-dialog-out var(--duration-fast) var(--ease-standard);
 }
 
+/* === Sheet slide animations (used by @willink-labs/react Sheet・4 side variants)
+ * Dialog と同 motion token (--duration-fast 150ms / --ease-standard) を使用。
+ * ============================================================ */
+
+@keyframes willink-sheet-in-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes willink-sheet-out-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
+}
+@keyframes willink-sheet-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+@keyframes willink-sheet-out-right {
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
+}
+@keyframes willink-sheet-in-top {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes willink-sheet-out-top {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+@keyframes willink-sheet-in-bottom {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+@keyframes willink-sheet-out-bottom {
+  from { transform: translateY(0); }
+  to   { transform: translateY(100%); }
+}
+
+@utility animate-sheet-in-left {
+  animation: willink-sheet-in-left var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-out-left {
+  animation: willink-sheet-out-left var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-in-right {
+  animation: willink-sheet-in-right var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-out-right {
+  animation: willink-sheet-out-right var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-in-top {
+  animation: willink-sheet-in-top var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-out-top {
+  animation: willink-sheet-out-top var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-in-bottom {
+  animation: willink-sheet-in-bottom var(--duration-fast) var(--ease-standard);
+}
+@utility animate-sheet-out-bottom {
+  animation: willink-sheet-out-bottom var(--duration-fast) var(--ease-standard);
+}
+
 /* ============================================================
  * Dark mode — semantic tokens flip; primitives stay constant
  * ============================================================ */
