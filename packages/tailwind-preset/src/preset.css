@@ -130,24 +130,39 @@
 
 /* ============================================================
  * Gradient utilities (Tailwind v4 doesn't allow background-image in @theme)
- * Brand-aware: gradients reference --color-brand-* and --color-accent-*
- * so they automatically adapt when a consumer overrides :root tokens.
+ *
+ * As of 0.10.0 these utilities resolve to semantic tokens only — no
+ * primitive scale (brand-50, brand-500, blue-600) is referenced directly.
+ * Consumer :root overrides therefore propagate into every gradient stop.
+ *
+ * Token contract:
+ *   bg-gradient-subtle  → white → brand-soft → sky-50
+ *   bg-gradient-primary → brand → brand-glow         (monochromatic brand)
+ *   bg-gradient-ai      → accent-cyan → brand-glow → accent-pink
+ *   text-gradient-primary → same colors as bg-gradient-primary, clipped to text
+ *
+ * Note: bg-gradient-primary changed in 0.10.0 from `brand → blue-600` to
+ * `brand → brand-glow`. Consumers that depended on the prior willink
+ * "violet → blue" two-tone aesthetic should shadow the utility in their
+ * own globals.css (`@layer utilities { .bg-gradient-primary { ... } }`).
+ * The sky-50 stop in bg-gradient-subtle remains a fixed accent and is
+ * intentionally not theme-derived.
  * ============================================================ */
 
 @utility bg-gradient-subtle {
-  background-image: linear-gradient(to right bottom, #ffffff, var(--color-brand-50), var(--color-sky-50));
+  background-image: linear-gradient(to right bottom, #ffffff, var(--color-brand-soft), var(--color-sky-50));
 }
 
 @utility bg-gradient-primary {
-  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-blue-600) 100%);
+  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-glow) 100%);
 }
 
 @utility bg-gradient-ai {
-  background-image: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-brand-500) 50%, var(--color-accent-pink) 100%);
+  background-image: linear-gradient(135deg, var(--color-accent-cyan) 0%, var(--color-brand-glow) 50%, var(--color-accent-pink) 100%);
 }
 
 @utility text-gradient-primary {
-  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-blue-600) 100%);
+  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-glow) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;

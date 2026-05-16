@@ -6,6 +6,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.10.0] — 2026-05-17
+
+### Changed — gradient utilities migrate to semantic tokens
+
+Lateral follow-up to 0.9.0: the gradient utilities (`bg-gradient-subtle` / `bg-gradient-primary` / `bg-gradient-ai` / `text-gradient-primary`) used to reference primitive scale values (`brand-50`, `brand-500`, `blue-600`) directly, so consumers that overrode `--color-brand` saw gradients that didn't match their brand. This release routes every gradient stop through semantic tokens.
+
+| Utility | Before | After |
+|---|---|---|
+| `bg-gradient-subtle` | white → `brand-50` → `sky-50` | white → **`brand-soft`** → `sky-50` |
+| `bg-gradient-primary` | `brand` → `blue-600` | `brand` → **`brand-glow`** (monochromatic) |
+| `bg-gradient-ai` | `accent-cyan` → `brand-500` → `accent-pink` | `accent-cyan` → **`brand-glow`** → `accent-pink` |
+| `text-gradient-primary` | same as bg-gradient-primary | same — also semantic now |
+
+### Visual impact
+
+- For the **willink baseline** (no consumer override): zero visual change. `brand-glow` default is `brand-500`, `brand-soft` default is `brand-100` — same hues as the prior primitive references.
+- For consumers that **override `--color-brand`**: gradients now correctly inherit the brand color. ClubLink (#2563EB primary, #3B82F6 glow) sees its Hero gradient-subtle and gradient-primary tinted blue instead of violet.
+- `bg-gradient-primary` shifts from "two-tone (brand → blue-600)" to "monochromatic (brand → brand-glow)". Consumers that depended on the prior willink-specific violet-to-blue look should shadow the utility in their own globals.css:
+
+  ```css
+  @layer utilities {
+    .bg-gradient-primary {
+      background-image: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+    }
+  }
+  ```
+
+  (i-willink.com already does this and is unaffected.)
+
+### Lockstep bump
+- `@willink-labs/tokens@0.10.0` (lockstep, no source change)
+- `@willink-labs/react@0.10.0` (lockstep, no source change)
+- `willink_theme` (Flutter): no change — gradients are consumer-defined via `WillinkBrandTokens` extension, not embedded in widget code
+
 ## [0.9.0] — 2026-05-17
 
 ### Added — Brand state semantic tokens
