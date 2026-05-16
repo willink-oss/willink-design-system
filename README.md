@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@willink-labs/react.svg)](https://www.npmjs.com/package/@willink-labs/react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/willink-labs/willink-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/willink-labs/willink-design-system/actions/workflows/ci.yml)
+[![CI](https://github.com/willink-oss/willink-design-system/actions/workflows/ci.yml/badge.svg)](https://github.com/willink-oss/willink-design-system/actions/workflows/ci.yml)
 
 i-Willink 企業デザインシステム。トークン駆動で全プロダクト (Next.js 群 / Flutter 群 / WordPress 群) のデザインルールを統一する。
 
