@@ -508,7 +508,7 @@ provenance を諦めて OIDC Trusted Publisher だけで publish する形に修
 
 ### CEO 既実施 (確認済)
 - npmjs.com 各 package settings → Trusted Publisher を設定:
-  - Repository: `willink-labs/willink-design-system`
+  - Repository: `willink-oss/willink-design-system`
   - Workflow: `publish.yml`
 - Publishing access を「Require 2FA and disallow tokens (recommended)」に設定
   → Token publishing 完全拒否 / OIDC Trusted Publisher のみ許可

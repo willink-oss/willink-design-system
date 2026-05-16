@@ -100,8 +100,8 @@ Pre-1.0 (0.x.x): minor bumps may include breaking changes. Pin with `~0.x.0` for
 
 ## Contact
 
-- **Bug reports / feature requests**: [GitHub Issues](https://github.com/willink-labs/willink-design-system/issues)
-- **Discussion / questions**: [GitHub Discussions](https://github.com/willink-labs/willink-design-system/discussions)
+- **Bug reports / feature requests**: [GitHub Issues](https://github.com/willink-oss/willink-design-system/issues)
+- **Discussion / questions**: [GitHub Discussions](https://github.com/willink-oss/willink-design-system/discussions)
 - **Security vulnerabilities**: see [SECURITY.md](./SECURITY.md) — do **not** open a public Issue for security reports.
 
 No email contact is published. Use GitHub channels above for all communication.

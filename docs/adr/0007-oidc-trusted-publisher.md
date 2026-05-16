@@ -30,7 +30,7 @@ CEO の指示 (2026-05-08): 「**更新漏れが起きない仕組み**を整備
 **npmjs.com OIDC Trusted Publisher (2024 GA) を採用**。token authentication を完全廃止。
 
 ### 仕組み
-1. npmjs.com 側で「`willink-labs/willink-design-system` リポジトリの `publish.yml`
+1. npmjs.com 側で「`willink-oss/willink-design-system` リポジトリの `publish.yml`
    workflow を信頼する」と設定 (Trusted Publisher)
 2. workflow 実行時、GitHub Actions が **短命 OIDC ID token** を発行
 3. npmjs.com が ID token の `iss` / `sub` クレームを検証 → trusted publisher と一致なら publish 許可

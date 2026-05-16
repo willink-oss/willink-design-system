@@ -4,7 +4,7 @@
 
 Please **do not** open a public GitHub Issue or Discussion for security vulnerabilities.
 
-Use GitHub's [Private vulnerability reporting](https://github.com/willink-labs/willink-design-system/security/advisories/new) (GitHub Security Advisories) to submit reports privately. This allows us to triage and patch before public disclosure.
+Use GitHub's [Private vulnerability reporting](https://github.com/willink-oss/willink-design-system/security/advisories/new) (GitHub Security Advisories) to submit reports privately. This allows us to triage and patch before public disclosure.
 
 Include as much of the following as possible:
 

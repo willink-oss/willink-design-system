@@ -1,10 +1,10 @@
 name: willink_theme
 description: i-Willink Design System theme for Flutter — Material 3 ThemeData factories with brand axes (willink / clublink / fitai).
 version: 0.4.0
-homepage: https://github.com/willink-labs/willink-design-system
-repository: https://github.com/willink-labs/willink-design-system
-issue_tracker: https://github.com/willink-labs/willink-design-system/issues
-documentation: https://github.com/willink-labs/willink-design-system/blob/main/packages/flutter_theme/README.md
+homepage: https://github.com/willink-oss/willink-design-system
+repository: https://github.com/willink-oss/willink-design-system
+issue_tracker: https://github.com/willink-oss/willink-design-system/issues
+documentation: https://github.com/willink-oss/willink-design-system/blob/main/packages/flutter_theme/README.md
 
 environment:
   sdk: ^3.7.0
