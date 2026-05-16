@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.11.0] — 2026-05-17
+
+### Lockstep bump (no React source change)
+
+Pair with `@willink-labs/tailwind-preset@0.11.0` which makes the `--color-brand-{50…950}` scale OKLCH-derived from a single `--color-brand` axis. Consumers swapping the brand color now override one CSS variable instead of 11 — fixes the ClubLink purple regression (numeric scale steps that consumer code referenced directly, e.g. `text-brand-600`, were not overridable in 0.10.0 without an 11-line alias block). See the tailwind-preset CHANGELOG for full details and migration.
+
 ## [0.10.0] — 2026-05-17
 
 ### Lockstep bump (no React source change)
