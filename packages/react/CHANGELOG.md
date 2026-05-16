@@ -6,6 +6,34 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.7.1] — 2026-05-16
+
+### Added — Toggle component (1 new・24 total)
+
+Toggle (Radix-based single press/depress button・toolbar primitive):
+- variants: `default` (transparent → brand on `data-state=on`) / `outline` (bordered → brand border on)
+- sizes: `sm` / `md` (default) / `lg`
+- controlled via `pressed`/`onPressedChange` or uncontrolled via `defaultPressed`
+- standard `disabled` state with opacity 0.5 + no pointer events
+
+採用想定: 太字 / italic 等のテキスト書式トグル・filter pill・mobile UI の small selection state。
+
+```tsx
+import { Toggle } from "@willink-labs/react";
+
+<Toggle aria-label="Toggle bold">B</Toggle>
+<Toggle variant="outline" aria-label="Toggle italic">I</Toggle>
+```
+
+### Verification
+- 150 tests pass (existing 145 + new 5 Toggle tests)
+- pnpm -r build clean
+- axe accessibility 0 violations (Radix Toggle primitive)
+- Note: first publish from the new `willink-oss/willink-design-system` repository (post-OSS migration).
+
+### Lockstep version bump
+- Bumped together with @willink-labs/tailwind-preset@0.7.1 and @willink-labs/tokens@0.7.1 (additive・no breaking changes).
+
 ## [0.7.0] — 2026-05-14
 
 ### Added — Skeleton + Sheet components (2 new・23 total)
