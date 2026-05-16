@@ -6,6 +6,46 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.9.0] — 2026-05-17
+
+### Added — Brand state semantic tokens
+
+To make `:root` brand overrides carry through every interaction state (not just the resting primary color), preset.css now exposes four new semantic tokens:
+
+| Token | Default | Used by |
+|---|---|---|
+| `--color-brand-hover` | `var(--color-brand-700)` | Button default hover bg, Button link hover text, AlertDialog action hover |
+| `--color-brand-active` | `var(--color-brand-800)` | Future :active state (currently unused, reserved) |
+| `--color-brand-soft` | `var(--color-brand-100)` | Badge default variant bg |
+| `--color-brand-soft-fg` | `var(--color-brand-700)` | Badge default variant fg |
+
+### Changed — components migrated off primitive scale references
+
+Components no longer reference `bg-brand-700` / `text-brand-700` / `bg-brand-100` / `shadow-brand-500/*` directly. They now use the semantic state tokens above, so a single `:root` override block in the consumer's globals.css fully retints every component (not just the resting state).
+
+### Migration
+
+Consumers that already override `--color-brand` must extend their `:root` block to include the new state tokens, otherwise Button hover / Badge default will revert to the baseline willink violet:
+
+```css
+:root {
+  --color-brand:          #2563eb;
+  --color-brand-glow:     #3b82f6;
+  --color-brand-hover:    #1d4ed8;   /* NEW — hover state */
+  --color-brand-active:   #1e40af;   /* NEW — reserved */
+  --color-brand-soft:     #dbeafe;   /* NEW — Badge bg */
+  --color-brand-soft-fg:  #1d4ed8;   /* NEW — Badge fg */
+  --color-accent-cyan:    #10b981;
+  --color-accent-pink:    #059669;
+  --shadow-glow:          0 0 20px -5px rgba(37, 99, 235, 0.3);
+}
+```
+
+### Lockstep bump
+- `@willink-labs/tokens@0.9.0` (no source change — lockstep)
+- `@willink-labs/react@0.9.0` (Button / AlertDialog / Badge updated to use semantic state tokens)
+- `willink_theme@0.5.0` (Flutter — no change; Material 3 ColorScheme already handles state colors natively via `colorScheme.copyWith`)
+
 ## [0.8.0] — 2026-05-16
 
 ### Breaking — brand axis machinery removed

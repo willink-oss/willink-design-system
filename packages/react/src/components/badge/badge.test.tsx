@@ -13,7 +13,7 @@ describe("Badge", () => {
 
   it("applies default variant (brand subtle)", () => {
     render(<Badge>Tag</Badge>);
-    expect(screen.getByText("Tag")).toHaveClass("bg-brand-100", "text-brand-700");
+    expect(screen.getByText("Tag")).toHaveClass("bg-brand-soft", "text-brand-soft-fg");
   });
 
   it("applies success variant with semantic color tokens", () => {
@@ -36,7 +36,7 @@ describe("Badge", () => {
 
   it("merges custom className", () => {
     render(<Badge className="extra">x</Badge>);
-    expect(screen.getByText("x")).toHaveClass("extra", "bg-brand-100");
+    expect(screen.getByText("x")).toHaveClass("extra", "bg-brand-soft");
   });
 
   it("has no axe a11y violations", async () => {

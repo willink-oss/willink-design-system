@@ -125,7 +125,7 @@ export const AlertDialogAction = forwardRef<
     ref={ref}
     className={cn(
       "inline-flex h-10 items-center justify-center rounded-md bg-brand px-6 text-base font-bold text-brand-fg",
-      "shadow-lg shadow-brand-500/20 hover:shadow-brand-500/40 hover:bg-brand-700",
+      "shadow-lg shadow-brand-glow/20 hover:shadow-brand-glow/40 hover:bg-brand-hover",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
       "disabled:pointer-events-none disabled:opacity-50",
       "transition-all",
