@@ -6,6 +6,54 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.11.0] — 2026-05-17
+
+### Changed — brand scale becomes OKLCH-derived from `--color-brand` (BREAKING)
+
+Until 0.10.0 the entire `--color-brand-{50…950}` scale was hard-coded as the Tailwind violet palette. Consumers that swapped the brand color (e.g. ClubLink → blue) had to override **all 11 numeric steps** in their own `:root` to keep utilities like `text-brand-600` consistent. Missing even one step (which is easy — clublink-platform skipped 50/100/500/600/700) leaves those utilities rendering the original violet ([postmortem](#) — purple regression 2026-05-17).
+
+0.11.0 derives the whole scale from a single `--color-brand` axis using `color-mix(in oklch, var(--color-brand) N%, white|black)`. Override `--color-brand` and the 11 numeric steps + all semantic state tokens follow automatically.
+
+```css
+/* Before (0.10.0) — consumer must alias all 11 steps */
+:root {
+  --color-brand:       #2563eb;
+  --color-brand-50:    var(--color-blue-50);
+  --color-brand-100:   var(--color-blue-100);
+  /* …9 more lines… */
+  --color-brand-950:   var(--color-blue-950);
+  --color-brand-hover: #1d4ed8;
+  --color-brand-soft:  #dbeafe;
+  /* …semantic state overrides… */
+}
+
+/* After (0.11.0) — one line carries through every utility */
+:root {
+  --color-brand: #2563eb;
+}
+```
+
+### Visual impact
+
+- **i-willink baseline (no consumer override)**: the derived scale matches the prior Tailwind violet within ~1–2% per channel. Side-by-side the difference is imperceptible on solid fills; subtle on long gradients. We treat this as acceptable drift for a 0.x release rather than re-tuning ratios to pixel-match the legacy hex values, since the OKLCH ratios are easier to reason about for future tweaks.
+- **clublink-platform**: after upgrading and removing the now-redundant 11-line alias block, every `text-brand-600` / `bg-brand-50` / `border-brand-300` etc. derives from `--color-brand: #2563eb` — same blue family the consumer was already overriding semantic tokens to.
+- **Components**: no source change. Button / Badge / Card etc. continue to reference numeric or semantic brand tokens; the derivation is transparent to them.
+
+### Browser support
+
+`color-mix()` is supported in all evergreen browsers (Chromium 111+ / Safari 16.4+ / Firefox 113+, all 2023). Tailwind v4 additionally emits a static hex fallback wrapped in `@supports (color: color-mix(in lab, red, red))`, so legacy browsers fall back to the i-willink violet baseline — consumer brand override only takes effect on supporting browsers, but the page still renders.
+
+### Migration
+
+For consumers that overrode `--color-brand` (the only known case is clublink-platform):
+1. Bump `@willink-labs/tailwind-preset`, `@willink-labs/react`, `@willink-labs/tokens` to `^0.11.0` (lockstep)
+2. Delete the per-step alias block (`--color-brand-50: var(--color-blue-50);` … `--color-brand-950: var(--color-blue-950);`) — kept only `--color-brand: #2563eb` and any custom `--color-brand-glow` / `--color-brand-fg`
+3. Optionally simplify the semantic state tokens (`--color-brand-hover` etc.) — they will derive correctly from `--color-brand-700` etc. without explicit override
+
+### Lockstep bump
+- `@willink-labs/tokens@0.11.0` (lockstep; `primitive.json` `brand` scale still references the i-willink hex values for Flutter codegen — runtime CSS uses the derived OKLCH scale, JSON tokens remain the i-willink reference)
+- `@willink-labs/react@0.11.0` (lockstep, no source change)
+
 ## [0.10.0] — 2026-05-17
 
 ### Changed — gradient utilities migrate to semantic tokens

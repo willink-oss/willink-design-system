@@ -13,21 +13,24 @@
  * regardless of how your consumer's node_modules are laid out
  * (pnpm symlinks / npm tarballs / Turborepo hoisting all work the same).
  *
- * Customize colors (added 0.8.0): override CSS variables in your consumer's
- * globals.css after the preset import.
+ * Customize colors (0.11.0+): override a single CSS variable on :root in
+ * your consumer's globals.css after the preset import — the entire brand
+ * scale (50–950) and every interaction state (hover / active / soft) are
+ * derived from `--color-brand` via color-mix(in oklch, …), so one line
+ * carries through every utility.
  *
  *   @import "@willink-labs/tailwind-preset/preset.css";
  *   :root {
- *     --color-brand:       #2563eb;
- *     --color-brand-glow:  #3b82f6;
+ *     --color-brand:       #2563eb;  // primary axis — everything follows
+ *     --color-brand-glow:  #3b82f6;  // optional: shadow tint
  *     --color-accent-cyan: #10b981;
  *     --color-accent-pink: #059669;
  *     --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
  *   }
  *
- * Tailwind v4 resolves :root tokens at compile time; all DS components
- * (Button, Badge, focus rings, gradients) pick up the new brand color
- * automatically.
+ * Before 0.11.0 the numeric scale was hard-coded violet, and consumers
+ * swapping the brand had to also alias all 11 steps in their own :root —
+ * easy to miss. The OKLCH-derived scale removes that footgun.
  */
 
 @import "tailwindcss";
@@ -47,18 +50,33 @@
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
 
-  /* === Primitive: brand (vibrant violet — i-willink default) === */
-  --color-brand-50:  #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
-  --color-brand-400: #a78bfa;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
-  --color-brand-950: #2e1065;
+  /* === Brand base (vibrant violet — i-willink default) ===
+   * The brand axis center. Consumers override this single token to swap
+   * the entire brand palette — the 50–950 scale below is derived from it
+   * via color-mix(in oklch, …) so every step follows automatically.
+   */
+  --color-brand: #7c3aed;
+
+  /* === Brand scale (50–950) — OKLCH-derived from --color-brand (0.11.0+)
+   * Mix ratios are tuned so the derived scale closely matches Tailwind's
+   * standard 11-step lightness ramp when --color-brand is set to a
+   * Tailwind-600 hue. Override `--color-brand` and the whole scale
+   * follows; no per-step alias block needed in consumer globals.css.
+   *
+   * Before 0.11.0 each step was a hard-coded hex. Consumers swapping the
+   * brand (e.g. clublink-platform) had to also alias all 11 steps, which
+   * was easy to miss — see ClubLink purple regression 2026-05-17. */
+  --color-brand-50:  color-mix(in oklch, var(--color-brand) 5%,  white);
+  --color-brand-100: color-mix(in oklch, var(--color-brand) 12%, white);
+  --color-brand-200: color-mix(in oklch, var(--color-brand) 25%, white);
+  --color-brand-300: color-mix(in oklch, var(--color-brand) 42%, white);
+  --color-brand-400: color-mix(in oklch, var(--color-brand) 65%, white);
+  --color-brand-500: color-mix(in oklch, var(--color-brand) 85%, white);
+  --color-brand-600: var(--color-brand);
+  --color-brand-700: color-mix(in oklch, var(--color-brand) 85%, black);
+  --color-brand-800: color-mix(in oklch, var(--color-brand) 70%, black);
+  --color-brand-900: color-mix(in oklch, var(--color-brand) 55%, black);
+  --color-brand-950: color-mix(in oklch, var(--color-brand) 35%, black);
 
   /* === Primitive: blue (ClubLink primary + i-willink gradient secondary) === */
   --color-blue-50:  #eff6ff;
@@ -87,7 +105,8 @@
   --color-fg:             var(--color-neutral-900);
   --color-muted:          var(--color-neutral-500);
   --color-border:         var(--color-neutral-200);
-  --color-brand:          var(--color-brand-600);
+  /* --color-brand is the brand axis center; defined in the brand block
+   * above. The semantic aliases below all derive from it. */
   --color-brand-fg:       #ffffff;
   --color-brand-glow:     var(--color-brand-500);
   /* Brand state tokens (0.9.0+) — components reference these for hover /

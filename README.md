@@ -62,36 +62,28 @@ import { Button, Badge } from "@willink-labs/react";
 
 ### 4. Customizing colors (single-brand baseline since 0.8.0)
 
-DS は willink purple (`#7C3AED`) を baseline として ship。consumer が他色を使いたい場合は `:root` で CSS variables を override する:
+DS は willink purple (`#7C3AED`) を baseline として ship。consumer が他色を使いたい場合は `:root` で `--color-brand` を override するだけで、scale 全段 (`brand-50`〜`brand-950`) と state tokens (hover / active / soft) が自動派生する (0.11.0+):
 
 ```css
 /* your-app/globals.css */
 @import "@willink-labs/tailwind-preset/preset.css";
 
 :root {
-  /* Primary tokens */
-  --color-brand:          #2563eb;   /* primary fill */
-  --color-brand-fg:       #ffffff;   /* text on primary */
-  --color-brand-glow:     #3b82f6;   /* shadow tint (Button default variant) */
+  /* This single line drives the entire brand palette. */
+  --color-brand: #2563eb;
 
-  /* State tokens (0.9.0+ — required for hover/active to follow brand) */
-  --color-brand-hover:    #1d4ed8;   /* Button hover bg, link hover text */
-  --color-brand-active:   #1e40af;   /* future :active state */
-  --color-brand-soft:     #dbeafe;   /* Badge default bg */
-  --color-brand-soft-fg:  #1d4ed8;   /* Badge default fg */
-
-  /* Accent tokens (gradient utilities) */
-  --color-accent-cyan:    #10b981;
-  --color-accent-pink:    #059669;
-
-  /* Shadow */
-  --shadow-glow:          0 0 20px -5px rgba(37, 99, 235, 0.3);
+  /* Optional: override these only if you want non-derived values. */
+  --color-brand-fg:    #ffffff;                          /* text on primary */
+  --color-brand-glow:  #3b82f6;                          /* shadow tint */
+  --color-accent-cyan: #10b981;
+  --color-accent-pink: #059669;
+  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
 }
 ```
 
-That's it. Tailwind v4 resolves `:root` tokens at compile time; every DS component picks up the override automatically. No JS code change required.
+That's it. The numeric scale (`brand-50` 〜 `brand-950`) and state tokens (`brand-hover` / `-active` / `-soft` / `-soft-fg`) all derive from `--color-brand` via `color-mix(in oklch, …)`. Every DS component and every consumer utility (`text-brand-600`, `bg-brand-soft` etc.) follows automatically — no per-step alias block, no missed steps.
 
-> **Upgrading from 0.8.0?** The state tokens (`--color-brand-hover`, `--color-brand-soft`, etc.) are new in 0.9.0. Without them, Button hover and Badge default revert to the baseline willink violet because components used to reference the primitive scale directly. Add the state token overrides to get a fully consistent brand color across interaction states.
+> **Upgrading from 0.10.0?** This is a breaking change. Consumers that overrode `--color-brand` along with an 11-step alias block (`--color-brand-50: var(--color-blue-50)` etc.) can delete the alias block — the OKLCH derivation does the same job from a single override. Visual drift for the i-willink baseline is ~1–2% per channel (imperceptible on solids, subtle on long gradients). Browsers without `color-mix` support (pre-2023) fall back to the i-willink violet baseline via a `@supports` hex fallback emitted by Tailwind v4.
 
 Flutter (Material 3) consumers do the equivalent by `copyWith`:
 
