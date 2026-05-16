@@ -9,7 +9,7 @@ import 'package:willink_theme/willink_theme.dart';
 
 void main() {
   Widget wrapWithTheme(Widget child) =>
-      MaterialApp(theme: WillinkTheme.fitai(), home: Scaffold(body: child));
+      MaterialApp(theme: WillinkTheme.willink(), home: Scaffold(body: child));
 
   group('WillinkSectionCard', () {
     testWidgets('renders title and child', (tester) async {

@@ -5,6 +5,73 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.5.0] — 2026-05-16
+
+### Breaking — brand axis machinery removed
+
+`WillinkBrand` enum and per-brand factories (`WillinkTheme.clublink()` / `.fitai()` / `WillinkTheme.fromBrand()`) have been removed. `WillinkTheme.willink()` is now the single factory.
+
+**Removed**:
+- `lib/src/brand_axis.dart` (entire file — `WillinkBrand` enum + `toColorScheme()`)
+- `WillinkTheme.fromBrand(WillinkBrand)` factory
+- `WillinkTheme.clublink()` factory
+- `WillinkTheme.fitai()` factory
+- `WillinkBrandTokens.clublink` static getter
+- `WillinkBrandTokens.fitai` static getter
+- `WillinkPrimitives.fitaiPrimary` / `fitaiSecondary` / `fitaiTertiary` constants
+- `test/brand_axis_test.dart` (entire file)
+- `export 'src/brand_axis.dart'` from package entrypoint
+
+**Kept**:
+- `WillinkTheme.willink()` — the single Material 3 ThemeData factory
+- `WillinkBrandTokens.willink` — non-Material brand tokens (glow / gradient / shadow)
+- All `WillinkPrimitives.*` color and motion constants (neutral / brand / blue / green / cyan / pink / sky / red / amber)
+- All component widgets (`WillinkEmptyState` / `WillinkErrorState` / `WillinkLoadingState` / `WillinkSectionCard` / `WillinkButton`)
+
+### Migration
+
+```diff
+- final theme = WillinkTheme.clublink();
++ final theme = WillinkTheme.willink().copyWith(
++   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
++ );
+
+- final theme = WillinkTheme.fitai();
++ final theme = WillinkTheme.willink().copyWith(
++   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B82F6)),
++ );
+```
+
+For consumers that previously used `WillinkBrandTokens.clublink` / `.fitai`:
+
+```dart
+// 0.4.x:
+final tokens = WillinkBrandTokens.clublink;
+
+// 0.5.0+: construct your own custom WillinkBrandTokens:
+final tokens = WillinkBrandTokens(
+  brandGlow: const Color(0xFF3B82F6),
+  brandGradient: const LinearGradient(
+    begin: Alignment.topLeft, end: Alignment.bottomRight,
+    colors: [Color(0xFF2563EB), Color(0xFF10B981)],
+  ),
+  subtleGradient: WillinkBrandTokens.willink.subtleGradient,
+  aiGradient: WillinkBrandTokens.willink.aiGradient,
+  shadowSoft: WillinkBrandTokens.willink.shadowSoft,
+  shadowGlow: const [
+    BoxShadow(color: Color(0x4C2563EB), offset: Offset(0, 0), blurRadius: 20, spreadRadius: -5),
+  ],
+);
+```
+
+### Why
+Matches the React side of the DS (which dropped the `[data-brand="..."]` mechanism in `@willink-labs/tailwind-preset@0.8.0`). ClubLink / fit-ai are independent products and now configure their own ColorScheme rather than relying on a per-product factory in DS.
+
+### Verification
+- `flutter analyze`: 0 issues
+- `flutter test`: all pass (brand_axis_test.dart removed; theme_data_test.dart updated to single-brand assertions)
+- `dart pub publish --dry-run`: clean
+
 ## [0.4.0] — 2026-05-14
 
 ### Added — WillinkButton component (1 component)
