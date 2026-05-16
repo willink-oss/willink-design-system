@@ -241,7 +241,6 @@ class が compile されるよう `safelist.css` に inline 登録:
     の `@source inline()` を追加し、Tailwind v4 の node_modules 非スキャン
     制約下でも consumer の CSS bundle に正しく compile されるよう保証。
 - 影響: `clublink-platform` (Phase 3 で flat list のため気付かれず)、`i-willink.com`
-  (Phase 4.1.1 で発見・consumer 側 globals.css に workaround を投入済)、(internal-site-1)
   (将来 DS 適用時)。consumer 側 workaround を 0.4.1 採用後に削除可能。
 
 ## [0.4.0] — 2026-05-08

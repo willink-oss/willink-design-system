@@ -104,4 +104,3 @@ publish が OIDC で動作確認できたら、GitHub Actions org-level secret `
 
 - npmjs.com Trusted Publishers docs: https://docs.npmjs.com/trusted-publishers
 - GitHub OIDC docs: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect
-- Phase 3 完遂レポート (失敗ログ含む): `internal-repo/assets/knowledge/2026-05-08-design-system-phase-3.md`

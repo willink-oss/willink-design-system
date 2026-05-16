@@ -131,7 +131,6 @@ Phase 8 で別途判断する。
   `check-tokens.test.ts`).
 - `theme_data_test.dart` covering each brand's primary color and
   `WillinkBrandTokens` presence.
-- `brand_axis_test.dart` documenting the 3-brand scope (and (internal project)'s
   intentional exclusion).
 
 ### Status notes
@@ -139,8 +138,6 @@ Phase 8 で別途判断する。
   Trusted Publisher configuration). The included
   `.github/workflows/publish-flutter.yml` is workflow_dispatch-ready once
   that's in place.
-- `(internal project)` ((internal partner) delivered) is intentionally **out of scope** for Phase 5.
-  Phase 5 covers only i-Willink-released apps (fit-ai, clubhouse). If (internal-partner)
   later adopts willink_theme independently, that's a separate downstream
   decision and would not require changes to this package.
 - Light mode only at this stage; dark variants will be added when one of

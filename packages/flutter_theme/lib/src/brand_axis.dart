@@ -1,6 +1,5 @@
 // Brand axis enum + per-brand ColorScheme derivation.
 //
-// Mirrors the React DS `[data-brand="willink|clublink"]` pattern. (internal project) ((internal partner)
 // delivered) is intentionally absent — see CHANGELOG and PR description for the
 // scope decision (5/8 21:23 JST CEO confirmation).
 

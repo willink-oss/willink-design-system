@@ -4,7 +4,6 @@ import 'package:willink_theme/willink_theme.dart';
 void main() {
   group('WillinkBrand', () {
     test('has exactly 3 brands (willink/clublink/fitai)', () {
-      // (internal project) ((internal partner) delivered) is intentionally excluded — see PR notes.
       expect(WillinkBrand.values.length, 3);
       expect(
         WillinkBrand.values,

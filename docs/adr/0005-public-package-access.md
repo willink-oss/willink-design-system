@@ -85,4 +85,3 @@ public access は将来的な OSS 化 (社外公開) との親和性が高い。
 ## References
 
 - ADR-0004 (Publish at end of Phase 1): `./0004-publish-end-of-phase-1.md`
-- Phase 3 完遂レポート: `internal-repo/assets/knowledge/2026-05-08-design-system-phase-3.md`

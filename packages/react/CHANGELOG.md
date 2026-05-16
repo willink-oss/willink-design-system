@@ -406,7 +406,6 @@ descendant 要素から target 可能 (Plus/Minus 切替 pattern):
   0.5.0 採用後に DS API のみに置換可能 (`<AccordionTrigger icon={...} />`)
 - **clublink-platform**: 既存 flat list は無変更で動作。card 化したい場合は
   `variant="card"` で opt-in
-- **internal-project-b**: 将来 DS adopt 時に variant prop が活用可能
 
 ## [0.4.1] — 2026-05-10
 
@@ -485,7 +484,6 @@ private repo 制約による provenance failure を回避。ただし `npm publi
 
 ### Provenance attestation の扱い
 - 現状: **不採用** (private repo 制約)
-- 将来: Phase 4+ で OSS 化判断時に再検討 ((internal ADR) 候補)
 - 影響: consumer は npmjs.com 上で「Built and signed on GitHub Actions」バッジを
   確認できないが、install 自体は通常通り動作
 
@@ -697,9 +695,7 @@ Initial usable release. Phase 1 ship (7 components). 0.2.0 で hotfix。
 - Storybook 不採用 — `apps/playground` で代替
 - Select / Dialog / Sheet / Tabs / Tooltip は Phase 1.5
 - Flutter ThemeData は Phase 2
-- (internal-site-1) brand axis (`(internal-site-1).json`) 追加は Level 3 別途承認
 
 ### Reference
 - Postmortem of past 2 DS attempts (2024-01 / 2024-05): see
-  `internal-repo/assets/knowledge/2026-05-07-design-system-archived-repos-postmortem.md`
 - Phase 1 implementation plan: `~/.claude/plans/cozy-painting-rabbit.md`

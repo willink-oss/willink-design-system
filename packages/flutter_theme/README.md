@@ -35,7 +35,6 @@ class MyApp extends StatelessWidget {
 | `WillinkBrand.clublink` | blue `#2563EB` | ClubLink (web) / clubhouse (Flutter, same brand) |
 | `WillinkBrand.fitai` | blue `#3B82F6` + emerald | fit-ai (existing palette preserved) |
 
-`(internal project)` (delivered to (internal partner)) is intentionally **out of scope**. If (internal-partner) adopts
 this package independently, that is their choice — they would either reuse one
 of the brands above or propose a new axis through the maintainers.
 

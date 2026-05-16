@@ -113,6 +113,4 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 
 ## References
 
-- 実証ログ (auth 必須仕様): `internal-repo/assets/knowledge/2026-05-08-design-system-phase-3.md` § 2 (副次成果)
 - GitHub Packages npm registry 仕様: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry
-- Phase 3 完遂レポート: `internal-repo/assets/knowledge/2026-05-08-design-system-phase-3.md`

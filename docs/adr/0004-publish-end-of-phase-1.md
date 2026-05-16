@@ -23,7 +23,6 @@ Phase 3 を待たない。
 過去 2 回の DS 試行 (`i-Willink-Design-System` 2024-05 / `Design-System-Development-bk`
 2024-01) は両方とも **「配布視点欠如 (npm publish の形跡なし・他プロダクトからの import なし)」**
 で頓挫した。Postmortem
-(`internal-repo/assets/knowledge/2026-05-07-design-system-archived-repos-postmortem.md`)
 の 3.3 章「配布・consumer 視点の欠如」より:
 
 > 両リポとも npm publish の形跡なし・他プロダクトからの import なし。「DS リポ単体」で
