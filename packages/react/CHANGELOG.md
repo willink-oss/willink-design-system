@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.10.0] — 2026-05-17
+
+### Lockstep bump (no React source change)
+
+Pair with `@willink-labs/tailwind-preset@0.10.0` which migrates the gradient utilities (`bg-gradient-{subtle,primary,ai}` / `text-gradient-primary`) off primitive scale references so consumer `:root` overrides propagate into every gradient stop. See the tailwind-preset CHANGELOG for the full migration table.
+
 ## [0.9.0] — 2026-05-17
 
 ### Changed — components use semantic state tokens
