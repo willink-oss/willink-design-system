@@ -69,15 +69,29 @@ DS は willink purple (`#7C3AED`) を baseline として ship。consumer が他�
 @import "@willink-labs/tailwind-preset/preset.css";
 
 :root {
-  --color-brand:       #2563eb;            /* your brand primary */
-  --color-brand-glow:  #3b82f6;            /* shadow tint */
-  --color-accent-cyan: #10b981;            /* accent (gradients) */
-  --color-accent-pink: #059669;            /* accent (gradients) */
-  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
+  /* Primary tokens */
+  --color-brand:          #2563eb;   /* primary fill */
+  --color-brand-fg:       #ffffff;   /* text on primary */
+  --color-brand-glow:     #3b82f6;   /* shadow tint (Button default variant) */
+
+  /* State tokens (0.9.0+ — required for hover/active to follow brand) */
+  --color-brand-hover:    #1d4ed8;   /* Button hover bg, link hover text */
+  --color-brand-active:   #1e40af;   /* future :active state */
+  --color-brand-soft:     #dbeafe;   /* Badge default bg */
+  --color-brand-soft-fg:  #1d4ed8;   /* Badge default fg */
+
+  /* Accent tokens (gradient utilities) */
+  --color-accent-cyan:    #10b981;
+  --color-accent-pink:    #059669;
+
+  /* Shadow */
+  --shadow-glow:          0 0 20px -5px rgba(37, 99, 235, 0.3);
 }
 ```
 
 That's it. Tailwind v4 resolves `:root` tokens at compile time; every DS component picks up the override automatically. No JS code change required.
+
+> **Upgrading from 0.8.0?** The state tokens (`--color-brand-hover`, `--color-brand-soft`, etc.) are new in 0.9.0. Without them, Button hover and Badge default revert to the baseline willink violet because components used to reference the primitive scale directly. Add the state token overrides to get a fully consistent brand color across interaction states.
 
 Flutter (Material 3) consumers do the equivalent by `copyWith`:
 

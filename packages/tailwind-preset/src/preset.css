@@ -83,19 +83,26 @@
   --color-amber-600: #d97706;
 
   /* === Semantic (default = i-willink) === */
-  --color-bg:           #ffffff;
-  --color-fg:           var(--color-neutral-900);
-  --color-muted:        var(--color-neutral-500);
-  --color-border:       var(--color-neutral-200);
-  --color-brand:        var(--color-brand-600);
-  --color-brand-fg:     #ffffff;
-  --color-brand-glow:   var(--color-brand-500);
-  --color-accent-cyan:  var(--color-cyan-500);
-  --color-accent-pink:  var(--color-pink-500);
-  --color-ring:         var(--color-brand);
-  --color-success:      var(--color-green-600);
-  --color-warning:      var(--color-amber-600);
-  --color-danger:       var(--color-red-600);
+  --color-bg:             #ffffff;
+  --color-fg:             var(--color-neutral-900);
+  --color-muted:          var(--color-neutral-500);
+  --color-border:         var(--color-neutral-200);
+  --color-brand:          var(--color-brand-600);
+  --color-brand-fg:       #ffffff;
+  --color-brand-glow:     var(--color-brand-500);
+  /* Brand state tokens (0.9.0+) — components reference these for hover /
+   * active / soft variants so a single :root override on the consumer side
+   * carries through every interaction state. */
+  --color-brand-hover:    var(--color-brand-700);
+  --color-brand-active:   var(--color-brand-800);
+  --color-brand-soft:     var(--color-brand-100);
+  --color-brand-soft-fg:  var(--color-brand-700);
+  --color-accent-cyan:    var(--color-cyan-500);
+  --color-accent-pink:    var(--color-pink-500);
+  --color-ring:           var(--color-brand);
+  --color-success:        var(--color-green-600);
+  --color-warning:        var(--color-amber-600);
+  --color-danger:         var(--color-red-600);
 
   /* === Radius === */
   --radius-sm:   0.25rem;

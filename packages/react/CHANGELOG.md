@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.9.0] — 2026-05-17
+
+### Changed — components use semantic state tokens
+
+Migrated `Button` (default + link variants), `AlertDialog` action, and `Badge` (default variant) off direct primitive scale references (`brand-700` / `brand-100` / `brand-500`) and onto the new semantic state tokens introduced in `@willink-labs/tailwind-preset@0.9.0`:
+
+- `Button` default: `hover:bg-brand-700` → `hover:bg-brand-hover`, `shadow-brand-500/{20,40}` → `shadow-brand-glow/{20,40}`
+- `Button` link: `hover:text-brand-700` → `hover:text-brand-hover`
+- `AlertDialog` action: same migration as Button default
+- `Badge` default: `bg-brand-100 text-brand-700` → `bg-brand-soft text-brand-soft-fg`
+
+### Why
+
+In 0.8.0 we removed the `data-brand` axis mechanism in favor of `:root` CSS variable overrides. But Button/Badge still referenced the willink-hardcoded primitive scale for hover/soft states, so consumers overriding `--color-brand` saw blue-on-rest but violet-on-hover. 0.9.0 closes that gap.
+
+### Migration
+
+No code change required on the React side. **However, if your consumer overrides `--color-brand` in `:root`, you must extend the override to include the new state tokens** (`--color-brand-hover`, `--color-brand-soft`, etc.). See `@willink-labs/tailwind-preset@0.9.0` CHANGELOG for the full override snippet.
+
+### Verification
+- 150 tests pass
+- Badge tests updated for the new class names (`bg-brand-soft` / `text-brand-soft-fg`)
+
+### Lockstep bump
+- `@willink-labs/tokens@0.9.0` (lockstep, no source change)
+- `@willink-labs/tailwind-preset@0.9.0` (new tokens added)
+
 ## [0.8.0] — 2026-05-16
 
 ### Lockstep bump
