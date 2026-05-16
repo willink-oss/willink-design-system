@@ -9,14 +9,14 @@ import 'package:willink_theme/willink_theme.dart';
 
 void main() {
   Widget wrap(Widget child, {ThemeData? theme}) => MaterialApp(
-        theme: theme ?? WillinkTheme.fitai(),
+        theme: theme ?? WillinkTheme.willink(),
         home: Scaffold(body: Center(child: child)),
       );
 
   group('WillinkButton — filled variant', () {
     testWidgets('uses primary background + onPrimary text color',
         (tester) async {
-      final theme = WillinkTheme.fitai();
+      final theme = WillinkTheme.willink();
       await tester.pumpWidget(
         wrap(
           WillinkButton(
@@ -52,7 +52,7 @@ void main() {
 
   group('WillinkButton — outline variant', () {
     testWidgets('border uses primary color', (tester) async {
-      final theme = WillinkTheme.fitai();
+      final theme = WillinkTheme.willink();
       await tester.pumpWidget(
         wrap(
           WillinkButton(
@@ -74,7 +74,7 @@ void main() {
 
   group('WillinkButton — ghost variant', () {
     testWidgets('uses transparent background + primary text', (tester) async {
-      final theme = WillinkTheme.fitai();
+      final theme = WillinkTheme.willink();
       await tester.pumpWidget(
         wrap(
           WillinkButton(
@@ -122,14 +122,12 @@ void main() {
     });
   });
 
-  group('WillinkButton — brand axis', () {
-    testWidgets('clublink theme yields a different primary than fitai',
-        (tester) async {
-      final clublink = WillinkTheme.clublink();
-      final fitai = WillinkTheme.fitai();
-      expect(
-        clublink.colorScheme.primary,
-        isNot(equals(fitai.colorScheme.primary)),
+  group('WillinkButton — ColorScheme override', () {
+    testWidgets('respects copyWith(colorScheme: ...) override', (tester) async {
+      // Migration path replacing the old per-brand factories: consumers
+      // override ColorScheme to change the brand color.
+      final overridden = WillinkTheme.willink().copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
       );
 
       await tester.pumpWidget(
@@ -138,13 +136,13 @@ void main() {
             onPressed: () {},
             child: const Text('Go'),
           ),
-          theme: clublink,
+          theme: overridden,
         ),
       );
 
       final button = tester.widget<FilledButton>(find.byType(FilledButton));
       final bg = button.style!.backgroundColor!.resolve(<WidgetState>{});
-      expect(bg, equals(clublink.colorScheme.primary));
+      expect(bg, equals(overridden.colorScheme.primary));
     });
   });
 

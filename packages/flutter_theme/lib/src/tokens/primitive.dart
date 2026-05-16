@@ -36,7 +36,7 @@ class WillinkPrimitives {
   static const Color brand900 = Color(0xFF4C1D95);
   static const Color brand950 = Color(0xFF2E1065);
 
-  // === Blue (ClubLink primary; clublink-platform Web + clubhouse Flutter で共有) ===
+  // === Blue (general-purpose · consumer override で brand を blue 系にしたい時の primitive) ===
   static const Color blue50 = Color(0xFFEFF6FF);
   static const Color blue100 = Color(0xFFDBEAFE);
   static const Color blue200 = Color(0xFFBFDBFE);
@@ -67,16 +67,6 @@ class WillinkPrimitives {
   static const Color red600 = Color(0xFFDC2626);
   static const Color amber500 = Color(0xFFF59E0B);
   static const Color amber600 = Color(0xFFD97706);
-
-  // === fit-ai brand palette (existing palette preserved · 1:1 from app_theme.dart) ===
-  /// fit-ai primary blue — same hex as [blue500].
-  static const Color fitaiPrimary = Color(0xFF3B82F6);
-
-  /// fit-ai secondary emerald (custom · not in shared palette).
-  static const Color fitaiSecondary = Color(0xFF5CDCA8);
-
-  /// fit-ai tertiary violet — same hex as [brand500].
-  static const Color fitaiTertiary = Color(0xFF8B5CF6);
 
   // === Radius ===
   static const double radiusSm = 4.0; // 0.25rem

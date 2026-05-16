@@ -18,7 +18,7 @@ const notoSansJp = Noto_Sans_JP({
 
 export const metadata: Metadata = {
   title: "willink-design-system playground",
-  description: "i-Willink Design System tokens & brand axes preview",
+  description: "i-Willink Design System tokens & components preview",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja" data-brand="willink" className={notoSansJp.variable}>
+    <html lang="ja" className={notoSansJp.variable}>
       <body className="antialiased">{children}</body>
     </html>
   );

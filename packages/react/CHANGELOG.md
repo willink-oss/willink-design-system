@@ -6,6 +6,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.8.0] — 2026-05-16
+
+### Lockstep bump
+
+No source changes in `@willink-labs/react`. This release is part of a coordinated 0.8.0 bump across `@willink-labs/{tokens,tailwind-preset,react}` to align peer dependency versions after the brand-axis machinery was removed from `tokens` and `tailwind-preset`.
+
+### Breaking (downstream, not in this package)
+
+`@willink-labs/tailwind-preset` no longer exports `BRANDS` / `Brand`. `@willink-labs/tokens` no longer exports `BRANDS` / `BrandKey` / `BRAND_KEYS` / `tokens.brand` / `./brand/*.json` subpaths. If your code imported any of those, see `packages/tokens/CHANGELOG.md` and `packages/tailwind-preset/CHANGELOG.md` migration sections.
+
+### Migration
+
+```diff
+- import { BRANDS, type Brand } from "@willink-labs/tailwind-preset";
++ // BRANDS removed in 0.8.0; DS is now single-brand baseline (willink).
++ // Customize colors via :root override in your globals.css:
++ //   :root { --color-brand: #2563eb; --color-brand-glow: #3b82f6; ... }
+```
+
 ## [0.7.1] — 2026-05-16
 
 ### Added — Toggle component (1 new・24 total)

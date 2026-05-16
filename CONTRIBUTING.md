@@ -10,10 +10,10 @@ This is the design system that powers i-Willink products (Next.js apps, Flutter 
 
 | Package | Role |
 |---|---|
-| `packages/tokens` | DTCG-compatible JSON tokens (primitive + semantic + brand). Single source of truth. |
-| `packages/tailwind-preset` | Tailwind v4 `@theme` preset. Switches brand axis via `[data-brand=...]`. |
-| `packages/react` | shadcn-inspired React components on Radix primitives. 21 components (0.5.0+). |
-| `packages/flutter_theme` | Material 3 `ThemeData` factories + brand axis + 4 Flutter components. Published to pub.dev as `willink_theme`. |
+| `packages/tokens` | DTCG-compatible JSON tokens (primitive + semantic). Single source of truth. |
+| `packages/tailwind-preset` | Tailwind v4 `@theme` preset (willink baseline). Consumers customize via `:root { --color-brand: ... }` override. |
+| `packages/react` | shadcn-inspired React components on Radix primitives. 24 components (0.8.0+). |
+| `packages/flutter_theme` | Material 3 `ThemeData` factory + 5 Flutter components (EmptyState / ErrorState / LoadingState / SectionCard / WillinkButton). Published to pub.dev as `willink_theme`. |
 
 ---
 
@@ -62,17 +62,34 @@ flutter test
 
 ---
 
-## Adding a new brand axis
+## Customizing brand color (consumer-side)
 
-Brand axes are 5-layer aligned. **All five must be updated in the same PR**:
+DS is a single-brand baseline (willink purple) as of 0.8.0. Consumers that need a different palette override the CSS variables in their own `globals.css`:
 
-1. **Tokens JSON** — add `packages/tokens/src/brand/<new>.json` + register in `packages/tokens/src/index.ts`.
-2. **Tailwind preset BRANDS** — extend `packages/tailwind-preset/src/index.ts` `BRANDS` array.
-3. **`preset.css` `[data-brand=<new>]` block** — `packages/tailwind-preset/src/preset.css` brand override block.
-4. **`brands/<new>.css` force-mode** — `packages/tailwind-preset/src/brands/<new>.css` for prefers-no-data-attr fallback. Update package `exports` map.
-5. **Flutter brand axis** — extend `WillinkBrand` enum + `WillinkTheme.<new>()` factory in `packages/flutter_theme/lib/src/`. Update `test/brand_axis_test.dart` enum count assertion.
+```css
+/* consumer/app/globals.css */
+@import "@willink-labs/tailwind-preset/preset.css";
 
-Approval: brand-axis addition is **Level 3 (CEO approval required)** — see governance section in root README.
+:root {
+  --color-brand:       #2563eb;
+  --color-brand-glow:  #3b82f6;
+  --color-accent-cyan: #10b981;
+  --color-accent-pink: #059669;
+  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
+}
+```
+
+Tailwind v4 resolves `:root` overrides at compile time; all DS components pick up the new color without code changes.
+
+Flutter consumers do the equivalent via `ThemeData.copyWith`:
+
+```dart
+final theme = WillinkTheme.willink().copyWith(
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
+);
+```
+
+No PR to this repo is required for consumer-side color overrides. PRs to change the baseline willink palette itself are **Level 3 (CEO approval required)**.
 
 ---
 

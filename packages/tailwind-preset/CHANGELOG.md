@@ -6,6 +6,53 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.8.0] — 2026-05-16
+
+### Breaking — brand axis machinery removed
+
+The `[data-brand="willink|clublink|fitai"]` switching mechanism has been removed in favor of direct `:root` CSS variable override. DS now ships a single willink baseline.
+
+**Removed**:
+- `[data-brand="willink"]` / `[data-brand="clublink"]` / `[data-brand="fitai"]` blocks in `preset.css`
+- `brands/willink.css` / `brands/clublink.css` / `brands/fitai.css` force-mode files
+- `BRANDS` const + `Brand` type from `index.ts`
+- `exports['./brands/*.css']` from `package.json`
+
+**Kept** (now hardcoded to willink values inside `@theme`):
+- All semantic tokens (`--color-brand`, `--color-brand-glow`, `--color-accent-cyan`, etc.)
+- All primitives (`--color-brand-50` through `--color-brand-950`, `--color-blue-*`, `--color-green-*`, neutrals, etc.)
+- All gradient and animation utilities
+
+### Migration
+
+Replace `<html data-brand="clublink">` and similar attributes with a `:root` override in your consumer's globals.css:
+
+```css
+@import "@willink-labs/tailwind-preset/preset.css";
+
+/* Old (0.7.x): <html data-brand="clublink"> ... </html> */
+/* New (0.8.0): override CSS variables directly */
+:root {
+  --color-brand:       #2563eb;
+  --color-brand-glow:  #3b82f6;
+  --color-accent-cyan: #10b981;
+  --color-accent-pink: #059669;
+  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
+}
+```
+
+If you imported `brands/*.css` directly, replace those imports with the inline `:root` block above.
+
+### Why
+1. ClubLink / fit-ai are independent products — bundling them as DS brand axes implied a managerial relationship that no longer reflects how the products evolve
+2. Per-product axes in the preset created the wrong mental model: "register your brand in the DS before you can use a new color"; CSS variable override is the more standard OSS pattern
+3. Removing the axis layer also simplifies the Flutter side (single `WillinkTheme.willink()` factory replaces 3 per-brand factories)
+
+### Lockstep bump
+- `@willink-labs/tokens@0.8.0` (also breaking: `BRANDS` / `BrandKey` / `BRAND_KEYS` removed; `./brand/*.json` subpaths removed)
+- `@willink-labs/react@0.8.0` (lockstep — no source changes)
+- `willink_theme@0.5.0` (Flutter — `WillinkBrand` enum and per-brand factories removed)
+
 ## [0.7.0] — 2026-05-14
 
 ### Added — Skeleton + Sheet components (2 new・23 total)

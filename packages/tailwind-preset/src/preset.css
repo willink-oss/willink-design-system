@@ -2,8 +2,7 @@
  * @willink-labs/tailwind-preset
  *
  * Tailwind v4 preset for i-Willink Design System.
- * Default brand = i-willink (vibrant violet, premium tech feel).
- * Switch via `<html data-brand="clublink">` etc.
+ * Single brand baseline = i-willink (vibrant violet, premium tech feel).
  *
  * Usage (one line — that's all):
  *   @import "@willink-labs/tailwind-preset/preset.css";
@@ -14,8 +13,21 @@
  * regardless of how your consumer's node_modules are laid out
  * (pnpm symlinks / npm tarballs / Turborepo hoisting all work the same).
  *
- * If you previously added `@source ".../node_modules/@willink-labs/..."`
- * lines for 0.3.x, those continue to work but are no longer required.
+ * Customize colors (added 0.8.0): override CSS variables in your consumer's
+ * globals.css after the preset import.
+ *
+ *   @import "@willink-labs/tailwind-preset/preset.css";
+ *   :root {
+ *     --color-brand:       #2563eb;
+ *     --color-brand-glow:  #3b82f6;
+ *     --color-accent-cyan: #10b981;
+ *     --color-accent-pink: #059669;
+ *     --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
+ *   }
+ *
+ * Tailwind v4 resolves :root tokens at compile time; all DS components
+ * (Button, Badge, focus rings, gradients) pick up the new brand color
+ * automatically.
  */
 
 @import "tailwindcss";
@@ -110,40 +122,9 @@
 }
 
 /* ============================================================
- * Brand axes — override semantic tokens via [data-brand="..."]
- * ============================================================ */
-
-[data-brand="willink"] {
-  --color-brand:       #7c3aed;
-  --color-brand-fg:    #ffffff;
-  --color-brand-glow:  #8b5cf6;
-  --color-accent-cyan: #06b6d4;
-  --color-accent-pink: #ec4899;
-  --shadow-glow:       0 0 20px -5px rgba(124, 58, 237, 0.3);
-}
-
-[data-brand="clublink"] {
-  --color-brand:       #2563eb;
-  --color-brand-fg:    #ffffff;
-  --color-brand-glow:  #3b82f6;
-  --color-accent-cyan: #10b981;
-  --color-accent-pink: #059669;
-  --shadow-glow:       0 0 20px -5px rgba(37, 99, 235, 0.3);
-}
-
-[data-brand="fitai"] {
-  --color-brand:       #3b82f6;
-  --color-brand-fg:    #ffffff;
-  --color-brand-glow:  #60a5fa;
-  --color-accent-cyan: #5cdca8;
-  --color-accent-pink: #8b5cf6;
-  --shadow-glow:       0 0 20px -5px rgba(59, 130, 246, 0.3);
-}
-
-/* ============================================================
  * Gradient utilities (Tailwind v4 doesn't allow background-image in @theme)
  * Brand-aware: gradients reference --color-brand-* and --color-accent-*
- * so they automatically adapt when [data-brand] changes.
+ * so they automatically adapt when a consumer overrides :root tokens.
  * ============================================================ */
 
 @utility bg-gradient-subtle {

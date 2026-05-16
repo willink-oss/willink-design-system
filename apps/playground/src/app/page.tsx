@@ -17,17 +17,9 @@ import {
   Label,
   Textarea,
 } from "@willink-labs/react";
-import { BRANDS, type Brand } from "@willink-labs/tailwind-preset";
 import { ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
 
 export default function Page() {
-  const [brand, setBrand] = useState<Brand>("willink");
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-brand", brand);
-  }, [brand]);
-
   return (
     <div className="min-h-screen bg-bg text-fg selection:bg-brand-100 selection:text-brand-900 font-sans">
       {/* ============================================================
@@ -43,7 +35,7 @@ export default function Page() {
             {/* Tagline (Badge コンポーネント差替後) */}
             <Badge className="mb-8 gap-2 px-4 py-1.5 text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              willink-design-system v0.5.0 — 21 components
+              willink-design-system v0.8.0 — 24 components · single-brand baseline
             </Badge>
 
             <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.15]">
@@ -55,26 +47,8 @@ export default function Page() {
             <p className="text-lg text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
               i-Willink Design System ─ 全プロダクト共通の token 駆動設計。
               <br className="hidden md:block" />
-              <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-700">
-                data-brand=&quot;{brand}&quot;
-              </code>{" "}
-              でブランド軸を切替。
+              Customize via <code className="font-mono text-xs px-1.5 py-0.5 rounded bg-neutral-100 text-neutral-700">:root {`{`} --color-brand: ... {`}`}</code> in your consumer&apos;s globals.css.
             </p>
-
-            {/* Brand toggle (Button asChild なしで直接 onClick) */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-              {BRANDS.map((b) => (
-                <Button
-                  key={b}
-                  size="lg"
-                  variant={b === brand ? "default" : "outline"}
-                  onClick={() => setBrand(b)}
-                >
-                  Brand: {b}
-                  {b === brand && <ArrowRight className="w-4 h-4" />}
-                </Button>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -132,7 +106,7 @@ export default function Page() {
         <h2 className="text-2xl font-bold mb-2">Badges</h2>
         <p className="text-sm text-muted mb-6">
           variants <code className="font-mono">default / outline / success / warning / danger</code>
-          。default は brand-100 + brand-700 (subtle・brand 切替で自動追従)。
+          。default は brand-100 + brand-700 (subtle・semantic token 経由)。
         </p>
         <div className="flex flex-wrap gap-3 items-center">
           <Badge>Default</Badge>
@@ -343,7 +317,8 @@ export default function Page() {
       <section className="max-w-5xl mx-auto px-6 py-8">
         <h2 className="text-2xl font-bold mb-2">Gradients</h2>
         <p className="text-sm text-muted mb-6">
-          brand 軸切替時にグラデーション全体が自動追従。
+          semantic token (<code className="font-mono">--color-brand-*</code>) を参照するため、
+          consumer の <code className="font-mono">:root</code> override に追従。
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="rounded-xl overflow-hidden border border-border">
@@ -446,10 +421,10 @@ export default function Page() {
 
       <footer className="max-w-5xl mx-auto px-6 py-12 text-xs text-muted border-t border-border mt-8">
         <p>
-          willink-design-system v0.5.0 — 21 components (core 7: Button / Badge / Input /
+          willink-design-system v0.8.0 — 24 components (core 7: Button / Badge / Input /
           Textarea / Label / Card / Accordion + Phase 7+ 14: Dialog / AlertDialog / Avatar /
           Tabs / Tooltip / Toast / DropdownMenu / Select / Switch / Checkbox / RadioGroup /
-          Slider / Progress / Separator)。
+          Slider / Progress / Separator + 0.7.x: Skeleton / Sheet / Toggle)。
         </p>
         <p className="mt-1">
           Storybook 不採用。本ページが全コンポーネント・全 token のリファレンス実装。

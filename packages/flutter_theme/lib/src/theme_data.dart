@@ -1,28 +1,49 @@
-// WillinkTheme — Material 3 ThemeData factories.
+// WillinkTheme — Material 3 ThemeData factory (single-brand baseline).
 //
 // Public API:
-//   WillinkTheme.fromBrand(WillinkBrand)  ← base factory
-//   WillinkTheme.willink()                ← alias
-//   WillinkTheme.clublink()               ← alias
-//   WillinkTheme.fitai()                  ← alias
+//   WillinkTheme.willink()  ← the only factory (since 0.5.0).
+//
+// Consumers that previously used WillinkTheme.clublink() / .fitai() should
+// switch to WillinkTheme.willink() and override the resulting ColorScheme
+// via ThemeData.copyWith(colorScheme: ColorScheme.fromSeed(...)).
 
 import 'package:flutter/material.dart';
-import 'brand_axis.dart';
 import 'theme_extensions/willink_brand_tokens.dart';
 import 'tokens/primitive.dart';
 
-/// Material 3 [ThemeData] factories for the i-Willink Design System.
+/// Material 3 [ThemeData] factory for the i-Willink Design System.
 class WillinkTheme {
   const WillinkTheme._();
 
-  /// Build a [ThemeData] for the given [brand].
+  /// i-Willink default theme (vibrant violet).
   ///
-  /// Consumers usually call one of the named aliases ([willink], [clublink],
-  /// [fitai]). Use [fromBrand] when the brand value is dynamic — for example
-  /// when it comes from a settings provider in the playground app.
-  static ThemeData fromBrand(WillinkBrand brand) {
-    final colorScheme = brand.toColorScheme();
-    final brandTokens = _brandTokensFor(brand);
+  /// To customize the brand color, copyWith a new ColorScheme:
+  /// ```dart
+  /// final theme = WillinkTheme.willink().copyWith(
+  ///   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
+  /// );
+  /// ```
+  static ThemeData willink() {
+    final colorScheme = const ColorScheme(
+      brightness: Brightness.light,
+      primary: WillinkPrimitives.brand600,
+      onPrimary: Color(0xFFFFFFFF),
+      primaryContainer: WillinkPrimitives.brand100,
+      onPrimaryContainer: WillinkPrimitives.brand900,
+      secondary: WillinkPrimitives.brand500,
+      onSecondary: Color(0xFFFFFFFF),
+      secondaryContainer: WillinkPrimitives.brand100,
+      onSecondaryContainer: WillinkPrimitives.brand900,
+      tertiary: WillinkPrimitives.cyan500,
+      onTertiary: Color(0xFFFFFFFF),
+      error: WillinkPrimitives.red600,
+      onError: Color(0xFFFFFFFF),
+      surface: Color(0xFFFFFFFF),
+      onSurface: WillinkPrimitives.neutral900,
+      surfaceContainerHighest: WillinkPrimitives.neutral100,
+      outline: WillinkPrimitives.neutral200,
+      outlineVariant: WillinkPrimitives.neutral200,
+    );
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -116,27 +137,7 @@ class WillinkTheme {
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: colorScheme.primary,
       ),
-      extensions: <ThemeExtension<dynamic>>[brandTokens],
+      extensions: <ThemeExtension<dynamic>>[WillinkBrandTokens.willink],
     );
-  }
-
-  /// i-Willink default theme (vibrant violet).
-  static ThemeData willink() => fromBrand(WillinkBrand.willink);
-
-  /// ClubLink theme (blue · shared by clublink-platform Web and clubhouse).
-  static ThemeData clublink() => fromBrand(WillinkBrand.clublink);
-
-  /// fit-ai theme (existing blue + emerald palette preserved).
-  static ThemeData fitai() => fromBrand(WillinkBrand.fitai);
-
-  static WillinkBrandTokens _brandTokensFor(WillinkBrand brand) {
-    switch (brand) {
-      case WillinkBrand.willink:
-        return WillinkBrandTokens.willink;
-      case WillinkBrand.clublink:
-        return WillinkBrandTokens.clublink;
-      case WillinkBrand.fitai:
-        return WillinkBrandTokens.fitai;
-    }
   }
 }

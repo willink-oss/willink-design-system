@@ -78,11 +78,5 @@ void main() {
       expect(rgbOf(WillinkPrimitives.amber600), hexFromJson('amber', '600'));
     });
 
-    test('fit-ai brand alias hex matches blue/brand primitives', () {
-      // fitaiPrimary === blue500 by design (single hex source of truth).
-      expect(WillinkPrimitives.fitaiPrimary, WillinkPrimitives.blue500);
-      // fitaiTertiary === brand500 by design.
-      expect(WillinkPrimitives.fitaiTertiary, WillinkPrimitives.brand500);
-    });
   });
 }
