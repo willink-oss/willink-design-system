@@ -9,6 +9,16 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.0.0] — 2026-05-17
+
+### API freeze (lockstep cut)
+
+First stable release. Token JSON shape and key set are frozen — every key documented in `primitive.json` and `semantic.json` at 1.0.0 is part of the public contract. Future MINOR releases may add new keys; renaming or removing a key, or changing the value an alias resolves to, is a MAJOR (see [ADR-0010](../../docs/adr/0010-semver-policy.md)).
+
+No content change vs. 0.13.0. The version bump exists to align the four npm packages (`tokens` / `tailwind-preset` / `react` / `css-tokens`) at a single "1.0" cut and to start the SemVer-2.0 contract clock. Adopter migration: [`docs/MIGRATION-0.8-to-1.0.md`](../../docs/MIGRATION-0.8-to-1.0.md).
+
+`willink_theme` (pub.dev) bumps to `1.0.0` in the same PR as a one-time storytelling coincidence; from `1.0.1` onward Flutter floats per [ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md).
+
 ## [0.13.0] — 2026-05-17
 
 ### Lockstep bump (no JSON change)
