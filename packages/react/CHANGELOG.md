@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.0.0] — 2026-05-17
+
+### API freeze (lockstep cut)
+
+First stable release. The 24 components exported from `packages/react/src/index.ts` — their names, prop signatures, default values, and a11y semantics — are now part of the SemVer-2.0 contract. Adopters can pin `^1.0.0` and trust that MINOR / PATCH updates will not break their code per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
+No content change vs. 0.13.0; this is the lockstep marker that pairs with `@willink-labs/tokens@1.0.0`, `@willink-labs/tailwind-preset@1.0.0`, and `@willink-labs/css-tokens@1.0.0`. Adopter migration: [`docs/MIGRATION-0.8-to-1.0.md`](../../docs/MIGRATION-0.8-to-1.0.md).
+
+### Out of v1.0 scope (deferred to v1.1+)
+
+- `FormField` compound export — current `Input` + `Label` + Radix combination is sufficient
+- Dark mode variant — light-only ships first to keep the API surface fixed; dark mode is a separate design cycle
+- Storybook 9 bootstrap (Phase 9.3 of the v1.0 roadmap) — deferred so the first-stable cut is not blocked by tooling. Apps/playground continues to serve as the visual reference
+- `Popover` / `Combobox` / `Breadcrumb` / `Stepper` — not planned for 1.0; open a Discussion to propose
+
 ## [0.13.0] — 2026-05-17
 
 ### Added — `prefers-reduced-motion` contract on every animated component

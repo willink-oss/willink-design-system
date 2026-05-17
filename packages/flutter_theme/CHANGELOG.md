@@ -5,6 +5,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.0.0] — 2026-05-17
+
+### API freeze (coincidence cut with the npm group)
+
+First stable release. The `WillinkTheme` factory, `WillinkSpacing` scale, the 5 component widgets (`WillinkButton`, `WillinkEmptyState`, `WillinkErrorState`, `WillinkLoadingState`, `WillinkSectionCard`), and the `tokens_sync_test.dart` token-drift guard are now part of the SemVer-2.0 contract.
+
+No content change vs. `flutter-v0.5.0`. The bump is a one-time storytelling coincidence with the npm group's `1.0.0` cut — from `flutter-v1.0.1` onward `willink_theme` floats per [ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md). Future Flutter minors and patches track Flutter-side cadence; they do not have to wait for an npm release, and vice versa.
+
+### Out of v1.0 scope (deferred to v1.1+)
+
+- Phase 7 component expansion (`WillinkTabBar`, `WillinkBottomSheet`, `WillinkSnackBar`, `WillinkProgressIndicator`) — deferred so the first-stable cut is not blocked. Each is planned as its own minor.
+- Dark mode variant — light-only ships first to keep the API surface fixed.
+
 ## [0.5.0] — 2026-05-16
 
 ### Breaking — brand axis machinery removed

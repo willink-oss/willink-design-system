@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [1.0.0] — 2026-05-17
+
+### API freeze (lockstep cut)
+
+First stable release. The `@theme` CSS variable names, the `@utility` rule set, the `@source inline()` safelist entries, and the `preset.css` / `safelist.css` import paths are now part of the SemVer-2.0 contract. Renaming any of them is a MAJOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
+No content change vs. 0.13.0; this is the lockstep marker that pairs with `@willink-labs/tokens@1.0.0`, `@willink-labs/react@1.0.0`, and `@willink-labs/css-tokens@1.0.0`. Adopter migration: [`docs/MIGRATION-0.8-to-1.0.md`](../../docs/MIGRATION-0.8-to-1.0.md).
+
 ## [0.13.0] — 2026-05-17
 
 ### Added — `prefers-reduced-motion` CSS safety net
