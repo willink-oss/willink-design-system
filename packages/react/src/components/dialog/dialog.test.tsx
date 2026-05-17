@@ -110,6 +110,14 @@ describe("Dialog", () => {
     expect(dialog).toHaveAttribute("aria-labelledby");
   });
 
+  it("applies motion-reduce:animate-none on overlay + content (WCAG 2.3.3)", async () => {
+    const user = userEvent.setup();
+    const { container } = render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /Open/ }));
+    const content = container.ownerDocument.querySelector('[role="dialog"]');
+    expect(content).toHaveClass("motion-reduce:animate-none");
+  });
+
   it("has no axe a11y violations when open", async () => {
     const user = userEvent.setup();
     const { baseElement } = render(<Sample />);

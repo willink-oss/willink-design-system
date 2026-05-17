@@ -45,6 +45,7 @@ export const SheetOverlay = forwardRef<
     className={cn(
       "fixed inset-0 z-50 bg-black/50",
       "data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out",
+      "motion-reduce:animate-none",
       className,
     )}
     {...props}
@@ -64,6 +65,7 @@ const sheetContentVariants = cva(
   [
     "fixed z-50 gap-4 bg-bg p-6 shadow-md",
     "border border-border",
+    "motion-reduce:animate-none",
   ],
   {
     variants: {

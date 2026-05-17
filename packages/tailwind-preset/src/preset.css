@@ -343,6 +343,49 @@
 }
 
 /* ============================================================
+ * Reduced motion — WCAG 2.3.3 / motion-sensitive users (0.13.0+)
+ *
+ * Two layers:
+ *   1. Tailwind `motion-reduce:*` variants on components (preferred,
+ *      so component authors can declare reduced-motion behavior next
+ *      to the animation class — see Dialog / Sheet / Accordion / Tooltip).
+ *   2. This CSS-level safety net — strips animation duration on every
+ *      DS keyframe utility, and on Sonner toast transitions which are
+ *      library-controlled and not reachable via Tailwind variants.
+ *
+ * Together they guarantee that `prefers-reduced-motion: reduce` collapses
+ * every DS animation to an instantaneous state change, while preserving
+ * the state transition itself (open/close still happens — only the
+ * transition feel disappears).
+ * ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-out,
+  .animate-fade-up,
+  .animate-dialog-in,
+  .animate-dialog-out,
+  .animate-sheet-in-left,
+  .animate-sheet-out-left,
+  .animate-sheet-in-right,
+  .animate-sheet-out-right,
+  .animate-sheet-in-top,
+  .animate-sheet-out-top,
+  .animate-sheet-in-bottom,
+  .animate-sheet-out-bottom,
+  .animate-accordion-down,
+  .animate-accordion-up {
+    animation-duration: 0ms !important;
+  }
+
+  /* Sonner toast — library-owned transitions */
+  [data-sonner-toaster] [data-sonner-toast] {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+/* ============================================================
  * Dark mode — semantic tokens flip; primitives stay constant
  * ============================================================ */
 

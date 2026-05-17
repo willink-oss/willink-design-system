@@ -91,4 +91,12 @@ describe("Sheet", () => {
     const results = await axe(baseElement);
     expect(results).toHaveNoViolations();
   });
+
+  it("applies motion-reduce:animate-none on content (WCAG 2.3.3)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /Open/ }));
+    const dialog = screen.getByRole("dialog");
+    expect(dialog).toHaveClass("motion-reduce:animate-none");
+  });
 });

@@ -71,4 +71,12 @@ describe("AlertDialog", () => {
     expect(ad).toHaveAttribute("aria-labelledby");
     expect(ad).toHaveAttribute("aria-describedby");
   });
+
+  it("applies motion-reduce:animate-none on content (WCAG 2.3.3)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /^削除$/ }));
+    const ad = await screen.findByRole("alertdialog");
+    expect(ad).toHaveClass("motion-reduce:animate-none");
+  });
 });

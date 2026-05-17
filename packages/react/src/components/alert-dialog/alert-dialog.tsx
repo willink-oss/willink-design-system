@@ -41,6 +41,7 @@ export const AlertDialogOverlay = forwardRef<
     className={cn(
       "fixed inset-0 z-50 bg-black/50",
       "data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out",
+      "motion-reduce:animate-none",
       className,
     )}
     {...props}
@@ -60,6 +61,7 @@ export const AlertDialogContent = forwardRef<
         "fixed left-[50%] top-[50%] z-50 grid w-full max-w-md translate-x-[-50%] translate-y-[-50%]",
         "gap-4 border border-border bg-bg p-6 shadow-md rounded-lg",
         "data-[state=open]:animate-dialog-in data-[state=closed]:animate-dialog-out",
+        "motion-reduce:animate-none",
         className,
       )}
       {...props}
