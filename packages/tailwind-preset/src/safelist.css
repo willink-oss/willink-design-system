@@ -78,7 +78,7 @@
 
 /* === Transitions / animations === */
 @source inline("transition-{all,colors,transform}");
-@source inline("duration-200");
+@source inline("duration-accordion");
 
 /* Accordion height animations (driven by Radix data-state) */
 @source inline("data-[state=open]:animate-accordion-down");

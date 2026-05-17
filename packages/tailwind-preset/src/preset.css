@@ -135,12 +135,31 @@
   --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
   --shadow-glow: 0 0 20px -5px rgba(124, 58, 237, 0.3);
 
-  /* === Motion === */
+  /* === Motion primitives (consumer override base) === */
   --duration-fast:    150ms;
   --duration-base:    250ms;
   --duration-slow:    400ms;
   --ease-standard:    cubic-bezier(0.2, 0, 0, 1);
   --ease-emphasized:  cubic-bezier(0.3, 0, 0, 1.1);
+
+  /* === Motion semantic aliases (0.12.0+) ===
+   * Role-named durations and easings. Components reference these
+   * (via Tailwind utilities like `duration-accordion`, or the
+   * preset's `animate-*` utilities below) so a consumer can tune
+   * one interaction class (e.g. accordion feel) without changing
+   * primitives globally. */
+  --duration-modal-enter:    var(--duration-fast);
+  --duration-modal-exit:     var(--duration-fast);
+  --duration-popover-enter:  var(--duration-fast);
+  --duration-popover-exit:   var(--duration-fast);
+  --duration-tooltip-enter:  var(--duration-fast);
+  --duration-tooltip-exit:   var(--duration-fast);
+  --duration-sheet:          var(--duration-fast);
+  --duration-accordion:      var(--duration-base);
+  --duration-toast:          var(--duration-base);
+  --ease-enter:              var(--ease-standard);
+  --ease-exit:               var(--ease-standard);
+  --ease-emphasized-enter:   var(--ease-emphasized);
 
   /* === Typography === */
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Helvetica Neue", "Noto Sans JP", sans-serif;
@@ -197,6 +216,9 @@
 }
 
 @utility animate-fade-up {
+  /* Hero reveal — kept at 500ms standard easing (not bound to a motion semantic
+   * role yet; consumers wanting to retune use the primitive --duration-slow /
+   * --ease-standard, or shadow this utility in their own globals.css). */
   animation: willink-fade-up 0.5s var(--ease-standard) forwards;
 }
 
@@ -216,11 +238,11 @@
 }
 
 @utility animate-accordion-down {
-  animation: accordion-down var(--duration-base) var(--ease-standard);
+  animation: accordion-down var(--duration-accordion) var(--ease-enter);
 }
 
 @utility animate-accordion-up {
-  animation: accordion-up var(--duration-base) var(--ease-standard);
+  animation: accordion-up var(--duration-accordion) var(--ease-exit);
 }
 
 /* === Generic fade + Dialog scale (Tooltip / DropdownMenu / Select / Dialog / AlertDialog overlay 等で共用) === */
@@ -246,16 +268,16 @@
 }
 
 @utility animate-fade-in {
-  animation: willink-fade-in var(--duration-fast) var(--ease-standard);
+  animation: willink-fade-in var(--duration-popover-enter) var(--ease-enter);
 }
 @utility animate-fade-out {
-  animation: willink-fade-out var(--duration-fast) var(--ease-standard);
+  animation: willink-fade-out var(--duration-popover-exit) var(--ease-exit);
 }
 @utility animate-dialog-in {
-  animation: willink-dialog-in var(--duration-fast) var(--ease-standard);
+  animation: willink-dialog-in var(--duration-modal-enter) var(--ease-enter);
 }
 @utility animate-dialog-out {
-  animation: willink-dialog-out var(--duration-fast) var(--ease-standard);
+  animation: willink-dialog-out var(--duration-modal-exit) var(--ease-exit);
 }
 
 /* === Sheet slide animations (used by @willink-labs/react Sheet・4 side variants)
@@ -296,28 +318,28 @@
 }
 
 @utility animate-sheet-in-left {
-  animation: willink-sheet-in-left var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-in-left var(--duration-sheet) var(--ease-enter);
 }
 @utility animate-sheet-out-left {
-  animation: willink-sheet-out-left var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-out-left var(--duration-sheet) var(--ease-exit);
 }
 @utility animate-sheet-in-right {
-  animation: willink-sheet-in-right var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-in-right var(--duration-sheet) var(--ease-enter);
 }
 @utility animate-sheet-out-right {
-  animation: willink-sheet-out-right var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-out-right var(--duration-sheet) var(--ease-exit);
 }
 @utility animate-sheet-in-top {
-  animation: willink-sheet-in-top var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-in-top var(--duration-sheet) var(--ease-enter);
 }
 @utility animate-sheet-out-top {
-  animation: willink-sheet-out-top var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-out-top var(--duration-sheet) var(--ease-exit);
 }
 @utility animate-sheet-in-bottom {
-  animation: willink-sheet-in-bottom var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-in-bottom var(--duration-sheet) var(--ease-enter);
 }
 @utility animate-sheet-out-bottom {
-  animation: willink-sheet-out-bottom var(--duration-fast) var(--ease-standard);
+  animation: willink-sheet-out-bottom var(--duration-sheet) var(--ease-exit);
 }
 
 /* ============================================================
