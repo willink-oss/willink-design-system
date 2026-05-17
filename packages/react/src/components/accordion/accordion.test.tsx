@@ -182,4 +182,20 @@ describe("Accordion", () => {
       expect(q1).toHaveClass("group/trigger");
     });
   });
+
+  describe("motion (a11y WCAG 2.3.3)", () => {
+    it("chevron has motion-reduce:transition-none", () => {
+      const { container } = render(<Sample type="single" />);
+      const svg = container.querySelector("button svg");
+      expect(svg).toHaveClass("motion-reduce:transition-none");
+    });
+
+    it("content has motion-reduce:animate-none", () => {
+      render(<Sample type="single" />);
+      // AccordionContent wraps the inner padding div which contains "A1"
+      const a1 = screen.getByText("A1");
+      const accordionContent = a1.parentElement;
+      expect(accordionContent).toHaveClass("motion-reduce:animate-none");
+    });
+  });
 });

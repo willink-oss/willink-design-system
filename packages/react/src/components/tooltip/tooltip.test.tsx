@@ -47,6 +47,18 @@ describe("Tooltip", () => {
     expect(await screen.findByRole("tooltip")).toBeInTheDocument();
   });
 
+  it("applies motion-reduce:animate-none on tooltip content (WCAG 2.3.3)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.hover(screen.getByRole("button", { name: /Hover me/ }));
+    await screen.findByRole("tooltip");
+    // Radix Tooltip splits the content across wrapper + styled + announcement
+    // elements depending on version; the DS class names land on one of them.
+    // Assert at the rendered-HTML level so the test survives Radix DOM shape
+    // changes — the reduced-motion contract is what we're checking.
+    expect(document.body.innerHTML).toContain("motion-reduce:animate-none");
+  });
+
   it("has no axe a11y violations when open", async () => {
     const user = userEvent.setup();
     const { baseElement } = render(<Sample />);

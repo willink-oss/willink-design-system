@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.13.0] — 2026-05-17
+
+### Added — `prefers-reduced-motion` contract on every animated component
+
+`Dialog` / `AlertDialog` / `Sheet` / `Accordion` / `Tooltip` each carry a `motion-reduce:animate-none` (or `motion-reduce:transition-none` for the Accordion chevron) sibling next to their `animate-*` declaration. Combined with the CSS-level safety net in `@willink-labs/tailwind-preset@0.13.0` (which also collapses Sonner toast transitions), every DS animation now honors the user's OS-level `prefers-reduced-motion: reduce` setting — closes WCAG 2.3.3 for every component in the system except `Skeleton` (`animate-pulse`, flagged for 0.14.0).
+
+See [`docs/a11y/matrix.md`](../../docs/a11y/matrix.md) for the full WCAG 2.1 AA compliance table and [`docs/a11y/motion-contract.md`](../../docs/a11y/motion-contract.md) for the override pattern. ADR-0008 records the design rationale.
+
+### Test coverage
+
+Added `motion-reduce:` class assertions to Dialog / AlertDialog / Sheet / Accordion (chevron + content) / Tooltip tests.
+
 ## [0.12.0] — 2026-05-17
 
 ### Changed — components ride semantic motion tokens (no behavioral change)

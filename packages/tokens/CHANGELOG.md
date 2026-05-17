@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [0.13.0] — 2026-05-17
+
+### Lockstep bump (no JSON change)
+
+Pair with `@willink-labs/tailwind-preset@0.13.0` and `@willink-labs/react@0.13.0`, which add the `prefers-reduced-motion` contract — a Tailwind `motion-reduce:animate-none` variant on every animated component plus a CSS safety net in the preset. The token JSON did not change; the new behavior is purely CSS / component-side. See ADR-0008 (motion-contract) for the design rationale and [`docs/a11y/matrix.md`](../../docs/a11y/matrix.md) for the resulting WCAG 2.1 AA compliance per component.
+
 ## [0.12.0] — 2026-05-17
 
 ### Added — role-based motion + easing semantic tokens

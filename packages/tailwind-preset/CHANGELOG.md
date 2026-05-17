@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.13.0] — 2026-05-17
+
+### Added — `prefers-reduced-motion` CSS safety net
+
+A new `@media (prefers-reduced-motion: reduce)` block in `preset.css` collapses every DS keyframe utility (`.animate-fade-in/out`, `.animate-fade-up`, `.animate-dialog-in/out`, `.animate-sheet-in/out-{left,right,top,bottom}`, `.animate-accordion-down/up`) to `animation-duration: 0ms`. Sonner toast transitions (`[data-sonner-toaster] [data-sonner-toast]`) are also folded in via the same block since they are library-owned and not reachable via Tailwind variants.
+
+This is **Layer 2** of the motion contract — Layer 1 is the `motion-reduce:animate-none` Tailwind variant added to each animated component in `@willink-labs/react@0.13.0`. Together they guarantee reduced-motion behavior even if a future component author forgets the Tailwind variant.
+
+`Skeleton` (`animate-pulse`) is the one DS animation not covered by Layer 2 — it uses a Tailwind built-in keyframe, not a DS utility. Flagged for 0.14.0.
+
+Reference: ADR-0008 (motion-contract), [`docs/a11y/motion-contract.md`](../../docs/a11y/motion-contract.md), [`docs/a11y/matrix.md`](../../docs/a11y/matrix.md).
+
 ## [0.12.0] — 2026-05-17
 
 ### Added — role-based motion semantic tokens

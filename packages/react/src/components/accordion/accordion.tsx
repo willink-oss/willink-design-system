@@ -91,7 +91,7 @@ export const AccordionTrigger = forwardRef<
       {children}
       {icon ?? (
         <ChevronDown
-          className="h-4 w-4 shrink-0 text-muted transition-transform duration-accordion group-data-[state=open]/trigger:rotate-180"
+          className="h-4 w-4 shrink-0 text-muted transition-transform duration-accordion group-data-[state=open]/trigger:rotate-180 motion-reduce:transition-none"
           aria-hidden="true"
         />
       )}
@@ -109,6 +109,7 @@ export const AccordionContent = forwardRef<
     className={cn(
       "overflow-hidden text-sm text-fg",
       "data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down",
+      "motion-reduce:animate-none",
       className,
     )}
     {...props}
