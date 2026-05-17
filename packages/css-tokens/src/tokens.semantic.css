@@ -1,0 +1,49 @@
+/**
+ * @willink-labs/css-tokens — semantic roles
+ *
+ * Generated from @willink-labs/tokens (DTCG JSON) — do not edit by hand.
+ * Regenerate with `pnpm -F @willink-labs/css-tokens generate` after the
+ * source tokens change.
+ *
+ * Usage:
+ *   @import "@willink-labs/css-tokens/tokens.css";
+ *
+ * Override on :root the same way as the Tailwind preset:
+ *   :root { --color-brand: #2563eb; }
+ *
+ * Notes
+ * - DTCG alias references are emitted as `var(--...)` so consumer
+ *   :root overrides cascade into dependent semantic roles.
+ * - The OKLCH-derived brand scale that the Tailwind preset computes at
+ *   render time (`color-mix(in oklch, var(--color-brand), …)`) is NOT
+ *   replicated here — this package emits the i-willink baseline hex
+ *   values for each numeric step. Consumers wanting full brand-axis
+ *   derivation should use `@willink-labs/tailwind-preset` instead.
+ */
+:root {
+  --color-bg: #ffffff;
+  --color-fg: var(--color-neutral-900);
+  --color-muted: var(--color-neutral-500);
+  --color-border: var(--color-neutral-200);
+  --color-ring: var(--color-brand);
+  --color-brand: var(--color-brand-600);
+  --color-brand-fg: #ffffff;
+  --color-brand-glow: var(--color-brand-500);
+  --color-accent-cyan: var(--color-cyan-500);
+  --color-accent-pink: var(--color-pink-500);
+  --color-success: var(--color-green-600);
+  --color-warning: var(--color-amber-600);
+  --color-danger: var(--color-red-600);
+  --motion-modal-enter: var(--duration-fast);
+  --motion-modal-exit: var(--duration-fast);
+  --motion-popover-enter: var(--duration-fast);
+  --motion-popover-exit: var(--duration-fast);
+  --motion-tooltip-enter: var(--duration-fast);
+  --motion-tooltip-exit: var(--duration-fast);
+  --motion-sheet: var(--duration-fast);
+  --motion-accordion: var(--duration-base);
+  --motion-toast: var(--duration-base);
+  --ease-enter: var(--ease-standard);
+  --ease-exit: var(--ease-standard);
+  --ease-emphasized-enter: var(--ease-emphasized);
+}

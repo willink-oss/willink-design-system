@@ -1,0 +1,33 @@
+{
+  "name": "@willink-labs/css-tokens",
+  "version": "0.13.0",
+  "description": "Framework-agnostic CSS variables export of i-Willink Design System tokens — for plain CSS / Astro / Vue / Svelte / WordPress consumers that don't use the Tailwind preset",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "exports": {
+    "./tokens.css": "./src/tokens.css",
+    "./tokens.semantic.css": "./src/tokens.semantic.css",
+    "./tokens.scale.css": "./src/tokens.scale.css"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "generate": "node scripts/generate.mjs",
+    "build": "node scripts/generate.mjs",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@willink-labs/tokens": "workspace:*",
+    "vitest": "^2.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willink-oss/willink-design-system.git",
+    "directory": "packages/css-tokens"
+  }
+}
