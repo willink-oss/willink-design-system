@@ -6,6 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [0.12.0] — 2026-05-17
+
+### Added — role-based motion semantic tokens
+
+Introduce a new CSS-variable layer between motion primitives (`--duration-fast/base/slow`, `--ease-standard/emphasized`) and the `@utility animate-*` keyframe runners. The new aliases name each motion by **role**, so consumers can tune a single interaction without redefining the global primitives.
+
+```css
+/* primitives (unchanged) */
+--duration-fast:  150ms;
+--duration-base:  250ms;
+--duration-slow:  400ms;
+--ease-standard:    cubic-bezier(0.2, 0, 0, 1);
+--ease-emphasized:  cubic-bezier(0.3, 0, 0, 1.1);
+
+/* role-based aliases (new in 0.12.0) */
+--duration-modal-enter:    var(--duration-fast);   /* Dialog / AlertDialog open */
+--duration-modal-exit:     var(--duration-fast);   /* Dialog / AlertDialog close */
+--duration-popover-enter:  var(--duration-fast);   /* DropdownMenu / Select overlay fade */
+--duration-popover-exit:   var(--duration-fast);
+--duration-tooltip-enter:  var(--duration-fast);
+--duration-tooltip-exit:   var(--duration-fast);
+--duration-sheet:          var(--duration-fast);   /* Sheet slide */
+--duration-accordion:      var(--duration-base);   /* Accordion + chevron */
+--duration-toast:          var(--duration-base);
+--ease-enter:              var(--ease-standard);
+--ease-exit:               var(--ease-standard);
+--ease-emphasized-enter:   var(--ease-emphasized); /* hero CTA reveal */
+```
+
+`@utility animate-dialog-in/out`, `animate-fade-in/out`, `animate-sheet-in/out-*`, `animate-accordion-down/up`, and `animate-fade-up` all reference the new aliases instead of primitives. Tailwind v4 auto-generates `duration-accordion` / `duration-modal-enter` / … utility classes from each `--duration-*` declaration in `@theme`, so component code can opt in with familiar Tailwind syntax (`transition-transform duration-accordion`).
+
+No behavior change: the alias chain resolves to the same primitive values. The added surface area is **override granularity** — a consumer can `--duration-accordion: 0ms` to disable that single interaction class without touching anything else.
+
+`animate-fade-up` (hero reveal) is intentionally not bound to a semantic role yet — it remains `0.5s var(--ease-standard)`, and consumers wanting a `hero-reveal` semantic should open an issue for a future minor.
+
 ## [0.11.0] — 2026-05-17
 
 ### Changed — brand scale becomes OKLCH-derived from `--color-brand` (BREAKING)

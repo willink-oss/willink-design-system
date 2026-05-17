@@ -15,5 +15,23 @@
     "success":      { "$value": "{color.green.600}",   "$type": "color" },
     "warning":      { "$value": "{color.amber.600}",   "$type": "color" },
     "danger":       { "$value": "{color.red.600}",     "$type": "color" }
+  },
+  "motion": {
+    "$description": "Role-based motion durations (0.12.0+). Components reference these by role (modal-enter, accordion, …) so a single :root override propagates to a specific interaction class without disturbing others. Sheet / accordion / toast use a single duration for both directions because the keyframe families are visually symmetric; modal/popover/tooltip split into enter/exit to allow distinct exit feel.",
+    "modal-enter":     { "$value": "{duration.fast}", "$type": "duration", "$description": "Dialog / AlertDialog open" },
+    "modal-exit":      { "$value": "{duration.fast}", "$type": "duration", "$description": "Dialog / AlertDialog close" },
+    "popover-enter":   { "$value": "{duration.fast}", "$type": "duration", "$description": "DropdownMenu / Select overlay fade-in" },
+    "popover-exit":    { "$value": "{duration.fast}", "$type": "duration", "$description": "DropdownMenu / Select overlay fade-out" },
+    "tooltip-enter":   { "$value": "{duration.fast}", "$type": "duration", "$description": "Tooltip fade-in" },
+    "tooltip-exit":    { "$value": "{duration.fast}", "$type": "duration", "$description": "Tooltip fade-out" },
+    "sheet":           { "$value": "{duration.fast}", "$type": "duration", "$description": "Sheet slide — same duration for open/close (symmetric across 4 sides)" },
+    "accordion":       { "$value": "{duration.base}", "$type": "duration", "$description": "Accordion expand / collapse + chevron rotation" },
+    "toast":           { "$value": "{duration.base}", "$type": "duration", "$description": "Toast slide-in. NOTE: currently declarative only — Sonner controls its own transitions via toastOptions.duration; reserved for a future wiring." }
+  },
+  "easing": {
+    "$description": "Role-based easing curves (0.12.0+). `emphasized` is intentionally only paired with `enter` (Material Motion convention — emphasized decelerate is an entry-only curve; exits use the standard curve to feel reliable).",
+    "enter":              { "$value": "{easing.standard}",   "$type": "cubicBezier", "$description": "Standard component enter" },
+    "exit":               { "$value": "{easing.standard}",   "$type": "cubicBezier", "$description": "Standard component exit" },
+    "emphasized-enter":   { "$value": "{easing.emphasized}", "$type": "cubicBezier", "$description": "Branded / important enter (e.g. hero CTA reveal)" }
   }
 }

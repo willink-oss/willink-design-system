@@ -56,4 +56,32 @@ describe("semantic.json", () => {
       expect(semantic.color, `slot ${slot}`).toHaveProperty(slot);
     }
   });
+
+  it("has the required role-based motion durations (0.12.0+)", () => {
+    const required = [
+      "modal-enter",
+      "modal-exit",
+      "popover-enter",
+      "popover-exit",
+      "tooltip-enter",
+      "tooltip-exit",
+      "sheet",
+      "accordion",
+      "toast",
+    ];
+    for (const role of required) {
+      expect(semantic.motion, `motion ${role}`).toHaveProperty(role);
+      const leaf = (semantic.motion as Record<string, TokenLeaf>)[role];
+      expect(leaf.$type, `motion ${role} $type`).toBe("duration");
+    }
+  });
+
+  it("has the required role-based easings (0.12.0+)", () => {
+    const required = ["enter", "exit", "emphasized-enter"];
+    for (const role of required) {
+      expect(semantic.easing, `easing ${role}`).toHaveProperty(role);
+      const leaf = (semantic.easing as Record<string, TokenLeaf>)[role];
+      expect(leaf.$type, `easing ${role} $type`).toBe("cubicBezier");
+    }
+  });
 });

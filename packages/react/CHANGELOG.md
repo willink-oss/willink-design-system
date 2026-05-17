@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [0.12.0] — 2026-05-17
+
+### Changed — components ride semantic motion tokens (no behavioral change)
+
+`Dialog` / `AlertDialog` / `Accordion` were rewired to the new role-based motion semantic tokens introduced in `@willink-labs/tailwind-preset@0.12.0` and `@willink-labs/tokens@0.12.0`. Visual feel is unchanged (alias chain resolves to the same primitive `duration-fast` / `duration-base` values) but consumers can now tune `--duration-modal-enter` / `--duration-accordion` independently of the rest of the system on `:root` to dial a single interaction class.
+
+- `Dialog`: removed orphan `duration-200` class that was a no-op (no `transition` property bound to it). Motion is fully owned by the `animate-dialog-in/out` keyframe utilities in the preset.
+- `AlertDialog`: same orphan removal.
+- `Accordion`: chevron rotation hardcoded `duration-200` → semantic `duration-accordion` Tailwind utility (resolves to `--duration-base` = 250ms by default, was `200ms`). Chevron-rotation now follows the same role as the accordion height animation for consistent override surface area.
+
+### Audited — no export changes in 0.12.0 (full freeze deferred to v1.0.0)
+
+`packages/react/src/index.ts` was audited as part of the v1.0.0 prep; no exports changed in 0.12.0. The hard API freeze lands with the v1.0.0 release cut (see [`docs/roadmap/v1.0.md`](../../docs/roadmap/v1.0.md) Phase 9.6). `FormField` compound (Input + Label + Radix) remains deferred to v1.1+ — the current `Input` + `Label` combo is sufficient.
+
 ## [0.11.0] — 2026-05-17
 
 ### Lockstep bump (no React source change)

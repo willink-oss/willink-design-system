@@ -45,7 +45,6 @@ const dialogContentVariants = cva(
   [
     "fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%]",
     "gap-4 border border-border bg-bg p-6 shadow-md rounded-lg",
-    "duration-200",
     "data-[state=open]:animate-dialog-in data-[state=closed]:animate-dialog-out",
   ],
   {
