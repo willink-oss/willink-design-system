@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Changed — Toast engine: sonner 1.7.4 → 2.0.7 (MINOR surface impact)
+
+The underlying Toast library took a major bump, but the `@willink-labs/react` surface stays compatible — classified **MINOR** per [ADR-0010](../../docs/adr/0010-semver-policy.md):
+
+- `toast` — type unchanged between sonner 1.7.4 and 2.0.7; `toast.promise` inputs additionally accept sonner's new extended-result objects (input widening, caller-compatible).
+- `Toaster` — sonner 2.x removed two props; we keep them as deprecated compat props so no adopter code breaks at compile time:
+  - `loadingIcon` (deprecated) — mapped onto `icons.loading`, behavior preserved. Prefer `icons={{ loading }}`.
+  - `pauseWhenPageIsHidden` (deprecated) — **no-op**: sonner 2.x removed the feature entirely. Flagged here per the ADR-0010 behavior-change rule.
+- `Toaster` additionally gains sonner 2.x's new optional props (`id`, and `toasterId` / `closeButtonAriaLabel` via `toastOptions`).
+- The `prefers-reduced-motion` safety net in `@willink-labs/tailwind-preset` keeps working — sonner 2.x retains the `data-sonner-toaster` / `data-sonner-toast` attributes it targets.
+
 ## [1.0.0] — 2026-05-17
 
 ### API freeze (lockstep cut)

@@ -32,3 +32,6 @@ Thumbs.db
 # coverage
 coverage
 .nyc_output
+
+# local AI-agent state
+.claude/

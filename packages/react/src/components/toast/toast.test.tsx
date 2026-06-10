@@ -36,4 +36,19 @@ describe("Toast", () => {
     expect(await screen.findByText("Failed")).toBeInTheDocument();
     expect(await screen.findByText("Try again")).toBeInTheDocument();
   });
+
+  it("maps deprecated loadingIcon to icons.loading (sonner 2.x compat)", async () => {
+    const user = userEvent.setup();
+    render(
+      <>
+        <button onClick={() => toast.loading("Working")}>Load</button>
+        <Toaster
+          loadingIcon={<span data-testid="legacy-loading-icon" />}
+          pauseWhenPageIsHidden
+        />
+      </>,
+    );
+    await user.click(screen.getByRole("button", { name: /Load/ }));
+    expect(await screen.findByTestId("legacy-loading-icon")).toBeInTheDocument();
+  });
 });
