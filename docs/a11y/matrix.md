@@ -40,7 +40,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Switch` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Switch |
 | `Checkbox` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | 16 px box; consumer should wrap in a 44 px-tall label for touch contexts |
 | `RadioGroup` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | Same as Checkbox |
-| `Slider` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Slider (arrow keys + Home/End) |
+| `Slider` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Slider (arrow keys + Home/End); root `aria-label` forwarded to the thumb when single-thumb (multi-thumb keeps Radix "Minimum"/"Maximum") |
 | `Progress` | ✅ | ✅ | ✅ | — | — | — | — | ✅ | ✅ | Non-interactive, `role="progressbar"` with aria-valuenow |
 | `Separator` | ✅ | — | — | — | — | — | — | ✅ | ✅ | Radix Separator `role="separator"` |
 | `Skeleton` | ✅ | — | — | — | 🔍 | — | — | ✅ | ✅ | `animate-pulse` not currently bound to `motion-reduce`; consumer can override at `:root` or shadow the utility — flagged for 0.14.0 |

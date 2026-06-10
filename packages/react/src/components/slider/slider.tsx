@@ -27,9 +27,15 @@ export const Slider = forwardRef<
       <SliderPrimitive.Range className="absolute h-full bg-brand" />
     </SliderPrimitive.Track>
     {Array.isArray(props.value ?? props.defaultValue)
-      ? (props.value ?? props.defaultValue)!.map((_, i) => (
+      ? (props.value ?? props.defaultValue)!.map((_, i, arr) => (
           <SliderPrimitive.Thumb
             key={i}
+            // Radix only auto-labels thumbs in multi-thumb ranges
+            // ("Minimum"/"Maximum"); a single thumb would have no accessible
+            // name, so forward the root aria-label to it (axe
+            // aria-input-field-name). Conditional spread: an explicit
+            // aria-label={undefined} would override Radix's auto-labels.
+            {...(arr.length === 1 ? { "aria-label": props["aria-label"] } : undefined)}
             className={cn(
               "block h-4 w-4 rounded-full border-2 border-brand bg-bg shadow-md transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
@@ -39,6 +45,7 @@ export const Slider = forwardRef<
         ))
       : (
           <SliderPrimitive.Thumb
+            aria-label={props["aria-label"]}
             className={cn(
               "block h-4 w-4 rounded-full border-2 border-brand bg-bg shadow-md transition-colors",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
