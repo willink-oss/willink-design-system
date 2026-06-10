@@ -22,6 +22,17 @@ describe("Slider", () => {
     expect(thumb).toHaveAttribute("aria-valuenow", "5");
   });
 
+  it("forwards aria-label to a single thumb (axe aria-input-field-name)", () => {
+    render(<Slider defaultValue={[50]} max={100} aria-label="volume" />);
+    expect(screen.getByRole("slider", { name: "volume" })).toBeInTheDocument();
+  });
+
+  it("keeps Radix auto-labels (Minimum/Maximum) on range thumbs", () => {
+    render(<Slider defaultValue={[20, 80]} max={100} aria-label="range" />);
+    expect(screen.getByRole("slider", { name: "Minimum" })).toBeInTheDocument();
+    expect(screen.getByRole("slider", { name: "Maximum" })).toBeInTheDocument();
+  });
+
   it("can be disabled (data-disabled propagated to root)", () => {
     const { container } = render(
       <Slider defaultValue={[50]} disabled aria-label="volume" />,

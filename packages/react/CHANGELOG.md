@@ -19,6 +19,10 @@ The underlying Toast library took a major bump, but the `@willink-labs/react` su
 - `Toaster` additionally gains sonner 2.x's new optional props (`id`, and `toasterId` / `closeButtonAriaLabel` via `toastOptions`).
 - The `prefers-reduced-motion` safety net in `@willink-labs/tailwind-preset` keeps working — sonner 2.x retains the `data-sonner-toaster` / `data-sonner-toast` attributes it targets.
 
+### Fixed — Slider single-thumb accessible name (PATCH)
+
+`Slider` now forwards the root `aria-label` to the thumb when there is exactly one thumb. Radix only auto-labels thumbs in multi-thumb ranges ("Minimum"/"Maximum"); a single thumb previously had no accessible name, failing axe `aria-input-field-name` — found by the Storybook a11y pass (#36). Multi-thumb ranges keep the Radix auto-labels. Restores the WCAG 4.1.2 status documented in [docs/a11y/matrix.md](../../docs/a11y/matrix.md).
+
 ## [1.0.0] — 2026-05-17
 
 ### API freeze (lockstep cut)
