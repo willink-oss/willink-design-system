@@ -5,6 +5,39 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.2.0] — 2026-06-11
+
+### Added — WillinkBottomSheet component (1 component)
+
+Material 3 brand-aware modal bottom sheet mirroring the React DS `Sheet`
+(`<SheetContent side="bottom">` — mobile action sheet), as a thin wrapper
+over Material 3 `showModalBottomSheet`:
+- `WillinkBottomSheet.show<T>(context, builder: ...)` static helper returning `Future<T?>` (resolves with the `Navigator.pop` value, or `null` on barrier tap / drag-down dismiss)
+- `isScrollControlled` / `isDismissible` / `enableDrag` / `useSafeArea` pass-through (same contract and defaults as `showModalBottomSheet`)
+- `showDragHandle` flag (default `true`) — renders a 32×4 rounded drag handle tinted with `colorScheme.outlineVariant` (manual, since `showModalBottomSheet` exposes no per-call handle color)
+- `WillinkBottomSheet` widget — minimal title + child content scaffold (title 18px / w600, mirrors React `SheetTitle`)
+- barrier is black at 50% alpha, matching the React Sheet overlay (`bg-black/50`)
+- top corners use `WillinkPrimitives.radiusXl` (16px — the DS radius feel, instead of the Material 3 default 28px)
+
+Colors derive from `Theme.of(context).colorScheme` (sheet surface =
+`surface`, drag handle = `outlineVariant`, title = `onSurface`) so the
+sheet follows any brand the consumer configures via
+`copyWith(colorScheme: ...)` automatically.
+
+Second of the four v1.1 Flutter parity components carried over from v1.0
+Phase 9.4 ([#13](https://github.com/willink-oss/willink-design-system/issues/13));
+ships as an independent minor per
+[ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md).
+
+### Migration from 1.1.0
+No breaking changes. Additive release — `WillinkBottomSheet` は opt-in。既存
+components の API は完全互換。
+
+### Verification
+- flutter analyze: 0 issues
+- flutter test: all pass (new 7 bottom sheet tests included; 37 on this branch — existing 30 + 7)
+- dart pub publish --dry-run: clean
+
 ## [1.1.0] — 2026-06-11
 
 ### Added — WillinkTabBar component (1 component)
