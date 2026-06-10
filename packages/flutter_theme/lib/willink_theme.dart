@@ -18,6 +18,7 @@
 /// ```
 library;
 
+export 'src/components/willink_bottom_sheet.dart' show WillinkBottomSheet;
 export 'src/components/willink_button.dart'
     show WillinkButton, WillinkButtonSize, WillinkButtonVariant;
 export 'src/components/willink_empty_state.dart' show WillinkEmptyState;
