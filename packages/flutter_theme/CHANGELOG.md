@@ -5,6 +5,38 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.1.0] — 2026-06-11
+
+### Added — WillinkTabBar component (1 component)
+
+Material 3 brand-aware tab bar mirroring the React DS `Tabs` compound
+(`<Tabs><TabsList><TabsTrigger/>...`), as a thin wrapper over Material 3
+`TabBar`:
+- `tabs` pass-through (`List<Widget>`, typically `Tab` instances)
+- `controller` / ancestor `DefaultTabController` selection state (same contract as `TabBar`)
+- `onTap` callback with the tapped index
+- `isScrollable` flag
+- implements `PreferredSizeWidget` so it slots into `AppBar.bottom`
+
+Colors derive from `Theme.of(context).colorScheme` (indicator + selected
+label = `primary`, unselected label = `onSurfaceVariant`, divider =
+`outlineVariant`) so the tab bar follows any brand the consumer configures
+via `copyWith(colorScheme: ...)` automatically.
+
+First of the four v1.1 Flutter parity components carried over from v1.0
+Phase 9.4 ([#13](https://github.com/willink-oss/willink-design-system/issues/13));
+ships as an independent minor per
+[ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md).
+
+### Migration from 1.0.0
+No breaking changes. Additive release — `WillinkTabBar` は opt-in。既存 5
+components の API は完全互換。
+
+### Verification
+- flutter analyze: 0 issues
+- flutter test: 37 tests pass (existing 30 + new 7 tab bar tests)
+- dart pub publish --dry-run: clean
+
 ## [1.0.0] — 2026-05-17
 
 ### API freeze (coincidence cut with the npm group)
