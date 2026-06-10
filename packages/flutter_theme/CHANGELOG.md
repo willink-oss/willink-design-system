@@ -5,6 +5,46 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.4.0] — 2026-06-11
+
+### Added — WillinkProgressIndicator component (issue #13, PR 4/4)
+
+Material 3 brand-aware linear progress indicator, parity with the React DS
+`Progress` (Radix Progress wrapper). Wraps `LinearProgressIndicator` with
+theme-aware styling:
+
+- determinate (`value: 0.0–1.0`) and indeterminate (`value: null`) variants —
+  the same nullable-value contract as both Material and the React `Progress`.
+  Note the scale difference: React/Radix uses `0–100`, Flutter keeps the
+  native `0.0–1.0` (documented in the dartdoc).
+- fill = `colorScheme.primary`, track = `colorScheme.surfaceContainerHighest`
+  (brand-neutral — the Material 3 equivalent of the React track's
+  `bg-neutral-200`), so the bar follows consumer
+  `copyWith(colorScheme: ...)` overrides automatically.
+- 8dp tall by default (React DS `h-2`; Material's native 4dp is available via
+  `minHeight: 4`) and fully rounded (`rounded-full`), overridable via
+  `minHeight` / `borderRadius`.
+- `semanticsLabel` passthrough (the React example's `aria-label`).
+
+Positioning vs. `WillinkLoadingState`: LoadingState = full-area loading state
+(centered spinner + caption replacing content); ProgressIndicator = inline
+linear progress inside otherwise-rendered UI (uploads / multi-step flows).
+
+This is a Flutter-only minor bump per
+[ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md) — the npm
+packages are unchanged. Completes the Phase-7 component expansion
+([#13](https://github.com/willink-oss/willink-design-system/issues/13)),
+4th of 4 components (`WillinkTabBar` / `WillinkBottomSheet` /
+`WillinkSnackBar` ship as 1.1.0–1.3.0).
+
+### Migration from 1.x
+No breaking changes. Additive release — `WillinkProgressIndicator` is opt-in.
+
+### Verification
+- `flutter analyze`: 0 issues
+- `flutter test`: 37 tests pass (existing 30 + new 7 progress-indicator tests)
+- `dart pub publish --dry-run`: clean
+
 ## [1.3.0] — 2026-06-11
 
 ### Added — WillinkSnackBar component ([#13](https://github.com/willink-oss/willink-design-system/issues/13), v1.1 parity PR 3/4)

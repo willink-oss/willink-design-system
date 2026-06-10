@@ -24,6 +24,8 @@ export 'src/components/willink_button.dart'
 export 'src/components/willink_empty_state.dart' show WillinkEmptyState;
 export 'src/components/willink_error_state.dart' show WillinkErrorState;
 export 'src/components/willink_loading_state.dart' show WillinkLoadingState;
+export 'src/components/willink_progress_indicator.dart'
+    show WillinkProgressIndicator;
 export 'src/components/willink_section_card.dart' show WillinkSectionCard;
 export 'src/components/willink_snack_bar.dart'
     show WillinkSnackBar, WillinkSnackBarVariant;
