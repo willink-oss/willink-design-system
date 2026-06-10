@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@willink-labs/tokens": "workspace:*",
-    "vitest": "^2.1.5"
+    "vitest": "^3.2.6"
   },
   "repository": {
     "type": "git",
