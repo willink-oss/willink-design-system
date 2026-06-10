@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [1.1.0] — 2026-06-11
+
+### Lockstep bump (no tailwind-preset source change)
+
+Pair with `@willink-labs/react@1.1.0` (sonner 1.7.4 → 2.0.7 migration with a compat shim keeping the frozen Toaster surface, and a Slider single-thumb accessible-name fix). No source change in this package — published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.0.0] — 2026-05-17
 
 ### API freeze (lockstep cut)

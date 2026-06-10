@@ -1,7 +1,10 @@
-# `@willink-labs/flutter_theme` (pub.dev: `willink_theme`)
+# willink_theme
 
-Material 3 theme for i-Willink Design System Flutter apps. Mirrors the React DS
-`[data-brand="willink|clublink"]` pattern from `@willink-labs/tailwind-preset`.
+Material 3 theme for i-Willink Design System Flutter apps — `ThemeData` factory,
+spacing / token constants, and **9 brand-aware components** on a single-brand
+baseline. The Flutter counterpart of
+[`@willink-labs/react`](https://www.npmjs.com/package/@willink-labs/react) /
+[`@willink-labs/tailwind-preset`](https://www.npmjs.com/package/@willink-labs/tailwind-preset).
 
 ## Quick start
 
@@ -20,34 +23,67 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      theme: WillinkTheme.clublink(), // or .willink() / .fitai()
+      theme: WillinkTheme.willink(), // the single factory (since 0.5.0)
       home: const HomeScreen(),
     );
   }
 }
 ```
 
-## Brand axes
+## Customizing the brand color
 
-| Brand | Primary | Use case |
+The DS ships the i-Willink violet (`#7C3AED`) baseline. Consumers re-brand via
+standard Material 3 `copyWith` — every component reads colors from
+`Theme.of(context).colorScheme`, so overrides flow through automatically (the
+Flutter equivalent of the CSS `--color-brand` `:root` override on the npm side):
+
+```dart
+final theme = WillinkTheme.willink().copyWith(
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
+);
+```
+
+## Components (9)
+
+| Component | Mirrors (React DS) | Shape |
 |---|---|---|
-| `WillinkBrand.willink` | violet `#7C3AED` | i-Willink default · marketing apps |
-| `WillinkBrand.clublink` | blue `#2563EB` | ClubLink (web) / clubhouse (Flutter, same brand) |
-| `WillinkBrand.fitai` | blue `#3B82F6` + emerald | fit-ai (existing palette preserved) |
+| `WillinkButton` | `Button` | variants (`WillinkButtonVariant`) × sizes (`WillinkButtonSize`) |
+| `WillinkEmptyState` | — | icon + message + optional CTA |
+| `WillinkErrorState` | — | error message + retry |
+| `WillinkLoadingState` | — | full-area loading state (centered spinner + caption) |
+| `WillinkSectionCard` | `Card` | section container |
+| `WillinkTabBar` | `Tabs` | `PreferredSizeWidget`, slots into `AppBar.bottom` |
+| `WillinkBottomSheet` | `Sheet` (`side="bottom"`) | `WillinkBottomSheet.show<T>()` + title/child scaffold |
+| `WillinkSnackBar` | `Toast` | `WillinkSnackBar.show()` with `info / success / error` variants |
+| `WillinkProgressIndicator` | `Progress` | determinate (`value` 0.0–1.0) / indeterminate (`null`) |
 
-this package independently, that is their choice — they would either reuse one
-of the brands above or propose a new axis through the maintainers.
+```dart
+// TabBar — inside an AppBar
+appBar: AppBar(
+  bottom: const WillinkTabBar(
+    tabs: [Tab(text: 'アカウント'), Tab(text: 'パスワード')],
+  ),
+),
 
-## Why a Theme package and not just constants?
+// BottomSheet
+final applied = await WillinkBottomSheet.show<bool>(
+  context,
+  builder: (context) => WillinkBottomSheet(
+    title: 'フィルター',
+    child: const FilterForm(),
+  ),
+);
 
-- A consumer that wires `WillinkTheme.fromBrand(brand)` into `MaterialApp.theme`
-  gets the complete Material 3 stack (ColorScheme, FilledButton shape,
-  InputDecoration radius, Card shape, Divider, etc.) in one line. No manual
-  re-implementation per app.
-- Brand-specific tokens that don't fit Material's palette (glow color,
-  hero gradient, soft shadows) are carried as a `WillinkBrandTokens`
-  `ThemeExtension`, accessible from any widget via
-  `Theme.of(context).extension<WillinkBrandTokens>()!`.
+// SnackBar
+WillinkSnackBar.show(
+  context,
+  message: '保存しました',
+  variant: WillinkSnackBarVariant.success,
+);
+
+// Progress
+WillinkProgressIndicator(value: 0.65)
+```
 
 ## Spacing
 
@@ -68,21 +104,17 @@ SizedBox(height: WillinkSpacing.lg)
 | `WillinkSpacing.xl` | 32 | between page-level sections |
 | `WillinkSpacing.xxl` | 48 | hero blocks, top-of-page padding |
 
-## Brand-aware gradients
+## Brand tokens beyond Material
 
-`WillinkBrandTokens` (a `ThemeExtension`) exposes three gradient presets per
-brand:
+Tokens that don't fit Material's palette (glow color, gradient presets, soft
+shadows) ride a `ThemeExtension`:
 
 ```dart
 final tokens = Theme.of(context).extension<WillinkBrandTokens>()!;
-Container(decoration: BoxDecoration(gradient: tokens.brandGradient));   // hero
+Container(decoration: BoxDecoration(gradient: tokens.brandGradient));  // hero
 Container(decoration: BoxDecoration(gradient: tokens.subtleGradient)); // bg
 Container(decoration: BoxDecoration(gradient: tokens.aiGradient));     // AI moments
 ```
-
-`brandGradient` rotates with the brand (i-Willink violet→blue, ClubLink
-blue→green, fit-ai blue→emerald). `subtleGradient` and `aiGradient` are
-brand-agnostic (white→brand-50→sky-50 / cyan→brand-500→pink).
 
 ## Token sync
 
@@ -94,22 +126,13 @@ This is the same "single source of truth" guarantee that `vitest`'s
 `check-tokens.test.ts` enforces on the React side. Both languages share one
 canonical DTCG JSON.
 
-## Maintenance — adding a new brand
-
-1. Add to `lib/src/tokens/primitive.dart` if any new primitive shades are needed.
-2. Extend `WillinkBrand` enum in `lib/src/brand_axis.dart` (handle the new
-   case in `toColorScheme()`).
-3. Add a static getter on `WillinkBrandTokens` for the brand's
-   non-Material extras.
-4. Add `WillinkTheme.<newBrand>()` alias in `lib/src/theme_data.dart`.
-5. Update `test/brand_axis_test.dart` enum count.
-6. Bump version in `pubspec.yaml` (minor for additive, major for breaking).
-
 ## Versioning
 
-`0.x.x` — pre-1.0, minor bumps may include breaking changes. Pin with `~0.1.0`
-for exact-minor stability. Released as part of the same lockstep cadence as
-`@willink-labs/{tokens,tailwind-preset,react}`.
+Strict [SemVer 2.0](https://semver.org/) since `1.0.0`. `willink_theme`
+versions **independently** of the `@willink-labs/*` npm packages — see
+[ADR-0011](https://github.com/willink-oss/willink-design-system/blob/main/docs/adr/0011-flutter-independent-versioning.md).
+Pin `^1.0.0` and trust MINOR / PATCH per
+[ADR-0010](https://github.com/willink-oss/willink-design-system/blob/main/docs/adr/0010-semver-policy.md).
 
 ## License
 
