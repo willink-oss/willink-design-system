@@ -5,6 +5,39 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.3.0] — 2026-06-11
+
+### Added — WillinkSnackBar component ([#13](https://github.com/willink-oss/willink-design-system/issues/13), v1.1 parity PR 3/4)
+
+Material 3 brand-aware snack bar helper — parity with the React DS `Toast`
+(brand-styled sonner wrapper). Thin wrapper over
+`ScaffoldMessenger.showSnackBar`:
+
+- `WillinkSnackBar.show(context, message: ...)` — returns the
+  `ScaffoldFeatureController` from `showSnackBar`
+- variants: `info` (default) / `success` / `error` via `WillinkSnackBarVariant`
+- neutral surface styling mirroring the React toast: `colorScheme.surface`
+  background, `outline` border, 12px radius (`radiusLg`), floating behavior
+- semantics carried by the leading icon accent — `colorScheme.primary` (info) /
+  `WillinkSemantics.success` (success) / `colorScheme.error` (error) — so the
+  snack bar follows any brand the consumer configures via
+  `copyWith(colorScheme: ...)`
+- optional `description` line (muted, `onSurfaceVariant`)
+- optional `actionLabel` + `onAction` → `SnackBarAction` in `colorScheme.primary`
+- reuses Material 3 SnackBar timing and queueing (default 4s, overridable
+  `duration`); no custom queue logic
+
+Flutter-only minor per [ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md)
+— the npm packages are unchanged and stay at their own versions.
+
+### Migration from 1.2.x
+No breaking changes. Additive release — `WillinkSnackBar` is opt-in.
+
+### Verification
+- flutter analyze: 0 issues
+- flutter test: all pass (7 new snack bar tests)
+- dart pub publish --dry-run: clean
+
 ## [1.2.0] — 2026-06-11
 
 ### Added — WillinkBottomSheet component (1 component)
