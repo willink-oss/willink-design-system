@@ -57,8 +57,11 @@ flutter test
 - [ ] Unit test with `@testing-library/react` + `jest-axe` (a11y assertion)
 - [ ] Safelist update in `packages/tailwind-preset/src/safelist.css` if the component emits new utility class strings
 - [ ] CHANGELOG entry in `packages/react/CHANGELOG.md`
-- [ ] Version bump in `packages/react/package.json` (lockstep with other packages — see below)
 - [ ] Playground demo in `apps/playground` so visual regressions are catchable
+- [ ] Story in `apps/storybook/src/stories/<component>.stories.tsx` — the addon-a11y axe pass runs per story, so the story is part of the test surface ([ADR-0012](./docs/adr/0012-release-verification-policy.md))
+- [ ] Row in [`docs/a11y/matrix.md`](./docs/a11y/matrix.md)
+
+Version bumps happen at release-cut time, not per component PR (see Release process below).
 
 ---
 
@@ -95,14 +98,19 @@ No PR to this repo is required for consumer-side color overrides. PRs to change 
 
 ## Release process
 
-All 4 packages are released in **lockstep**: tokens / tailwind-preset / react / flutter_theme bump together for any cross-package change.
+Two independent release channels ([ADR-0011](./docs/adr/0011-flutter-independent-versioning.md)):
 
-1. Bump version in each `package.json` and `pubspec.yaml` (same version string).
-2. Update each `CHANGELOG.md` with the user-facing change.
-3. Open PR; CI must pass (lint / test / build / Flutter analyze).
-4. After merge, tag `vX.Y.Z` on `main` — GitHub Actions publishes to npmjs.org (OIDC Trusted Publisher) and pub.dev (OIDC Trusted Publisher). No PAT or `.npmrc` setup needed.
+- **npm group** — `tokens` / `tailwind-preset` / `css-tokens` / `react` move in **lockstep**: one release PR bumps all four to the same version; packages without source changes get an explicit lockstep-marker CHANGELOG entry. Tag `vX.Y.Z` publishes all four via OIDC Trusted Publisher.
+- **`willink_theme`** — versions independently. Flutter PRs bump `pubspec.yaml` + CHANGELOG per change; tag `flutter-vX.Y.Z` publishes to pub.dev via OIDC Trusted Publisher.
 
-Pre-1.0 (0.x.x): minor bumps may include breaking changes. Pin with `~0.x.0` for exact-minor stability.
+Cut procedure (what must be verified is defined in [ADR-0012](./docs/adr/0012-release-verification-policy.md), Layer 2):
+
+1. Release PR: version bumps + CHANGELOG cuts (`[Unreleased]` → `[X.Y.Z]`) + README freshness check — READMEs are rendered by npm / pub.dev, so a stale README is a shipping bug.
+2. Run the **full local gate** before tagging (CI green on the PR is necessary, not sufficient).
+3. Rebase-merge the PR; tag the merged commit; push all tags for the release event atomically (`git push origin v1.1.0 flutter-v1.4.0`).
+4. Verify post-publish: `npm view <pkg> version` ×4 / pub.dev API, then draft GitHub Releases.
+
+Since v1.0.0 strict SemVer 2.0 applies — classification rules per surface live in [ADR-0010](./docs/adr/0010-semver-policy.md).
 
 ---
 
@@ -110,8 +118,9 @@ Pre-1.0 (0.x.x): minor bumps may include breaking changes. Pin with `~0.x.0` for
 
 - Branch off `main`. Branch name: `<type>/<short-description>` (e.g. `feat/dropdown-menu-0.6.0`, `fix/safelist-progress`).
 - Conventional Commits prefix: `feat:` / `fix:` / `docs:` / `chore:` / `refactor:` / `test:` / `ci:`.
-- One logical change per PR. Squash on merge.
+- One logical change per PR. Rebase-merge keeps the linear history.
 - Reference the related Issue (`Closes #N`) if applicable.
+- Include a **Verification** section in the PR body: the commands you ran and their outcomes. Which checks are required for which change type is defined in [ADR-0012](./docs/adr/0012-release-verification-policy.md).
 
 ---
 
