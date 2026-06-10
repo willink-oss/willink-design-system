@@ -24,6 +24,7 @@ export 'src/components/willink_empty_state.dart' show WillinkEmptyState;
 export 'src/components/willink_error_state.dart' show WillinkErrorState;
 export 'src/components/willink_loading_state.dart' show WillinkLoadingState;
 export 'src/components/willink_section_card.dart' show WillinkSectionCard;
+export 'src/components/willink_tab_bar.dart' show WillinkTabBar;
 export 'src/theme_data.dart' show WillinkTheme;
 export 'src/theme_extensions/willink_brand_tokens.dart'
     show WillinkBrandTokens;
