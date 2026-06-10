@@ -1,7 +1,7 @@
 "use client";
 
 import { Toaster as SonnerToaster, toast as sonnerToast } from "sonner";
-import { type ComponentProps } from "react";
+import { type ComponentProps, type ReactNode } from "react";
 
 import { cn } from "../../lib/cn";
 
@@ -23,10 +23,24 @@ import { cn } from "../../lib/cn";
 export const Toaster = ({
   className,
   toastOptions,
+  icons,
+  loadingIcon,
+  pauseWhenPageIsHidden: _pauseWhenPageIsHidden,
   ...props
-}: ComponentProps<typeof SonnerToaster>) => (
+}: ComponentProps<typeof SonnerToaster> & {
+  /**
+   * @deprecated sonner 2.x removed `loadingIcon`. Kept for v1.x API
+   * compatibility — mapped onto `icons.loading`. Prefer `icons={{ loading }}`.
+   */
+  loadingIcon?: ReactNode;
+  /**
+   * @deprecated sonner 2.x removed this option; it no longer has any effect.
+   */
+  pauseWhenPageIsHidden?: boolean;
+}) => (
   <SonnerToaster
     className={cn("toaster group", className)}
+    icons={loadingIcon ? { loading: loadingIcon, ...icons } : icons}
     toastOptions={{
       classNames: {
         toast:
@@ -44,5 +58,10 @@ export const Toaster = ({
 );
 Toaster.displayName = "Toaster";
 
-/** Re-export Sonner's `toast()` helper for direct usage. */
-export const toast = sonnerToast;
+/**
+ * Re-export Sonner's `toast()` helper for direct usage.
+ * The explicit `typeof` annotation keeps the emitted declaration a reference
+ * to Sonner's own type — sonner 2.x no longer exports the internal types
+ * (`PromiseIExtendedResult` etc.) its inferred expansion would need (TS4023).
+ */
+export const toast: typeof sonnerToast = sonnerToast;
