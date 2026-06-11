@@ -155,6 +155,31 @@ void main() {
     });
   });
 
+  group('WillinkSnackBar — dark theme (willinkDark)', () {
+    testWidgets(
+        'surface flips to neutral-950 with neutral-800 border + light text',
+        (tester) async {
+      await showSnackBar(
+        tester,
+        message: '保存しました',
+        description: '同期が完了しました',
+        theme: WillinkTheme.willinkDark(),
+      );
+
+      // ADR-0013 surface flips: bg → neutral-950, border → neutral-800.
+      final snackBar = tester.widget<SnackBar>(find.byType(SnackBar));
+      expect(snackBar.backgroundColor, equals(WillinkPrimitives.neutral950));
+      final shape = snackBar.shape! as RoundedRectangleBorder;
+      expect(shape.side.color, equals(WillinkPrimitives.neutral800));
+
+      // fg → neutral-50, muted (onSurfaceVariant) → neutral-400.
+      final message = tester.widget<Text>(find.text('保存しました'));
+      expect(message.style!.color, equals(WillinkPrimitives.neutral50));
+      final description = tester.widget<Text>(find.text('同期が完了しました'));
+      expect(description.style!.color, equals(WillinkPrimitives.neutral400));
+    });
+  });
+
   group('WillinkSnackBar — surface shape', () {
     testWidgets('floating behavior + 12px radius + outline border',
         (tester) async {

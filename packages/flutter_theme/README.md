@@ -23,12 +23,32 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My App',
-      theme: WillinkTheme.willink(), // the single factory (since 0.5.0)
+      theme: WillinkTheme.willink(), // light baseline (since 0.5.0)
       home: const HomeScreen(),
     );
   }
 }
 ```
+
+## Dark mode
+
+Since 1.5.0 the DS ships `WillinkTheme.willinkDark()` — the semantic flip of
+the light baseline per
+[ADR-0013](https://github.com/willink-oss/willink-design-system/blob/main/docs/adr/0013-dark-mode.md)
+(surfaces flip to the dark neutral ladder; brand identity stays the same
+violet, exactly like the web preset under `data-theme="dark"`). Wire it up
+the standard Material way and the OS preference drives the switch:
+
+```dart
+MaterialApp(
+  theme: WillinkTheme.willink(),
+  darkTheme: WillinkTheme.willinkDark(),
+  themeMode: ThemeMode.system,
+)
+```
+
+All 9 components read `Theme.of(context).colorScheme`, so they follow the
+active mode automatically — no component carries dark-specific styles.
 
 ## Customizing the brand color
 
