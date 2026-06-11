@@ -21,6 +21,10 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 
 ブランド軸を切替えたい場合は `<html data-brand="clublink">` (または `"fitai"`) を設定。デフォルトは `willink`。
 
+### Next.js App Router (RSC)
+
+dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 component は Client Component として動作し、Server Component から直接 import できる — client 側 re-export shim は不要 (1.4.0 以前で必要だった workaround は削除してよい)。
+
 ---
 
 ## Components (1.4.0・25 total)

@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
-## [Unreleased]
+## [1.4.1] — 2026-06-12
 
 ### Fixed — dist now ships the `'use client'` directive (RSC / Next.js App Router)
 

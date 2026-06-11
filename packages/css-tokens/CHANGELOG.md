@@ -4,6 +4,12 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [1.4.1] — 2026-06-12
+
+### Lockstep bump (no css-tokens source change)
+
+Pair with `@willink-labs/react@1.4.1` (PATCH: dist now ships the `'use client'` directive so RSC / Next.js App Router consumers can import from Server Components — production-discovered in the clublink-platform rollout). No source change in this package — published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.4.0] — 2026-06-11
 
 ### Lockstep bump (no css-tokens source change)
