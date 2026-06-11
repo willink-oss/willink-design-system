@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Added — `FormField` compound (25th component, ADR-0015)
+
+`FormField` / `FormFieldLabel` / `FormFieldControl` / `FormFieldDescription` / `FormFieldError` (+ their `*Props` types) — the compound that automates the label/control/description/error a11y wiring consumers have hand-written since 0.1.0 (`id` / `htmlFor` / `aria-describedby` / `aria-invalid`). Deferred twice (v1.0 Phase 9.1 audit, v1.1) precisely to keep this surface minimal; API decisions in [ADR-0015](../../docs/adr/0015-formfield-api.md):
+
+- `FormField` generates ids via `useId()` and provides them over context; it detects `FormFieldDescription` / `FormFieldError` among its **direct children** (render-time inspection — SSR-safe, no effects) so `aria-describedby` only ever references rendered nodes.
+- `FormFieldControl` is a Radix `Slot` (existing dependency, zero new runtime deps): it injects `id`, the merged `aria-describedby` (consumer-supplied value + description + error, in that order) and `aria-invalid` onto any single control element — `Input`, `Textarea`, native elements, Radix triggers.
+- `FormFieldError` renders only when it has content (safe to mount unconditionally as `<FormFieldError>{errors.x}</FormFieldError>`), carries `role="alert"` so dynamically appearing errors are announced, and drives the control's `aria-invalid` automatically (`invalid` prop on `FormField` as explicit override).
+- `FormFieldLabel` wraps `Label` (size / `required` props unchanged) with `htmlFor` pre-wired.
+- No CVA — no variants warranted. Class strings: `grid gap-2` / `text-sm text-muted` / `text-sm text-danger` (the latter newly safelisted in `@willink-labs/tailwind-preset`).
+
+MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) (new component + new exports).
+
 ## [1.3.0] — 2026-06-11
 
 ### Lockstep bump (no react source change)

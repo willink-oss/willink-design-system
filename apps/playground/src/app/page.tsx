@@ -13,6 +13,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  FormField,
+  FormFieldControl,
+  FormFieldDescription,
+  FormFieldError,
+  FormFieldLabel,
   Input,
   Label,
   Textarea,
@@ -35,7 +40,7 @@ export default function Page() {
             {/* Tagline (Badge コンポーネント差替後) */}
             <Badge className="mb-8 gap-2 px-4 py-1.5 text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" />
-              willink-design-system v0.8.0 — 24 components · single-brand baseline
+              willink-design-system v1.4.0 — 25 components · single-brand baseline
             </Badge>
 
             <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.15]">
@@ -171,6 +176,51 @@ export default function Page() {
             </Label>
             <Input id="ds-disabled" disabled defaultValue="読み取り専用" />
           </div>
+
+          <Button type="submit">送信する</Button>
+        </form>
+      </section>
+
+      {/* ============================================================
+       * FORMFIELD section — compound a11y wiring (v1.4 / ADR-0015)
+       * ============================================================ */}
+      <section className="max-w-5xl mx-auto px-6 py-8">
+        <h2 className="text-2xl font-bold mb-2">FormField (compound)</h2>
+        <p className="text-sm text-muted mb-6">
+          上の Form primitives で手書きしていた{" "}
+          <code className="font-mono">id / htmlFor / aria-describedby / aria-invalid</code>{" "}
+          配線を自動化する compound。<code className="font-mono">FormFieldError</code>{" "}
+          は内容があるときだけ <code className="font-mono">role=&quot;alert&quot;</code>{" "}
+          付きで描画され、control の <code className="font-mono">aria-invalid</code>{" "}
+          も自動で立つ。
+        </p>
+        <form
+          className="grid gap-4 max-w-md p-6 rounded-xl border border-border bg-bg"
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <FormField>
+            <FormFieldLabel required>お名前</FormFieldLabel>
+            <FormFieldControl>
+              <Input placeholder="山田 太郎" />
+            </FormFieldControl>
+            <FormFieldDescription>姓と名の間にスペースを入れてください。</FormFieldDescription>
+          </FormField>
+
+          <FormField>
+            <FormFieldLabel required>メールアドレス (error 状態)</FormFieldLabel>
+            <FormFieldControl>
+              <Input type="email" defaultValue="invalid" />
+            </FormFieldControl>
+            <FormFieldError>有効なメールアドレスを入力してください。</FormFieldError>
+          </FormField>
+
+          <FormField>
+            <FormFieldLabel>お問い合わせ内容</FormFieldLabel>
+            <FormFieldControl>
+              <Textarea rows={4} placeholder="どのようなご相談ですか?" />
+            </FormFieldControl>
+            <FormFieldDescription>500 文字以内でご記入ください。</FormFieldDescription>
+          </FormField>
 
           <Button type="submit">送信する</Button>
         </form>
@@ -421,13 +471,15 @@ export default function Page() {
 
       <footer className="max-w-5xl mx-auto px-6 py-12 text-xs text-muted border-t border-border mt-8">
         <p>
-          willink-design-system v0.8.0 — 24 components (core 7: Button / Badge / Input /
+          willink-design-system v1.4.0 — 25 components (core 7: Button / Badge / Input /
           Textarea / Label / Card / Accordion + Phase 7+ 14: Dialog / AlertDialog / Avatar /
           Tabs / Tooltip / Toast / DropdownMenu / Select / Switch / Checkbox / RadioGroup /
-          Slider / Progress / Separator + 0.7.x: Skeleton / Sheet / Toggle)。
+          Slider / Progress / Separator + 0.7.x: Skeleton / Sheet / Toggle + v1.4:
+          FormField)。
         </p>
         <p className="mt-1">
-          Storybook 不採用。本ページが全コンポーネント・全 token のリファレンス実装。
+          本ページは token + 主要コンポーネントのリファレンス実装。全コンポーネントの
+          カタログは Storybook (apps/storybook・v1.1+) を参照。
         </p>
       </footer>
     </div>

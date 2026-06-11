@@ -145,3 +145,17 @@ export {
   toggleVariants,
   type ToggleProps,
 } from "./components/toggle";
+
+// v1.4: FormField (compound a11y wiring・ADR-0015)
+export {
+  FormField,
+  FormFieldControl,
+  FormFieldDescription,
+  FormFieldError,
+  FormFieldLabel,
+  type FormFieldControlProps,
+  type FormFieldDescriptionProps,
+  type FormFieldErrorProps,
+  type FormFieldLabelProps,
+  type FormFieldProps,
+} from "./components/form-field";

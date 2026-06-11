@@ -323,6 +323,12 @@
 /* w-12 / w-2 (avatar size + indicator widths) */
 /* block (Separator base orientation) */
 
+/* === FormField (1.4.0+・compound a11y wiring・ADR-0015) === */
+/* FormFieldError message — text-danger lives in the react dist, invisible to
+ * consumer scanners. Wrapper (grid gap-2) + description (text-sm text-muted)
+ * are already covered above. */
+@source inline("text-danger");
+
 /* === Skeleton (0.7.0+・loading placeholder・CSS animate-pulse のみ) === */
 @source inline("animate-pulse");
 @source inline("bg-neutral-200");
