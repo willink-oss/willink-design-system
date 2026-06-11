@@ -9,7 +9,7 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
-## [Unreleased]
+## [1.2.0] — 2026-06-11
 
 ### Added — dark mode core (ADR-0013)
 
