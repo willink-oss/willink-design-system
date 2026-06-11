@@ -23,7 +23,7 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 
 ---
 
-## Components (0.5.0・21 total)
+## Components (1.4.0・25 total)
 
 ### Phase 0-3 core set (7・0.1.0-0.4.x)
 
@@ -55,6 +55,15 @@ pnpm add @willink-labs/react @willink-labs/tailwind-preset @willink-labs/tokens
 | `Slider` | brand range + neutral track + disabled state | Radix Slider |
 | `Progress` | brand-filled indicator + animated transitions | Radix Progress |
 | `Separator` | horizontal / vertical orientation | Radix Separator |
+
+### 0.7.x / v1.4 additions (4)
+
+| Component | API / Notes | Headless |
+|---|---|---|
+| `Skeleton` | rect / circle / text variants + animate-pulse | — |
+| `Sheet` | top / right (default) / bottom / left side variants | Radix Dialog |
+| `Toggle` | default / outline × sm / md / lg + controlled/uncontrolled | Radix Toggle |
+| `FormField` | compound a11y wiring (Label / Control / Description / Error)・`id` / `htmlFor` / `aria-describedby` / `aria-invalid` 自動配線 ([ADR-0015](../../docs/adr/0015-formfield-api.md)) | Radix Slot |
 
 ---
 
@@ -95,51 +104,41 @@ import Link from "next/link";
 </Button>;
 ```
 
-### FormField composition pattern (推奨)
+### FormField — a11y 配線の compound (1.4.0+)
 
-FormField wrapper component は DS では提供しないが、以下のパターンで誤用を防ぐ:
+1.3.0 まで README が案内していた「自前 FormField wrapper」パターンは不要になった。
+`FormField` compound が `id` / `htmlFor` / `aria-describedby` / `aria-invalid` を自動配線する
+([ADR-0015](../../docs/adr/0015-formfield-api.md)):
 
 ```tsx
-function FormField({
-  id,
-  label,
-  required,
-  error,
-  children,
-}: {
-  id: string;
-  label: string;
-  required?: boolean;
-  error?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="space-y-1.5">
-      <Label htmlFor={id} required={required}>
-        {label}
-      </Label>
-      {children}
-      {error ? (
-        <p id={`${id}-error`} className="text-sm text-danger">
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
+import {
+  FormField,
+  FormFieldControl,
+  FormFieldDescription,
+  FormFieldError,
+  FormFieldLabel,
+  Input,
+} from "@willink-labs/react";
 
-// 使用側:
-<FormField id="email" label="Email" required error={errors.email}>
-  <Input
-    id="email"
-    type="email"
-    aria-invalid={!!errors.email}
-    aria-describedby={errors.email ? "email-error" : undefined}
-  />
+<FormField>
+  <FormFieldLabel required>Email</FormFieldLabel>
+  <FormFieldControl>
+    <Input type="email" />
+  </FormFieldControl>
+  <FormFieldDescription>会社のメールアドレスを入力してください。</FormFieldDescription>
+  <FormFieldError>{errors.email}</FormFieldError>
 </FormField>;
 ```
 
-`aria-invalid` を Input に渡すだけで Input 側の border / focus ring が danger 色に切替わる。
+- id は `useId()` で自動生成 — list 描画でも衝突しない。手書き id 不要。
+- `FormFieldControl` は Radix Slot: `Input` / `Textarea` / native 要素 / Radix trigger を
+  1 つだけ子に取り、`id` + `aria-describedby` (+ error 時 `aria-invalid`) を注入する。
+- `FormFieldError` は内容があるときだけ `role="alert"` 付きで描画される —
+  `{errors.email}` をそのまま渡して常時マウントしてよい。error が描画されると
+  control の `aria-invalid` も自動で立ち、Input / Textarea の border / focus ring が
+  danger 色に切替わる。
+- 制約: `FormFieldDescription` / `FormFieldError` は `FormField` の**直下**に置くこと
+  (描画有無の検査が直接の子要素に対して行われるため)。
 
 ---
 
