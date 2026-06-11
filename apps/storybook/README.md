@@ -8,6 +8,21 @@ pnpm -F willink-storybook dev    # http://localhost:6006
 pnpm -F willink-storybook build  # static build (also runs in the CI quality gate via `pnpm -r build`)
 ```
 
+## Theme toggle (light / dark / auto)
+
+The toolbar has a **Theme** selector backed by a hand-rolled decorator in
+`.storybook/preview.ts` (no `@storybook/addon-themes` — it would be a new dependency, and the
+contract is one attribute). It rides the [`data-theme` contract (ADR-0013)](../../docs/adr/0013-dark-mode.md):
+
+- **Light / Dark** set `<html data-theme="light|dark">` — the explicit override path.
+- **Auto (OS)** removes the attribute, so the preset's `prefers-color-scheme: dark`
+  media-query path follows the OS preference.
+
+The default is **light** so a11y-addon (axe) runs are deterministic regardless of the
+reviewer's OS scheme. The preview canvas follows the flip because `.storybook/preview.css`
+binds `html, body` to `var(--color-bg)` / `var(--color-fg)`. A story can pin a theme with
+story-level globals (`globals: { theme: "dark" }` — see `button.stories.tsx > DarkForced`).
+
 ## Conventions
 
 - One `src/stories/<component>.stories.tsx` per exported component family, CSF3 format
