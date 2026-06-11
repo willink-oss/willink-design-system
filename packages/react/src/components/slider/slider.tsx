@@ -23,7 +23,7 @@ export const Slider = forwardRef<
     )}
     {...props}
   >
-    <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-neutral-200">
+    <SliderPrimitive.Track className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-track">
       <SliderPrimitive.Range className="absolute h-full bg-brand" />
     </SliderPrimitive.Track>
     {Array.isArray(props.value ?? props.defaultValue)

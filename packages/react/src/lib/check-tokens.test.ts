@@ -25,6 +25,18 @@ const FORBIDDEN: Array<{ pattern: RegExp; label: string }> = [
   { pattern: /\bbg-card\b/, label: "bg-card" },
   { pattern: /\btext-card-foreground\b/, label: "text-card-foreground" },
   { pattern: /\btext-primary-foreground\b/, label: "text-primary-foreground" },
+  // dark mode (ADR-0013): primitive neutral utilities は dark で反転しないため、
+  // semantic surface role (bg-surface-subtle / bg-surface-muted / bg-track /
+  // bg-surface-inverted + text-surface-inverted-fg) のみ使用。
+  // prefix 付き (hover:/focus:/data-[...]:) も部分一致で検知する。
+  {
+    pattern: /\bbg-neutral-\d+\b/,
+    label: "bg-neutral-* (use bg-surface-subtle / bg-surface-muted / bg-track / bg-surface-inverted)",
+  },
+  {
+    pattern: /\btext-neutral-\d+\b/,
+    label: "text-neutral-* (use text-surface-inverted-fg / text-muted / text-fg)",
+  },
 ];
 
 const __filename = fileURLToPath(import.meta.url);

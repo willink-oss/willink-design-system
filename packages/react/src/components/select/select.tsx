@@ -87,7 +87,7 @@ export const SelectItem = forwardRef<
     ref={ref}
     className={cn(
       "relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none",
-      "focus:bg-neutral-100 focus:text-fg",
+      "focus:bg-surface-muted focus:text-fg",
       "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className,
     )}

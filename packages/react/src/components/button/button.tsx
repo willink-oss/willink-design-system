@@ -16,8 +16,8 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-brand text-brand-fg shadow-lg shadow-brand-glow/20 hover:shadow-brand-glow/40 hover:bg-brand-hover",
-        outline: "border border-border bg-bg text-fg hover:bg-neutral-50",
-        ghost: "text-fg hover:bg-neutral-100",
+        outline: "border border-border bg-bg text-fg hover:bg-surface-subtle",
+        ghost: "text-fg hover:bg-surface-muted",
         link: "text-brand underline-offset-4 hover:underline hover:text-brand-hover shadow-none h-auto px-1",
       },
       size: {

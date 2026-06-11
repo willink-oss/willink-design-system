@@ -33,7 +33,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `AlertDialog` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Same as Dialog with `role="alertdialog"` |
 | `Avatar` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Fallback text required for screen readers |
 | `Tabs` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Tabs (arrow-key nav) |
-| `Tooltip` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | Triggers on focus + hover; `motion-reduce` collapses fade (0.13.0) |
+| `Tooltip` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | Triggers on focus + hover; `motion-reduce` collapses fade (0.13.0); inverted surface flips appropriately in dark (ADR-0013) |
 | `Toast` (Sonner) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | preset.css overrides Sonner transitions under `prefers-reduced-motion` (0.13.0) |
 | `DropdownMenu` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix DropdownMenu (full keyboard) |
 | `Select` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Select |
@@ -43,7 +43,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Slider` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Slider (arrow keys + Home/End); root `aria-label` forwarded to the thumb when single-thumb (multi-thumb keeps Radix "Minimum"/"Maximum") |
 | `Progress` | ✅ | ✅ | ✅ | — | — | — | — | ✅ | ✅ | Non-interactive, `role="progressbar"` with aria-valuenow |
 | `Separator` | ✅ | — | — | — | — | — | — | ✅ | ✅ | Radix Separator `role="separator"` |
-| `Skeleton` | ✅ | — | — | — | ✅ | — | — | ✅ | ✅ | `animate-pulse` collapsed to 0ms by the preset's `prefers-reduced-motion` block since 1.2.0 (Tailwind built-in keyframe — covered by the CSS safety net, not a `motion-reduce:` variant) |
+| `Skeleton` | ✅ | — | — | — | ✅ | — | — | ✅ | ✅ | `animate-pulse` collapsed to 0ms by the preset's `prefers-reduced-motion` block since 1.2.0 (Tailwind built-in keyframe); component also carries `motion-reduce:animate-none` per house style |
 | `Sheet` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 4-side slide; `motion-reduce` collapses all eight `animate-sheet-*` utilities (0.13.0) |
 | `Toggle` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `sm` size mirrors Button `sm`; document touch context |
 
@@ -64,4 +64,4 @@ Note: Flutter's `prefers-reduced-motion` honors the OS-level toggle automaticall
 - The matrix audits the **DS surface**. Consumer-side mistakes that the DS cannot prevent — for example, putting a low-contrast color on `--color-brand`, omitting `<Label>` for `<Input>`, or wrapping interactive elements in non-semantic `<div>` — will still fail audits.
 - Target Size (2.5.5) is rated `⚠` for `sm` size variants (Button / Toggle / Checkbox / RadioGroup). These exist for inline-form contexts. Consumer should choose `md` (default) or larger for primary touch surfaces, or wrap small controls in a 44 px-tall hit area (e.g. label + padding).
 - Motion (2.3.3) is honored at two layers from 0.13.0: Tailwind `motion-reduce:animate-none` variants on each component, and a `prefers-reduced-motion` CSS block in `@willink-labs/tailwind-preset` that collapses every `animate-*` utility (plus Sonner toast transitions) to 0 ms. See [`motion-contract.md`](./motion-contract.md).
-- `Skeleton` `animate-pulse` — the last uncovered DS animation — joined the preset's `prefers-reduced-motion` block in 1.2.0 (it is a Tailwind built-in keyframe, so the CSS safety net rather than a `motion-reduce:` variant does the work).
+- `Skeleton` `animate-pulse` — the last uncovered DS animation — joined the preset's `prefers-reduced-motion` block in 1.2.0 (it is a Tailwind built-in keyframe, so the CSS safety net does the heavy lifting); the component additionally carries the `motion-reduce:animate-none` variant, matching the rest of the system.
