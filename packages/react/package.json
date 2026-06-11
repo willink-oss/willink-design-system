@@ -25,7 +25,7 @@
     }
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node ./scripts/check-dist-use-client.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

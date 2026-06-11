@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Fixed — dist now ships the `'use client'` directive (RSC / Next.js App Router)
+
+Production-discovered in the clublink-platform rollout: `@willink-labs/react@1.4.0` executes client-only code at module top level (`createContext` in the new `FormField`, hooks throughout) but the published `dist/index.js` carried **no** `'use client'` directive — esbuild strips source-level directives during bundling (even `toast.tsx`'s own), so `next build` crashed for any consumer importing from a Server Component. Consumers had to hand-write client re-export shims; the fix belongs upstream:
+
+- `tsup.config.ts` adds `banner: { js: "'use client';" }` so the directive leads every emitted JS file.
+- tsup's extra rollup `treeshake` pass is disabled — rollup 4 removes module-level directives (`MODULE_LEVEL_DIRECTIVE`) and was silently deleting the banner. esbuild's own bundler still tree-shakes; measured dist cost is ~4.7 KB (40.4 → 45.1 KB).
+- New build-output regression check (`scripts/check-dist-use-client.mjs`, wired into `pnpm build` and therefore the CI gate per [ADR-0012](../../docs/adr/0012-release-verification-policy.md) Layer 0): every dist JS file must **start** with the directive — position matters, so it asserts the first bytes rather than grepping for containment.
+
+No runtime API or type change. RSC consumers can delete their client re-export shims and import from `@willink-labs/react` directly in Server Components again (the components themselves remain Client Components, as before).
+
 ## [1.4.0] — 2026-06-11
 
 ### Added — `FormField` compound (25th component, ADR-0015)
