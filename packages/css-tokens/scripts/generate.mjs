@@ -10,6 +10,9 @@
  *   tokens.scale.css      — primitives only (color / radius / duration / easing / shadow)
  *   tokens.semantic.css   — semantic roles only (color slots / motion roles / easing roles)
  *   tokens.css            — both combined (the recommended single-import entry)
+ *   tokens.dark.css       — dark-mode semantic overrides (1.2.0+ / ADR-0013),
+ *                           built from the per-token `$extensions["willink.dark"]`
+ *                           entries in semantic.json; import AFTER tokens.css
  *
  * Design choice on alias resolution
  * ---------------------------------
@@ -139,6 +142,65 @@ primitiveLines.push(
 
 const semanticLines = flatten(semantic, "-");
 
+/**
+ * Dark-mode overrides (1.2.0+ / ADR-0013) — walk semantic.json for leaves
+ * carrying `$extensions["willink.dark"]` and emit the flipped value with the
+ * same alias→var() translation as the light output. Tokens without the
+ * extension are mode-invariant and intentionally absent from the dark file.
+ */
+function flattenDark(obj, prefix) {
+  const out = [];
+  for (const [key, value] of Object.entries(obj)) {
+    if (key.startsWith("$")) continue;
+    if (typeof value !== "object" || value === null) continue;
+    const nextPrefix = `${prefix}-${rename(key)}`;
+    if (isLeaf(value)) {
+      const dark = value.$extensions?.["willink.dark"];
+      if (dark) out.push(`${nextPrefix}: ${translateAlias(dark.$value)};`);
+    } else {
+      out.push(...flattenDark(value, nextPrefix));
+    }
+  }
+  return out;
+}
+
+const darkLines = flattenDark(semantic, "-");
+
+const darkHeader = `/**
+ * @willink-labs/css-tokens — dark-mode semantic overrides
+ *
+ * Generated from @willink-labs/tokens (DTCG JSON, \`$extensions["willink.dark"]\`)
+ * — do not edit by hand. Regenerate with \`pnpm -F @willink-labs/css-tokens generate\`
+ * after the source tokens change.
+ *
+ * Usage (import AFTER the base tokens):
+ *   @import "@willink-labs/css-tokens/tokens.css";
+ *   @import "@willink-labs/css-tokens/tokens.dark.css";
+ *
+ * Contract (ADR-0013) — identical to @willink-labs/tailwind-preset:
+ *   - auto:     \`prefers-color-scheme: dark\` flips every semantic role below,
+ *               unless the consumer opts out with <html data-theme="light">
+ *   - explicit: <html data-theme="dark"> forces dark regardless of the OS
+ *
+ * Only semantic roles flip; primitives and the invariant roles (ring / brand /
+ * brand-fg / brand-glow / accent-cyan / accent-pink) stay constant. The two
+ * blocks carry the same declarations — one per activation path.
+ */
+`;
+
+function wrapDark(lines) {
+  return `${darkHeader}@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+${lines.map((l) => `    ${l}`).join("\n")}
+  }
+}
+
+:root[data-theme="dark"] {
+${lines.map((l) => `  ${l}`).join("\n")}
+}
+`;
+}
+
 fs.mkdirSync(outDir, { recursive: true });
 fs.writeFileSync(
   path.join(outDir, "tokens.scale.css"),
@@ -158,9 +220,10 @@ fs.writeFileSync(
     ...semanticLines,
   ]),
 );
+fs.writeFileSync(path.join(outDir, "tokens.dark.css"), wrapDark(darkLines));
 
 const declCount = (lines) =>
   lines.filter((l) => l.startsWith("--")).length;
 console.log(
-  `Generated ${declCount(primitiveLines)} primitive + ${declCount(semanticLines)} semantic CSS variables in ${outDir}`,
+  `Generated ${declCount(primitiveLines)} primitive + ${declCount(semanticLines)} semantic + ${declCount(darkLines)} dark-override CSS variables in ${outDir}`,
 );

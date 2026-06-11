@@ -13,7 +13,8 @@
     "dev": "pnpm --filter playground dev",
     "test": "pnpm -r --if-present test",
     "test:watch": "pnpm -F @willink-labs/react test:watch",
-    "guardrails": "node ./scripts/check-guardrails.mjs"
+    "guardrails": "node ./scripts/check-guardrails.mjs",
+    "check-contrast": "node scripts/check-contrast.mjs"
   },
   "devDependencies": {
     "typescript": "^6.0.3",

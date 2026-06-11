@@ -96,8 +96,13 @@
   --color-sky-50:   #f0f9ff;
   --color-sky-500:  #0ea5e9;
 
-  /* === Primitive: feedback === */
+  /* === Primitive: feedback ===
+   * red-500 / amber-500 are mirrored from primitive.json (1.2.0+) as the
+   * dark-mode flip targets for --color-danger / --color-warning — not new
+   * primitives; the preset previously only mirrored the 600 steps. */
+  --color-red-500:   #ef4444;
   --color-red-600:   #dc2626;
+  --color-amber-500: #f59e0b;
   --color-amber-600: #d97706;
 
   /* === Semantic (default = i-willink) === */
@@ -105,6 +110,19 @@
   --color-fg:             var(--color-neutral-900);
   --color-muted:          var(--color-neutral-500);
   --color-border:         var(--color-neutral-200);
+  /* Surface roles (1.2.0+ / ADR-0013) — neutral surfaces that flip in dark
+   * mode. Introduced to absorb the primitive-utility leaks (bg-neutral-100,
+   * hover:bg-neutral-50, …) that froze light-mode grays under a dark root:
+   *   surface-subtle        → outline Button hover
+   *   surface-muted         → TabsList / Avatar fallback / ghost hover / menu item focus
+   *   track                 → Switch / Slider / Progress / Skeleton
+   *   surface-inverted(-fg) → Tooltip
+   */
+  --color-surface-subtle:      var(--color-neutral-50);
+  --color-surface-muted:       var(--color-neutral-100);
+  --color-track:               var(--color-neutral-200);
+  --color-surface-inverted:    var(--color-neutral-900);
+  --color-surface-inverted-fg: var(--color-neutral-50);
   /* --color-brand is the brand axis center; defined in the brand block
    * above. The semantic aliases below all derive from it. */
   --color-brand-fg:       #ffffff;
@@ -122,6 +140,11 @@
   --color-success:        var(--color-green-600);
   --color-warning:        var(--color-amber-600);
   --color-danger:         var(--color-red-600);
+  /* Preset-internal (intentionally NOT in semantic.json) — final stop of the
+   * bg-gradient-subtle utility. Flips with the theme (light: sky-50 / dark:
+   * neutral-900) so the decorative gradient doesn't pin a light tint under a
+   * dark root. */
+  --color-gradient-subtle-end: var(--color-sky-50);
 
   /* === Radius === */
   --radius-sm:   0.25rem;
@@ -174,7 +197,7 @@
  * Consumer :root overrides therefore propagate into every gradient stop.
  *
  * Token contract:
- *   bg-gradient-subtle  → white → brand-soft → sky-50
+ *   bg-gradient-subtle  → bg → brand-soft → gradient-subtle-end
  *   bg-gradient-primary → brand → brand-glow         (monochromatic brand)
  *   bg-gradient-ai      → accent-cyan → brand-glow → accent-pink
  *   text-gradient-primary → same colors as bg-gradient-primary, clipped to text
@@ -183,12 +206,14 @@
  * `brand → brand-glow`. Consumers that depended on the prior willink
  * "violet → blue" two-tone aesthetic should shadow the utility in their
  * own globals.css (`@layer utilities { .bg-gradient-primary { ... } }`).
- * The sky-50 stop in bg-gradient-subtle remains a fixed accent and is
- * intentionally not theme-derived.
+ * As of 1.2.0 every bg-gradient-subtle stop is theme-derived: the first
+ * stop is --color-bg (was literal #ffffff) and the last stop is the
+ * preset-internal --color-gradient-subtle-end (light: sky-50 / dark:
+ * neutral-900), so the gradient follows the dark flip.
  * ============================================================ */
 
 @utility bg-gradient-subtle {
-  background-image: linear-gradient(to right bottom, #ffffff, var(--color-brand-soft), var(--color-sky-50));
+  background-image: linear-gradient(to right bottom, var(--color-bg), var(--color-brand-soft), var(--color-gradient-subtle-end));
 }
 
 @utility bg-gradient-primary {
@@ -378,6 +403,13 @@
     animation-duration: 0ms !important;
   }
 
+  /* Skeleton — Tailwind built-in animate-pulse keyframe (not a DS @utility,
+   * so the list above can't catch it). Debt flagged in docs/a11y/matrix.md
+   * since 0.13.0; closed here (1.2.0). */
+  .animate-pulse {
+    animation-duration: 0ms !important;
+  }
+
   /* Sonner toast — library-owned transitions */
   [data-sonner-toaster] [data-sonner-toast] {
     transition-duration: 0ms !important;
@@ -387,20 +419,62 @@
 
 /* ============================================================
  * Dark mode — semantic tokens flip; primitives stay constant
+ *
+ * Contract (ADR-0013, formalizing the 1.1.0 scaffold):
+ *   - auto:     prefers-color-scheme: dark flips every role below, unless
+ *               the consumer opts out with <html data-theme="light">
+ *   - explicit: <html data-theme="dark"> forces dark regardless of the OS
+ * Only semantic roles flip. The numeric scales (neutral / brand 50–950,
+ * incl. the OKLCH derivation block) and the invariant roles (ring / brand /
+ * brand-fg / brand-glow / accent-cyan / accent-pink) never move; dark values
+ * mirror the willink.dark $extensions in @willink-labs/tokens semantic.json.
+ *
+ * NOTE: the two blocks below MUST stay textually identical — one is the
+ * OS-preference path, the other the explicit data-theme override path.
  * ============================================================ */
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-bg:     var(--color-neutral-950);
-    --color-fg:     var(--color-neutral-50);
-    --color-muted:  var(--color-neutral-400);
-    --color-border: var(--color-neutral-800);
+    --color-bg:                  var(--color-neutral-950);
+    --color-fg:                  var(--color-neutral-50);
+    --color-muted:               var(--color-neutral-400);
+    --color-border:              var(--color-neutral-800);
+    --color-surface-subtle:      var(--color-neutral-900);
+    --color-surface-muted:       var(--color-neutral-800);
+    --color-track:               var(--color-neutral-700);
+    --color-surface-inverted:    var(--color-neutral-100);
+    --color-surface-inverted-fg: var(--color-neutral-900);
+    --color-brand-hover:         var(--color-brand-500);
+    --color-brand-active:        var(--color-brand-400);
+    --color-brand-soft:          var(--color-brand-950);
+    --color-brand-soft-fg:       var(--color-brand-300);
+    --color-success:             var(--color-green-500);
+    --color-warning:             var(--color-amber-500);
+    --color-danger:              var(--color-red-500);
+    --color-gradient-subtle-end: var(--color-neutral-900);
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
   }
 }
 
 :root[data-theme="dark"] {
-  --color-bg:     var(--color-neutral-950);
-  --color-fg:     var(--color-neutral-50);
-  --color-muted:  var(--color-neutral-400);
-  --color-border: var(--color-neutral-800);
+  --color-bg:                  var(--color-neutral-950);
+  --color-fg:                  var(--color-neutral-50);
+  --color-muted:               var(--color-neutral-400);
+  --color-border:              var(--color-neutral-800);
+  --color-surface-subtle:      var(--color-neutral-900);
+  --color-surface-muted:       var(--color-neutral-800);
+  --color-track:               var(--color-neutral-700);
+  --color-surface-inverted:    var(--color-neutral-100);
+  --color-surface-inverted-fg: var(--color-neutral-900);
+  --color-brand-hover:         var(--color-brand-500);
+  --color-brand-active:        var(--color-brand-400);
+  --color-brand-soft:          var(--color-brand-950);
+  --color-brand-soft-fg:       var(--color-brand-300);
+  --color-success:             var(--color-green-500);
+  --color-warning:             var(--color-amber-500);
+  --color-danger:              var(--color-red-500);
+  --color-gradient-subtle-end: var(--color-neutral-900);
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
 }

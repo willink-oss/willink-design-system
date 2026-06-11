@@ -1,0 +1,59 @@
+/**
+ * @willink-labs/css-tokens — dark-mode semantic overrides
+ *
+ * Generated from @willink-labs/tokens (DTCG JSON, `$extensions["willink.dark"]`)
+ * — do not edit by hand. Regenerate with `pnpm -F @willink-labs/css-tokens generate`
+ * after the source tokens change.
+ *
+ * Usage (import AFTER the base tokens):
+ *   @import "@willink-labs/css-tokens/tokens.css";
+ *   @import "@willink-labs/css-tokens/tokens.dark.css";
+ *
+ * Contract (ADR-0013) — identical to @willink-labs/tailwind-preset:
+ *   - auto:     `prefers-color-scheme: dark` flips every semantic role below,
+ *               unless the consumer opts out with <html data-theme="light">
+ *   - explicit: <html data-theme="dark"> forces dark regardless of the OS
+ *
+ * Only semantic roles flip; primitives and the invariant roles (ring / brand /
+ * brand-fg / brand-glow / accent-cyan / accent-pink) stay constant. The two
+ * blocks carry the same declarations — one per activation path.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--color-neutral-950);
+    --color-fg: var(--color-neutral-50);
+    --color-muted: var(--color-neutral-400);
+    --color-border: var(--color-neutral-800);
+    --color-surface-subtle: var(--color-neutral-900);
+    --color-surface-muted: var(--color-neutral-800);
+    --color-track: var(--color-neutral-700);
+    --color-surface-inverted: var(--color-neutral-100);
+    --color-surface-inverted-fg: var(--color-neutral-900);
+    --color-brand-hover: var(--color-brand-500);
+    --color-brand-active: var(--color-brand-400);
+    --color-brand-soft: var(--color-brand-950);
+    --color-brand-soft-fg: var(--color-brand-300);
+    --color-success: var(--color-green-500);
+    --color-warning: var(--color-amber-500);
+    --color-danger: var(--color-red-500);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: var(--color-neutral-950);
+  --color-fg: var(--color-neutral-50);
+  --color-muted: var(--color-neutral-400);
+  --color-border: var(--color-neutral-800);
+  --color-surface-subtle: var(--color-neutral-900);
+  --color-surface-muted: var(--color-neutral-800);
+  --color-track: var(--color-neutral-700);
+  --color-surface-inverted: var(--color-neutral-100);
+  --color-surface-inverted-fg: var(--color-neutral-900);
+  --color-brand-hover: var(--color-brand-500);
+  --color-brand-active: var(--color-brand-400);
+  --color-brand-soft: var(--color-brand-950);
+  --color-brand-soft-fg: var(--color-brand-300);
+  --color-success: var(--color-green-500);
+  --color-warning: var(--color-amber-500);
+  --color-danger: var(--color-red-500);
+}

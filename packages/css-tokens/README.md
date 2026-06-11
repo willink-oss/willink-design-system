@@ -14,13 +14,14 @@ No auth, no `.npmrc`. Public on npmjs.org.
 
 ## Use
 
-The package ships three CSS files. Pick the one that matches your needs:
+The package ships four CSS files. Pick the ones that match your needs:
 
 | File | Content | Recommended for |
 |---|---|---|
 | `@willink-labs/css-tokens/tokens.css` | primitive + semantic (full) | most consumers |
 | `@willink-labs/css-tokens/tokens.scale.css` | primitive only | low-level — you'll build your own semantic layer |
 | `@willink-labs/css-tokens/tokens.semantic.css` | semantic only (assumes primitives loaded separately) | layered token loading |
+| `@willink-labs/css-tokens/tokens.dark.css` | dark-mode semantic overrides (1.2.0+) — import **after** the base file | consumers that want dark mode |
 
 ```css
 /* app.css */
@@ -40,6 +41,23 @@ body {
 }
 ```
 
+## Dark mode (1.2.0+)
+
+`tokens.dark.css` ships the dark-mode overrides for every flipping semantic role, generated from the `$extensions["willink.dark"]` entries in `@willink-labs/tokens` `semantic.json`. Import it **after** the base file:
+
+```css
+@import "@willink-labs/css-tokens/tokens.css";
+@import "@willink-labs/css-tokens/tokens.dark.css";
+```
+
+The `data-theme` contract (ADR-0013, identical to the Tailwind preset):
+
+- **Auto** — with no `data-theme` attribute, `@media (prefers-color-scheme: dark)` flips the semantic roles to their dark values.
+- **Force dark** — `<html data-theme="dark">` applies the dark values regardless of the OS preference.
+- **Force light** — `<html data-theme="light">` opts out of the auto flip.
+
+Only semantic roles flip (`bg`, `fg`, `muted`, `border`, the surface roles, brand state tokens, feedback colors). Primitives and the invariant roles (`ring`, `brand`, `brand-fg`, `brand-glow`, `accent-cyan`, `accent-pink`) stay constant — consumers styling against `var(--color-brand-600)` etc. under a dark root take responsibility for the contrast themselves. Note: the dark **shadow** overrides (`--shadow-soft` / `--shadow-md`) are a Tailwind-preset-level decision and are not part of this file; copy the two declarations from the preset's dark block if you need them.
+
 ## Override
 
 The same single-line override pattern as the Tailwind preset:
@@ -57,7 +75,8 @@ Every semantic role that aliases `var(--color-brand)` (ring, brand-glow, etc.) c
 ## What ships
 
 - 60 primitive CSS variables (color scales, radius, duration, easing, shadow)
-- 25 semantic roles (color slots + motion roles + easing roles)
+- 34 semantic roles (color slots + motion roles + easing roles)
+- 16 dark-mode overrides in `tokens.dark.css` (one per flipping semantic role)
 - One declarative shorthand: `--color-brand: var(--color-brand-600)`
 
 ## Regenerate after a tokens change
@@ -66,7 +85,7 @@ Every semantic role that aliases `var(--color-brand)` (ring, brand-glow, etc.) c
 pnpm -F @willink-labs/css-tokens generate
 ```
 
-The script reads `@willink-labs/tokens/src/{primitive,semantic}.json` and rewrites the three CSS files under `src/`. The generated files are committed so consumers do not need a build step.
+The script reads `@willink-labs/tokens/src/{primitive,semantic}.json` and rewrites the four CSS files under `src/`. The generated files are committed so consumers do not need a build step.
 
 ## Versioning
 
