@@ -4,6 +4,18 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [Unreleased]
+
+### Added — dark mode export (ADR-0013)
+
+- **`tokens.dark.css`** (new export `@willink-labs/css-tokens/tokens.dark.css`): dark-mode semantic overrides generated from the `$extensions["willink.dark"]` entries in `@willink-labs/tokens` `semantic.json`. Ships both activation paths — `@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }` and `:root[data-theme="dark"] { … }` — with the same alias→`var()` reference style as the light files. Import after `tokens.css`.
+- **9 new semantic variables** in the light files (semantic roles grew 25 → 34): the surface roles (`--color-surface-subtle/muted`, `--color-track`, `--color-surface-inverted(-fg)`) and the brand state tokens (`--color-brand-hover/active/soft/soft-fg`) newly sourced from `semantic.json`.
+- Tests cover the dark file's existence, both selectors, and that its variable count matches the number of `willink.dark` extensions in the source JSON.
+
+Note: the dark `--shadow-soft` / `--shadow-md` overrides are a Tailwind-preset-level decision and are not part of `tokens.dark.css` (shadows are primitives in the DTCG source); see the README for how to copy them.
+
+All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
 ## [1.1.0] — 2026-06-11
 
 ### Lockstep bump (no css-tokens source change)

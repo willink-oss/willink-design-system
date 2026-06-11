@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Added — dark mode core (ADR-0013)
+
+- **Full dark flip**: the two dark blocks (`@media (prefers-color-scheme: dark)` + `:root[data-theme="dark"]`, shipped partially since 1.1.0) now flip every flipping semantic role — `bg` / `fg` / `muted` / `border`, the new surface roles, `brand-hover/active/soft/soft-fg`, `success` / `warning` / `danger` — plus dark `--shadow-soft` / `--shadow-md` (higher-alpha black; `--shadow-glow` unchanged). The `data-theme` contract is formalized in [ADR-0013](../../docs/adr/0013-dark-mode.md): auto via OS preference, explicit override via `data-theme="dark"` / `"light"`; no `.dark` class, no `dark:` variants needed.
+- **5 new semantic variables + utilities**: `--color-surface-subtle`, `--color-surface-muted`, `--color-track`, `--color-surface-inverted`, `--color-surface-inverted-fg` (with safelist entries `bg-surface-subtle`, `bg-surface-muted`, `bg-track`, `bg-surface-inverted`, `text-surface-inverted-fg` + hover/focus forms) — the targets for the React primitive-leak migration.
+- **Theme-derived `bg-gradient-subtle`**: stops are now `var(--color-bg) → brand-soft → var(--color-gradient-subtle-end)` (preset-internal variable; light `sky-50` / dark `neutral-900`) instead of pinning literal `#ffffff` / `sky-50` under a dark root.
+- **`red-500` / `amber-500` mirrored into `@theme`** from `primitive.json` (the preset previously carried only the 600 steps) — `var()` targets for the dark feedback flip.
+- **Skeleton reduced-motion debt closed**: `.animate-pulse` (Tailwind built-in keyframe, not reachable by the DS-utility list) joins the `prefers-reduced-motion` safety net — flagged in `docs/a11y/matrix.md` since 0.13.0.
+
+All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
 ## [1.1.0] — 2026-06-11
 
 ### Lockstep bump (no tailwind-preset source change)

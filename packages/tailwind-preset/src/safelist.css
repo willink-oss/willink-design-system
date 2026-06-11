@@ -50,6 +50,16 @@
 @source inline("ring-ring");
 @source inline("ring-offset-bg");
 
+/* Surface roles (1.2.0+ / ADR-0013 — consumed by the dark-mode React leak migration) */
+@source inline("bg-surface-subtle");
+@source inline("hover:bg-surface-subtle");
+@source inline("bg-surface-muted");
+@source inline("hover:bg-surface-muted");
+@source inline("focus:bg-surface-muted");
+@source inline("bg-track");
+@source inline("bg-surface-inverted");
+@source inline("text-surface-inverted-fg");
+
 /* === Focus-visible state for all interactive components === */
 @source inline("focus-visible:outline-none");
 @source inline("focus-visible:ring-2");

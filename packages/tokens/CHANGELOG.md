@@ -9,6 +9,17 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [Unreleased]
+
+### Added — dark mode core (ADR-0013)
+
+- **Dark values via DTCG `$extensions`**: every flipping semantic color role now carries `"$extensions": { "willink.dark": { "$value": … } }` — the value the role resolves to under `data-theme="dark"` / `prefers-color-scheme: dark`. 16 roles flip (`bg`, `fg`, `muted`, `border`, the 5 new surface roles, the 4 brand state tokens, `success`, `warning`, `danger`); tokens without the extension (`ring`, `brand`, `brand-fg`, `brand-glow`, `accent-cyan`, `accent-pink`) are mode-invariant by design. Primitives never flip.
+- **5 new surface roles** absorbing the primitive-utility leaks found in the v1.2 survey: `color.surface-subtle` (outline Button hover), `color.surface-muted` (TabsList / Avatar fallback / ghost hover / menu item focus), `color.track` (Switch / Slider / Progress / Skeleton), `color.surface-inverted` / `color.surface-inverted-fg` (Tooltip).
+- **Brand state tokens** `color.brand-hover` / `brand-active` / `brand-soft` / `brand-soft-fg` added to `semantic.json` with their light aliases (`{color.brand.700}` etc.) — healing the 0.9.0 drift where they existed only as preset CSS variables.
+- **Contrast audit CI gate**: `__tests__/contrast.test.ts` executes the repo-level `scripts/check-contrast.mjs` (WCAG 2.1 ratios for the key pairs in both modes) and fails on any required pair below threshold. All required pairs pass; light-mode `success`/`warning` on white (3.77 / 3.19) and dark white-on-danger (3.76) are documented report-only baselines — see ADR-0013.
+
+All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
 ## [1.1.0] — 2026-06-11
 
 ### Lockstep bump (no tokens source change)

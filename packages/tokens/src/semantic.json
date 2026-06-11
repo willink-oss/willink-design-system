@@ -1,20 +1,106 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
-  "$description": "Semantic tokens — 役割で命名。consumer は原則これを参照する。値は brand 軸ごとに上書きされる。default = i-willink",
+  "$description": "Semantic tokens — 役割で命名。consumer は原則これを参照する。値は brand 軸ごとに上書きされる。default = i-willink. Dark mode (1.2.0+ / ADR-0013): flipping roles carry a per-token \"$extensions\": { \"willink.dark\": { \"$value\": \"<alias or literal>\" } } — the value the role resolves to under data-theme=\"dark\" (or prefers-color-scheme: dark without a data-theme=\"light\" opt-out). Tokens WITHOUT the willink.dark extension are mode-invariant by design (ring / brand / brand-fg / brand-glow / accent-cyan / accent-pink); primitives never flip.",
   "color": {
-    "bg":           { "$value": "#ffffff",            "$type": "color", "$description": "ページ背景" },
-    "fg":           { "$value": "{color.neutral.900}", "$type": "color", "$description": "本文テキスト" },
-    "muted":        { "$value": "{color.neutral.500}", "$type": "color", "$description": "補助テキスト" },
-    "border":       { "$value": "{color.neutral.200}", "$type": "color", "$description": "区切り線・枠" },
+    "bg": {
+      "$value": "#ffffff",
+      "$type": "color",
+      "$description": "ページ背景",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.950}" } }
+    },
+    "fg": {
+      "$value": "{color.neutral.900}",
+      "$type": "color",
+      "$description": "本文テキスト",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.50}" } }
+    },
+    "muted": {
+      "$value": "{color.neutral.500}",
+      "$type": "color",
+      "$description": "補助テキスト",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.400}" } }
+    },
+    "border": {
+      "$value": "{color.neutral.200}",
+      "$type": "color",
+      "$description": "区切り線・枠",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.800}" } }
+    },
+    "surface-subtle": {
+      "$value": "{color.neutral.50}",
+      "$type": "color",
+      "$description": "最弱の raised surface — outline Button hover が消費 (1.2.0+)",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.900}" } }
+    },
+    "surface-muted": {
+      "$value": "{color.neutral.100}",
+      "$type": "color",
+      "$description": "muted surface — TabsList 背景 / Avatar fallback / ghost Button hover / menu item focus が消費 (1.2.0+)",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.800}" } }
+    },
+    "track": {
+      "$value": "{color.neutral.200}",
+      "$type": "color",
+      "$description": "control track — Switch off-track / Slider track / Progress track / Skeleton base が消費 (1.2.0+)",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.700}" } }
+    },
+    "surface-inverted": {
+      "$value": "{color.neutral.900}",
+      "$type": "color",
+      "$description": "反転 surface — Tooltip 背景が消費。light では dark-on-light の反転面、dark では light-on-dark (1.2.0+)",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.100}" } }
+    },
+    "surface-inverted-fg": {
+      "$value": "{color.neutral.50}",
+      "$type": "color",
+      "$description": "surface-inverted 上のテキスト — Tooltip テキストが消費 (1.2.0+)",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.900}" } }
+    },
     "ring":         { "$value": "{color.brand}",       "$type": "color", "$description": "focus ring" },
     "brand":        { "$value": "{color.brand.600}",   "$type": "color", "$description": "primary action / brand identity" },
     "brand-fg":     { "$value": "#ffffff",             "$type": "color", "$description": "brand 上のテキスト" },
     "brand-glow":   { "$value": "{color.brand.500}",   "$type": "color", "$description": "primary button shadow base" },
+    "brand-hover": {
+      "$value": "{color.brand.700}",
+      "$type": "color",
+      "$description": "brand の hover state (Button default hover) — preset では 0.9.0 から CSS 変数として出荷済み、JSON は 1.2.0 で追随",
+      "$extensions": { "willink.dark": { "$value": "{color.brand.500}" } }
+    },
+    "brand-active": {
+      "$value": "{color.brand.800}",
+      "$type": "color",
+      "$description": "brand の active / pressed state — preset では 0.9.0 から CSS 変数として出荷済み、JSON は 1.2.0 で追随",
+      "$extensions": { "willink.dark": { "$value": "{color.brand.400}" } }
+    },
+    "brand-soft": {
+      "$value": "{color.brand.100}",
+      "$type": "color",
+      "$description": "soft brand 面 (Badge soft variant / gradient-subtle 中間 stop) — preset では 0.9.0 から CSS 変数として出荷済み、JSON は 1.2.0 で追随",
+      "$extensions": { "willink.dark": { "$value": "{color.brand.950}" } }
+    },
+    "brand-soft-fg": {
+      "$value": "{color.brand.700}",
+      "$type": "color",
+      "$description": "brand-soft 上のテキスト — preset では 0.9.0 から CSS 変数として出荷済み、JSON は 1.2.0 で追随",
+      "$extensions": { "willink.dark": { "$value": "{color.brand.300}" } }
+    },
     "accent-cyan":  { "$value": "{color.cyan.500}",    "$type": "color", "$description": "AI-tech accent (i-willink)" },
     "accent-pink":  { "$value": "{color.pink.500}",    "$type": "color", "$description": "AI-tech accent gradient terminus (i-willink)" },
-    "success":      { "$value": "{color.green.600}",   "$type": "color" },
-    "warning":      { "$value": "{color.amber.600}",   "$type": "color" },
-    "danger":       { "$value": "{color.red.600}",     "$type": "color" }
+    "success": {
+      "$value": "{color.green.600}",
+      "$type": "color",
+      "$extensions": { "willink.dark": { "$value": "{color.green.500}" } }
+    },
+    "warning": {
+      "$value": "{color.amber.600}",
+      "$type": "color",
+      "$extensions": { "willink.dark": { "$value": "{color.amber.500}" } }
+    },
+    "danger": {
+      "$value": "{color.red.600}",
+      "$type": "color",
+      "$extensions": { "willink.dark": { "$value": "{color.red.500}" } }
+    }
   },
   "motion": {
     "$description": "Role-based motion durations (0.12.0+). Components reference these by role (modal-enter, accordion, …) so a single :root override propagates to a specific interaction class without disturbing others. Sheet / accordion / toast use a single duration for both directions because the keyframe families are visually symmetric; modal/popover/tooltip split into enter/exit to allow distinct exit feel.",

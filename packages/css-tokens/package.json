@@ -8,7 +8,8 @@
   "exports": {
     "./tokens.css": "./src/tokens.css",
     "./tokens.semantic.css": "./src/tokens.semantic.css",
-    "./tokens.scale.css": "./src/tokens.scale.css"
+    "./tokens.scale.css": "./src/tokens.scale.css",
+    "./tokens.dark.css": "./src/tokens.dark.css"
   },
   "files": [
     "src"
