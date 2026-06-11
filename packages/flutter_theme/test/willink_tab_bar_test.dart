@@ -118,6 +118,29 @@ void main() {
     });
   });
 
+  group('WillinkTabBar — dark theme (willinkDark)', () {
+    testWidgets('labels/divider flip to dark roles; indicator stays brand-600',
+        (tester) async {
+      await tester.pumpWidget(
+        wrap(
+          const WillinkTabBar(tabs: threeTabs),
+          theme: WillinkTheme.willinkDark(),
+        ),
+      );
+
+      final tabBar = tester.widget<TabBar>(find.byType(TabBar));
+      // brand is mode-invariant (ADR-0013) — same violet as light.
+      expect(tabBar.indicatorColor, equals(WillinkPrimitives.brand600));
+      expect(tabBar.labelColor, equals(WillinkPrimitives.brand600));
+      // muted → neutral-400, border → neutral-800 dark flips.
+      expect(
+        tabBar.unselectedLabelColor,
+        equals(WillinkPrimitives.neutral400),
+      );
+      expect(tabBar.dividerColor, equals(WillinkPrimitives.neutral800));
+    });
+  });
+
   group('WillinkTabBar — ColorScheme override', () {
     testWidgets('respects copyWith(colorScheme: ...) override', (tester) async {
       // Brand customization path per ADR-0011 era conventions: consumers

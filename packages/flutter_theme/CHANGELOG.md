@@ -5,6 +5,70 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 This project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.5.0] — 2026-06-11
+
+### Added — WillinkTheme.willinkDark() (dark mode, [ADR-0013](../../docs/adr/0013-dark-mode.md))
+
+The Flutter side of the v1.2 dark-mode cycle
+([docs/roadmap/v1.2.md](../../docs/roadmap/v1.2.md)): a `Brightness.dark`
+`ThemeData` factory mirroring the `willink.dark` semantic flips that
+`@willink-labs/tokens` `semantic.json` ships for the web. Same
+semantic-flip / primitive-invariant contract — brand identity does **not**
+flip; only surface roles do:
+
+| ColorScheme slot | light | dark | semantic role |
+|---|---|---|---|
+| `surface` | `#ffffff` | `neutral-950` | `bg` |
+| `onSurface` | `neutral-900` | `neutral-50` | `fg` |
+| `onSurfaceVariant` | (derived) | `neutral-400` | `muted` |
+| `surfaceContainerLow` / `Container` | (derived) | `neutral-900` | `surface-subtle` |
+| `surfaceContainerHigh` | (derived) | `neutral-800` | `surface-muted` |
+| `surfaceContainerHighest` | `neutral-100` | `neutral-700` | `track` (WillinkProgressIndicator) |
+| `outline` / `outlineVariant` | `neutral-200` | `neutral-800` | `border` |
+| `primary` / `onPrimary` | `brand-600` / white | **unchanged** | `brand` / `brand-fg` (mode-invariant) |
+| `primaryContainer` (+ secondary) | `brand-100` | `brand-950` | `brand-soft` |
+| `onPrimaryContainer` (+ secondary) | `brand-900` | `brand-300` | `brand-soft-fg` |
+| `tertiary` | `cyan-500` | **unchanged** | `accent-cyan` (mode-invariant) |
+| `error` | `red-600` | `red-500` | `danger` |
+
+- `WillinkBrandTokens.willinkDark` rides the dark `ThemeData`: the
+  white-anchored `subtleGradient` flips to the dark surface ladder
+  (neutral-950 → brand-950 → neutral-900, the preset's dark
+  `bg-gradient-subtle` derivation) and `shadowSoft` raises its black alpha
+  (0.05 → 0.4, the dark `--shadow-soft`); `brandGradient` / `aiGradient` /
+  `brandGlow` / `shadowGlow` are identical to light.
+- Every component theme slot the light factory sets is mirrored — both
+  factories now assemble through one shared builder, so light/dark cannot
+  structurally drift.
+- All 9 components follow automatically (they read
+  `Theme.of(context).colorScheme`); no component ships dark-specific styles,
+  per the ADR-0013 "semantic flip only" rule.
+
+Wire it up the standard Material way:
+
+```dart
+MaterialApp(
+  theme: WillinkTheme.willink(),
+  darkTheme: WillinkTheme.willinkDark(),
+  themeMode: ThemeMode.system,
+)
+```
+
+Flutter-only minor per
+[ADR-0011](../../docs/adr/0011-flutter-independent-versioning.md) — ships in
+the same cycle as the npm group's dark release but versions independently.
+
+### Migration from 1.4.0
+No breaking changes. Additive release — `WillinkTheme.willinkDark()` and
+`WillinkBrandTokens.willinkDark` are opt-in; `WillinkTheme.willink()` output
+is unchanged.
+
+### Verification
+- `flutter analyze`: 0 issues
+- `flutter test`: 66 tests pass (existing 58 + new 8 dark tests: 4 factory +
+  WillinkButton ×2 / WillinkSnackBar / WillinkTabBar under `willinkDark()`)
+- `dart pub publish --dry-run`: clean
+
 ## [1.4.0] — 2026-06-11
 
 ### Added — WillinkProgressIndicator component (issue #13, PR 4/4)

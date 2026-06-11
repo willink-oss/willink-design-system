@@ -146,6 +146,50 @@ void main() {
     });
   });
 
+  group('WillinkButton — dark theme (willinkDark)', () {
+    testWidgets('filled keeps mode-invariant brand-600 bg + white text',
+        (tester) async {
+      // ADR-0013: brand identity does not flip — a filled button is the
+      // same violet on a neutral-950 surface.
+      await tester.pumpWidget(
+        wrap(
+          WillinkButton(
+            onPressed: () {},
+            child: const Text('保存'),
+          ),
+          theme: WillinkTheme.willinkDark(),
+        ),
+      );
+
+      final button = tester.widget<FilledButton>(find.byType(FilledButton));
+      final style = button.style!;
+      final bg = style.backgroundColor!.resolve(<WidgetState>{});
+      final fg = style.foregroundColor!.resolve(<WidgetState>{});
+      expect(bg, equals(WillinkPrimitives.brand600));
+      expect(fg, equals(const Color(0xFFFFFFFF)));
+    });
+
+    testWidgets('ghost overlay uses the dark brand-950 container',
+        (tester) async {
+      await tester.pumpWidget(
+        wrap(
+          WillinkButton(
+            variant: WillinkButtonVariant.ghost,
+            onPressed: () {},
+            child: const Text('スキップ'),
+          ),
+          theme: WillinkTheme.willinkDark(),
+        ),
+      );
+
+      final button = tester.widget<TextButton>(find.byType(TextButton));
+      final overlay = button.style!.overlayColor!
+          .resolve(<WidgetState>{WidgetState.pressed});
+      // primaryContainer flips brand-100 → brand-950 under willinkDark.
+      expect(overlay, equals(WillinkPrimitives.brand950));
+    });
+  });
+
   group('WillinkButton — icon layout', () {
     testWidgets('leadingIcon sits before label with 8px gap', (tester) async {
       await tester.pumpWidget(

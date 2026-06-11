@@ -85,6 +85,11 @@ class WillinkBrandTokens extends ThemeExtension<WillinkBrandTokens> {
   // The subtle and AI gradients reuse the same primitive triplet across brands
   // (white → brand-50 → sky-50 / cyan → brand-500 → pink). Brand identity is
   // expressed through `brandGlow` and `brandGradient`.
+  //
+  // Mode-invariant pieces (ADR-0013): `brandGradient`, `aiGradient`, and
+  // `shadowGlow` are shared between [willink] and [willinkDark] — brand
+  // identity does not flip. Only the white-anchored `subtleGradient` and the
+  // black-alpha `shadowSoft` carry dark variants.
 
   static const LinearGradient _subtleGradient = LinearGradient(
     begin: Alignment.topLeft,
@@ -93,6 +98,21 @@ class WillinkBrandTokens extends ThemeExtension<WillinkBrandTokens> {
       Color(0xFFFFFFFF),
       WillinkPrimitives.brand50,
       WillinkPrimitives.sky50,
+    ],
+    stops: [0.0, 0.5, 1.0],
+  );
+
+  /// Dark counterpart of [_subtleGradient] — mirrors the preset's dark
+  /// `bg-gradient-subtle` derivation (`bg` → `brand-soft` →
+  /// `gradient-subtle-end`): neutral-950 → brand-950 → neutral-900. The
+  /// white / sky-50 anchors would pin a light tint under a dark root.
+  static const LinearGradient _subtleGradientDark = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      WillinkPrimitives.neutral950,
+      WillinkPrimitives.brand950,
+      WillinkPrimitives.neutral900,
     ],
     stops: [0.0, 0.5, 1.0],
   );
@@ -117,26 +137,61 @@ class WillinkBrandTokens extends ThemeExtension<WillinkBrandTokens> {
     ),
   ];
 
+  /// Dark counterpart of [_shadowSoftDefault] — same geometry, black alpha
+  /// raised 0.05 → 0.4 so the shadow stays legible against neutral-950
+  /// (mirrors the preset's dark `--shadow-soft` override).
+  static const List<BoxShadow> _shadowSoftDark = [
+    BoxShadow(
+      color: Color(0x66000000), // rgba(0, 0, 0, 0.4)
+      offset: Offset(0, 4),
+      blurRadius: 20,
+      spreadRadius: -2,
+    ),
+  ];
+
+  /// Hero gradient for the i-Willink brand (brand-600 → blue-600 diagonal).
+  /// Mode-invariant — shared by [willink] and [willinkDark].
+  static const LinearGradient _willinkBrandGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [WillinkPrimitives.brand600, WillinkPrimitives.blue600],
+    stops: [0.0, 1.0],
+  );
+
+  /// Brand-tinted glow shadow (`--shadow-glow`). Mode-invariant — the glow
+  /// is brand-colored, not black-anchored, so it reads on both surfaces.
+  static const List<BoxShadow> _willinkShadowGlow = [
+    BoxShadow(
+      color: Color(0x4C7C3AED), // rgba(124, 58, 237, 0.3)
+      offset: Offset(0, 0),
+      blurRadius: 20,
+      spreadRadius: -5,
+    ),
+  ];
+
   /// Default tokens for the i-Willink brand.
   static WillinkBrandTokens get willink => const WillinkBrandTokens(
     brandGlow: WillinkPrimitives.brand500,
-    brandGradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [WillinkPrimitives.brand600, WillinkPrimitives.blue600],
-      stops: [0.0, 1.0],
-    ),
+    brandGradient: _willinkBrandGradient,
     subtleGradient: _subtleGradient,
     aiGradient: _aiGradient,
     shadowSoft: _shadowSoftDefault,
-    shadowGlow: [
-      BoxShadow(
-        color: Color(0x4C7C3AED), // rgba(124, 58, 237, 0.3)
-        offset: Offset(0, 0),
-        blurRadius: 20,
-        spreadRadius: -5,
-      ),
-    ],
+    shadowGlow: _willinkShadowGlow,
   );
 
+  /// Dark-mode tokens for the i-Willink brand (ADR-0013, since 1.5.0).
+  ///
+  /// Brand identity is mode-invariant: [brandGlow], [brandGradient],
+  /// [aiGradient], and [shadowGlow] are identical to [willink]. Only the
+  /// white-anchored pieces flip — [subtleGradient] moves to the dark surface
+  /// ladder (neutral-950 → brand-950 → neutral-900) and [shadowSoft] raises
+  /// its black alpha, mirroring the preset's dark `--shadow-soft`.
+  static WillinkBrandTokens get willinkDark => const WillinkBrandTokens(
+    brandGlow: WillinkPrimitives.brand500,
+    brandGradient: _willinkBrandGradient,
+    subtleGradient: _subtleGradientDark,
+    aiGradient: _aiGradient,
+    shadowSoft: _shadowSoftDark,
+    shadowGlow: _willinkShadowGlow,
+  );
 }
