@@ -67,3 +67,24 @@ export const WithIcon: Story = {
 export const Disabled: Story = {
   args: { disabled: true },
 };
+
+// Locks the toolbar theme global for this story (data-theme="dark", ADR-0013)
+// so the dark rendering is always one click away in the sidebar — every other
+// story is reviewable in dark via the toolbar Theme toggle instead.
+export const DarkForced: Story = {
+  globals: { theme: "dark" },
+  render: (args) => (
+    <div className="flex items-center gap-4">
+      <Button {...args}>Default</Button>
+      <Button {...args} variant="outline">
+        Outline
+      </Button>
+      <Button {...args} variant="ghost">
+        Ghost
+      </Button>
+      <Button {...args} variant="link">
+        Link
+      </Button>
+    </div>
+  ),
+};
