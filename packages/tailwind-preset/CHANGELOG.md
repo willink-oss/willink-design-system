@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Added — `text-danger` safelist entry (FormField error message)
+
+`@source inline("text-danger")` — the new `FormFieldError` in `@willink-labs/react@1.4.0` ([ADR-0015](../../docs/adr/0015-formfield-api.md)) emits `text-sm text-danger` from the package dist, which consumer scanners never see (Tailwind v4 excludes `node_modules`). The compound's other class strings (`grid gap-2` / `text-sm text-muted`) were already safelisted. MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) (new safelist entry).
+
 ## [1.3.0] — 2026-06-11
 
 ### Lockstep bump (no preset source change)
