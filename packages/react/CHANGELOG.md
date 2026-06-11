@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.3.0] — 2026-06-11
+
+### Lockstep bump (no react source change)
+
+Pair with `@willink-labs/css-tokens@1.3.0` (WordPress / legacy-toolchain consumption fixes per [ADR-0014](../../docs/adr/0014-wordpress-consumption.md): root-level proxy CSS files for plain-path resolvers like postcss-import, plus the color-free `tokens.primitives.css` export). No source change in this package — published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.2.0] — 2026-06-11
 
 ### Changed — dark mode adaptation via semantic surface utilities (ADR-0013)

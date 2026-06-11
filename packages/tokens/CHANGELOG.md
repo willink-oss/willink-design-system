@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.3.0] — 2026-06-11
+
+### Lockstep bump (no tokens source change)
+
+Pair with `@willink-labs/css-tokens@1.3.0` (WordPress / legacy-toolchain consumption fixes per [ADR-0014](../../docs/adr/0014-wordpress-consumption.md): root-level proxy CSS files for plain-path resolvers like postcss-import, plus the color-free `tokens.primitives.css` export). No source change in this package — published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.2.0] — 2026-06-11
 
 ### Added — dark mode core (ADR-0013)
