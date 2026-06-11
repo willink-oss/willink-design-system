@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.4.0] — 2026-06-11
+
+### Lockstep bump (no tokens source change)
+
+Pair with `@willink-labs/react@1.4.0` (`FormField` compound — a11y wiring for label / control / description / error per [ADR-0015](../../docs/adr/0015-formfield-api.md)) and `@willink-labs/tailwind-preset@1.4.0` (its `text-danger` safelist entry). No source change in this package — published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.3.0] — 2026-06-11
 
 ### Lockstep bump (no tokens source change)

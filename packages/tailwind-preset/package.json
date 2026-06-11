@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tailwind-preset",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Tailwind v4 preset for i-Willink Design System. Single-brand baseline (willink); consumers customize via CSS variables override on :root.",
   "license": "MIT",
   "private": false,
