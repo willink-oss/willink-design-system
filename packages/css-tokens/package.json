@@ -6,13 +6,20 @@
   "private": false,
   "type": "module",
   "exports": {
-    "./tokens.css": "./src/tokens.css",
-    "./tokens.semantic.css": "./src/tokens.semantic.css",
-    "./tokens.scale.css": "./src/tokens.scale.css",
-    "./tokens.dark.css": "./src/tokens.dark.css"
+    "./tokens.css": "./tokens.css",
+    "./tokens.semantic.css": "./tokens.semantic.css",
+    "./tokens.scale.css": "./tokens.scale.css",
+    "./tokens.dark.css": "./tokens.dark.css",
+    "./tokens.primitives.css": "./tokens.primitives.css",
+    "./src/*.css": "./src/*.css"
   },
   "files": [
-    "src"
+    "src",
+    "tokens.css",
+    "tokens.semantic.css",
+    "tokens.scale.css",
+    "tokens.dark.css",
+    "tokens.primitives.css"
   ],
   "publishConfig": {
     "access": "public"

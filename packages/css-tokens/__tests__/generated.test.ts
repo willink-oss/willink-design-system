@@ -1,10 +1,13 @@
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pkgRoot = path.resolve(__dirname, "..");
 const srcDir = path.resolve(__dirname, "../src");
+const primitiveJsonPath = path.resolve(__dirname, "../../tokens/src/primitive.json");
 const semanticJsonPath = path.resolve(__dirname, "../../tokens/src/semantic.json");
 
 function readCss(name: string): string {
@@ -87,5 +90,101 @@ describe("@willink-labs/css-tokens generated files", () => {
     expect(css).not.toContain("--color-ring");
     expect(css).not.toContain("--color-brand-fg");
     expect(css).not.toContain("--color-accent-cyan");
+  });
+});
+
+describe("tokens.primitives.css — color-free contract (1.3.0+ / ADR-0014)", () => {
+  it("exists and carries the radius / duration / easing vocabulary", () => {
+    const css = readCss("tokens.primitives.css");
+    expect(css).toContain("--radius-md: 0.5rem");
+    expect(css).toContain("--duration-fast: 150ms");
+    expect(css).toContain("--ease-standard: cubic-bezier(0.2, 0, 0, 1)");
+  });
+
+  it("has zero --color-* and zero --shadow-* variables", () => {
+    const css = readCss("tokens.primitives.css");
+    // covers declarations AND var() references
+    expect(css).not.toMatch(/--color-/);
+    expect(css).not.toMatch(/--shadow-/);
+  });
+
+  it("var count matches the radius + duration + easing leaves in primitive.json", () => {
+    const primitive = JSON.parse(fs.readFileSync(primitiveJsonPath, "utf8"));
+    const countLeaves = (node: unknown): number => {
+      if (typeof node !== "object" || node === null) return 0;
+      const obj = node as Record<string, unknown>;
+      if ("$value" in obj && "$type" in obj) return 1;
+      return Object.entries(obj)
+        .filter(([key]) => !key.startsWith("$"))
+        .reduce((sum, [, value]) => sum + countLeaves(value), 0);
+    };
+    const expected =
+      countLeaves(primitive.radius) +
+      countLeaves(primitive.duration) +
+      countLeaves(primitive.easing);
+    expect(expected).toBeGreaterThan(0);
+    const decls = readCss("tokens.primitives.css").match(/^\s*--[a-z0-9-]+:/gm) ?? [];
+    expect(decls.length).toBe(expected);
+  });
+});
+
+describe("root-level proxy files — plain-path resolution (1.3.0+ / ADR-0014)", () => {
+  const ROOT_PROXIES = [
+    "tokens.css",
+    "tokens.scale.css",
+    "tokens.semantic.css",
+    "tokens.dark.css",
+    "tokens.primitives.css",
+  ];
+
+  it("each proxy exists as a physical file at the package root (fs check — no exports map involved)", () => {
+    // postcss-import / Tailwind v3 CLI resolve
+    // "@willink-labs/css-tokens/<name>" as a literal path inside
+    // node_modules and never read the `exports` map — the file itself
+    // existing at the package root IS the contract.
+    for (const name of ROOT_PROXIES) {
+      const file = path.join(pkgRoot, name);
+      expect(fs.existsSync(file), `${name} missing at package root`).toBe(true);
+      expect(fs.readFileSync(file, "utf8")).toContain(`@import "./src/${name}";`);
+    }
+  });
+
+  it("each proxy target under src/ exists", () => {
+    for (const name of ROOT_PROXIES) {
+      expect(
+        fs.existsSync(path.join(srcDir, name)),
+        `src/${name} missing`,
+      ).toBe(true);
+    }
+  });
+
+  it("the exports map resolves every subpath to the root proxy (require.resolve self-reference)", () => {
+    const require = createRequire(import.meta.url);
+    for (const name of ROOT_PROXIES) {
+      const resolved = require.resolve(`@willink-labs/css-tokens/${name}`);
+      expect(fs.existsSync(resolved)).toBe(true);
+      expect(path.basename(resolved)).toBe(name);
+      // the map must point at the root proxy, not the src/ file
+      expect(path.basename(path.dirname(resolved))).not.toBe("src");
+    }
+  });
+
+  it("the exports map keeps the physical src/ paths importable (pilot workaround stays valid)", () => {
+    const require = createRequire(import.meta.url);
+    const resolved = require.resolve(
+      "@willink-labs/css-tokens/src/tokens.scale.css",
+    );
+    expect(fs.existsSync(resolved)).toBe(true);
+    expect(path.basename(path.dirname(resolved))).toBe("src");
+  });
+
+  it("package.json `files` whitelists every root proxy so npm pack ships them", () => {
+    const pkg = JSON.parse(
+      fs.readFileSync(path.join(pkgRoot, "package.json"), "utf8"),
+    );
+    for (const name of ROOT_PROXIES) {
+      expect(pkg.files, `files[] missing ${name}`).toContain(name);
+      expect(pkg.exports[`./${name}`]).toBe(`./${name}`);
+    }
   });
 });
