@@ -4,7 +4,7 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
-## [Unreleased]
+## [1.3.0] — 2026-06-11
 
 ### Added — WordPress / legacy-toolchain consumption fixes (ADR-0014)
 
