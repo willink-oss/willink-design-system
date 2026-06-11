@@ -49,7 +49,7 @@ export const Toaster = ({
         actionButton:
           "group-[.toast]:bg-brand group-[.toast]:text-brand-fg group-[.toast]:rounded-md",
         cancelButton:
-          "group-[.toast]:bg-neutral-100 group-[.toast]:text-fg group-[.toast]:rounded-md",
+          "group-[.toast]:bg-surface-muted group-[.toast]:text-fg group-[.toast]:rounded-md",
       },
       ...toastOptions,
     }}

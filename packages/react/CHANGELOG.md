@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Changed — dark mode adaptation via semantic surface utilities (ADR-0013)
+
+Every component that leaked primitive neutral utilities now rides the semantic surface roles introduced in `@willink-labs/tailwind-preset` (dark mode core, [ADR-0013](../../docs/adr/0013-dark-mode.md)): `bg-surface-subtle` / `bg-surface-muted` / `bg-track` / `bg-surface-inverted` + `text-surface-inverted-fg`. Zero `dark:` variants — the CSS variables flip, so every component now follows `data-theme="dark"` (and the `prefers-color-scheme` auto path) with no consumer action.
+
+- **Light-mode rendering is pixel-identical**: the new tokens' light values resolve to the exact primitives the components used before (`neutral-50/100/200/900`).
+- Migrated: `Button` (outline/ghost hover), `Toggle` (default/outline hover), `TabsList`, `Avatar` fallback, `Tooltip` (inverted surface), `Switch` unchecked track, `Slider` track, `Progress` track, `Skeleton`, `DropdownMenu` / `Select` item focus, `AlertDialog` cancel hover, `Toaster` cancelButton (paired safelist entry updated in the preset).
+- The `bg-black/50` overlays (`Dialog` / `AlertDialog` / `Sheet`) are intentionally unchanged in both modes.
+- The `check-tokens` regression gate now also forbids `bg-neutral-*` / `text-neutral-*` (any variant prefix) in component sources, so primitive leaks cannot come back.
+
+### Added — Skeleton `motion-reduce:animate-none` variant
+
+`Skeleton` now carries the component-side `motion-reduce:animate-none` variant next to `animate-pulse`, matching the house style of every other animated component (Dialog / Sheet / etc. carry the variant even though the preset has a CSS safety net) — closes the flag left open in 0.13.0.
+
 ## [1.1.0] — 2026-06-11
 
 ### Changed — Toast engine: sonner 1.7.4 → 2.0.7 (MINOR surface impact)

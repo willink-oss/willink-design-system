@@ -15,9 +15,9 @@ const toggleVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-transparent text-fg hover:bg-neutral-100",
+        default: "bg-transparent text-fg hover:bg-surface-muted",
         outline:
-          "border border-border bg-bg text-fg hover:bg-neutral-50 data-[state=on]:border-brand",
+          "border border-border bg-bg text-fg hover:bg-surface-subtle data-[state=on]:border-brand",
       },
       size: {
         sm: "h-8 px-3 text-sm rounded-full",

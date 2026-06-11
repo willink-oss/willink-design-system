@@ -220,7 +220,7 @@
 @source inline("group-[.toast]:text-muted");
 @source inline("group-[.toast]:bg-brand");
 @source inline("group-[.toast]:text-brand-fg");
-@source inline("group-[.toast]:bg-neutral-100");
+@source inline("group-[.toast]:bg-surface-muted");
 @source inline("group-[.toast]:text-fg");
 @source inline("group-[.toast]:rounded-md");
 @source inline("rounded-{sm,full}");

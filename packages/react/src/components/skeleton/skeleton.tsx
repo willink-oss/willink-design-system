@@ -6,7 +6,7 @@ import { cn } from "../../lib/cn";
 /**
  * Skeleton — Loading placeholder。
  *
- * - `rect` (default): rounded-md + animate-pulse + bg-neutral-200 (汎用ブロック)
+ * - `rect` (default): rounded-md + animate-pulse + bg-track (汎用ブロック)
  * - `circle`: rounded-full (avatar 用 — h/w は className で指定)
  * - `text`: h-4 + rounded (テキスト行用)
  *
@@ -15,7 +15,7 @@ import { cn } from "../../lib/cn";
  *   <Skeleton variant="circle" className="h-10 w-10" />
  *   <Skeleton variant="text" className="w-48" />
  */
-const skeletonVariants = cva("animate-pulse bg-neutral-200", {
+const skeletonVariants = cva("animate-pulse motion-reduce:animate-none bg-track", {
   variants: {
     variant: {
       rect: "rounded-md",

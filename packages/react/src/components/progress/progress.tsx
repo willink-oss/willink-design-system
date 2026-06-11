@@ -20,7 +20,7 @@ export const Progress = forwardRef<
     ref={ref}
     value={value}
     className={cn(
-      "relative h-2 w-full overflow-hidden rounded-full bg-neutral-200",
+      "relative h-2 w-full overflow-hidden rounded-full bg-track",
       className,
     )}
     {...props}

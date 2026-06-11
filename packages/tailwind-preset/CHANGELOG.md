@@ -18,6 +18,10 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
 
+### Changed — toast cancelButton safelist entry follows the React dark-mode migration
+
+`@source inline("group-[.toast]:bg-neutral-100")` → `@source inline("group-[.toast]:bg-surface-muted")`. This class string flows through sonner's `toastOptions.classNames` at runtime — invisible to Tailwind's scanner — so the safelist entry must match what `@willink-labs/react` now emits. The entry's only consumer is the lockstep React `Toaster`; swapped rather than duplicated to keep the safelist authoritative.
+
 ## [1.1.0] — 2026-06-11
 
 ### Lockstep bump (no tailwind-preset source change)
