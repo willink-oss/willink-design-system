@@ -4,6 +4,12 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [1.7.0] — 2026-06-13
+
+### Lockstep bump (no generated-output change)
+
+Pair with `@willink-labs/tailwind-preset@1.7.0` — the dark-aware `text-gradient-primary` fix + the gradient-aware contrast audit ([ADR-0018](../../docs/adr/0018-gradient-accent-text-dark.md)). Gradient utilities are a preset concern and have never been part of this package's output; the new endpoints are **preset-internal** vars (`--color-gradient-primary-from/-to`, like `--color-gradient-subtle-end`, which is also not exported here), so the generated CSS is byte-identical to 1.6.0. Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.6.0] — 2026-06-13
 
 ### Lockstep bump (no generated-output change)

@@ -161,6 +161,28 @@
    * neutral-900) so the decorative gradient doesn't pin a light tint under a
    * dark root. */
   --color-gradient-subtle-end: var(--color-sky-50);
+  /* Preset-internal (intentionally NOT in semantic.json / css-tokens) — the two
+   * endpoints of the text-gradient-primary utility (clipped to text via
+   * bg-clip-text). Unlike the bg-gradient-* utilities (which sit behind white
+   * text), text-gradient-primary IS the readable text, so its endpoints must
+   * clear the WCAG 1.4.3 contrast floor against `bg` in BOTH modes (1.7.0+ /
+   * ADR-0018).
+   *
+   * In LIGHT these resolve to brand / brand-glow (brand-600 → brand-500) —
+   * BYTE-IDENTICAL to the pre-1.7 gradient (worst endpoint brand-500 = 4.23:1
+   * on white, a documented large-text baseline ≥ 3:1).
+   *
+   * The bug they close (caught twice by manual review, missed by the audit
+   * before it understood clipped text): on a dark `bg` the FIXED brand
+   * primitives do not flip (ADR-0013), so the clipped heading rendered at
+   * brand-600 = 3.54:1 — below AA, washed out. The dark flips below brighten
+   * the endpoints to brand-300 → brand-400 (worst brand-400 = 7.41:1 on the
+   * dark `bg`, AAA-adjacent) while staying recognizably brand-purple — the same
+   * "lighter brand step in dark" move brand-soft-fg already makes (brand-700 →
+   * brand-300). Flipped in BOTH dark blocks below per the ADR-0013 two-block
+   * convention. */
+  --color-gradient-primary-from: var(--color-brand);
+  --color-gradient-primary-to:   var(--color-brand-glow);
 
   /* === Radius === */
   --radius-sm:   0.25rem;
@@ -216,7 +238,14 @@
  *   bg-gradient-subtle  → bg → brand-soft → gradient-subtle-end
  *   bg-gradient-primary → brand → brand-glow         (monochromatic brand)
  *   bg-gradient-ai      → accent-cyan → brand-glow → accent-pink
- *   text-gradient-primary → same colors as bg-gradient-primary, clipped to text
+ *   text-gradient-primary → gradient-primary-from → gradient-primary-to,
+ *                           clipped to text (dark-aware endpoints, 1.7.0+)
+ *
+ * text-gradient-primary diverges from bg-gradient-primary as of 1.7.0
+ * (ADR-0018): because the clipped text IS the content, its endpoints flip to
+ * lighter brand steps in dark for legibility (brand-300 → brand-400 instead of
+ * the fixed brand-600 → brand-500), whereas bg-gradient-primary stays the
+ * vivid fixed brand pair behind white text. Light is byte-identical for both.
  *
  * Note: bg-gradient-primary changed in 0.10.0 from `brand → blue-600` to
  * `brand → brand-glow`. Consumers that depended on the prior willink
@@ -241,7 +270,11 @@
 }
 
 @utility text-gradient-primary {
-  background-image: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-glow) 100%);
+  /* Endpoints are dark-aware (1.7.0+ / ADR-0018): light = brand → brand-glow
+   * (byte-identical to pre-1.7), dark = brand-300 → brand-400 so the clipped
+   * heading stays ≥ AA on the dark bg instead of washing out at brand-600
+   * (3.54:1). See --color-gradient-primary-from/-to and the dark blocks. */
+  background-image: linear-gradient(135deg, var(--color-gradient-primary-from) 0%, var(--color-gradient-primary-to) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -473,6 +506,12 @@
     --color-warning:             var(--color-amber-500);
     --color-danger:              var(--color-red-500);
     --color-gradient-subtle-end: var(--color-neutral-900);
+    /* text-gradient-primary endpoints brighten in dark (ADR-0018): the clipped
+     * heading is text, so it must clear the dark-bg contrast floor. Fixed
+     * brand-600 → brand-500 would render 3.54:1 (below AA); brand-300 →
+     * brand-400 lands worst-endpoint 7.41:1 while staying brand-purple. */
+    --color-gradient-primary-from: var(--color-brand-300);
+    --color-gradient-primary-to:   var(--color-brand-400);
     --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
     --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
   }
@@ -501,6 +540,12 @@
   --color-warning:             var(--color-amber-500);
   --color-danger:              var(--color-red-500);
   --color-gradient-subtle-end: var(--color-neutral-900);
+  /* text-gradient-primary endpoints brighten in dark (ADR-0018): the clipped
+   * heading is text, so it must clear the dark-bg contrast floor. Fixed
+   * brand-600 → brand-500 would render 3.54:1 (below AA); brand-300 →
+   * brand-400 lands worst-endpoint 7.41:1 while staying brand-purple. */
+  --color-gradient-primary-from: var(--color-brand-300);
+  --color-gradient-primary-to:   var(--color-brand-400);
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
   --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
 }

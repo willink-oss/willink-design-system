@@ -27,6 +27,22 @@
  *     tiers; intentionally below the 4.5 body-text floor (like muted on white),
  *     documented here so the floor is a visible number, not folklore
  *
+ * Gradient-text audit (1.7.0+ / ADR-0018) — closes a real audit BLIND SPOT.
+ *   The per-pair checks above only see flat token roles; they could not see
+ *   `bg-clip-text text-transparent` gradient HEADINGS (e.g. text-gradient-
+ *   primary), so a clipped heading whose worst endpoint washed out on the dark
+ *   bg passed CI silently — it was caught twice only by manual review. The
+ *   TEXT_GRADIENTS registry below declares every preset gradient utility that
+ *   is CLIPPED TO TEXT, with its endpoints PER MODE, and asserts the WORST
+ *   endpoint clears the floor against `bg`:
+ *     DARK  — required ≥ 4.5 (the bug class; FAIL → exit 1)
+ *     LIGHT — report-only baseline (the legacy fixed brand pair ships byte-
+ *             identical; worst endpoint clears the 3:1 large-text floor — these
+ *             are display headings — but sits just under 4.5, like the feedback
+ *             colors on white above). Printed with ⚠, never fatal.
+ *   Vivid bg-only gradients behind white text (bg-gradient-primary / -ai) are
+ *   NOT in the registry — they are not text; see ADR-0018 for why.
+ *
  * Brand numeric steps: the Tailwind preset derives brand-50…950 at render time
  * via `color-mix(in oklch, var(--color-brand) X%, white|black)` rather than
  * using the primitive.json hex ramp. For every pair that touches a brand step,
@@ -169,6 +185,21 @@ const PRESET_BRAND_MIX = {
 const BRAND_BASE = resolveValue("{color.brand.600}");
 
 /**
+ * Given a raw DTCG value string, attach the `preset` OKLCH color-mix variant
+ * when it is a numeric brand step the preset derives (anything but 600). The
+ * Tailwind preset renders brand-50…950 via `color-mix(in oklch, …)` at run
+ * time rather than from the DTCG hex, so both hexes are audited.
+ */
+function withPresetVariant(out, raw) {
+  const m = typeof raw === "string" && raw.match(/^\{color\.brand\.(\d+)\}$/);
+  if (m && PRESET_BRAND_MIX[m[1]]) {
+    const [pct, base] = PRESET_BRAND_MIX[m[1]];
+    out.preset = colorMixOklch(BRAND_BASE, pct, base);
+  }
+  return out;
+}
+
+/**
  * Resolve a semantic role (or `#hex` literal) in a mode, returning every hex
  * variant that consumers can actually see:
  *   - `tokens`: the DTCG hex ramp (what @willink-labs/css-tokens ships)
@@ -179,13 +210,19 @@ const BRAND_BASE = resolveValue("{color.brand.600}");
 function variantsOf(roleOrHex, mode) {
   if (roleOrHex.startsWith("#")) return { tokens: roleOrHex.toLowerCase() };
   const raw = rawSemantic(roleOrHex, mode);
-  const out = { tokens: resolveValue(raw) };
-  const m = typeof raw === "string" && raw.match(/^\{color\.brand\.(\d+)\}$/);
-  if (m && PRESET_BRAND_MIX[m[1]]) {
-    const [pct, base] = PRESET_BRAND_MIX[m[1]];
-    out.preset = colorMixOklch(BRAND_BASE, pct, base);
-  }
-  return out;
+  return withPresetVariant({ tokens: resolveValue(raw) }, raw);
+}
+
+/**
+ * Resolve a gradient ENDPOINT spec to its hex variants. Endpoints are written
+ * the way the preset declares them: either a primitive/brand alias string like
+ * `{color.brand.300}` / `{color.cyan.500}`, or a `#hex` literal. (Gradient
+ * endpoints are preset-internal `--color-gradient-*` vars — NOT semantic.json
+ * roles — so they are declared inline in TEXT_GRADIENTS below per mode.)
+ */
+function endpointVariants(spec) {
+  if (spec.startsWith("#")) return { tokens: spec.toLowerCase() };
+  return withPresetVariant({ tokens: resolveValue(spec) }, spec);
 }
 
 /* ============================================================
@@ -232,6 +269,46 @@ const PAIRS = [
   { fg: "#ffffff", bg: "danger", min: 4.5, required: { light: false, dark: false }, note: "AlertDialog destructive action" },
 ];
 
+/* ============================================================
+ * Gradient-text registry (1.7.0+ / ADR-0018)
+ *
+ * The audit blind spot: a `bg-clip-text text-transparent` heading renders the
+ * GRADIENT as the glyph color, but the flat-role checks above only know about
+ * `--color-*` token roles, so a clipped heading whose worst endpoint washed out
+ * on the dark bg passed CI (it was caught twice only by a human). This registry
+ * declares every preset `@utility` that is clipped to text, with its endpoints
+ * PER MODE, exactly as preset.css resolves the `--color-gradient-*-from/-to`
+ * vars. The check asserts the WORST (lowest-contrast) endpoint against `bg`:
+ *   dark  → required ≥ floor (FAIL → exit 1)   — the bug class, frozen
+ *   light → report-only baseline (legacy fixed brand pair, byte-identical;
+ *           clears the 3:1 large-text floor but sits under 4.5, like the
+ *           feedback colors on white). Never fatal.
+ *
+ * Endpoints are written as the preset writes them: `{color.brand.N}` primitive
+ * aliases (audited in BOTH the DTCG hex and the preset's OKLCH color-mix
+ * rendering, like the brand pairs above). Add a row here whenever a new
+ * text-clipped gradient `@utility` is added to preset.css — that is the
+ * maintenance contract that keeps this blind spot closed.
+ *
+ * NOT listed (intentionally): bg-gradient-primary / bg-gradient-ai. They are
+ * decorative SECTION backgrounds sitting behind white text, not clipped text;
+ * white-on-endpoint is governed by the brand-fg / surface pairs and the design
+ * intent (vivid panels), not the text floor. See ADR-0018.
+ */
+const TEXT_GRADIENTS = [
+  {
+    utility: "text-gradient-primary",
+    floor: 4.5,
+    required: { light: false, dark: true },
+    // endpoints per mode, in preset.css order (from → to)
+    endpoints: {
+      light: ["{color.brand.600}", "{color.brand.500}"], // brand → brand-glow (byte-identical to pre-1.7)
+      dark: ["{color.brand.300}", "{color.brand.400}"], // dark-aware: brightened so the clipped heading stays legible
+    },
+    note: "clipped heading (bg-clip-text)",
+  },
+];
+
 let failures = 0;
 const fmt = (n) => n.toFixed(2).padStart(5);
 
@@ -265,6 +342,43 @@ for (const mode of ["light", "dark"]) {
       );
     }
   }
+
+  /* --- Gradient-text checks (ADR-0018): worst endpoint vs bg --- */
+  console.log(`  --- text gradients (worst endpoint vs bg) ---`);
+  const bgGrad = variantsOf("bg", mode);
+  for (const grad of TEXT_GRADIENTS) {
+    const required = grad.required[mode];
+    // Evaluate every shared source (tokens / preset color-mix) across all
+    // endpoints; the gradient's worst endpoint is the binding one.
+    const endpointVar = grad.endpoints[mode].map(endpointVariants);
+    const sources = new Set(["tokens", ...endpointVar.flatMap(Object.keys)]);
+    for (const source of sources) {
+      if (source === "preset" && !endpointVar.some((e) => "preset" in e)) continue;
+      const bgHex = bgGrad[source] ?? bgGrad.tokens;
+      // worst = lowest contrast among the gradient's endpoints
+      let worst = null;
+      for (let i = 0; i < endpointVar.length; i++) {
+        const epHex = endpointVar[i][source] ?? endpointVar[i].tokens;
+        const ratio = contrast(epHex, bgHex);
+        if (worst === null || ratio < worst.ratio) {
+          worst = { ratio, epHex, idx: i };
+        }
+      }
+      const pass = worst.ratio >= grad.floor;
+      let status;
+      if (pass) status = "✓ PASS";
+      else if (required) {
+        status = "✗ FAIL";
+        failures++;
+      } else status = "⚠ BASELINE (report-only)";
+      const sourceTag = source === "preset" ? " [preset color-mix approx]" : "";
+      const reqTag = required ? `min ${grad.floor}` : `min ${grad.floor} (non-fatal)`;
+      const which = `endpoint ${worst.idx + 1}/${endpointVar.length}`;
+      console.log(
+        `  ${(grad.utility + " (worst)").padEnd(40)} ${worst.epHex} on ${bgHex}  ${fmt(worst.ratio)}:1  ${reqTag.padEnd(18)} ${status}${sourceTag}  — ${grad.note} [${which}]`,
+      );
+    }
+  }
 }
 
 console.log();
@@ -273,5 +387,5 @@ if (failures > 0) {
   console.error("  Adjust the willink.dark $extensions in semantic.json within the existing primitives (see ADR-0013).");
   process.exit(1);
 }
-console.log("✓ All required WCAG 2.1 contrast pairs pass in both modes.");
-console.log("  (⚠ rows are documented pre-1.2 baselines — see ADR-0013 / docs/a11y/matrix.md.)");
+console.log("✓ All required WCAG 2.1 contrast pairs (incl. text-gradient worst endpoints) pass in both modes.");
+console.log("  (⚠ rows are documented baselines — see ADR-0013 / ADR-0018 / docs/a11y/matrix.md + gradient-and-accent.md.)");
