@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/css-tokens",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Framework-agnostic CSS variables export of i-Willink Design System tokens — for plain CSS / Astro / Vue / Svelte / WordPress consumers that don't use the Tailwind preset",
   "license": "MIT",
   "private": false,

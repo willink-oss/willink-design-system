@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.7.0] — 2026-06-13
+
+### Lockstep bump (no component change)
+
+Pair with `@willink-labs/tailwind-preset@1.7.0` — the dark-aware `text-gradient-primary` fix + the gradient-aware contrast audit ([ADR-0018](../../docs/adr/0018-gradient-accent-text-dark.md)). The fix lives entirely in the preset's gradient utility (preset-internal `--color-gradient-primary-from/-to` vars); no React component references it, so no component changed. Consumers using the `text-gradient-primary` utility get the dark legibility fix automatically through the preset. Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.6.0] — 2026-06-13
 
 ### Changed — `Button variant="link"` resting color now flips in dark mode (#58, ADR-0017)

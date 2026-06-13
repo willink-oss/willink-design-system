@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [1.7.0] — 2026-06-13
+
+### Added — dark-aware `text-gradient-primary` endpoints (ADR-0018)
+
+The `text-gradient-primary` utility (`bg-clip-text` heading) painted its glyphs with the fixed `brand → brand-glow` gradient (brand-600 → brand-500). The numeric brand ramp does **not** flip ([ADR-0013](../../docs/adr/0013-dark-mode.md)), so on the dark page background (`bg` = neutral-950) the clipped heading rendered its worst endpoint at **brand-600 = 3.54:1 — below WCAG AA**, washing out. (Caught twice by manual production review; the contrast audit could not see `bg-clip-text` gradients — the blind spot [ADR-0018](../../docs/adr/0018-gradient-accent-text-dark.md) closes.)
+
+- New **preset-internal** variables `--color-gradient-primary-from` / `--color-gradient-primary-to` (declared in `@theme` + **both** dark blocks, textually in sync per the [ADR-0013](../../docs/adr/0013-dark-mode.md) two-block convention; same kind of preset-internal flipping gradient var as `--color-gradient-subtle-end` since 1.2.0).
+  - **light**: `brand` → `brand-glow` — **byte-identical** to the pre-1.7 gradient (worst endpoint brand-500 = 4.23:1, a documented large-text baseline).
+  - **dark**: `brand-300` → `brand-400` — worst endpoint **7.41:1** on `bg` (AAA-adjacent), recognizably brand-purple. The same "lighter brand step in dark" move `brand-soft-fg` makes.
+- `text-gradient-primary` re-pointed at the vars. `bg-gradient-primary` / `bg-gradient-ai` are **unchanged** — they are vivid section backgrounds behind white text, not clipped text.
+- `prefers-reduced-motion` behavior is **unaffected** (color-only change; no keyframe or animation touched).
+
+MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) (new `@theme` variables; light byte-identical, dark a contrast improvement, compile-safe). A consumer who deliberately wants the fixed-brand gradient in dark can shadow the utility in their own `globals.css` (discouraged — it fails AA there). The repo-level `scripts/check-contrast.mjs` now gates every text-clipped gradient's worst endpoint against `bg` (required ≥ 4.5 dark / report-only baseline light), wired into CI via `packages/tokens/__tests__/contrast.test.ts`.
+
 ## [1.6.0] — 2026-06-13
 
 ### Lockstep bump (no preset change)

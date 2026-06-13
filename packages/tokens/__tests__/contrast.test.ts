@@ -5,6 +5,12 @@
  * `pnpm -r test` / quality-gate forever. A token PR that pushes a required
  * pair (fg/bg, muted/bg, brand-fg/brand, brand-soft-fg/brand-soft,
  * surface-inverted pairs, dark feedback-on-bg) below its threshold fails CI.
+ *
+ * As of 1.7.0 (ADR-0018) the same gate also covers `bg-clip-text` GRADIENT
+ * headings (the prior audit blind spot): the script's TEXT_GRADIENTS registry
+ * asserts each text-clipped gradient utility's WORST endpoint clears the floor
+ * against `bg` in dark (required) — so a clipped heading that washes out on the
+ * dark background (the defect caught twice by manual review) now fails CI.
  */
 import { spawnSync } from "node:child_process";
 import path from "node:path";

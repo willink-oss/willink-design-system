@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.7.0] — 2026-06-13
+
+### Lockstep bump (no token change)
+
+Pair with `@willink-labs/tailwind-preset@1.7.0` — the dark-aware `text-gradient-primary` fix + the gradient-aware contrast audit ([ADR-0018](../../docs/adr/0018-gradient-accent-text-dark.md)). The gradient endpoints are **preset-internal** vars (`--color-gradient-primary-from/-to`, the same kind of preset-only flipping gradient var as `--color-gradient-subtle-end`), not `semantic.json` roles — so no token was added or changed. Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.6.0] — 2026-06-13
 
 ### Lockstep bump (no token change)
