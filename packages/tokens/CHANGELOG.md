@@ -9,6 +9,22 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.5.0] — 2026-06-13
+
+### Added — text emphasis roles (`fg-*` ladder, ADR-0016)
+
+Five new semantic foreground roles slotted **between** the existing `fg` (strongest body) and `muted` (weakest supporting) — upstreamed from the i-willink.com dark rollout, which grew them locally because the two-tier `fg`/`muted` surface couldn't express the in-between emphasis steps ([v1.5](../../docs/roadmap/v1.5.md) Outcome 3). Each maps to a neutral step in light and carries a `willink.dark` extension so it flips like every other role:
+
+- `color.fg-strong` — `{color.neutral.800}` / dark `{color.neutral.100}` (headings / strong runs)
+- `color.fg-emphasis` — `{color.neutral.700}` / dark `{color.neutral.200}` (labels / links / emphasized body)
+- `color.fg-secondary` — `{color.neutral.600}` / dark `{color.neutral.300}` (secondary body, one step stronger than `muted`)
+- `color.fg-subtle` — `{color.neutral.400}` / dark `{color.neutral.500}` (captions / meta / placeholders)
+- `color.fg-faint` — `{color.neutral.300}` / dark `{color.neutral.600}` (disabled text / separators)
+
+`fg` and `muted` are unchanged (the ladder's anchors). Per-role contrast contracts are enforced by `scripts/check-contrast.mjs` in both modes: `fg-strong` / `fg-emphasis` ≥ 7 (AAA), `fg-secondary` ≥ 4.5 (AA); `fg-subtle` / `fg-faint` are documented report-only baselines below the body-text floor (non-body tiers). Naming + contrast rationale: [ADR-0016](../../docs/adr/0016-text-emphasis-roles.md).
+
+All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
 ## [1.4.1] — 2026-06-12
 
 ### Lockstep bump (no tokens source change)

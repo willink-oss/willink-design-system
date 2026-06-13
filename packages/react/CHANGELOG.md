@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.5.0] — 2026-06-13
+
+### Lockstep bump (no react source change)
+
+Pair with `@willink-labs/tokens@1.5.0` / `@willink-labs/tailwind-preset@1.5.0` / `@willink-labs/css-tokens@1.5.0` — the `fg-*` text-emphasis roles ([ADR-0016](../../docs/adr/0016-text-emphasis-roles.md)) upstreamed from the i-willink.com dark rollout. No React component change: consumers opt in via the new `text-fg-*` utilities; the frozen component surface does not move. Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.4.1] — 2026-06-12
 
 ### Fixed — dist now ships the `'use client'` directive (RSC / Next.js App Router)
