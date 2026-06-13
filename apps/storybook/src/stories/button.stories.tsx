@@ -35,6 +35,14 @@ export const Ghost: Story = {
 
 export const Link: Story = {
   args: { variant: "link" },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Resting color is the flipping `text-brand-soft-fg` role (brand-700 ≈ 7.1:1 on white in light, brand-300 ≈ 10.9:1 on the dark page background) — not the mode-invariant `text-brand` (brand-600), which dropped to 3.54:1 in dark and failed AA (ADR-0017, #58). Hover uses `text-brand-hover` (also flipping). Toggle the toolbar Theme to dark, or see the **DarkForced** story, to verify dark legibility.",
+      },
+    },
+  },
 };
 
 export const Sizes: Story = {

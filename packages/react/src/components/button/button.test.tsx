@@ -30,10 +30,15 @@ describe("Button", () => {
     expect(btn).not.toHaveClass("bg-brand");
   });
 
-  it("applies link variant", () => {
+  it("applies link variant with a flipping foreground role (ADR-0017 #58)", () => {
     render(<Button variant="link">Link</Button>);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveClass("text-brand", "underline-offset-4");
+    // Resting color is text-brand-soft-fg (flips: brand-700 light / brand-300
+    // dark), not the mode-invariant text-brand (brand-600) which failed AA on
+    // the dark page background (3.54:1). Hover keeps text-brand-hover (flips).
+    expect(btn).toHaveClass("text-brand-soft-fg", "underline-offset-4");
+    expect(btn).toHaveClass("hover:text-brand-hover");
+    expect(btn).not.toHaveClass("text-brand");
   });
 
   it("supports sm/md/lg sizes", () => {

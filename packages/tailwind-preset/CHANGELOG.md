@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [1.6.0] — 2026-06-13
+
+### Lockstep bump (no preset change)
+
+Pair with `@willink-labs/react@1.6.0` — the `Button variant="link"` dark-contrast fix ([ADR-0017](../../docs/adr/0017-dark-link-contrast-and-info-fg.md), #58). The fix re-points the link to the **existing** `text-brand-soft-fg` utility (and the Accordion-trigger hover to `text-brand-hover`); both `--color-brand-soft-fg` and `--color-brand-hover` already exist in `@theme` and both dark blocks, and `text-brand-soft-fg` / `hover:text-brand-hover` are already in the safelist — so no variable, utility, or safelist entry was added. `info-fg` was evaluated for upstreaming (#59) and **deferred** (rationale in ADR-0017). Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.5.0] — 2026-06-13
 
 ### Added — text emphasis utilities (`text-fg-*` ladder, ADR-0016)

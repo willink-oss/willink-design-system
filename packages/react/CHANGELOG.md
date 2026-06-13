@@ -6,6 +6,24 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [1.6.0] — 2026-06-13
+
+### Changed — `Button variant="link"` resting color now flips in dark mode (#58, ADR-0017)
+
+The `link` variant's resting foreground moved from the mode-invariant `text-brand` (brand-600) to the flipping `text-brand-soft-fg` role (light = brand-700, dark = brand-300). `text-brand` is the fixed brand-600 primitive and does **not** flip ([ADR-0013](../../docs/adr/0013-dark-mode.md) semantic-flip/primitive-invariant), so on the dark page background (`bg` = neutral-950) the resting link rendered at **3.54:1 — below WCAG AA**. Reproduced by the i-willink.com production sweep on `/design-system`.
+
+- Resting: `text-brand` → **`text-brand-soft-fg`**. Contrast on `bg`: light **7.10:1** (was 5.70 at brand-600), dark **10.93:1** (was 3.54). Both now clear AAA.
+- Hover (`hover:text-brand-hover`) is unchanged — it already flips (light brand-700 / dark brand-500) and stays legible in dark (**4.76:1**, AA).
+- **Light-mode visual shift**: the resting link is now a subtly darker purple (brand-600 → brand-700). Per [ADR-0010](../../docs/adr/0010-semver-policy.md) this is a default-visual change classified **MINOR** (compile-safe; no API/type/a11y-semantics change). The shift *improves* light contrast (5.70 → 7.10) and is the alternative the ADR chose over a new dedicated link role, to avoid expanding the token surface for a one-notch change (rationale in [ADR-0017](../../docs/adr/0017-dark-link-contrast-and-info-fg.md)).
+
+**Migration:** none required. If a consumer relied on the link resting color being exactly brand-600 in light, re-pin with `className="text-brand"` on the link Button (not recommended in dark contexts — it fails AA there).
+
+### Fixed — `AccordionTrigger` hover color now flips in dark mode (#58 audit, ADR-0017)
+
+The DS-wide audit for the same bug class (fixed brand foreground on a flipping surface) found one more instance: `AccordionTrigger`'s `hover:text-brand` (brand-600, invariant) turned the trigger label to 3.54:1 on the dark page background on hover. Changed to **`hover:text-brand-hover`** (flips: light brand-700 / dark brand-500 — 4.76:1 dark, AA). `RadioGroupItem`'s `text-brand` was audited and **left unchanged**: it colors the 8px selected-state indicator dot (a graphical/UI object, not text), which clears the WCAG 1.4.11 non-text 3:1 threshold (3.54:1) in dark. No other component uses fixed brand text on a flipping surface.
+
+PATCH-grade fix shipped in the same MINOR cut.
+
 ## [1.5.0] — 2026-06-13
 
 ### Lockstep bump (no react source change)

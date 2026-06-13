@@ -22,13 +22,13 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `Button` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `sm` (h-8) is 32 px — under 44 px; document as a Form / inline action affordance, not a primary touch target |
+| `Button` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `sm` (h-8) is 32 px — under 44 px; document as a Form / inline action affordance, not a primary touch target. `variant="link"` resting fg is the flipping `text-brand-soft-fg` (light 7.10:1 / dark 10.93:1 on `bg`), not the mode-invariant `text-brand` which failed AA in dark (3.54:1) — fixed 1.6.0, [ADR-0017](../adr/0017-dark-link-contrast-and-info-fg.md) / #58 |
 | `Badge` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive |
 | `Input` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | `aria-invalid` for error styling |
 | `Textarea` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Same as Input |
 | `Label` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Pairs via `htmlFor` / Radix Label |
 | `Card` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive container |
-| `Accordion` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Chevron rotation + content expand both honor `motion-reduce` (0.13.0) |
+| `Accordion` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Chevron rotation + content expand both honor `motion-reduce` (0.13.0); trigger hover fg is the flipping `text-brand-hover` (dark 4.76:1 on `bg`), not the mode-invariant `text-brand` (3.54:1 dark) — fixed 1.6.0, [ADR-0017](../adr/0017-dark-link-contrast-and-info-fg.md) / #58 |
 | `Dialog` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Radix focus trap; `motion-reduce` collapses overlay + content animation (0.13.0) |
 | `AlertDialog` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Same as Dialog with `role="alertdialog"` |
 | `Avatar` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Fallback text required for screen readers |
