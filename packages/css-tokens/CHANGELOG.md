@@ -4,6 +4,12 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [1.6.0] — 2026-06-13
+
+### Lockstep bump (no generated-output change)
+
+Pair with `@willink-labs/react@1.6.0` — the `Button variant="link"` dark-contrast fix ([ADR-0017](../../docs/adr/0017-dark-link-contrast-and-info-fg.md), #58). The fix reuses existing semantic roles (`brand-soft-fg` / `brand-hover`, both already in `tokens.css` / `tokens.semantic.css` / `tokens.dark.css`), so the generated CSS is byte-identical to 1.5.0; `info-fg` was evaluated for upstreaming (#59) and **deferred** (no new `--color-info-fg` variable shipped — rationale in ADR-0017). Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.5.0] — 2026-06-13
 
 ### Added — text emphasis variables (`fg-*` ladder, ADR-0016)

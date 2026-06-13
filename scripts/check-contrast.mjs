@@ -15,6 +15,8 @@
  *   muted/bg                           ≥ 4.5  (both modes)
  *   brand-fg/brand                     ≥ 4.5  (both modes)
  *   brand-soft-fg/brand-soft           ≥ 4.5  (both modes)
+ *   brand-soft-fg/bg                   ≥ 4.5  (both modes — Button link resting, #58/ADR-0017)
+ *   brand-hover/bg                     ≥ 4.5  (both modes — Button link / Accordion-trigger hover, #58)
  *   surface-inverted-fg/surface-inverted ≥ 4.5 (both modes)
  *   success|warning|danger on bg       ≥ 4.5  (DARK mode only)
  *
@@ -217,6 +219,12 @@ const PAIRS = [
   { fg: "muted", bg: "bg", min: 4.5, required: { light: true, dark: true }, note: "secondary text" },
   { fg: "brand-fg", bg: "brand", min: 4.5, required: { light: true, dark: true }, note: "primary Button" },
   { fg: "brand-soft-fg", bg: "brand-soft", min: 4.5, required: { light: true, dark: true }, note: "Badge soft" },
+  // Brand text directly on the page background (ADR-0017 #58). The link Button
+  // resting color and the Accordion-trigger hover are brand text on `bg`. The
+  // old mode-invariant `text-brand` (brand-600) failed here in dark (3.54:1);
+  // both now use FLIPPING roles, gated to AA in both modes.
+  { fg: "brand-soft-fg", bg: "bg", min: 4.5, required: { light: true, dark: true }, note: "Button link resting (#58)" },
+  { fg: "brand-hover", bg: "bg", min: 4.5, required: { light: true, dark: true }, note: "Button link / Accordion-trigger hover (#58)" },
   { fg: "surface-inverted-fg", bg: "surface-inverted", min: 4.5, required: { light: true, dark: true }, note: "Tooltip" },
   { fg: "success", bg: "bg", min: 4.5, required: { light: false, dark: true }, note: "feedback text" },
   { fg: "warning", bg: "bg", min: 4.5, required: { light: false, dark: true }, note: "feedback text" },

@@ -82,7 +82,7 @@ export const AccordionTrigger = forwardRef<
       ref={ref}
       className={cn(
         "group/trigger flex flex-1 items-center justify-between py-4 text-base font-semibold text-fg",
-        "transition-all hover:text-brand",
+        "transition-all hover:text-brand-hover",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg",
         className,
       )}

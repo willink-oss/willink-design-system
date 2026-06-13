@@ -90,7 +90,11 @@ describe("Accordion", () => {
   it("trigger has hover/focus class names from cn", () => {
     render(<Sample type="single" />);
     const q1 = screen.getByRole("button", { name: /Q1/ });
-    expect(q1).toHaveClass("hover:text-brand");
+    // Hover uses the flipping brand-hover role (brand-700 light / brand-500
+    // dark), not the mode-invariant text-brand (brand-600), which froze to
+    // 3.54:1 on the dark page background (ADR-0017 #58 audit).
+    expect(q1).toHaveClass("hover:text-brand-hover");
+    expect(q1).not.toHaveClass("hover:text-brand");
   });
 
   it("has no axe a11y violations", async () => {

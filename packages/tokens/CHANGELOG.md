@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.6.0] — 2026-06-13
+
+### Lockstep bump (no token change)
+
+Pair with `@willink-labs/react@1.6.0` — the `Button variant="link"` dark-contrast fix ([ADR-0017](../../docs/adr/0017-dark-link-contrast-and-info-fg.md), #58). The fix reuses **existing** semantic roles (`brand-soft-fg`, `brand-hover`), so no token was added or changed; `info-fg` was evaluated for upstreaming (#59) and **deferred** (single-usage, no info-surface family, below the promotion bar — rationale in ADR-0017). Published to keep the lockstep version set aligned per the monorepo convention.
+
 ## [1.5.0] — 2026-06-13
 
 ### Added — text emphasis roles (`fg-*` ladder, ADR-0016)
