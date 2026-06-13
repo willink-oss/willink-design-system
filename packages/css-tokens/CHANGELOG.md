@@ -4,6 +4,14 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [1.5.0] — 2026-06-13
+
+### Added — text emphasis variables (`fg-*` ladder, ADR-0016)
+
+Regenerated from `@willink-labs/tokens@1.5.0`: the five new `fg-*` text-emphasis roles ([ADR-0016](../../docs/adr/0016-text-emphasis-roles.md)) now appear as CSS variables — `--color-fg-strong` / `--color-fg-emphasis` / `--color-fg-secondary` / `--color-fg-subtle` / `--color-fg-faint` — in `tokens.css` and `tokens.semantic.css` (light, mapped to `var(--color-neutral-*)`), and flipped to lighter steps in `tokens.dark.css` (both activation paths) + the root proxies. Semantic var count 34 → **39**; dark overrides 16 → **21**. Use them for a foreground emphasis hierarchy that flips in dark without reaching into mode-invariant `--color-neutral-*`.
+
+All additive — MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md).
+
 ## [1.4.1] — 2026-06-12
 
 ### Lockstep bump (no css-tokens source change)

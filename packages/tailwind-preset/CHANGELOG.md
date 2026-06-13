@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [1.5.0] — 2026-06-13
+
+### Added — text emphasis utilities (`text-fg-*` ladder, ADR-0016)
+
+Five new foreground CSS variables + safelist entries for the text-emphasis ladder upstreamed from the i-willink.com dark rollout ([ADR-0016](../../docs/adr/0016-text-emphasis-roles.md)) — sitting between `text-fg` and `text-muted`:
+
+- `--color-fg-strong` (`neutral-800` / dark `neutral-100`), `--color-fg-emphasis` (`neutral-700` / `neutral-200`), `--color-fg-secondary` (`neutral-600` / `neutral-300`), `--color-fg-subtle` (`neutral-400` / `neutral-500`), `--color-fg-faint` (`neutral-300` / `neutral-600`) — declared in `@theme` (light) and in **both** dark blocks (`@media (prefers-color-scheme: dark)` + `:root[data-theme="dark"]`), kept textually in sync per the [ADR-0013](../../docs/adr/0013-dark-mode.md) two-block convention.
+- Safelist: `@source inline("text-fg-strong")` … `text-fg-faint`, so the `text-fg-*` utilities compile for consumers that opt in.
+
+No `dark:` variants needed — the roles flip through the underlying CSS variables. MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) (new `@theme` variables + safelist entries).
+
 ## [1.4.1] — 2026-06-12
 
 ### Lockstep bump (no preset source change)
