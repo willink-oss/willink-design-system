@@ -47,6 +47,15 @@
 @source inline("text-fg");
 @source inline("text-muted");
 @source inline("border-border");
+
+/* Text emphasis ladder (1.5.0+ / ADR-0016) — intermediate foreground roles
+ * between text-fg and text-muted. Consumers opt in via these utilities; they
+ * flip in dark mode through the underlying --color-fg-* CSS variables. */
+@source inline("text-fg-strong");
+@source inline("text-fg-emphasis");
+@source inline("text-fg-secondary");
+@source inline("text-fg-subtle");
+@source inline("text-fg-faint");
 @source inline("ring-ring");
 @source inline("ring-offset-bg");
 

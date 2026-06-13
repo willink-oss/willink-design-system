@@ -83,7 +83,9 @@ The `data-theme` contract (ADR-0013, identical to the Tailwind preset):
 - **Force dark** — `<html data-theme="dark">` applies the dark values regardless of the OS preference.
 - **Force light** — `<html data-theme="light">` opts out of the auto flip.
 
-Only semantic roles flip (`bg`, `fg`, `muted`, `border`, the surface roles, brand state tokens, feedback colors). Primitives and the invariant roles (`ring`, `brand`, `brand-fg`, `brand-glow`, `accent-cyan`, `accent-pink`) stay constant — consumers styling against `var(--color-brand-600)` etc. under a dark root take responsibility for the contrast themselves. Note: the dark **shadow** overrides (`--shadow-soft` / `--shadow-md`) are a Tailwind-preset-level decision and are not part of this file; copy the two declarations from the preset's dark block if you need them.
+Only semantic roles flip (`bg`, `fg`, `muted`, the `fg-*` text-emphasis ladder, `border`, the surface roles, brand state tokens, feedback colors). Primitives and the invariant roles (`ring`, `brand`, `brand-fg`, `brand-glow`, `accent-cyan`, `accent-pink`) stay constant — consumers styling against `var(--color-brand-600)` etc. under a dark root take responsibility for the contrast themselves. Note: the dark **shadow** overrides (`--shadow-soft` / `--shadow-md`) are a Tailwind-preset-level decision and are not part of this file; copy the two declarations from the preset's dark block if you need them.
+
+The `fg-*` text-emphasis ladder (1.5.0+ / [ADR-0016](../../docs/adr/0016-text-emphasis-roles.md)) sits between `fg` and `muted` — `--color-fg-strong` / `--color-fg-emphasis` / `--color-fg-secondary` / `--color-fg-subtle` / `--color-fg-faint`, each a neutral-step alias that flips in dark like every other role. Use it for a foreground emphasis hierarchy without reaching into mode-invariant `--color-neutral-*`.
 
 ## Override
 
@@ -102,8 +104,8 @@ Every semantic role that aliases `var(--color-brand)` (ring, brand-glow, etc.) c
 ## What ships
 
 - 60 primitive CSS variables (color scales, radius, duration, easing, shadow)
-- 34 semantic roles (color slots + motion roles + easing roles)
-- 16 dark-mode overrides in `tokens.dark.css` (one per flipping semantic role)
+- 39 semantic roles (color slots + the `fg-*` text-emphasis ladder + motion roles + easing roles)
+- 21 dark-mode overrides in `tokens.dark.css` (one per flipping semantic role)
 - 10 color-free primitives in `tokens.primitives.css` (radius + duration + easing — 1.3.0+)
 - One declarative shorthand: `--color-brand: var(--color-brand-600)`
 - 5 root-level proxy files so plain-path (non-`exports`-map) resolvers work (1.3.0+)

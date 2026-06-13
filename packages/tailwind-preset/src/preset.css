@@ -110,6 +110,22 @@
   --color-fg:             var(--color-neutral-900);
   --color-muted:          var(--color-neutral-500);
   --color-border:         var(--color-neutral-200);
+  /* Text emphasis ladder (1.5.0+ / ADR-0016) — intermediate foreground roles
+   * between fg (strongest body) and muted (weakest). Upstreamed from the
+   * i-willink.com dark rollout, which needed steps the two-tier fg/muted
+   * surface couldn't express. Each maps to a neutral step and flips in dark
+   * (see the dual dark blocks below):
+   *   fg-strong    → headings / strong runs            (n800 / dark n100)
+   *   fg-emphasis  → labels / links / emphasized body  (n700 / dark n200)
+   *   fg-secondary → secondary body (one step > muted)  (n600 / dark n300)
+   *   fg-subtle    → captions / meta / placeholders     (n400 / dark n500)
+   *   fg-faint     → disabled text / separators         (n300 / dark n600)
+   */
+  --color-fg-strong:      var(--color-neutral-800);
+  --color-fg-emphasis:    var(--color-neutral-700);
+  --color-fg-secondary:   var(--color-neutral-600);
+  --color-fg-subtle:      var(--color-neutral-400);
+  --color-fg-faint:       var(--color-neutral-300);
   /* Surface roles (1.2.0+ / ADR-0013) — neutral surfaces that flip in dark
    * mode. Introduced to absorb the primitive-utility leaks (bg-neutral-100,
    * hover:bg-neutral-50, …) that froze light-mode grays under a dark root:
@@ -438,6 +454,11 @@
     --color-bg:                  var(--color-neutral-950);
     --color-fg:                  var(--color-neutral-50);
     --color-muted:               var(--color-neutral-400);
+    --color-fg-strong:           var(--color-neutral-100);
+    --color-fg-emphasis:         var(--color-neutral-200);
+    --color-fg-secondary:        var(--color-neutral-300);
+    --color-fg-subtle:           var(--color-neutral-500);
+    --color-fg-faint:            var(--color-neutral-600);
     --color-border:              var(--color-neutral-800);
     --color-surface-subtle:      var(--color-neutral-900);
     --color-surface-muted:       var(--color-neutral-800);
@@ -461,6 +482,11 @@
   --color-bg:                  var(--color-neutral-950);
   --color-fg:                  var(--color-neutral-50);
   --color-muted:               var(--color-neutral-400);
+  --color-fg-strong:           var(--color-neutral-100);
+  --color-fg-emphasis:         var(--color-neutral-200);
+  --color-fg-secondary:        var(--color-neutral-300);
+  --color-fg-subtle:           var(--color-neutral-500);
+  --color-fg-faint:            var(--color-neutral-600);
   --color-border:              var(--color-neutral-800);
   --color-surface-subtle:      var(--color-neutral-900);
   --color-surface-muted:       var(--color-neutral-800);

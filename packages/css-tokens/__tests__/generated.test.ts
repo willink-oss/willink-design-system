@@ -55,6 +55,15 @@ describe("@willink-labs/css-tokens generated files", () => {
     expect(css).not.toMatch(/--color-brand-500: #/);
   });
 
+  it("emits the text emphasis ladder (1.5.0+ / ADR-0016) in light, mapped to neutral steps", () => {
+    const css = readCss("tokens.css");
+    expect(css).toContain("--color-fg-strong: var(--color-neutral-800)");
+    expect(css).toContain("--color-fg-emphasis: var(--color-neutral-700)");
+    expect(css).toContain("--color-fg-secondary: var(--color-neutral-600)");
+    expect(css).toContain("--color-fg-subtle: var(--color-neutral-400)");
+    expect(css).toContain("--color-fg-faint: var(--color-neutral-300)");
+  });
+
   it("DTCG alias references are emitted as var(--…), not resolved hex", () => {
     const css = readCss("tokens.css");
     // `ring` in semantic.json aliases `{color.brand}` → should be `var(--color-brand)`
@@ -90,6 +99,15 @@ describe("@willink-labs/css-tokens generated files", () => {
     expect(css).not.toContain("--color-ring");
     expect(css).not.toContain("--color-brand-fg");
     expect(css).not.toContain("--color-accent-cyan");
+  });
+
+  it("tokens.dark.css flips the text emphasis ladder to lighter neutral steps (ADR-0016)", () => {
+    const css = readCss("tokens.dark.css");
+    expect(css).toContain("--color-fg-strong: var(--color-neutral-100)");
+    expect(css).toContain("--color-fg-emphasis: var(--color-neutral-200)");
+    expect(css).toContain("--color-fg-secondary: var(--color-neutral-300)");
+    expect(css).toContain("--color-fg-subtle: var(--color-neutral-500)");
+    expect(css).toContain("--color-fg-faint: var(--color-neutral-600)");
   });
 });
 
