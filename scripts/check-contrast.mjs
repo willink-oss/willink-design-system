@@ -9,6 +9,9 @@
  *
  * Required thresholds (FAIL → exit 1):
  *   fg/bg                              ≥ 7.0  (both modes — AAA body text)
+ *   fg-strong/bg                       ≥ 7.0  (both modes — AAA emphasis, ADR-0016)
+ *   fg-emphasis/bg                     ≥ 7.0  (both modes — AAA emphasis, ADR-0016)
+ *   fg-secondary/bg                    ≥ 4.5  (both modes — AA secondary body, ADR-0016)
  *   muted/bg                           ≥ 4.5  (both modes)
  *   brand-fg/brand                     ≥ 4.5  (both modes)
  *   brand-soft-fg/brand-soft           ≥ 4.5  (both modes)
@@ -18,6 +21,9 @@
  * Report-only documented baselines (printed with ⚠ if < 4.5, never fatal):
  *   success|warning|danger on bg in LIGHT mode — pre-existing 1.x values
  *   #ffffff on danger (AlertDialog destructive action), both modes
+ *   fg-subtle/bg, fg-faint/bg (ADR-0016) — captions/meta and disabled/separator
+ *     tiers; intentionally below the 4.5 body-text floor (like muted on white),
+ *     documented here so the floor is a visible number, not folklore
  *
  * Brand numeric steps: the Tailwind preset derives brand-50…950 at render time
  * via `color-mix(in oklch, var(--color-brand) X%, white|black)` rather than
@@ -200,6 +206,14 @@ function contrast(fgHex, bgHex) {
 
 const PAIRS = [
   { fg: "fg", bg: "bg", min: 7.0, required: { light: true, dark: true }, note: "body text" },
+  // Text emphasis ladder (ADR-0016). strong/emphasis target AAA (≥7);
+  // secondary targets AA (≥4.5); subtle/faint are non-body tiers documented
+  // below their floor (report-only, like muted on white in light mode).
+  { fg: "fg-strong", bg: "bg", min: 7.0, required: { light: true, dark: true }, note: "emphasis (headings/strong)" },
+  { fg: "fg-emphasis", bg: "bg", min: 7.0, required: { light: true, dark: true }, note: "emphasis (labels/links)" },
+  { fg: "fg-secondary", bg: "bg", min: 4.5, required: { light: true, dark: true }, note: "secondary body" },
+  { fg: "fg-subtle", bg: "bg", min: 4.5, required: { light: false, dark: false }, note: "captions/meta (non-body tier)" },
+  { fg: "fg-faint", bg: "bg", min: 4.5, required: { light: false, dark: false }, note: "disabled/separator (non-text tier)" },
   { fg: "muted", bg: "bg", min: 4.5, required: { light: true, dark: true }, note: "secondary text" },
   { fg: "brand-fg", bg: "brand", min: 4.5, required: { light: true, dark: true }, note: "primary Button" },
   { fg: "brand-soft-fg", bg: "brand-soft", min: 4.5, required: { light: true, dark: true }, note: "Badge soft" },

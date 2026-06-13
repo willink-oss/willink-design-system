@@ -45,10 +45,12 @@ Use these. shadcn-default names (`bg-primary` / `text-foreground` / etc.) are ex
 | Class | Purpose |
 |---|---|
 | `bg-brand` / `bg-brand-hover` / `bg-brand-active` | Brand surfaces |
-| `text-fg` / `text-fg-muted` / `text-fg-subtle` | Foreground text |
+| `text-fg` / `text-muted` | Foreground text — strongest body / weakest supporting |
+| `text-fg-strong` / `text-fg-emphasis` / `text-fg-secondary` / `text-fg-subtle` / `text-fg-faint` | Text emphasis ladder between `fg` and `muted` (1.5.0+ / [ADR-0016](../../docs/adr/0016-text-emphasis-roles.md)) — flips in dark mode; per-role contrast contract (strong/emphasis ≥ 7 AAA, secondary ≥ 4.5 AA, subtle/faint non-body tiers) |
 | `text-brand-fg` | Foreground on brand surface |
-| `border-border` / `border-border-strong` | Borders |
+| `border-border` | Borders |
 | `ring-ring` | Focus ring |
+| `bg-surface-subtle` / `bg-surface-muted` / `bg-track` / `bg-surface-inverted` (+ `text-surface-inverted-fg`) | Neutral surface roles (1.2.0+) |
 | `bg-success` / `bg-warning` / `bg-danger` (+ `text-*` variants) | Feedback |
 
 ## License

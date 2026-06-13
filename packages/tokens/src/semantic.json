@@ -20,6 +20,36 @@
       "$description": "補助テキスト",
       "$extensions": { "willink.dark": { "$value": "{color.neutral.400}" } }
     },
+    "fg-strong": {
+      "$value": "{color.neutral.800}",
+      "$type": "color",
+      "$description": "Text emphasis ladder (1.5.0+ / ADR-0016) — strongest emphasis below fg. Headings / strong runs. Contrast on bg ≥ 7 (AAA) both modes.",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.100}" } }
+    },
+    "fg-emphasis": {
+      "$value": "{color.neutral.700}",
+      "$type": "color",
+      "$description": "Text emphasis ladder (1.5.0+ / ADR-0016) — labels / links / emphasized body. Contrast on bg ≥ 7 (AAA) both modes.",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.200}" } }
+    },
+    "fg-secondary": {
+      "$value": "{color.neutral.600}",
+      "$type": "color",
+      "$description": "Text emphasis ladder (1.5.0+ / ADR-0016) — secondary body text, one step stronger than muted. Contrast on bg ≥ 4.5 both modes.",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.300}" } }
+    },
+    "fg-subtle": {
+      "$value": "{color.neutral.400}",
+      "$type": "color",
+      "$description": "Text emphasis ladder (1.5.0+ / ADR-0016) — captions / meta / placeholders, weakest readable tier below muted. Sub-4.5 on bg in light by design (documented baseline like muted on white) — not for body text.",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.500}" } }
+    },
+    "fg-faint": {
+      "$value": "{color.neutral.300}",
+      "$type": "color",
+      "$description": "Text emphasis ladder (1.5.0+ / ADR-0016) — faintest tier: disabled text / separators / decorative dividers. Non-text contrast tier (documented baseline) — never use for content text.",
+      "$extensions": { "willink.dark": { "$value": "{color.neutral.600}" } }
+    },
     "border": {
       "$value": "{color.neutral.200}",
       "$type": "color",

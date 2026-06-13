@@ -23,6 +23,11 @@
     --color-bg: var(--color-neutral-950);
     --color-fg: var(--color-neutral-50);
     --color-muted: var(--color-neutral-400);
+    --color-fg-strong: var(--color-neutral-100);
+    --color-fg-emphasis: var(--color-neutral-200);
+    --color-fg-secondary: var(--color-neutral-300);
+    --color-fg-subtle: var(--color-neutral-500);
+    --color-fg-faint: var(--color-neutral-600);
     --color-border: var(--color-neutral-800);
     --color-surface-subtle: var(--color-neutral-900);
     --color-surface-muted: var(--color-neutral-800);
@@ -43,6 +48,11 @@
   --color-bg: var(--color-neutral-950);
   --color-fg: var(--color-neutral-50);
   --color-muted: var(--color-neutral-400);
+  --color-fg-strong: var(--color-neutral-100);
+  --color-fg-emphasis: var(--color-neutral-200);
+  --color-fg-secondary: var(--color-neutral-300);
+  --color-fg-subtle: var(--color-neutral-500);
+  --color-fg-faint: var(--color-neutral-600);
   --color-border: var(--color-neutral-800);
   --color-surface-subtle: var(--color-neutral-900);
   --color-surface-muted: var(--color-neutral-800);

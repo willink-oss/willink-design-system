@@ -57,6 +57,25 @@ describe("semantic.json", () => {
     }
   });
 
+  it("has the text emphasis ladder (1.5.0+ / ADR-0016) with dark flips", () => {
+    // fg-* roles between fg (strongest) and muted (weakest). Each maps to a
+    // neutral step in light and carries a willink.dark flip to a lighter step.
+    const ladder: Record<string, { light: string; dark: string }> = {
+      "fg-strong": { light: "{color.neutral.800}", dark: "{color.neutral.100}" },
+      "fg-emphasis": { light: "{color.neutral.700}", dark: "{color.neutral.200}" },
+      "fg-secondary": { light: "{color.neutral.600}", dark: "{color.neutral.300}" },
+      "fg-subtle": { light: "{color.neutral.400}", dark: "{color.neutral.500}" },
+      "fg-faint": { light: "{color.neutral.300}", dark: "{color.neutral.600}" },
+    };
+    for (const [role, { light, dark }] of Object.entries(ladder)) {
+      const leaf = (semantic.color as Record<string, TokenLeaf & { $extensions?: Record<string, TokenLeaf> }>)[role];
+      expect(leaf, `slot ${role}`).toBeDefined();
+      expect(leaf.$type, `${role} $type`).toBe("color");
+      expect(leaf.$value, `${role} light`).toBe(light);
+      expect(leaf.$extensions?.["willink.dark"]?.$value, `${role} dark`).toBe(dark);
+    }
+  });
+
   it("has the required role-based motion durations (0.12.0+)", () => {
     const required = [
       "modal-enter",
