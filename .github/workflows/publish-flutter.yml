@@ -35,6 +35,25 @@ jobs:
       # Ref: https://dart.dev/tools/pub/automated-publishing
       - uses: dart-lang/setup-dart@v1
 
+      # Tag/pubspec agreement + pre-release awareness (ADR-0012 Layer 2 #1 / ADR-0019).
+      # pub.dev has no dist-tags: isolation is inherent in the SemVer string —
+      # a pre-release version (`X.Y.Z-beta.N`) is excluded from default
+      # `^`-constraint resolution, so existing consumers never auto-upgrade to it.
+      # Only runs on tag pushes (workflow_dispatch is a manual human path).
+      - name: Verify tag/pubspec agreement
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          set -euo pipefail
+          TAG_VERSION="${GITHUB_REF_NAME#flutter-v}"
+          PUBSPEC_VERSION="$(grep '^version:' pubspec.yaml | awk '{print $2}')"
+          if [ "$TAG_VERSION" != "$PUBSPEC_VERSION" ]; then
+            echo "::error::Tag/pubspec mismatch: tag '$TAG_VERSION' vs pubspec '$PUBSPEC_VERSION'. Refusing to publish."
+            exit 1
+          fi
+          if [[ "$TAG_VERSION" == *-* ]]; then
+            echo "Pre-release '$TAG_VERSION' — pub.dev excludes it from default ^-constraint resolution (ADR-0019)."
+          fi
+
       - name: Install dependencies
         run: flutter pub get
 
