@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 
 import { Toggle } from "./toggle";
@@ -51,5 +52,10 @@ describe("Toggle", () => {
       </Toggle>,
     );
     expect(screen.getByRole("button", { name: "Outline" })).toHaveClass("border");
+  });
+
+  it("has no axe a11y violations", async () => {
+    const { container } = render(<Toggle aria-label="Toggle bold">B</Toggle>);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 
 import { Slider } from "./slider";
@@ -40,5 +41,12 @@ describe("Slider", () => {
     // Radix sets data-disabled on the root span; thumb does not get HTML `disabled`
     const root = container.querySelector('[data-orientation="horizontal"][data-disabled]');
     expect(root).not.toBeNull();
+  });
+
+  it("has no axe a11y violations", async () => {
+    const { container } = render(
+      <Slider defaultValue={[50]} max={100} aria-label="volume" />,
+    );
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

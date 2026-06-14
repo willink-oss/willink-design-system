@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it, vi } from "vitest";
 
 import {
@@ -54,5 +55,10 @@ describe("Select", () => {
     expect(trigger).toHaveAttribute("aria-expanded", "false");
     await user.click(trigger);
     expect(trigger).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("has no axe a11y violations", async () => {
+    const { container } = render(<Sample defaultValue="premium" />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
