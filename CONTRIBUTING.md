@@ -112,6 +112,24 @@ Cut procedure (what must be verified is defined in [ADR-0012](./docs/adr/0012-re
 
 Since v1.0.0 strict SemVer 2.0 applies — classification rules per surface live in [ADR-0010](./docs/adr/0010-semver-policy.md).
 
+### Beta channel & pre-releases
+
+Two channels per registry ([ADR-0019](./docs/adr/0019-autonomous-beta-channel.md)):
+
+- **Stable** (`latest` dist-tag on npm / a stable SemVer on pub.dev) — what `npm i @willink-labs/react` resolves. **Hand-cut and human-gated, always.**
+- **Beta** (`beta` dist-tag on npm / a `X.Y.Z-beta.N` pre-release on pub.dev) — opt-in only:
+
+  ```bash
+  npm i @willink-labs/react@beta        # npm consumers
+  # pubspec.yaml:  willink_theme: 1.6.0-beta.1   # Flutter consumers pin explicitly
+  ```
+
+The version string decides the channel: a SemVer pre-release (`X.Y.Z-beta.N`) routes to a non-`latest` dist-tag; `publish.yml` enforces this and refuses to publish a pre-release to `latest`. A normal `^`-constraint never auto-upgrades to a beta.
+
+### Automated contributions (supervised loop)
+
+Some PRs are opened by a human-supervised automation loop. They are held to the **same** [ADR-0012](./docs/adr/0012-release-verification-policy.md) Definition-of-Done as human PRs — an independent checker validates the executable DoD before the PR is eligible to merge. The loop may merge its own PR and cut a **beta** release once the checker passes and CI is green; **promotion to a stable release is human-only.** The loop never invents its own work — it acts only on issues a maintainer has approved.
+
 ---
 
 ## Pull requests

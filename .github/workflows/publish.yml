@@ -49,6 +49,78 @@ jobs:
       - name: Build all packages
         run: pnpm -r build
 
+      # Resolve the npm dist-tag from the release version — the beta-channel
+      # isolation that lets pre-releases be cut (incl. autonomously) without ever
+      # reaching production consumers. See ADR-0019.
+      #
+      # - Stable `X.Y.Z`        → `latest`  (what `npm i @willink-labs/react` resolves)
+      # - Pre-release `X.Y.Z-*` → `beta` / `rc` / `alpha` / `next` (opt-in only:
+      #                           `npm i @willink-labs/react@beta`)
+      #
+      # Two guards make a wrong publish fail loudly instead of silently shipping:
+      #   1. tag/manifest agreement — the tag version must equal the version in
+      #      packages/react/package.json (the npm group moves in lockstep, so
+      #      react's version is canonical). ADR-0012 Layer 2 #1, automated.
+      #   2. a pre-release must never resolve to `latest` (defense in depth).
+      - name: Resolve release channel (beta isolation)
+        id: channel
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF_NAME}"
+          fi
+          VERSION="${VERSION#v}"   # strip the tag's leading 'v'
+
+          PKG_VERSION="$(node -p "require('./packages/react/package.json').version")"
+          if [ "$VERSION" != "$PKG_VERSION" ]; then
+            echo "::error::Tag/version mismatch: '$VERSION' (release) vs '$PKG_VERSION' (packages/react/package.json). Refusing to publish."
+            exit 1
+          fi
+
+          # SemVer 2.0.0: a pre-release is the segment after '-' and BEFORE any '+'
+          # build metadata. Strip build metadata first, so a hyphen that is legal
+          # *inside* build metadata (§10, e.g. 1.8.0+exp-sha-5) can never be
+          # mistaken for a pre-release and misroute a stable release off `latest`.
+          CORE="${VERSION%%+*}"
+          if [[ "$CORE" == *-* ]]; then
+            PRERELEASE_ID="${CORE#*-}"   # e.g. beta.0 / rc.1
+            case "$PRERELEASE_ID" in
+              beta*)  DIST_TAG="beta" ;;
+              rc*)    DIST_TAG="rc" ;;
+              alpha*) DIST_TAG="alpha" ;;
+              *)      DIST_TAG="next" ;;
+            esac
+            IS_PRERELEASE=1
+          else
+            DIST_TAG="latest"
+            IS_PRERELEASE=0
+          fi
+
+          # Defense in depth: a pre-release must never resolve to `latest`.
+          if [ "$IS_PRERELEASE" = "1" ] && [ "$DIST_TAG" = "latest" ]; then
+            echo "::error::Refusing to publish pre-release '$VERSION' to the 'latest' dist-tag."
+            exit 1
+          fi
+
+          # First-publish bootstrap guard: npm forces a `latest` dist-tag onto a
+          # package that has ZERO published versions — even with `--tag beta`. So a
+          # pre-release may only publish packages that ALREADY exist on npm. A new
+          # package's first release must be a hand-cut stable (new public surface is
+          # human-only / Level 3 anyway; the loop never creates packages).
+          if [ "$IS_PRERELEASE" = "1" ]; then
+            for pkg in @willink-labs/tokens @willink-labs/tailwind-preset @willink-labs/css-tokens @willink-labs/react; do
+              if ! npm view "$pkg" version >/dev/null 2>&1; then
+                echo "::error::Pre-release blocked: '$pkg' has no published version yet. A new package's first release must be a hand-cut stable (npm would otherwise bootstrap 'latest' to the pre-release)."
+                exit 1
+              fi
+            done
+          fi
+
+          echo "Publishing version=$VERSION to dist-tag=$DIST_TAG"
+          echo "DIST_TAG=$DIST_TAG" >> "$GITHUB_ENV"
+
       # OIDC Trusted Publisher 経由で publish
       # - NODE_AUTH_TOKEN 不要 (token 完全廃止・期限切れ概念なし)
       # - pnpm publish 経由で workspace:* の peerDeps を実 version に自動置換
@@ -57,14 +129,15 @@ jobs:
       #   OIDC token can be signed and the attestation registered on npmjs.com.
       #   See ADR-0007 for the original rationale and the private-repo blocker
       #   that was lifted by Phase 8 (OSS public化).
+      # - --tag "$DIST_TAG" routes pre-releases off `latest` (ADR-0019).
       - name: Publish @willink-labs/tokens
-        run: pnpm -F @willink-labs/tokens publish --access public --no-git-checks --provenance
+        run: pnpm -F @willink-labs/tokens publish --access public --no-git-checks --provenance --tag "$DIST_TAG"
 
       - name: Publish @willink-labs/tailwind-preset
-        run: pnpm -F @willink-labs/tailwind-preset publish --access public --no-git-checks --provenance
+        run: pnpm -F @willink-labs/tailwind-preset publish --access public --no-git-checks --provenance --tag "$DIST_TAG"
 
       - name: Publish @willink-labs/css-tokens
-        run: pnpm -F @willink-labs/css-tokens publish --access public --no-git-checks --provenance
+        run: pnpm -F @willink-labs/css-tokens publish --access public --no-git-checks --provenance --tag "$DIST_TAG"
 
       - name: Publish @willink-labs/react
-        run: pnpm -F @willink-labs/react publish --access public --no-git-checks --provenance
+        run: pnpm -F @willink-labs/react publish --access public --no-git-checks --provenance --tag "$DIST_TAG"

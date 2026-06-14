@@ -61,6 +61,55 @@ for (const group of ["packages", "apps"]) {
   }
 }
 
+// --- Beta-channel isolation must not silently regress (ADR-0019) ---
+// Pre-release versions (incl. autonomously cut ones) are only safe while
+// publish.yml routes EVERY publish through the resolved dist-tag. This is a
+// semantic check, not a string-presence tripwire: it inspects the actual
+// `pnpm ... publish` command lines (comments stripped), so a rewrite that keeps
+// the marker strings alive in comments/dead branches but hard-codes `--tag latest`
+// on the real publish step is still caught.
+function checkBetaIsolation() {
+  const wf = join(ROOT, ".github/workflows/publish.yml");
+  if (!existsSync(wf)) {
+    errors.push("publish.yml is missing — cannot verify beta-channel isolation (ADR-0019).");
+    return;
+  }
+  const lines = readFileSync(wf, "utf8").split("\n");
+  const strip = (l) => l.replace(/#.*$/, ""); // drop trailing YAML/shell comment
+  const code = lines.map(strip).join("\n");
+
+  const publishLines = lines.filter((l) =>
+    /pnpm\s+-F\s+@willink-labs\/\S+\s+publish/.test(strip(l)),
+  );
+  if (publishLines.length === 0) {
+    errors.push(
+      "publish.yml: no `pnpm -F @willink-labs/* publish` command found — cannot verify beta isolation (ADR-0019).",
+    );
+  }
+  for (const l of publishLines) {
+    const c = strip(l);
+    if (!c.includes('--tag "$DIST_TAG"')) {
+      errors.push(
+        `publish.yml: a publish step is not routed through the resolved dist-tag ` +
+          `(missing \`--tag "$DIST_TAG"\`): \`${l.trim()}\`. A pre-release could leak to 'latest' (ADR-0019).`,
+      );
+    }
+    if (/--tag\s+(latest|beta|rc|alpha|next)\b/.test(c)) {
+      errors.push(
+        `publish.yml: a publish step hard-codes a dist-tag instead of using "$DIST_TAG": ` +
+          `\`${l.trim()}\` (ADR-0019).`,
+      );
+    }
+  }
+  if (!/DIST_TAG=/.test(code) || !/GITHUB_ENV/.test(code)) {
+    errors.push("publish.yml: DIST_TAG is not computed and exported in a real (non-comment) line (ADR-0019).");
+  }
+  if (!code.includes("Refusing to publish pre-release")) {
+    errors.push("publish.yml: missing the pre-release→latest refusal assertion in a real line (ADR-0019).");
+  }
+}
+checkBetaIsolation();
+
 if (errors.length > 0) {
   console.error("✗ Guardrail violations:");
   for (const e of errors) console.error(`  - ${e}`);
