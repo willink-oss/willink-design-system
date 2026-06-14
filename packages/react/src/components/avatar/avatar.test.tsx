@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
@@ -31,5 +32,14 @@ describe("Avatar", () => {
       </Avatar>,
     );
     expect(container.querySelector(".h-12")).toBeInTheDocument();
+  });
+
+  it("has no axe a11y violations", async () => {
+    const { container } = render(
+      <Avatar>
+        <AvatarFallback>YS</AvatarFallback>
+      </Avatar>,
+    );
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

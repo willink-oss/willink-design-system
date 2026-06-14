@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it, vi } from "vitest";
 
 import {
@@ -78,5 +79,13 @@ describe("AlertDialog", () => {
     await user.click(screen.getByRole("button", { name: /^削除$/ }));
     const ad = await screen.findByRole("alertdialog");
     expect(ad).toHaveClass("motion-reduce:animate-none");
+  });
+
+  it("has no axe a11y violations (open)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /^削除$/ }));
+    await screen.findByRole("alertdialog");
+    expect(await axe(document.body)).toHaveNoViolations();
   });
 });

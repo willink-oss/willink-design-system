@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it, vi } from "vitest";
 
 import {
@@ -65,5 +66,16 @@ describe("DropdownMenu", () => {
     expect(await screen.findByRole("menu")).toBeInTheDocument();
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  it("has no axe a11y violations (open)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /Open menu/ }));
+    // Scope axe to the menu subtree: the page-level `region` (landmark) rule is
+    // a false positive in a bare test fixture — the consuming app provides
+    // landmarks, not this component.
+    const menu = await screen.findByRole("menu");
+    expect(await axe(menu)).toHaveNoViolations();
   });
 });

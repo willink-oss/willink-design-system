@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import { describe, expect, it } from "vitest";
 
 import { Toaster, toast } from "./toast";
@@ -50,5 +51,13 @@ describe("Toast", () => {
     );
     await user.click(screen.getByRole("button", { name: /Load/ }));
     expect(await screen.findByTestId("legacy-loading-icon")).toBeInTheDocument();
+  });
+
+  it("has no axe a11y violations (active toast)", async () => {
+    const user = userEvent.setup();
+    render(<Sample />);
+    await user.click(screen.getByRole("button", { name: /Save/ }));
+    await screen.findByText("Saved");
+    expect(await axe(document.body)).toHaveNoViolations();
   });
 });
