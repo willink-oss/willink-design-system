@@ -48,7 +48,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Toggle` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `sm` size mirrors Button `sm`; document touch context |
 | `FormField` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Compound a11y wiring (1.4.0, [ADR-0015](../adr/0015-formfield-api.md)): generated ids, label `htmlFor`, merged `aria-describedby` (description + error, rendered nodes only), auto `aria-invalid`; error message is `role="alert"`. Interactive criteria are rated on the slotted control itself |
 
-## Flutter components (5, willink_theme 0.5.0)
+## Flutter components (9, willink_theme 1.5.0)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.4.7 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|
@@ -57,6 +57,10 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `WillinkErrorState` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Retry button inherits WillinkButton; copy button has aria label |
 | `WillinkLoadingState` | ✅ | ✅ | — | — | — | ✅ | `Semantics(label: 'Loading')` |
 | `WillinkSectionCard` | ✅ | ✅ | — | — | — | ✅ | Non-interactive container |
+| `WillinkTabBar` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Thin wrapper over Material 3 `TabBar`; inherits tablist/tab roles + arrow-key nav + focus ring. Selected label/indicator `colorScheme.primary`, unselected `onSurfaceVariant`, divider `outlineVariant` |
+| `WillinkBottomSheet` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | `showModalBottomSheet` wrapper; modal route traps focus + scrim/Esc dismiss. Surface `colorScheme.surface`, drag handle `outlineVariant` |
+| `WillinkSnackBar` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | `ScaffoldMessenger.showSnackBar` wrapper; inherits SnackBar live-region announce + queueing. Optional `SnackBarAction` in `primary` (keyboard-reachable, focus-visible); variant accent via leading icon, message text carries the meaning non-visually |
+| `WillinkProgressIndicator` | ✅ | — | ✅ | — | — | ✅ | `LinearProgressIndicator` wrapper with `semanticsLabel` passthrough (progressbar role + value). Non-interactive, no text. Fill `primary` / track `surfaceContainerHighest` (non-text contrast) |
 
 Note: Flutter's `prefers-reduced-motion` honors the OS-level toggle automatically for `AnimatedContainer` / `Hero` etc. when the platform setting is on. DS components rely on Material 3 defaults and do not introduce custom keyframes.
 
