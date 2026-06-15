@@ -247,7 +247,9 @@
 @source inline("data-[state=checked]:translate-x-5");
 @source inline("data-[state=unchecked]:translate-x-0");
 @source inline("data-[state=checked]:bg-brand");
-@source inline("data-[state=unchecked]:bg-neutral-200");
+/* off-state migrated to the semantic surface role in 1.x (ADR-0013); the
+   bare `bg-track` (L68) does not emit the data-[state=unchecked]: variant. */
+@source inline("data-[state=unchecked]:bg-track");
 @source inline("pointer-events-none");
 @source inline("ring-0");
 
@@ -372,3 +374,26 @@
 /* Overlay fade (shared with Dialog) */
 @source inline("data-[state=open]:animate-fade-in");
 @source inline("data-[state=closed]:animate-fade-out");
+
+/* === Badge status variants (success / warning / danger) === */
+/* Emitted from badge.tsx cva; the tokens live in preset.css (with dark flips).
+   text-danger is already safelisted by the FormField block above. */
+@source inline("bg-success/10");
+@source inline("text-success");
+@source inline("bg-warning/10");
+@source inline("text-warning");
+@source inline("bg-danger/10");
+
+/* === Form control invalid state (Input / Textarea, wired by FormField) === */
+/* The visible error affordance for aria-invalid fields; without these the red
+   border/ring purges while the FormFieldError text (above) survives. */
+@source inline("aria-[invalid=true]:border-danger");
+@source inline("aria-[invalid=true]:focus-visible:ring-danger");
+
+/* === Toggle (pressed state + transparent base) === */
+/* The data-[state=on]: variants are distinct utilities from the bare
+   bg-brand/text-brand-fg/border-brand and must be scanned explicitly. */
+@source inline("bg-transparent");
+@source inline("data-[state=on]:bg-brand");
+@source inline("data-[state=on]:text-brand-fg");
+@source inline("data-[state=on]:border-brand");
