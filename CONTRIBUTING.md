@@ -12,7 +12,7 @@ This is the design system that powers i-Willink products (Next.js apps, Flutter 
 |---|---|
 | `packages/tokens` | DTCG-compatible JSON tokens (primitive + semantic). Single source of truth. |
 | `packages/tailwind-preset` | Tailwind v4 `@theme` preset (willink baseline). Consumers customize via `:root { --color-brand: ... }` override. |
-| `packages/react` | shadcn-inspired React components on Radix primitives. 24 components (0.8.0+). |
+| `packages/react` | shadcn-inspired React components on Radix primitives. 25 components (1.4.0+, FormField). |
 | `packages/flutter_theme` | Material 3 `ThemeData` factory + 5 Flutter components (EmptyState / ErrorState / LoadingState / SectionCard / WillinkButton). Published to pub.dev as `willink_theme`. |
 
 ---
