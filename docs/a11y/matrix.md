@@ -35,6 +35,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Tabs` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Tabs (arrow-key nav) |
 | `Tooltip` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | Triggers on focus + hover; `motion-reduce` collapses fade (0.13.0); inverted surface flips appropriately in dark (ADR-0013) |
 | `Popover` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | Radix click-triggered panel (`role="dialog"`); focus + Esc/outside-dismiss managed; `motion-reduce` collapses fade; surface panel (`border`/`bg-bg`/`shadow`) flips in dark (ADR-0013). 4.1.2: content **requires a consumer `aria-label`/`aria-labelledby`** (axe `aria-dialog-name`) — documented + tested. Target size (2.5.5) rated on consumer-provided trigger/content (v1.9) |
+| `ScrollArea` | ✅ | — | ✅ | ✅ | — | — | — | ✅ | ✅ | Radix styled scroll container (non-interactive chrome); thumb `bg-border` (1.4.11); native keyboard scroll preserved (2.1.1); 1.4.3/2.4.7/2.5.5 N/A to the chrome — content a11y is the consumer's (v1.9) |
 | `Toast` (Sonner) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | preset.css overrides Sonner transitions under `prefers-reduced-motion` (0.13.0) |
 | `DropdownMenu` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix DropdownMenu (full keyboard) |
 | `Select` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ✅ | ✅ | ✅ | Radix Select |
