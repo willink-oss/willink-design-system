@@ -65,6 +65,9 @@ export {
   PopoverTrigger,
 } from "./components/popover";
 
+// v1.9: ScrollArea (Radix) — styled cross-browser scroll container
+export { ScrollArea, ScrollBar } from "./components/scroll-area";
+
 // PR8: Toast (Sonner wrapper)
 export { Toaster, toast } from "./components/toast";
 // PR9: Form controls (Switch + Checkbox + RadioGroup・Radix)

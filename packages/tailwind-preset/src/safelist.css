@@ -402,3 +402,14 @@
 /* Content panel width; all other Popover classes (border/bg-bg/p-4/shadow-md/
    z-50/rounded-md/text-fg/animate-fade-*) are already safelisted above. */
 @source inline("w-72");
+
+/* === ScrollArea (v1.9) === */
+/* Viewport + scrollbar/thumb utilities not covered above (border-l/border-t via
+   border-{t,b,l,r}; transition-colors via transition-{...}; bg-border/relative/
+   flex/touch-none/select-none/rounded-full/flex-1/flex-col already present). */
+@source inline("rounded-[inherit]");
+@source inline("w-2.5");
+@source inline("h-2.5");
+@source inline("p-px");
+@source inline("border-l-transparent");
+@source inline("border-t-transparent");
