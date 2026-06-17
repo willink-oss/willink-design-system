@@ -397,3 +397,8 @@
 @source inline("data-[state=on]:bg-brand");
 @source inline("data-[state=on]:text-brand-fg");
 @source inline("data-[state=on]:border-brand");
+
+/* === Popover (v1.9) === */
+/* Content panel width; all other Popover classes (border/bg-bg/p-4/shadow-md/
+   z-50/rounded-md/text-fg/animate-fade-*) are already safelisted above. */
+@source inline("w-72");

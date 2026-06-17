@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.1.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Added
+
+- **Popover** (Radix `@radix-ui/react-popover`) — click-triggered floating panel (`Popover` / `PopoverTrigger` / `PopoverContent` / `PopoverAnchor` / `PopoverClose` / `PopoverPortal`). A focusable surface panel (border + `bg-bg` + shadow) for rich content (input groups, info cards), distinct from the hover Tooltip bubble. `motion-reduce:animate-none` per [ADR-0008](../../docs/adr/0008-motion-contract.md); unblocks Combobox / DatePicker / Sidebar (v1.9 extensibility — [ADR-0020](../../docs/adr/0020-distribution-channels.md)).
+
 ## [1.7.0] — 2026-06-13
 
 ### Lockstep bump (no component change)

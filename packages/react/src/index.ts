@@ -55,6 +55,16 @@ export {
   TooltipTrigger,
 } from "./components/tooltip";
 
+// v1.9: Popover (Radix) — click-triggered floating panel
+export {
+  Popover,
+  PopoverAnchor,
+  PopoverClose,
+  PopoverContent,
+  PopoverPortal,
+  PopoverTrigger,
+} from "./components/popover";
+
 // PR8: Toast (Sonner wrapper)
 export { Toaster, toast } from "./components/toast";
 // PR9: Form controls (Switch + Checkbox + RadioGroup・Radix)
