@@ -6,6 +6,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
+## [Unreleased]
+
+### Added — CSS-first `@layer components` DS classes (ADR-0021 §3, #97)
+
+Override-able, framework-agnostic component classes that mirror the `@willink-labs/react` cva strings, so non-React consumers (WordPress / Astro / Vue) get a real styling target instead of re-vendoring atomics by hand:
+
+- `.wl-btn` (+ `.wl-btn--outline` / `.wl-btn--ghost`) — mirrors `buttonVariants()` base + default variant + `md` size.
+- `.wl-card` — mirrors `cardVariants()` default (`rounded-xl border border-border bg-bg text-fg transition-shadow`).
+- `.wl-input` — mirrors the `Input` class string (incl. `placeholder`, `focus-visible` ring, `disabled`, and `aria-[invalid=true]` red border/ring).
+
+Every declaration resolves a DS **semantic** token (`--color-brand` / `--color-brand-fg` / `--color-border` / `--color-bg` / `--color-fg` / `--color-surface-*` / `--radius-*`) — never a primitive ramp step, never a shadcn name — so a consumer's single `--color-brand` `:root` override carries through, and the dark flips apply with no `dark:` duplication. Emitted in `@layer components`, which Tailwind v4 orders **below** `utilities`, so consumers still override with atomics (`class="wl-btn rounded-none"`).
+
+**No JS `@plugin` / build step** added — the preset keeps its no-build ethos (the JS plugin spine is deferred per [ADR-0021](../../docs/adr/0021-extension-contract.md) §3). The `.wl-*` classes are plain authored CSS and are **not** safelisted (only Tailwind utilities need `@source inline()`); see the note in `safelist.css`.
+
+MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) — additive, compile-safe, no existing utility or token changed.
+
 ## [1.7.0] — 2026-06-13
 
 ### Added — dark-aware `text-gradient-primary` endpoints (ADR-0018)
