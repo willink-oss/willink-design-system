@@ -479,7 +479,11 @@ export default function Page() {
         </p>
         <p className="mt-1">
           本ページは token + 主要コンポーネントのリファレンス実装。全コンポーネントの
-          カタログは Storybook (apps/storybook・v1.1+) を参照。
+          対話的カタログは{" "}
+          <a href="storybook/" className="text-brand underline hover:text-brand-hover">
+            Storybook
+          </a>
+          {" "}を参照。
         </p>
       </footer>
     </div>
