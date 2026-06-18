@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "@willink",
+  "homepage": "https://registry.i-willink.com",
+  "items": [
+    {
+      "name": "cn",
+      "type": "registry:lib",
+      "title": "cn",
+      "description": "clsx + tailwind-merge class combiner — the shared utility every @willink block/component depends on. Copy-to-own via `npx shadcn add @willink/cn`.",
+      "files": [
+        {
+          "path": "registry/lib/cn.ts",
+          "type": "registry:lib",
+          "target": "lib/cn.ts"
+        }
+      ],
+      "dependencies": ["clsx", "tailwind-merge"]
+    }
+  ]
+}
