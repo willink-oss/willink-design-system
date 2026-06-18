@@ -482,6 +482,155 @@
  * OS-preference path, the other the explicit data-theme override path.
  * ============================================================ */
 
+/* ============================================================
+ * CSS-first DS component classes — @layer components (ADR-0021 §3)
+ *
+ * Override-able, framework-agnostic mirrors of the @willink-labs/react cva
+ * strings, so non-React consumers (WordPress / Astro / Vue) get a real styling
+ * target instead of re-vendoring the atomics by hand, and registry-copied
+ * source can reference one class instead of a long atomic string.
+ *
+ * Pure CSS — NO JS @plugin / build step (deferred per ADR-0021 §3). Every
+ * declaration resolves a DS *semantic* token (--color-brand / --color-brand-fg
+ * / --color-border / --color-bg / --color-fg / --color-surface-* / --radius-* /
+ * --shadow-*) — never a primitive (neutral-/brand-600) and never a shadcn name
+ * (primary/secondary/destructive). So a consumer's single `--color-brand`
+ * :root override carries through here exactly as it does through the utilities,
+ * and the dark flips (semantic roles above) apply with no `dark:` duplication.
+ *
+ * Public surface (the ADR-0021 contract):
+ *   .wl-btn  (+ .wl-btn--outline / .wl-btn--ghost)   ← buttonVariants
+ *   .wl-card                                          ← cardVariants (default)
+ *   .wl-input                                         ← Input cn() string
+ *
+ * Tailwind v4 emits `@layer components` BELOW `utilities`, so consumers still
+ * override with atomics — e.g. `class="wl-btn rounded-none"` wins. Keep these
+ * mirrors in sync with packages/react/src/components/{button,card,input}.
+ * ============================================================ */
+
+@layer components {
+  /* Button — mirrors buttonVariants() base + default variant + md size.
+   * Base: inline-flex items-center justify-center gap-2 whitespace-nowrap
+   *       font-bold transition-all + focus-visible ring + disabled + cursor.
+   * Variant default: bg-brand text-brand-fg shadow-lg shadow-brand-glow/20
+   *       hover:bg-brand-hover hover:shadow-brand-glow/40.
+   * Size md: h-10 px-6 text-base rounded-full. */
+  .wl-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    font-weight: 700;
+    cursor: pointer;
+    transition-property: all;
+    transition-timing-function: var(--ease-standard);
+    transition-duration: var(--duration-fast);
+
+    height: 2.5rem;          /* h-10  */
+    padding-inline: 1.5rem;  /* px-6  */
+    font-size: 1rem;         /* text-base */
+    line-height: 1.5rem;
+    border-radius: var(--radius-full);
+
+    background-color: var(--color-brand);
+    color: var(--color-brand-fg);
+    box-shadow: 0 10px 15px -3px color-mix(in oklab, var(--color-brand-glow) 20%, transparent),
+                0 4px 6px -4px color-mix(in oklab, var(--color-brand-glow) 20%, transparent);
+  }
+  .wl-btn:hover {
+    background-color: var(--color-brand-hover);
+    box-shadow: 0 10px 15px -3px color-mix(in oklab, var(--color-brand-glow) 40%, transparent),
+                0 4px 6px -4px color-mix(in oklab, var(--color-brand-glow) 40%, transparent);
+  }
+  .wl-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-bg),
+                0 0 0 4px var(--color-ring);
+  }
+  .wl-btn:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* variant="outline" — border border-border bg-bg text-fg hover:bg-surface-subtle */
+  .wl-btn--outline {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    box-shadow: none;
+  }
+  .wl-btn--outline:hover {
+    background-color: var(--color-surface-subtle);
+    box-shadow: none;
+  }
+
+  /* variant="ghost" — text-fg hover:bg-surface-muted (no border / fill at rest) */
+  .wl-btn--ghost {
+    border: none;
+    background-color: transparent;
+    color: var(--color-fg);
+    box-shadow: none;
+  }
+  .wl-btn--ghost:hover {
+    background-color: var(--color-surface-muted);
+    box-shadow: none;
+  }
+
+  /* Card — mirrors cardVariants() default:
+   * rounded-xl border border-border bg-bg text-fg transition-shadow. */
+  .wl-card {
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    transition-property: box-shadow;
+    transition-timing-function: var(--ease-standard);
+    transition-duration: var(--duration-fast);
+  }
+
+  /* Input — mirrors the Input cn() string:
+   * flex h-10 w-full rounded-md border border-border bg-bg px-3 py-2 text-base
+   * text-fg placeholder:text-muted focus-visible:ring-2 ring-ring
+   * disabled:opacity-50 aria-[invalid=true]:border-danger transition-colors. */
+  .wl-input {
+    display: flex;
+    height: 2.5rem;          /* h-10 */
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    padding-inline: 0.75rem; /* px-3 */
+    padding-block: 0.5rem;   /* py-2 */
+    font-size: 1rem;         /* text-base */
+    line-height: 1.5rem;
+    color: var(--color-fg);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: var(--ease-standard);
+    transition-duration: var(--duration-fast);
+  }
+  .wl-input::placeholder {
+    color: var(--color-muted);
+  }
+  .wl-input:focus-visible {
+    outline: none;
+    border-color: var(--color-ring);
+    box-shadow: 0 0 0 2px var(--color-bg),
+                0 0 0 4px var(--color-ring);
+  }
+  .wl-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .wl-input[aria-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+  .wl-input[aria-invalid="true"]:focus-visible {
+    box-shadow: 0 0 0 2px var(--color-bg),
+                0 0 0 4px var(--color-danger);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --color-bg:                  var(--color-neutral-950);

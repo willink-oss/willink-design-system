@@ -15,6 +15,14 @@
  * @willink-labs/react, add the required class names below. Verify by running
  *   pnpm -r build && grep -rE '\.bg-brand|\.text-brand-fg' apps/playground/.next
  * to confirm the safelist-emitted classes are present in the playground build.
+ *
+ * Note (ADR-0021 §3 / #97): the CSS-first `.wl-*` component classes added to
+ * preset.css are NOT safelisted here and never need to be. `@source inline()`
+ * registers *Tailwind utilities* so they survive purge; the `.wl-btn` /
+ * `.wl-card` / `.wl-input` rules are plain authored CSS in an `@layer
+ * components` block, emitted unconditionally by the preset import regardless of
+ * consumer scanning. As registry-copied source migrates from atomic strings to
+ * these classes, the per-utility entries below shrink — not grow.
  */
 
 /* === Brand color utilities (semantic + scale) === */
