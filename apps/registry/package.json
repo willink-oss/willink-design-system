@@ -1,0 +1,12 @@
+{
+  "name": "registry",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Self-hosted shadcn-compatible registry for @willink blocks/components — emits static /r/*.json via `shadcn build` (ADR-0020). Deploy target: registry.i-willink.com.",
+  "scripts": {
+    "build": "shadcn build"
+  },
+  "devDependencies": {
+    "shadcn": "^3.4.0"
+  }
+}
