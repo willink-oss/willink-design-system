@@ -1,4 +1,4 @@
-name: Deploy Playground to GitHub Pages
+name: Deploy Playground + Storybook to GitHub Pages
 
 on:
   push:
@@ -45,6 +45,15 @@ jobs:
 
       - name: Build playground (static export)
         run: pnpm --filter=playground build
+
+      # Storybook was already built by the "Build all packages" step
+      # (storybook build → apps/storybook/storybook-static). Serve it under
+      # /storybook of the same Pages site — its static output uses relative
+      # asset paths, so it resolves correctly at the subpath (no base config).
+      - name: Add Storybook under /storybook
+        run: |
+          mkdir -p apps/playground/out/storybook
+          cp -r apps/storybook/storybook-static/. apps/playground/out/storybook/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
