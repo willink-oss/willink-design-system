@@ -18,7 +18,7 @@
 
 Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applicable
 
-## React components (34)
+## React components (37)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -56,6 +56,9 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Alert` | ✅ | ✅ | ✅ | — | — | — | — | ✅ | ✅ | `role="alert"` (assertive live region) by default, overridable to `role="status"` (polite). Color variants pair semantic bg/text/border tokens for contrast; consumers supply title/description as children |
 | `Table` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive static table; native `<table>`/`<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>`/`<caption>` semantics supply structure (1.3.1) — no ARIA. `TableHead` `text-fg-secondary` / `TableCell` `text-fg` on `bg` (1.4.3); `hover:bg-surface-subtle` is a decorative row affordance. Interactive / motion / target-size N/A |
 | `Pagination` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `nav[aria-label="pagination"]` landmark; active page is the `outline` `buttonVariants` carrying `aria-current="page"` (inactive = `ghost`); prev/next carry `aria-label`, ellipsis is `aria-hidden` + `sr-only`. Focus-visible ring via `buttonVariants` (2.4.7); page cells square the `sm` button (h-8 = 32 px) → 2.5.5 ⚠ same caveat as `Button` |
+| `Breadcrumb` | ✅ | ✅ | — | ✅ | — | 🔍 | — | ✅ | ✅ | `nav[aria-label="breadcrumb"]` over `<ol>`; current page `role="link"` + `aria-current="page"` + `aria-disabled`; separators `aria-hidden`. Ancestor links keyboard-accessible (2.1.1); focus-visible rated on consumer link styling (2.4.7 🔍). `text-muted` links (~4.76:1) / `hover:text-fg`. axe clean |
+| `ContextMenu` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Radix `@radix-ui/react-context-menu` (near-clone of DropdownMenu); `role="menu"` + full keyboard nav (incl. Shift+F10); `motion-reduce` collapses content fade (ADR-0008). Right-click trigger — provide a keyboard/touch alternative entry point where needed |
+| `HoverCard` | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | Radix `@radix-ui/react-hover-card`; opens on hover AND focus (keyboard 2.1.1); NOT `role="dialog"` so no required aria-label; `motion-reduce` collapses fade (2.3.3); supplementary preview content |
 
 ## Flutter components (9, willink_theme 1.5.0)
 
