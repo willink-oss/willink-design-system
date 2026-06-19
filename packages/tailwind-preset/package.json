@@ -29,6 +29,10 @@
     "url": "https://github.com/willink-oss/willink-design-system.git",
     "directory": "packages/tailwind-preset"
   },
+  "homepage": "https://github.com/willink-oss/willink-design-system/tree/main/packages/tailwind-preset#readme",
+  "bugs": {
+    "url": "https://github.com/willink-oss/willink-design-system/issues"
+  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }

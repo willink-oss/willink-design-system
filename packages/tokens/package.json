@@ -27,6 +27,10 @@
     "url": "https://github.com/willink-oss/willink-design-system.git",
     "directory": "packages/tokens"
   },
+  "homepage": "https://github.com/willink-oss/willink-design-system/tree/main/packages/tokens#readme",
+  "bugs": {
+    "url": "https://github.com/willink-oss/willink-design-system/issues"
+  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }
