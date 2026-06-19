@@ -183,3 +183,35 @@ export {
 export { Empty, emptyVariants, type EmptyProps } from "./components/empty";
 export { Kbd, kbdVariants, type KbdProps } from "./components/kbd";
 export { Spinner, spinnerVariants, type SpinnerProps } from "./components/spinner";
+
+// Issue #94: Table (compound・zero-dep CVA・native table semantics)
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  type TableBodyProps,
+  type TableCaptionProps,
+  type TableCellProps,
+  type TableHeadProps,
+  type TableHeaderProps,
+  type TableProps,
+  type TableRowProps,
+} from "./components/table";
+
+// Issue #94: Pagination (compound CVA, zero-dep, built on buttonVariants)
+export {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  type PaginationLinkProps,
+  type PaginationNextProps,
+  type PaginationPreviousProps,
+} from "./components/pagination";

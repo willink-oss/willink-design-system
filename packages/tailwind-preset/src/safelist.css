@@ -481,3 +481,31 @@
 @source inline("border-danger/30");
 @source inline("p-4");
 @source inline("gap-3");
+
+/* === Table (Issue #94) === */
+/* Native-semantics table; border-border / hover:bg-surface-subtle / text-fg /
+   text-fg-secondary / text-muted / px-3 / align-middle / font-medium already present.
+   The scroll container + caption + arbitrary row-border selectors are new. */
+@source inline("overflow-x-auto");
+@source inline("caption-bottom");
+@source inline("mt-4");
+@source inline("h-10");
+/* text-left is load-bearing: only TableHead emits it; without it <th> falls back
+   to the browser default text-align:center in a purged consumer build. */
+@source inline("text-left");
+@source inline("[&_tr]:border-b");
+@source inline("[&_tr:last-child]:border-0");
+
+/* === Pagination (Issue #94) === */
+/* nav landmark built on buttonVariants (already safelisted); the square icon-cell
+   sizes + sr-only label + spacing are component-emitted and not consumer-authored. */
+@source inline("sr-only");
+@source inline("gap-1");
+@source inline("px-0");
+@source inline("px-4");
+@source inline("w-auto");
+@source inline("h-8");
+@source inline("w-8");
+@source inline("w-10");
+@source inline("h-14");
+@source inline("w-14");
