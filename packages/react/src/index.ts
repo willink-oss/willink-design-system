@@ -250,3 +250,18 @@ export {
   HoverCardPortal,
   HoverCardTrigger,
 } from "./components/hover-card";
+
+// Issue #96: ToggleGroup (Radix・built on toggleVariants・variant/size via context)
+export {
+  ToggleGroup,
+  ToggleGroupItem,
+  type ToggleGroupProps,
+  type ToggleGroupItemProps,
+} from "./components/toggle-group";
+
+// Issue #96: Collapsible (Radix) — single open/closed disclosure region (no animation)
+export {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./components/collapsible";
