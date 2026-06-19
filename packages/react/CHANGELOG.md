@@ -8,6 +8,10 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [Unreleased]
 
+## [1.8.0] — 2026-06-19
+
+Catalog expansion (roadmap v1.9): 14 new components (25 → 39), the CSS-first `@layer components` extension surface, and the ADR-0008 Layer-1 reduced-motion completion. Lockstep with `@willink-labs/{tokens,tailwind-preset,css-tokens}@1.8.0`.
+
 ### Added
 
 - **Popover** (Radix `@radix-ui/react-popover`) — click-triggered floating panel (`Popover` / `PopoverTrigger` / `PopoverContent` / `PopoverAnchor` / `PopoverClose` / `PopoverPortal`). A focusable surface panel (border + `bg-bg` + shadow) for rich content (input groups, info cards), distinct from the hover Tooltip bubble. `motion-reduce:animate-none` per [ADR-0008](../../docs/adr/0008-motion-contract.md); unblocks Combobox / DatePicker / Sidebar (v1.9 extensibility — [ADR-0020](../../docs/adr/0020-distribution-channels.md)).
@@ -24,6 +28,14 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 - **HoverCard** (Radix `@radix-ui/react-hover-card`) — hover/focus-triggered floating preview panel (`HoverCard` / `HoverCardTrigger` / `HoverCardContent` / `HoverCardPortal`). Mirrors the Popover surface panel (`border` + `bg-bg` + `p-4` + `shadow-md`, `w-64`) with `motion-reduce:animate-none`; not `role="dialog"` (sighted-hover affordance) so no required accessible name. (#95)
 - **Collapsible** (Radix `@radix-ui/react-collapsible`) — single open/closed disclosure region (`Collapsible` / `CollapsibleTrigger` / `CollapsibleContent`). Radix wires `aria-expanded` / `aria-controls` / `hidden` automatically; no height animation (the preset ships no collapsible keyframes), so no `motion-reduce` needed. Unblocks Sidebar. (#96)
 - **ToggleGroup** (Radix `@radix-ui/react-toggle-group`) — grouped two-state toggle buttons (`type="single"` | `"multiple"`), built on the existing `toggleVariants` (`ToggleGroup` / `ToggleGroupItem`). The root passes `variant`/`size` to each item via React context (items may override). Semantic tokens reuse Toggle's already-safelisted `data-[state=on]:bg-brand` etc. (#96)
+
+### Fixed
+
+- **DropdownMenu** + **Select** — added the `motion-reduce:animate-none` Layer-1 variant their `animate-fade` content was missing, completing the ADR-0008 reduced-motion contract (every animated component now carries it; a `check-motion-contract` static gate prevents regression). (#78, #79)
+
+### Changed
+
+- Added `homepage` + `bugs` metadata to `package.json` so the npmjs.com Homepage / Report-issue links resolve. (#80)
 
 ## [1.7.0] — 2026-06-13
 

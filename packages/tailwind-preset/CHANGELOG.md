@@ -8,6 +8,10 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [Unreleased]
 
+## [1.8.0] — 2026-06-19
+
+Lockstep with `@willink-labs/{tokens,css-tokens,react}@1.8.0` (the 14-component catalog expansion). The preset's own change is the CSS-first `@layer components` extension surface below, plus safelist entries for every class the new React components emit.
+
 ### Added — CSS-first `@layer components` DS classes (ADR-0021 §3, #97)
 
 Override-able, framework-agnostic component classes that mirror the `@willink-labs/react` cva strings, so non-React consumers (WordPress / Astro / Vue) get a real styling target instead of re-vendoring atomics by hand:
@@ -21,6 +25,11 @@ Every declaration resolves a DS **semantic** token (`--color-brand` / `--color-b
 **No JS `@plugin` / build step** added — the preset keeps its no-build ethos (the JS plugin spine is deferred per [ADR-0021](../../docs/adr/0021-extension-contract.md) §3). The `.wl-*` classes are plain authored CSS and are **not** safelisted (only Tailwind utilities need `@source inline()`); see the note in `safelist.css`.
 
 MINOR per [ADR-0010](../../docs/adr/0010-semver-policy.md) — additive, compile-safe, no existing utility or token changed.
+
+### Changed
+
+- Safelist extended with the class strings emitted by the 14 new `@willink-labs/react` components (the new components' utilities + arbitrary variants `[&>button]` / `[&_tr]` / `[&>svg]`), so they survive Tailwind purge in consumer builds.
+- Added `homepage` + `bugs` metadata to `package.json`. (#80)
 
 ## [1.7.0] — 2026-06-13
 
