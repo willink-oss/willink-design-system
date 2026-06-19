@@ -12,6 +12,11 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 - **Popover** (Radix `@radix-ui/react-popover`) — click-triggered floating panel (`Popover` / `PopoverTrigger` / `PopoverContent` / `PopoverAnchor` / `PopoverClose` / `PopoverPortal`). A focusable surface panel (border + `bg-bg` + shadow) for rich content (input groups, info cards), distinct from the hover Tooltip bubble. `motion-reduce:animate-none` per [ADR-0008](../../docs/adr/0008-motion-contract.md); unblocks Combobox / DatePicker / Sidebar (v1.9 extensibility — [ADR-0020](../../docs/adr/0020-distribution-channels.md)).
 - **ScrollArea** (Radix `@radix-ui/react-scroll-area`) — styled cross-browser scroll container (`ScrollArea` / `ScrollBar`) with a token-themed thumb (`bg-border`); vertical + horizontal orientations. Unblocks Command / Sidebar (v1.9 extensibility).
+- **Spinner** — zero-dep loading indicator (`role="status"` + default `aria-label="読み込み中"`); spinning `border` ring with `animate-spin` / `motion-reduce:animate-none` ([ADR-0008](../../docs/adr/0008-motion-contract.md)); `size` sm/md/lg, color inherits via `text-*` (default `text-brand`). (#89)
+- **Empty** — zero-dep presentational empty-state container (centered column, muted `text-fg-secondary`); `size` variants `sm`/`md`/`lg` (default `md`) control padding + max width. Non-interactive; consumers compose icon/title/description/action `Button` as children (distinct from Flutter `WillinkEmptyState`). (#89)
+- **Kbd** — inline keyboard-key hint rendering a presentational `<kbd>` (`font-mono`, `border-border` + `bg-surface-subtle`, rounded, `text-fg`); cva `size` `sm` (default) / `md`. Zero-dep; non-interactive. (#89)
+- **ButtonGroup** — zero-dep segmented container joining `Button` children into a connected group; `horizontal` (default) / `vertical` orientation; `role="group"`. (#89)
+- **Alert** — inline status banner (`role="alert"` assertive by default, overridable to `role="status"`); cva `variant`: info / success / warning / danger using semantic tokens. Distinct from `AlertDialog` and `Toast`. Zero-dep. (#89)
 
 ## [1.7.0] — 2026-06-13
 

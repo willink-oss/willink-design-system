@@ -421,3 +421,63 @@
 @source inline("p-px");
 @source inline("border-l-transparent");
 @source inline("border-t-transparent");
+
+/* === Spinner (Issue #89) === */
+/* Decorative spinning ring + sizes. rounded-full / border-t-transparent / text-brand
+   already present above; animate-spin + border-current + the size/border widths are new.
+   inline-block is load-bearing: a <span> defaults to display:inline where size-* (w/h)
+   is ignored — without it the ring collapses in a purged consumer build. */
+@source inline("inline-block");
+@source inline("animate-spin");
+@source inline("motion-reduce:animate-none");
+@source inline("border-current");
+@source inline("border-2");
+@source inline("border-[3px]");
+@source inline("size-4");
+@source inline("size-6");
+@source inline("size-8");
+
+/* === Empty (Issue #89) === */
+/* Centered column container; text-fg-secondary already present. Padding + max-width
+   variants are new. */
+@source inline("mx-auto");
+@source inline("py-8");
+@source inline("py-12");
+@source inline("py-16");
+@source inline("max-w-xs");
+@source inline("max-w-sm");
+@source inline("max-w-md");
+
+/* === Kbd (Issue #89) === */
+/* font-mono key-cap; border-border / bg-surface-subtle / text-fg already present.
+   The min-w arbitrary values + font/spacing utilities are new. */
+@source inline("font-mono");
+@source inline("align-middle");
+@source inline("min-w-[1.25rem]");
+@source inline("min-w-[1.5rem]");
+@source inline("px-1.5");
+@source inline("px-2");
+@source inline("py-0.5");
+
+/* === ButtonGroup (Issue #89) === */
+/* Joins Button children via arbitrary child selectors — these are component-emitted
+   (consumer source never contains them), so they must be safelisted explicitly. */
+@source inline("isolate");
+@source inline("flex-row");
+@source inline("[&>button]:rounded-none");
+@source inline("[&>button:first-child]:rounded-l-full");
+@source inline("[&>button:last-child]:rounded-r-full");
+@source inline("[&>button:not(:first-child)]:-ml-px");
+@source inline("[&>button:first-child]:rounded-t-full");
+@source inline("[&>button:last-child]:rounded-b-full");
+@source inline("[&>button:not(:first-child)]:-mt-px");
+
+/* === Alert (Issue #89) === */
+/* Inline banner variants. bg-brand-soft/text-brand-soft-fg + bg-{success,warning,danger}/10
+   + text-{success,warning,danger} already present; the semantic borders + p-4/gap-3 are new. */
+@source inline("border-brand-soft");
+@source inline("border-success/30");
+@source inline("border-warning/30");
+@source inline("border-danger/30");
+@source inline("p-4");
+@source inline("gap-3");

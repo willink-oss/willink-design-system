@@ -18,7 +18,7 @@
 
 Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applicable
 
-## React components (25)
+## React components (32)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -49,6 +49,11 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Sheet` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 4-side slide; `motion-reduce` collapses all eight `animate-sheet-*` utilities (0.13.0) |
 | `Toggle` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `sm` size mirrors Button `sm`; document touch context |
 | `FormField` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Compound a11y wiring (1.4.0, [ADR-0015](../adr/0015-formfield-api.md)): generated ids, label `htmlFor`, merged `aria-describedby` (description + error, rendered nodes only), auto `aria-invalid`; error message is `role="alert"`. Interactive criteria are rated on the slotted control itself |
+| `Spinner` | ✅ | — | — | — | ✅ | — | — | ✅ | ✅ | Non-interactive `role="status"` with a default `aria-label="読み込み中"` (overridable) carrying the accessible name; the spinning ring is decorative. `animate-spin` honors `motion-reduce:animate-none` (ADR-0008) + the preset's `prefers-reduced-motion` block. 1.4.3/1.4.11 N/A (decorative ring) |
+| `Empty` | ✅ | — | — | — | — | — | — | ✅ | ✅ | Presentational container; no role (non-interactive). Centered column, muted `text-fg-secondary`; title/description/action contrast is consumer-composed. axe clean |
+| `Kbd` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive inline `<kbd>` key-cap; `text-fg` on `bg-surface-subtle` (1.4.3); presentational — interactive / motion / target-size criteria N/A |
+| `ButtonGroup` | ✅ | — | — | 🔍 | — | ✅ | — | ✅ | ✅ | `role="group"` container joining `Button` children (which carry their own a11y + focus-visible); author `aria-label` when the grouping needs a name. No own color tokens — contrast inherited from `Button` |
+| `Alert` | ✅ | ✅ | ✅ | — | — | — | — | ✅ | ✅ | `role="alert"` (assertive live region) by default, overridable to `role="status"` (polite). Color variants pair semantic bg/text/border tokens for contrast; consumers supply title/description as children |
 
 ## Flutter components (9, willink_theme 1.5.0)
 

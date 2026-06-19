@@ -172,3 +172,14 @@ export {
   type FormFieldLabelProps,
   type FormFieldProps,
 } from "./components/form-field";
+
+// Issue #89: zero-dep CVA primitives batch
+export { Alert, alertVariants, type AlertProps } from "./components/alert";
+export {
+  ButtonGroup,
+  buttonGroupVariants,
+  type ButtonGroupProps,
+} from "./components/button-group";
+export { Empty, emptyVariants, type EmptyProps } from "./components/empty";
+export { Kbd, kbdVariants, type KbdProps } from "./components/kbd";
+export { Spinner, spinnerVariants, type SpinnerProps } from "./components/spinner";
