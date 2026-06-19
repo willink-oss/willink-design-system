@@ -47,6 +47,7 @@ export const SelectContent = forwardRef<
       className={cn(
         "relative z-50 max-h-96 min-w-32 overflow-hidden rounded-md border border-border bg-bg text-fg shadow-md",
         "data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out",
+        "motion-reduce:animate-none",
         position === "popper" &&
           "data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1",
         className,
