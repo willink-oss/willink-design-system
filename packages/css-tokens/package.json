@@ -37,5 +37,9 @@
     "type": "git",
     "url": "https://github.com/willink-oss/willink-design-system.git",
     "directory": "packages/css-tokens"
+  },
+  "homepage": "https://github.com/willink-oss/willink-design-system/tree/main/packages/css-tokens#readme",
+  "bugs": {
+    "url": "https://github.com/willink-oss/willink-design-system/issues"
   }
 }
