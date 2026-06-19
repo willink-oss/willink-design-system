@@ -25,6 +25,7 @@ export const DropdownMenuContent = forwardRef<
       className={cn(
         "z-50 min-w-32 overflow-hidden rounded-md border border-border bg-bg p-1 text-fg shadow-md",
         "data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out",
+        "motion-reduce:animate-none",
         className,
       )}
       {...props}
