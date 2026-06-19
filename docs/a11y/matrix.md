@@ -18,7 +18,7 @@
 
 Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applicable
 
-## React components (32)
+## React components (34)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -54,6 +54,8 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Kbd` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive inline `<kbd>` key-cap; `text-fg` on `bg-surface-subtle` (1.4.3); presentational — interactive / motion / target-size criteria N/A |
 | `ButtonGroup` | ✅ | — | — | 🔍 | — | ✅ | — | ✅ | ✅ | `role="group"` container joining `Button` children (which carry their own a11y + focus-visible); author `aria-label` when the grouping needs a name. No own color tokens — contrast inherited from `Button` |
 | `Alert` | ✅ | ✅ | ✅ | — | — | — | — | ✅ | ✅ | `role="alert"` (assertive live region) by default, overridable to `role="status"` (polite). Color variants pair semantic bg/text/border tokens for contrast; consumers supply title/description as children |
+| `Table` | ✅ | ✅ | — | — | — | — | — | ✅ | ✅ | Non-interactive static table; native `<table>`/`<thead>`/`<tbody>`/`<tr>`/`<th>`/`<td>`/`<caption>` semantics supply structure (1.3.1) — no ARIA. `TableHead` `text-fg-secondary` / `TableCell` `text-fg` on `bg` (1.4.3); `hover:bg-surface-subtle` is a decorative row affordance. Interactive / motion / target-size N/A |
+| `Pagination` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | `nav[aria-label="pagination"]` landmark; active page is the `outline` `buttonVariants` carrying `aria-current="page"` (inactive = `ghost`); prev/next carry `aria-label`, ellipsis is `aria-hidden` + `sr-only`. Focus-visible ring via `buttonVariants` (2.4.7); page cells square the `sm` button (h-8 = 32 px) → 2.5.5 ⚠ same caveat as `Button` |
 
 ## Flutter components (9, willink_theme 1.5.0)
 

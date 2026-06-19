@@ -17,6 +17,8 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 - **Kbd** — inline keyboard-key hint rendering a presentational `<kbd>` (`font-mono`, `border-border` + `bg-surface-subtle`, rounded, `text-fg`); cva `size` `sm` (default) / `md`. Zero-dep; non-interactive. (#89)
 - **ButtonGroup** — zero-dep segmented container joining `Button` children into a connected group; `horizontal` (default) / `vertical` orientation; `role="group"`. (#89)
 - **Alert** — inline status banner (`role="alert"` assertive by default, overridable to `role="status"`); cva `variant`: info / success / warning / danger using semantic tokens. Distinct from `AlertDialog` and `Toast`. Zero-dep. (#89)
+- **Table** — zero-dep compound data-table primitive set (`Table` / `TableHeader` / `TableBody` / `TableRow` / `TableHead` / `TableCell` / `TableCaption`). Pure CVA over native table semantics (no Radix, no ARIA); root wraps `<table>` in an `overflow-x-auto` scroll container, rows carry `border-border` + `hover:bg-surface-subtle`, headers use muted `text-fg-secondary`. (#94)
+- **Pagination** — zero-dep compound page-navigation primitive (`Pagination` / `PaginationContent` / `PaginationItem` / `PaginationLink` / `PaginationPrevious` / `PaginationNext` / `PaginationEllipsis`) built on `buttonVariants`. `nav[aria-label="pagination"]` landmark; active page = `outline` variant + `aria-current="page"`; prev/next carry `aria-label`; ellipsis is `aria-hidden` + `sr-only`. (#94)
 
 ## [1.7.0] — 2026-06-13
 
