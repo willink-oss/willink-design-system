@@ -215,3 +215,38 @@ export {
   type PaginationNextProps,
   type PaginationPreviousProps,
 } from "./components/pagination";
+
+// Issue #95: ContextMenu (Radix・right-click menu・near-clone of DropdownMenu)
+export {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuGroup,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuPortal,
+  ContextMenuRadioGroup,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuTrigger,
+} from "./components/context-menu";
+
+// Issue #95: Breadcrumb (compound nav, no Radix root, asChild link via Slot)
+export {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  type BreadcrumbLinkProps,
+  type BreadcrumbSeparatorProps,
+} from "./components/breadcrumb";
+
+// Issue #95: HoverCard (Radix) — hover/focus-triggered floating preview panel
+export {
+  HoverCard,
+  HoverCardContent,
+  HoverCardPortal,
+  HoverCardTrigger,
+} from "./components/hover-card";

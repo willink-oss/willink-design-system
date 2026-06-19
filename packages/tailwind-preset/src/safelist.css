@@ -509,3 +509,29 @@
 @source inline("w-10");
 @source inline("h-14");
 @source inline("w-14");
+
+/* === Breadcrumb (Issue #95) === */
+/* Compound nav; plain text-muted / text-fg / transition-colors already present, but
+   the hover:text-fg VARIANT is a distinct utility (BreadcrumbLink hover) and must be
+   listed, and font-normal (BreadcrumbPage) is component-only. Plus flex-wrap / gap-1.5
+   + the separator svg sizing (incl. arbitrary child selector). */
+@source inline("hover:text-fg");
+@source inline("font-normal");
+@source inline("flex-wrap");
+@source inline("gap-1.5");
+@source inline("h-3.5");
+@source inline("w-3.5");
+@source inline("[&>svg]:h-3.5");
+@source inline("[&>svg]:w-3.5");
+
+/* === HoverCard (Issue #95) === */
+/* Floating panel — all classes mirror Popover (border / bg-bg / p-4 / shadow-md /
+   rounded-md / z-50 / outline-none / animate-fade-* / motion-reduce already present)
+   except the w-64 panel width. */
+@source inline("w-64");
+
+/* === ContextMenu (Issue #95) === */
+/* Right-click menu — content/item/label/shortcut classes are byte-identical to
+   DropdownMenu (already safelisted above): animate-fade-* / motion-reduce / z-50 /
+   min-w-32 / focus:bg-surface-muted / data-[disabled]:* / px-2 / py-1.5 / rounded-sm /
+   tracking-widest / pl-8. No new entries required. */
