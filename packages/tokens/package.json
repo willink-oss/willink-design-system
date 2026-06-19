@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/tokens",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "i-Willink Design System tokens (DTCG-compatible JSON, single source of truth)",
   "license": "MIT",
   "private": false,

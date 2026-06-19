@@ -27,7 +27,7 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 
 ---
 
-## Components (1.4.0・25 total)
+## Components (1.8.0・39 total)
 
 ### Phase 0-3 core set (7・0.1.0-0.4.x)
 
@@ -68,6 +68,25 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 | `Sheet` | top / right (default) / bottom / left side variants | Radix Dialog |
 | `Toggle` | default / outline × sm / md / lg + controlled/uncontrolled | Radix Toggle |
 | `FormField` | compound a11y wiring (Label / Control / Description / Error)・`id` / `htmlFor` / `aria-describedby` / `aria-invalid` 自動配線 ([ADR-0015](../../docs/adr/0015-formfield-api.md)) | Radix Slot |
+
+### v1.8.0 additions (14・catalog expansion)
+
+| Component | API / Notes | Headless |
+|---|---|---|
+| `Popover` | compound (Popover / Trigger / Content / Anchor / Close / Portal)・click-triggered floating panel・props `align` / `sideOffset` | Radix Popover |
+| `ScrollArea` | compound (ScrollArea / ScrollBar)・orientation vertical / horizontal | Radix ScrollArea |
+| `Spinner` | size sm / md / lg・`role="status"` loading indicator | — |
+| `Empty` | size sm / md / lg・presentational empty-state container | — |
+| `Kbd` | size sm / md・inline `<kbd>` key hint | — |
+| `ButtonGroup` | orientation horizontal / vertical・`role="group"` segmented container | — |
+| `Alert` | variant info / success / warning / danger・`role="alert"` inline banner | — |
+| `Table` | compound (Table / Header / Body / Row / Head / Cell / Caption)・native `<table>` semantics | — |
+| `Pagination` | compound (Pagination / Content / Item / Link / Previous / Next / Ellipsis)・built on `buttonVariants` | — |
+| `Breadcrumb` | compound (Breadcrumb / List / Item / Link / Page / Separator)・nav・asChild via Slot | Radix Slot |
+| `ContextMenu` | compound (11 parts・near-clone of DropdownMenu) | Radix ContextMenu |
+| `HoverCard` | compound (HoverCard / Trigger / Content / Portal) | Radix HoverCard |
+| `Collapsible` | compound (Collapsible / Trigger / Content) | Radix Collapsible |
+| `ToggleGroup` | variant default / outline × size sm / md / lg × type single / multiple・built on `toggleVariants` | Radix ToggleGroup |
 
 ---
 

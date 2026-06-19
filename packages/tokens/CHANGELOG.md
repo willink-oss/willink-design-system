@@ -9,6 +9,12 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.8.0] — 2026-06-19
+
+### Lockstep bump (no token change)
+
+Pair with the npm group at `1.8.0` — the 14-component catalog expansion in `@willink-labs/react` + the CSS-first `@layer components` surface in `@willink-labs/tailwind-preset`. No token was added or changed; published to keep the lockstep version set aligned. Also added `homepage` + `bugs` package metadata (#80).
+
 ## [1.7.0] — 2026-06-13
 
 ### Lockstep bump (no token change)

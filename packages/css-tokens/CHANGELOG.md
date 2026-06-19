@@ -4,6 +4,12 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [1.8.0] — 2026-06-19
+
+### Lockstep bump (no generated-output change)
+
+Pair with the npm group at `1.8.0` — the 14-component catalog expansion + the CSS-first `@layer components` surface (a preset concern, never part of this package's output). The generated CSS is byte-identical to 1.7.0. Also added `homepage` + `bugs` package metadata (#80).
+
 ## [1.7.0] — 2026-06-13
 
 ### Lockstep bump (no generated-output change)
