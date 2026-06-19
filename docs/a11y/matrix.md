@@ -18,7 +18,7 @@
 
 Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applicable
 
-## React components (37)
+## React components (39)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -59,6 +59,8 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Breadcrumb` | ✅ | ✅ | — | ✅ | — | 🔍 | — | ✅ | ✅ | `nav[aria-label="breadcrumb"]` over `<ol>`; current page `role="link"` + `aria-current="page"` + `aria-disabled`; separators `aria-hidden`. Ancestor links keyboard-accessible (2.1.1); focus-visible rated on consumer link styling (2.4.7 🔍). `text-muted` links (~4.76:1) / `hover:text-fg`. axe clean |
 | `ContextMenu` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | Radix `@radix-ui/react-context-menu` (near-clone of DropdownMenu); `role="menu"` + full keyboard nav (incl. Shift+F10); `motion-reduce` collapses content fade (ADR-0008). Right-click trigger — provide a keyboard/touch alternative entry point where needed |
 | `HoverCard` | ✅ | ✅ | — | ✅ | ✅ | — | — | — | ✅ | Radix `@radix-ui/react-hover-card`; opens on hover AND focus (keyboard 2.1.1); NOT `role="dialog"` so no required aria-label; `motion-reduce` collapses fade (2.3.3); supplementary preview content |
+| `Collapsible` | ✅ | — | — | ✅ | — | — | — | ✅ | ✅ | Radix disclosure (`Collapsible`/`Trigger`/`Content`); trigger is a keyboard-accessible button (2.1.1) with auto `aria-expanded`/`aria-controls` (1.3.1/4.1.2). No animation by design (no preset collapsible keyframes) → 2.3.3 N/A. Content styling/contrast is consumer-composed. axe clean (open) |
+| `ToggleGroup` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | Radix `@radix-ui/react-toggle-group`; reuses `toggleVariants` (variant/size via context). Roles per Radix: `type="single"`→radiogroup/radio, `multiple`→toolbar/button. Keyboard nav + focus-visible ring (2.1.1/2.4.7); `sm` size 32 px → 2.5.5 ⚠ (same caveat as Toggle/Button). `data-[state=on]` uses safelisted brand tokens (1.4.3/1.4.11). axe clean |
 
 ## Flutter components (9, willink_theme 1.5.0)
 
