@@ -17,6 +17,7 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 ### Tests
 
 - **`check-safelist-emission` gate** (#125) — a static CI test asserting every high-risk utility (variant-prefixed / arbitrary-value / dashed) a component emits via `cn()`/`cva()` is covered by `@willink-labs/tailwind-preset`'s `@source inline(...)` safelist (with Tailwind brace-expansion). Automates the **#1 recurring purge-gap defect** — emitted-but-unsafelisted classes that purge in consumer builds, missed by makers in cycles 1 & 6 and caught only by human review. Its first run surfaced **14 pre-existing gaps** now fixed in the preset. Extraction covers both `cn()`/`cva()` literals and raw `className="…"` attributes (with JSDoc `@example` stripping); a bare-word / variant-name shape filter avoids false positives. Runs inside the existing `pnpm -r test` step (no CI change). The full `apps/playground` build + emitted-CSS grep remains the periodic ground-truth backstop for runtime-only Radix/Sonner classes.
+- **`check-barrel-completeness` gate** (#126) — a static CI test asserting `src/index.ts` re-exports every `src/components/<name>/` dir 1:1 (set-equality, both directions). Guards against shipping a component whose types/values never reach the public API (forgot the barrel `export … from "./components/<name>"`), and against a stale re-export after a dir is removed. The barrel is hand-maintained with `// PRn:` comment blocks, so this drift is plausible. Same `pnpm -r test` step, no CI change.
 
 ## [1.8.0] — 2026-06-19
 
