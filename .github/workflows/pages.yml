@@ -1,4 +1,4 @@
-name: Deploy Playground + Storybook to GitHub Pages
+name: Deploy Playground + Storybook + Registry to GitHub Pages
 
 on:
   push:
@@ -54,6 +54,18 @@ jobs:
         run: |
           mkdir -p apps/playground/out/storybook
           cp -r apps/storybook/storybook-static/. apps/playground/out/storybook/
+
+      # Serve the @willink shadcn registry under /r of the same Pages site, so
+      # `npx shadcn add <pages-url>/r/<name>.json` resolves (ADR-0020). The
+      # "Build all packages" step above already runs `shadcn build`; rebuild
+      # explicitly here (idempotent, ~1s) so the registry hosting can't silently
+      # break if that filter changes. shadcn build emits the gitignored
+      # apps/registry/public/r/*.json.
+      - name: Add @willink registry under /r
+        run: |
+          pnpm --filter=registry build
+          mkdir -p apps/playground/out/r
+          cp -r apps/registry/public/r/. apps/playground/out/r/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

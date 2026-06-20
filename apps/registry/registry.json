@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "@willink",
-  "homepage": "https://registry.i-willink.com",
+  "homepage": "https://willink-oss.github.io/willink-design-system",
   "items": [
     {
       "name": "cn",

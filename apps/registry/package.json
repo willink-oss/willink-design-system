@@ -2,7 +2,7 @@
   "name": "registry",
   "version": "0.0.1",
   "private": true,
-  "description": "Self-hosted shadcn-compatible registry for @willink blocks/components — emits static /r/*.json via `shadcn build` (ADR-0020). Deploy target: registry.i-willink.com.",
+  "description": "Self-hosted shadcn-compatible registry for @willink blocks/components — emits static /r/*.json via `shadcn build` (ADR-0020). Deploy target: GitHub Pages /r/ (https://willink-oss.github.io/willink-design-system/r/); registry.i-willink.com planned as a future branded alias.",
   "scripts": {
     "build": "shadcn build"
   },
