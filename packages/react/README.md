@@ -27,7 +27,7 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 
 ---
 
-## Components (1.9.0・41 total)
+## Components (1.9.0・42 total)
 
 ### Phase 0-3 core set (7・0.1.0-0.4.x)
 
@@ -88,12 +88,13 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 | `Collapsible` | compound (Collapsible / Trigger / Content) | Radix Collapsible |
 | `ToggleGroup` | variant default / outline × size sm / md / lg × type single / multiple・built on `toggleVariants` | Radix ToggleGroup |
 
-### v1.9.0 additions (2)
+### v1.9.0 additions (3)
 
 | Component | Variants / Parts | Headless |
 |---|---|---|
 | `Command` | compound (Command / Input / List / Empty / Group / Item / Separator / Shortcut)・semantic-token restyle of `cmdk` | cmdk |
 | `NavigationMenu` | compound (NavigationMenu / List / Item / Trigger / Content / Link / Viewport / Indicator)・`navigationMenuTriggerStyle` ghost-pill trigger + fade panels | Radix NavigationMenu |
+| `Menubar` | compound (Menubar / Menu / Trigger / Content / Item / CheckboxItem / RadioGroup / RadioItem / Label / Separator / Shortcut / Sub / SubTrigger / SubContent)・`flex h-10` app menu bar (File / Edit / View)・near-clone of ContextMenu | Radix Menubar |
 
 ---
 
