@@ -277,3 +277,16 @@ export {
   CommandSeparator,
   CommandShortcut,
 } from "./components/command";
+
+// Issue #114: NavigationMenu (Radix) — site-level nav with disclosure panels
+export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "./components/navigation-menu";

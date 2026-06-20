@@ -559,3 +559,43 @@
 @source inline("py-3");
 @source inline("py-6");
 @source inline("mr-2");
+
+/* === NavigationMenu (Issue #114・Radix nav menubar) === */
+/* Most classes are already present (relative / absolute / flex / flex-1 / inline-flex /
+   items-center / justify-center / gap-1 / h-10 / h-2 / w-2 / px-4 / text-sm / font-medium /
+   rounded-full / rounded-md / transition-colors / transition-transform / shrink-0 /
+   h-3.5 / w-3.5 / border / border-border / border-t / border-l / bg-bg / text-fg /
+   shadow-md / overflow-hidden / hover:bg-surface-subtle / focus-visible:* / disabled:* /
+   p-2 / w-full / top-0 / left-0 / data-[state=open]:animate-fade-in /
+   data-[state=closed]:animate-fade-out / motion-reduce:animate-none).
+   The container/list/trigger/viewport/indicator utilities below are component-emitted
+   (consumer source never contains them) and not yet safelisted. */
+@source inline("z-10");
+@source inline("max-w-max");
+@source inline("w-max");
+@source inline("list-none");
+/* Trigger pill: focus + open state ghost fill (distinct utilities from the bare
+   bg-surface-subtle / hover: variant) */
+@source inline("focus:bg-surface-subtle");
+@source inline("data-[state=open]:bg-surface-subtle");
+/* ChevronDown rotate-on-open (group-data variant + its transition) */
+@source inline("duration-200");
+@source inline("group-data-[state=open]:rotate-180");
+@source inline("motion-reduce:transition-none");
+/* Content panel responsive positioning */
+@source inline("md:absolute");
+@source inline("md:w-auto");
+/* Viewport: placement + Radix CSS-var sizing */
+@source inline("top-full");
+@source inline("mt-1.5");
+@source inline("origin-top");
+@source inline("h-[var(--radix-navigation-menu-viewport-height)]");
+@source inline("md:w-[var(--radix-navigation-menu-viewport-width)]");
+/* Indicator: arrow chip + its show/hide fade (distinct data-state variants) */
+@source inline("h-1.5");
+@source inline("items-end");
+@source inline("top-[60%]");
+@source inline("rotate-45");
+@source inline("rounded-tl-sm");
+@source inline("data-[state=visible]:animate-fade-in");
+@source inline("data-[state=hidden]:animate-fade-out");

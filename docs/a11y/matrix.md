@@ -18,7 +18,7 @@
 
 Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applicable
 
-## React components (40)
+## React components (41)
 
 | Component | 1.3.1 | 1.4.3 | 1.4.11 | 2.1.1 | 2.3.3 | 2.4.7 | 2.5.5 | 3.2.4 | 4.1.2 | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -62,6 +62,7 @@ Legend: ✅ Pass · ⚠ Partial · 🔍 Manual review required · — Not applic
 | `Collapsible` | ✅ | — | — | ✅ | — | — | — | ✅ | ✅ | Radix disclosure (`Collapsible`/`Trigger`/`Content`); trigger is a keyboard-accessible button (2.1.1) with auto `aria-expanded`/`aria-controls` (1.3.1/4.1.2). No animation by design (no preset collapsible keyframes) → 2.3.3 N/A. Content styling/contrast is consumer-composed. axe clean (open) |
 | `ToggleGroup` | ✅ | ✅ | ✅ | ✅ | — | ✅ | ⚠ | ✅ | ✅ | Radix `@radix-ui/react-toggle-group`; reuses `toggleVariants` (variant/size via context). Roles per Radix: `type="single"`→radiogroup/radio, `multiple`→toolbar/button. Keyboard nav + focus-visible ring (2.1.1/2.4.7); `sm` size 32 px → 2.5.5 ⚠ (same caveat as Toggle/Button). `data-[state=on]` uses safelisted brand tokens (1.4.3/1.4.11). axe clean |
 | `Command` | ✅ | ✅ | — | ✅ | — | ✅ | — | ✅ | ✅ | cmdk palette (`Command` / `CommandInput` / `CommandList` / `CommandEmpty` / `CommandGroup` / `CommandItem` / `CommandSeparator` / `CommandShortcut`). cmdk supplies combobox/listbox semantics: typeahead-filtered `cmdk-item`s, `aria-selected` highlight via `data-[selected=true]:bg-surface-subtle`, full keyboard nav (↑/↓/Enter, 2.1.1) with focus on the search input (2.4.7). `text-fg` items / `text-fg-secondary` empty state / `text-muted` headings on `bg` (1.4.3). No animation by design → 2.3.3 N/A; 1.4.11/2.5.5 rated on the consumer-composed list rows. axe clean (open) |
+| `NavigationMenu` | ✅ | ✅ | — | ✅ | ✅ | ✅ | ⚠ | ✅ | ✅ | Radix `@radix-ui/react-navigation-menu` (`NavigationMenu` / `List` / `Item` / `Trigger` / `Content` / `Link` / `Viewport` / `Indicator`). Renders a `<nav>` landmark; Radix wires `aria-expanded` on triggers + disclosure semantics (1.3.1/4.1.2). Full keyboard nav (arrows / Enter / Esc, 2.1.1) with a focus-visible ring on the `navigationMenuTriggerStyle` pill (2.4.7). Trigger / panel use `text-fg` on `bg` + `border-border` surface (1.4.3); `data-[state=open]:bg-surface-subtle` + the `ChevronDown` `rotate-180` are decorative state cues. `motion-reduce:animate-none` collapses the panel/viewport fade (2.3.3). `h-10` (40 px) pill trigger → 2.5.5 ⚠ (same inline-nav caveat as Button/Tabs). axe clean (open) |
 
 ## Flutter components (9, willink_theme 1.5.0)
 
