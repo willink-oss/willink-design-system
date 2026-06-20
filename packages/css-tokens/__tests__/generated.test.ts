@@ -80,15 +80,35 @@ describe("@willink-labs/css-tokens generated files", () => {
     expect(css).toContain(':root:not([data-theme="light"])');
   });
 
-  it("tokens.dark.css var count matches the willink.dark $extensions in semantic.json", () => {
+  it("tokens.dark.css var count matches the willink.dark $extensions in semantic.json + primitive.json", () => {
     const semantic = JSON.parse(fs.readFileSync(semanticJsonPath, "utf8"));
-    const expected = countDarkExtensions(semantic);
+    const primitive = JSON.parse(fs.readFileSync(primitiveJsonPath, "utf8"));
+    // dark overrides come from both files (primitive.json carries shadow.soft/md darks)
+    const expected = countDarkExtensions(semantic) + countDarkExtensions(primitive);
     expect(expected).toBeGreaterThan(0);
     const css = readCss("tokens.dark.css");
     // every extension is emitted twice — once per activation path
     // (media-query block + data-theme block)
     const decls = css.match(/^\s*--[a-z0-9-]+:/gm) ?? [];
     expect(decls.length).toBe(expected * 2);
+  });
+
+  it("tokens.dark.css flips --shadow-soft/-md to high-alpha (matches preset dark) and never flips --shadow-glow (ADR-0013)", () => {
+    const css = readCss("tokens.dark.css");
+    // soft + md flipped once per activation path (2x each); high-alpha dark values
+    expect(
+      (css.match(/--shadow-soft: 0 4px 20px -2px rgba\(0, 0, 0, 0\.4\);/g) ?? [])
+        .length,
+    ).toBe(2);
+    expect(
+      (
+        css.match(
+          /--shadow-md: 0 4px 6px -1px rgba\(0, 0, 0, 0\.5\), 0 2px 4px -2px rgba\(0, 0, 0, 0\.4\);/g,
+        ) ?? []
+      ).length,
+    ).toBe(2);
+    // glow is brand-fixed: never in the dark file (mirrors preset.css)
+    expect(css).not.toContain("--shadow-glow");
   });
 
   it("tokens.dark.css flips semantic roles via var() and omits invariant roles", () => {

@@ -4,6 +4,12 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [Unreleased]
+
+### Fixed
+
+- `tokens.dark.css` now flips `--shadow-soft` / `--shadow-md` to the high-alpha dark values (`rgba(0,0,0,0.4/0.5)`), matching `tailwind-preset`'s authored dark block (ADR-0013). Previously the css-tokens dark file carried zero shadow overrides, so non-Tailwind consumers (WordPress / Astro / Vue) rendered nearly-invisible light shadows under a dark root. Shadows live in `primitive.json` (which `flattenDark` didn't walk); fixed by adding a `willink.dark` `$extension` to `shadow.soft`/`md` and walking primitives in `generate.mjs`. `--shadow-glow` stays brand-fixed (never flipped), mirroring the preset. (#118)
+
 ## [1.8.0] — 2026-06-19
 
 ### Lockstep bump (no generated-output change)
