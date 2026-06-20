@@ -599,3 +599,15 @@
 @source inline("rounded-tl-sm");
 @source inline("data-[state=visible]:animate-fade-in");
 @source inline("data-[state=hidden]:animate-fade-out");
+
+/* === Menubar (Issue #116・Radix Menubar) === */
+/* A ContextMenu/DropdownMenu clone: content/item/checkbox/radio/separator/label utilities
+   are already safelisted via those components (min-w-32 / px-2 / px-3 / py-1.5 / rounded-sm /
+   focus:bg-surface-subtle / focus:bg-surface-muted / data-[disabled]:* / pl-8 /
+   data-[state=open]:bg-surface-subtle (trigger, from NavigationMenu) /
+   data-[state=open]:animate-fade-in|out / motion-reduce:animate-none).
+   The two SubTrigger open-state highlight utilities below are unique to Menubar — its
+   styled SubTrigger has no analogue in ContextMenu/DropdownMenu (whose SubTriggers are
+   unstyled) — so they appear in no consumer source and would purge without this. */
+@source inline("data-[state=open]:bg-surface-muted");
+@source inline("data-[state=open]:text-fg");
