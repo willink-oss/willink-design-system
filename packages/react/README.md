@@ -27,7 +27,7 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 
 ---
 
-## Components (1.8.0・39 total)
+## Components (1.9.0・40 total)
 
 ### Phase 0-3 core set (7・0.1.0-0.4.x)
 
@@ -87,6 +87,12 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 | `HoverCard` | compound (HoverCard / Trigger / Content / Portal) | Radix HoverCard |
 | `Collapsible` | compound (Collapsible / Trigger / Content) | Radix Collapsible |
 | `ToggleGroup` | variant default / outline × size sm / md / lg × type single / multiple・built on `toggleVariants` | Radix ToggleGroup |
+
+### v1.9.0 addition (1)
+
+| Component | Variants / Parts | Headless |
+|---|---|---|
+| `Command` | compound (Command / Input / List / Empty / Group / Item / Separator / Shortcut)・semantic-token restyle of `cmdk` | cmdk |
 
 ---
 
