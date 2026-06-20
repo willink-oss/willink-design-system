@@ -89,8 +89,8 @@
   },
   "shadow": {
     "$description": "i-willink premium tech: soft for default, glow for primary action (brand-500 with 20% / 40% on hover)",
-    "soft": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow" },
-    "md":   { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow" },
+    "soft": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow", "$extensions": { "willink.dark": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.4)" } } },
+    "md":   { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow", "$extensions": { "willink.dark": { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4)" } } },
     "glow": { "$value": "0 0 20px -5px rgba(124, 58, 237, 0.3)", "$type": "shadow" }
   }
 }

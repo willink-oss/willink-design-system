@@ -176,7 +176,12 @@ function flattenDark(obj, prefix) {
   return out;
 }
 
-const darkLines = flattenDark(semantic, "-");
+// Dark overrides come from BOTH files: semantic roles (color/surface/motion) AND
+// the primitive shadows (shadow.soft/md carry willink.dark in primitive.json so the
+// css-tokens dark path matches preset.css's authored dark shadow block — ADR-0013;
+// shadow.glow is brand-fixed and intentionally has no dark extension, mirroring the
+// preset which never flips --shadow-glow).
+const darkLines = [...flattenDark(semantic, "-"), ...flattenDark(primitive, "-")];
 
 /**
  * Color-free primitives (1.3.0+ / ADR-0014) — radius + duration + easing
