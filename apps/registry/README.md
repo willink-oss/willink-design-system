@@ -23,14 +23,28 @@ on deploy.
 
 ## Deploy
 
-Static host of `public/` at **registry.i-willink.com**. Public MIT. A consumer
-adds the registry to its `components.json`:
+The emitted `public/r/*.json` is published to **GitHub Pages** under `/r/`,
+alongside the Storybook catalog and playground, by `.github/workflows/pages.yml`
+on every push to `main`. Live base URL:
 
-```json
-{ "registries": { "@willink": "https://registry.i-willink.com/r/{name}.json" } }
+```
+https://willink-oss.github.io/willink-design-system/r/{name}.json
 ```
 
-then `npx shadcn add @willink/<item>`.
+Public MIT. A consumer either registers the namespace in its `components.json`:
+
+```json
+{ "registries": { "@willink": "https://willink-oss.github.io/willink-design-system/r/{name}.json" } }
+```
+
+then `npx shadcn add @willink/<item>`, **or** uses the direct URL:
+
+```bash
+npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-form.json
+```
+
+> A branded `registry.i-willink.com` alias is the planned future home; until it
+> is stood up, the GitHub Pages URL above is the canonical, working registry URL.
 
 ## Items
 
