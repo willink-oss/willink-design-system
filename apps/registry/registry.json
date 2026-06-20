@@ -22,13 +22,54 @@
       "type": "registry:block",
       "title": "Contact form",
       "description": "Token-themed contact form composing the @willink-labs/react primitives (FormField + Input + Textarea + Button). Copy-to-own via `npx shadcn add @willink/contact-form` — the markup is yours to edit; the primitives and `--color-brand` theming come from the npm packages (ADR-0020).",
-      "registryDependencies": ["FormField", "Button"],
       "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
       "files": [
         {
           "path": "registry/blocks/contact-form/contact-form.tsx",
           "type": "registry:block",
           "target": "components/blocks/contact-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-hero",
+      "type": "registry:block",
+      "title": "Page hero",
+      "description": "Centered marketing hero composing the @willink-labs/react primitives (Badge + Button) — eyebrow badge, title, lead copy, and primary/secondary CTA buttons. Copy-to-own via `npx shadcn add @willink/page-hero`; the markup is yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/page-hero/page-hero.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/page-hero.tsx"
+        }
+      ]
+    },
+    {
+      "name": "auth-form",
+      "type": "registry:block",
+      "title": "Auth form",
+      "description": "Token-themed sign-in form composing the @willink-labs/react primitives (FormField + Input + Checkbox + Button + Separator) — email/password fields with inline validation, a remember-me checkbox, and an alternate-action divider. Copy-to-own via `npx shadcn add @willink/auth-form`; the markup and validation are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/auth-form/auth-form.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-card",
+      "type": "registry:block",
+      "title": "Pricing card",
+      "description": "A single pricing tier composing the @willink-labs/react primitives (Card + Badge + Button) — plan name, price, a popular badge, a feature list, and a CTA. Render several side by side for a pricing table. Copy-to-own via `npx shadcn add @willink/pricing-card`; the copy and features are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-card/pricing-card.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-card.tsx"
         }
       ]
     }

@@ -52,7 +52,17 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 |---|---|---|
 | `cn` | `registry:lib` | clsx + tailwind-merge class combiner (the shared utility). |
 | `contact-form` | `registry:block` | Token-themed contact form composing the `@willink-labs/react` primitives (FormField + Input + Textarea + Button). First composition block (ADR-0020). |
+| `page-hero` | `registry:block` | Centered marketing hero (Badge + Button) — eyebrow, title, lead copy, primary/secondary CTAs. |
+| `auth-form` | `registry:block` | Sign-in form (FormField + Input + Checkbox + Button + Separator) — email/password with inline validation, remember-me, alternate-action divider. |
+| `pricing-card` | `registry:block` | A pricing tier (Card + Badge + Button) — plan, price, popular badge, feature list, CTA. Render several for a pricing table. |
 
-Blocks (`@willink/contact-form`, `@willink/page-hero`, …) and primitive
-registry-items land in follow-up issues. A Next.js preview site is a later
-addition; this scaffold is the JSON pipeline only.
+## Authoring a block
+
+Block sources live in `registry/blocks/<name>/<name>.tsx` and compose the
+`@willink-labs/react` primitives. They are **type-checked** against the real
+primitive APIs — `pnpm --filter registry build` runs `tsc --noEmit` before
+`shadcn build`, so a block that uses a non-existent prop/export fails the build
+(and the deploy) instead of shipping broken copy-to-own code. Block wrapper
+classes are scanned by the **consumer's** Tailwind (the source is copied into
+their repo), so the preset safelist does not apply to them — only the primitives
+they compose need safelisting (handled in `@willink-labs/tailwind-preset`).

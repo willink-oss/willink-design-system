@@ -4,9 +4,16 @@
   "private": true,
   "description": "Self-hosted shadcn-compatible registry for @willink blocks/components — emits static /r/*.json via `shadcn build` (ADR-0020). Deploy target: GitHub Pages /r/ (https://willink-oss.github.io/willink-design-system/r/); registry.i-willink.com planned as a future branded alias.",
   "scripts": {
-    "build": "shadcn build"
+    "type-check": "tsc --noEmit",
+    "build": "tsc --noEmit && shadcn build"
   },
   "devDependencies": {
-    "shadcn": "^3.4.0"
+    "@types/react": "^19.2.17",
+    "@willink-labs/react": "workspace:*",
+    "clsx": "^2.1.1",
+    "react": "^19.2.7",
+    "shadcn": "^3.4.0",
+    "tailwind-merge": "^3.6.0",
+    "typescript": "^6.0.3"
   }
 }
