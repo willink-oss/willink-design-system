@@ -37,6 +37,7 @@ then `npx shadcn add @willink/<item>`.
 | Item | Type | Notes |
 |---|---|---|
 | `cn` | `registry:lib` | clsx + tailwind-merge class combiner (the shared utility). |
+| `contact-form` | `registry:block` | Token-themed contact form composing the `@willink-labs/react` primitives (FormField + Input + Textarea + Button). First composition block (ADR-0020). |
 
 Blocks (`@willink/contact-form`, `@willink/page-hero`, …) and primitive
 registry-items land in follow-up issues. A Next.js preview site is a later
