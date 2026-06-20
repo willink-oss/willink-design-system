@@ -611,3 +611,35 @@
    unstyled) — so they appear in no consumer source and would purge without this. */
 @source inline("data-[state=open]:bg-surface-muted");
 @source inline("data-[state=open]:text-fg");
+
+/* === Purge-gap audit (Issue #125 — surfaced by the check-safelist-emission gate) === */
+/* The new static gate found these utilities emitted from shipped components' cn()/cva()
+   but absent from every block above. Each appears in no consumer source, so it would
+   purge in a consumer build — the exact clublink.jp 5/8 failure mode that the gate now
+   guards against automatically. Grouped by origin: */
+/* Badge: pill horizontal padding */
+@source inline("px-2.5");
+/* Card: title size + hover elevation (transition-shadow / hover:shadow-md are distinct
+   from the bare shadow-md / transition-* already present) */
+@source inline("text-2xl");
+@source inline("pt-0");
+@source inline("transition-shadow");
+@source inline("hover:shadow-md");
+/* Dialog / Sheet overlay: the backdrop fade animates opacity */
+@source inline("transition-opacity");
+/* Accordion: content bottom padding (raw className, not a cn() literal) */
+@source inline("pb-4");
+/* Label: peer-driven disabled affordance (peer-disabled: variants are distinct utilities)
+   + required-asterisk left margin */
+@source inline("peer-disabled:cursor-not-allowed");
+@source inline("peer-disabled:opacity-70");
+@source inline("ml-0.5");
+/* NavigationMenu: content panel padding */
+@source inline("p-2");
+/* Textarea: min height + vertical-only resize */
+@source inline("min-h-20");
+@source inline("resize-y");
+/* Menu/overlay items reset the native focus outline so the bg highlight is the sole focus
+   cue. Bare `outline-none` (distinct from the safelisted `focus-visible:outline-none`) is
+   emitted by Command / ContextMenu / DropdownMenu / HoverCard / Menubar / Popover / Select. */
+@source inline("outline-none");

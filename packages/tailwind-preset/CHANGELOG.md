@@ -8,6 +8,10 @@ breaking changes; pin with `~0.2.0` for exact-minor stability).
 
 ## [Unreleased]
 
+### Fixed
+
+- **safelist: close 14 purge-gap utilities** surfaced by the new `check-safelist-emission` gate (#125). Each is emitted from a shipped `@willink-labs/react` component but was absent from the safelist, so it purged in consumer builds that don't scan `node_modules` (the clublink.jp 5/8 failure mode): bare `outline-none` (Command / ContextMenu / DropdownMenu / HoverCard / Menubar / Popover / Select focus reset — distinct from the already-listed `focus-visible:outline-none`), `transition-opacity` (Dialog / Sheet overlay fade), `text-2xl` / `pt-0` / `transition-shadow` / `hover:shadow-md` (Card), `pb-4` (Accordion content), `peer-disabled:cursor-not-allowed` / `peer-disabled:opacity-70` / `ml-0.5` (Label), `px-2.5` (Badge), `p-2` (NavigationMenu), `min-h-20` / `resize-y` (Textarea). Several (Accordion `pb-4`, Label `ml-0.5`, NavigationMenu/Progress/Menubar structural classes) are emitted via raw `className="…"` rather than `cn()`, which the gate scans alongside `cn()`/`cva()`. Build-verified to emit in the playground consumer CSS.
+
 ## [1.8.0] — 2026-06-19
 
 Lockstep with `@willink-labs/{tokens,css-tokens,react}@1.8.0` (the 14-component catalog expansion). The preset's own change is the CSS-first `@layer components` extension surface below, plus safelist entries for every class the new React components emit.
