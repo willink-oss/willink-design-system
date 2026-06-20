@@ -16,6 +16,21 @@
         }
       ],
       "dependencies": ["clsx", "tailwind-merge"]
+    },
+    {
+      "name": "contact-form",
+      "type": "registry:block",
+      "title": "Contact form",
+      "description": "Token-themed contact form composing the @willink-labs/react primitives (FormField + Input + Textarea + Button). Copy-to-own via `npx shadcn add @willink/contact-form` — the markup is yours to edit; the primitives and `--color-brand` theming come from the npm packages (ADR-0020).",
+      "registryDependencies": ["FormField", "Button"],
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/contact-form/contact-form.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-form.tsx"
+        }
+      ]
     }
   ]
 }
