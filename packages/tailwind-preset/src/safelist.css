@@ -535,3 +535,27 @@
    DropdownMenu (already safelisted above): animate-fade-* / motion-reduce / z-50 /
    min-w-32 / focus:bg-surface-muted / data-[disabled]:* / px-2 / py-1.5 / rounded-sm /
    tracking-widest / pl-8. No new entries required. */
+
+/* === Command (Issue #113・cmdk palette) === */
+/* Most classes are already present (border-border / bg-bg / text-fg / text-fg-secondary
+   / text-muted / bg-border / rounded-{sm,md} / border-b / px-{2,3} / py-1.5 / gap-2 /
+   ml-auto / -mx-1 / my-1 / tracking-widest / h-{px,4,10} / w-4 / shrink-0 / select-none /
+   cursor-pointer / flex-col / bg-transparent / placeholder:text-muted /
+   disabled:cursor-not-allowed / disabled:opacity-50 / text-center / font-medium).
+   The cmdk-specific selection/disabled variants, the [cmdk-group-heading] child
+   selectors, the scroll-area overflow + max-h, and the input padding are new. */
+@source inline("data-[selected=true]:bg-surface-subtle");
+@source inline("data-[selected=true]:text-fg");
+@source inline("data-[disabled=true]:pointer-events-none");
+@source inline("data-[disabled=true]:opacity-50");
+@source inline("[&_[cmdk-group-heading]]:px-2");
+@source inline("[&_[cmdk-group-heading]]:py-1.5");
+@source inline("[&_[cmdk-group-heading]]:text-xs");
+@source inline("[&_[cmdk-group-heading]]:font-medium");
+@source inline("[&_[cmdk-group-heading]]:text-muted");
+@source inline("overflow-y-auto");
+@source inline("overflow-x-hidden");
+@source inline("max-h-80");
+@source inline("py-3");
+@source inline("py-6");
+@source inline("mr-2");

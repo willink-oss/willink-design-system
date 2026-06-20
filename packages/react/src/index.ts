@@ -265,3 +265,15 @@ export {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./components/collapsible";
+
+// Issue #113: Command (cmdk) — command palette / fuzzy-search menu (no animation)
+export {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "./components/command";

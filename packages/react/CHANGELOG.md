@@ -8,6 +8,10 @@ breaking changes; pin with `~0.1.0` for exact-minor stability).
 
 ## [Unreleased]
 
+### Added
+
+- **Command** (cmdk `cmdk@^1.1.1`) — command palette / fuzzy-search menu (`Command` / `CommandInput` / `CommandList` / `CommandEmpty` / `CommandGroup` / `CommandItem` / `CommandSeparator` / `CommandShortcut`). cmdk supplies the combobox/listbox semantics (typeahead-filtered items, `aria-selected` highlight, full keyboard nav); this wrapper restyles to DS semantic tokens — container `border-border` + `bg-bg` + `text-fg`, `CommandInput` row with a lucide `Search` icon + `border-b`, `CommandItem` `data-[selected=true]:bg-surface-subtle`, muted group headings + `CommandShortcut`. No animation by design (no `motion-reduce` needed). Built on the v1.8.0 `ScrollArea` unblock; compose inside `Dialog` for a modal palette. (#113)
+
 ## [1.8.0] — 2026-06-19
 
 Catalog expansion (roadmap v1.9): 14 new components (25 → 39), the CSS-first `@layer components` extension surface, and the ADR-0008 Layer-1 reduced-motion completion. Lockstep with `@willink-labs/{tokens,tailwind-preset,css-tokens}@1.8.0`.
