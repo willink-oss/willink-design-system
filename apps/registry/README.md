@@ -70,6 +70,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `comparison-table` | `registry:block` | Tiered comparison matrix (Table + ToggleGroup + HoverCard + Badge + Button) — billing toggle, ✓/✗ cells with text alternatives, feature explainers, per-plan CTAs. |
 | `confirm-dialog` | `registry:block` | Destructive-confirm dialog (AlertDialog + Button) — focus-trapped `alertdialog`, danger confirm wired to `onConfirm`. |
 | `dashboard-shell` | `registry:block` | Responsive app shell (Sheet + ScrollArea + Avatar + DropdownMenu + Button + Badge + Separator) — desktop sidebar / mobile drawer nav, topbar with user menu, wraps `children`. |
+| `team-grid` | `registry:block` | Team/people grid (Card + Avatar + HoverCard + Badge) — avatar, name, role badge, optional bio popover. |
+| `article-card` | `registry:block` | Blog/article preview card (Card + Badge + Avatar + Button) — category, title, excerpt, author + date, read-more link. |
+| `stat-highlight` | `registry:block` | Rich KPI card (Card + Progress + Badge) — label, big value, trend badge, goal progress bar. |
 
 ## Authoring a block
 
