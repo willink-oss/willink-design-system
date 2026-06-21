@@ -67,6 +67,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `settings-form` | `registry:block` | Settings surface (Tabs + Card + FormField + Input + Switch + Select + RadioGroup + Button) — tabbed sections of grouped setting rows with a save/cancel footer. |
 | `command-palette` | `registry:block` | ⌘K modal command palette (Command + Dialog) — keyboard toggle, fuzzy search, grouped commands + shortcuts, empty state. |
 | `page-header` | `registry:block` | App page header (Breadcrumb + Badge + ButtonGroup + Button + DropdownMenu) — breadcrumb, title + status badge, primary/secondary actions (`onClick`), overflow menu (`onSelect`). |
+| `comparison-table` | `registry:block` | Tiered comparison matrix (Table + ToggleGroup + HoverCard + Badge + Button) — billing toggle, ✓/✗ cells with text alternatives, feature explainers, per-plan CTAs. |
+| `confirm-dialog` | `registry:block` | Destructive-confirm dialog (AlertDialog + Button) — focus-trapped `alertdialog`, danger confirm wired to `onConfirm`. |
+| `dashboard-shell` | `registry:block` | Responsive app shell (Sheet + ScrollArea + Avatar + DropdownMenu + Button + Badge + Separator) — desktop sidebar / mobile drawer nav, topbar with user menu, wraps `children`. |
 
 ## Authoring a block
 

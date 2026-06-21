@@ -198,6 +198,48 @@
           "target": "components/blocks/page-header.tsx"
         }
       ]
+    },
+    {
+      "name": "comparison-table",
+      "type": "registry:block",
+      "title": "Comparison table",
+      "description": "A tiered pricing/feature comparison matrix composing the @willink-labs/react primitives (Table + ToggleGroup + HoverCard + Badge + Button) — a monthly/annual billing toggle, a plan-per-column table with ✓/✗ cells (with text alternatives), HoverCard feature explainers, and per-plan CTA buttons (onSelectPlan). Companion to pricing-card. Copy-to-own via `npx shadcn add @willink/comparison-table`; the plans and features are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/comparison-table/comparison-table.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/comparison-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-dialog",
+      "type": "registry:block",
+      "title": "Confirm dialog",
+      "description": "A reusable destructive-confirmation dialog composing the @willink-labs/react AlertDialog + Button primitives — a trigger button opens a focus-trapped `role=\"alertdialog\"` with a title, description, Cancel, and a danger-styled confirm action wired to an onConfirm callback. Copy-to-own via `npx shadcn add @willink/confirm-dialog`; the copy and handler are yours and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/confirm-dialog/confirm-dialog.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/confirm-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-shell",
+      "type": "registry:block",
+      "title": "Dashboard shell",
+      "description": "A responsive app shell composing the @willink-labs/react primitives (Sheet + ScrollArea + Avatar + DropdownMenu + Button + Badge + Separator) — a fixed desktop sidebar (mobile Sheet drawer) with a scrollable nav rail, a topbar with the mobile menu trigger + title + a user Avatar menu (onSelect), wrapping arbitrary `children`. Copy-to-own via `npx shadcn add @willink/dashboard-shell`; the nav and user menu are yours to wire and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/dashboard-shell/dashboard-shell.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/dashboard-shell.tsx"
+        }
+      ]
     }
   ]
 }
