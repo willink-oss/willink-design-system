@@ -324,6 +324,48 @@
           "target": "components/blocks/logo-cloud.tsx"
         }
       ]
+    },
+    {
+      "name": "testimonial-wall",
+      "type": "registry:block",
+      "title": "Testimonial wall",
+      "description": "A multi-quote social-proof wall composing the @willink-labs/react primitives (Card + Avatar + Badge) — a masonry layout of testimonial cards, each with figure/figcaption attribution, an avatar, and an optional tag badge. Extends the single testimonial block. Copy-to-own via `npx shadcn add @willink/testimonial-wall`; the quotes are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/testimonial-wall/testimonial-wall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/testimonial-wall.tsx"
+        }
+      ]
+    },
+    {
+      "name": "description-list",
+      "type": "registry:block",
+      "title": "Description list",
+      "description": "A metadata/settings-summary readout composing the @willink-labs/react primitives (Card + Separator + Badge + Tooltip + Collapsible) — a real <dl> of term/description rows with optional tooltips, badges, and an expandable details section. Copy-to-own via `npx shadcn add @willink/description-list`; the items are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/description-list/description-list.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/description-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "range-filter",
+      "type": "registry:block",
+      "title": "Range filter",
+      "description": "A faceted number/price range filter composing the @willink-labs/react primitives (Popover + Slider + Badge + Button) — a popover trigger showing the current range as a badge, a two-thumb slider with a formatter, and apply/reset actions wired to onApply. Copy-to-own via `npx shadcn add @willink/range-filter`; the range and formatter are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/range-filter/range-filter.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/range-filter.tsx"
+        }
+      ]
     }
   ]
 }

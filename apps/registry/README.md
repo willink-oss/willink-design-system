@@ -76,6 +76,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `subscribe-inline` | `registry:block` | Inline email capture (FormField + Input + Button + Alert) — single-field subscribe with validation + success alert (`onSubscribe`). |
 | `newsletter-signup` | `registry:block` | Card newsletter signup (Card + FormField + Input + Checkbox + Button + toast) — email + consent, success toast (mount `<Toaster/>` at app root). |
 | `logo-cloud` | `registry:block` | "Trusted by" logo strip (ScrollArea + Avatar + Skeleton + Tooltip) — scrollable greyscale logos with name tooltips + loading state. |
+| `testimonial-wall` | `registry:block` | Multi-quote social-proof wall (Card + Avatar + Badge) — masonry of testimonial cards with figure/figcaption attribution + tag badges. |
+| `description-list` | `registry:block` | Metadata readout (Card + Separator + Badge + Tooltip + Collapsible) — a `<dl>` of term/value rows with tooltips, badges, expandable details. |
+| `range-filter` | `registry:block` | Faceted range filter (Popover + Slider + Badge + Button) — popover with a two-thumb slider + apply/reset (`onApply`). |
 
 ## Authoring a block
 
