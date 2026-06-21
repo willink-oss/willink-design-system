@@ -7,10 +7,13 @@ copy-to-own distribution channel for blocks and composition ([ADR-0020](../../do
   `shadcn build` compiles it to static JSON under `public/r/*.json`.
 - **What it is NOT**: the npm primitives (`@willink-labs/*`) remain the
   versioned, import-and-run contract layer. The registry is **additive** — items
-  are copied into a consumer's repo (`npx shadcn add @willink/<item>`), and
-  block items' `registryDependencies` point at the npm primitives (no
-  re-vendoring). Token theming is inherited via the `@willink-labs/tailwind-preset`
-  dependency (one token source).
+  are copied into a consumer's repo (`npx shadcn add @willink/<item>`), and each
+  block declares the npm primitives via `dependencies`
+  (`@willink-labs/react` + `@willink-labs/tailwind-preset`), which `shadcn add`
+  installs — the primitives are **not** re-vendored. (Blocks carry no
+  `registryDependencies`: bare names there resolve against shadcn's official
+  registry, not `@willink`.) Token theming is inherited via the
+  `@willink-labs/tailwind-preset` dependency (one token source).
 
 ## Build
 
@@ -55,6 +58,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `page-hero` | `registry:block` | Centered marketing hero (Badge + Button) — eyebrow, title, lead copy, primary/secondary CTAs. |
 | `auth-form` | `registry:block` | Sign-in form (FormField + Input + Checkbox + Button + Separator) — email/password with inline validation, remember-me, alternate-action divider. |
 | `pricing-card` | `registry:block` | A pricing tier (Card + Badge + Button) — plan, price, popular badge, feature list, CTA. Render several for a pricing table. |
+| `faq` | `registry:block` | FAQ section (Accordion) — single-open collapsible question/answer list with an optional heading. |
+| `testimonial` | `registry:block` | Customer-quote card (Card + Avatar) — quote with figure/figcaption attribution; avatar falls back to initials. |
+| `stats` | `registry:block` | Responsive metrics row (Card) — a `<dl>` grid of label/value (+ optional delta) stat cards. |
 
 ## Authoring a block
 
