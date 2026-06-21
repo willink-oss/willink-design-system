@@ -73,6 +73,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `team-grid` | `registry:block` | Team/people grid (Card + Avatar + HoverCard + Badge) — avatar, name, role badge, optional bio popover. |
 | `article-card` | `registry:block` | Blog/article preview card (Card + Badge + Avatar + Button) — category, title, excerpt, author + date, read-more link. |
 | `stat-highlight` | `registry:block` | Rich KPI card (Card + Progress + Badge) — label, big value, trend badge, goal progress bar. |
+| `subscribe-inline` | `registry:block` | Inline email capture (FormField + Input + Button + Alert) — single-field subscribe with validation + success alert (`onSubscribe`). |
+| `newsletter-signup` | `registry:block` | Card newsletter signup (Card + FormField + Input + Checkbox + Button + toast) — email + consent, success toast (mount `<Toaster/>` at app root). |
+| `logo-cloud` | `registry:block` | "Trusted by" logo strip (ScrollArea + Avatar + Skeleton + Tooltip) — scrollable greyscale logos with name tooltips + loading state. |
 
 ## Authoring a block
 

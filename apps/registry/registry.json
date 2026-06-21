@@ -282,6 +282,48 @@
           "target": "components/blocks/stat-highlight.tsx"
         }
       ]
+    },
+    {
+      "name": "subscribe-inline",
+      "type": "registry:block",
+      "title": "Subscribe (inline)",
+      "description": "A compact inline email-capture composing the @willink-labs/react primitives (FormField + Input + Button + Alert) — a single-field newsletter/waitlist form with inline validation and a success Alert, wired to an onSubscribe callback. Copy-to-own via `npx shadcn add @willink/subscribe-inline`; the copy is yours and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/subscribe-inline/subscribe-inline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/subscribe-inline.tsx"
+        }
+      ]
+    },
+    {
+      "name": "newsletter-signup",
+      "type": "registry:block",
+      "title": "Newsletter signup",
+      "description": "A card-framed newsletter signup composing the @willink-labs/react primitives (Card + FormField + Input + Checkbox + Button + toast) — email validation, a consent checkbox, and a success toast (mount <Toaster/> once at your app root). Copy-to-own via `npx shadcn add @willink/newsletter-signup`; the copy is yours and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/newsletter-signup/newsletter-signup.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/newsletter-signup.tsx"
+        }
+      ]
+    },
+    {
+      "name": "logo-cloud",
+      "type": "registry:block",
+      "title": "Logo cloud",
+      "description": "A \"trusted by\" social-proof logo strip composing the @willink-labs/react primitives (ScrollArea + Avatar + Skeleton + Tooltip) — a horizontally-scrollable row of greyscale logos with company-name tooltips and an optional loading state. Copy-to-own via `npx shadcn add @willink/logo-cloud`; the logos are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud/logo-cloud.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud.tsx"
+        }
+      ]
     }
   ]
 }
