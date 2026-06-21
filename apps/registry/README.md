@@ -61,6 +61,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `faq` | `registry:block` | FAQ section (Accordion) — single-open collapsible question/answer list with an optional heading. |
 | `testimonial` | `registry:block` | Customer-quote card (Card + Avatar) — quote with figure/figcaption attribution; avatar falls back to initials. |
 | `stats` | `registry:block` | Responsive metrics row (Card) — a `<dl>` grid of label/value (+ optional delta) stat cards. |
+| `data-table` | `registry:block` | Admin data table (Table + Checkbox + Badge + DropdownMenu + Pagination + Empty) — tri-state select-all, status badges, row-action menu (`onAction`), client-side pagination, empty state. |
+| `feature-grid` | `registry:block` | Responsive feature grid (Card + Badge) — optional eyebrow/heading + a grid of title/description feature cards. |
+| `cta-section` | `registry:block` | End-of-page CTA band (Badge + Button) — eyebrow, title, copy, primary/secondary CTAs (asChild links). |
 
 ## Authoring a block
 
