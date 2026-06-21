@@ -72,6 +72,48 @@
           "target": "components/blocks/pricing-card.tsx"
         }
       ]
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "FAQ",
+      "description": "A frequently-asked-questions section composing the @willink-labs/react Accordion primitive (single-open, collapsible) — an optional heading and a list of question/answer items. Copy-to-own via `npx shadcn add @willink/faq`; the heading and Q&A are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/faq/faq.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq.tsx"
+        }
+      ]
+    },
+    {
+      "name": "testimonial",
+      "type": "registry:block",
+      "title": "Testimonial",
+      "description": "A customer-quote card composing the @willink-labs/react primitives (Card + Avatar) — a quote with figure/figcaption attribution and an avatar that falls back to initials. Copy-to-own via `npx shadcn add @willink/testimonial`; the quote and attribution are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/testimonial/testimonial.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/testimonial.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stats",
+      "type": "registry:block",
+      "title": "Stats",
+      "description": "A responsive metrics row composing the @willink-labs/react Card primitive — a grid of label/value (+ optional delta) stat cards in a real <dl>. Copy-to-own via `npx shadcn add @willink/stats`; the metrics and layout are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/stats/stats.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/stats.tsx"
+        }
+      ]
     }
   ]
 }
