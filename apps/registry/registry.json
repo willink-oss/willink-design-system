@@ -114,6 +114,48 @@
           "target": "components/blocks/stats.tsx"
         }
       ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:block",
+      "title": "Data table",
+      "description": "An admin data table composing the @willink-labs/react primitives (Table + Checkbox + Badge + DropdownMenu + Pagination + Empty) — row + tri-state select-all (indeterminate), status badges, a per-row actions menu wired via an optional onAction prop, real client-side pagination, and an Empty state. Copy-to-own via `npx shadcn add @willink/data-table`; the columns and behaviour are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/data-table/data-table.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/data-table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "feature-grid",
+      "type": "registry:block",
+      "title": "Feature grid",
+      "description": "A responsive product-feature grid composing the @willink-labs/react primitives (Card + Badge) — an optional eyebrow/heading and a responsive grid of feature cards (title + description). Copy-to-own via `npx shadcn add @willink/feature-grid`; the copy and layout are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/feature-grid/feature-grid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/feature-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cta-section",
+      "type": "registry:block",
+      "title": "CTA section",
+      "description": "An end-of-page call-to-action band composing the @willink-labs/react primitives (Badge + Button) — an optional eyebrow, title, supporting copy, and primary/secondary CTA buttons (asChild link-wrapped). Copy-to-own via `npx shadcn add @willink/cta-section`; the copy is yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/cta-section/cta-section.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/cta-section.tsx"
+        }
+      ]
     }
   ]
 }
