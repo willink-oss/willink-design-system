@@ -156,6 +156,48 @@
           "target": "components/blocks/cta-section.tsx"
         }
       ]
+    },
+    {
+      "name": "settings-form",
+      "type": "registry:block",
+      "title": "Settings form",
+      "description": "An account/preferences settings surface composing the @willink-labs/react primitives (Tabs + Card + FormField + Input + Switch + Select + RadioGroup + Separator + Button) — tabbed sections of grouped setting rows (text fields, toggles, selects, radios) with a save/cancel footer. Copy-to-own via `npx shadcn add @willink/settings-form`; the fields and behaviour are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/settings-form/settings-form.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/settings-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:block",
+      "title": "Command palette",
+      "description": "A ⌘K modal command palette composing the @willink-labs/react primitives (Command inside a controlled Dialog) — a ⌘K/Ctrl+K keyboard toggle, fuzzy-search input, grouped commands with shortcuts, and an empty state. Copy-to-own via `npx shadcn add @willink/command-palette`; the commands are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/command-palette/command-palette.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/command-palette.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:block",
+      "title": "Page header",
+      "description": "An app/admin page header composing the @willink-labs/react primitives (Breadcrumb + Badge + ButtonGroup + Button + DropdownMenu) — a breadcrumb trail, title with optional status badge, primary/secondary action buttons (onClick), and an overflow actions menu (onSelect). Copy-to-own via `npx shadcn add @willink/page-header`; the actions are yours to wire and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/page-header/page-header.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/page-header.tsx"
+        }
+      ]
     }
   ]
 }

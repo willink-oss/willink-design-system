@@ -64,6 +64,9 @@ npx shadcn add https://willink-oss.github.io/willink-design-system/r/contact-for
 | `data-table` | `registry:block` | Admin data table (Table + Checkbox + Badge + DropdownMenu + Pagination + Empty) — tri-state select-all, status badges, row-action menu (`onAction`), client-side pagination, empty state. |
 | `feature-grid` | `registry:block` | Responsive feature grid (Card + Badge) — optional eyebrow/heading + a grid of title/description feature cards. |
 | `cta-section` | `registry:block` | End-of-page CTA band (Badge + Button) — eyebrow, title, copy, primary/secondary CTAs (asChild links). |
+| `settings-form` | `registry:block` | Settings surface (Tabs + Card + FormField + Input + Switch + Select + RadioGroup + Button) — tabbed sections of grouped setting rows with a save/cancel footer. |
+| `command-palette` | `registry:block` | ⌘K modal command palette (Command + Dialog) — keyboard toggle, fuzzy search, grouped commands + shortcuts, empty state. |
+| `page-header` | `registry:block` | App page header (Breadcrumb + Badge + ButtonGroup + Button + DropdownMenu) — breadcrumb, title + status badge, primary/secondary actions (`onClick`), overflow menu (`onSelect`). |
 
 ## Authoring a block
 
