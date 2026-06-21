@@ -240,6 +240,48 @@
           "target": "components/blocks/dashboard-shell.tsx"
         }
       ]
+    },
+    {
+      "name": "team-grid",
+      "type": "registry:block",
+      "title": "Team grid",
+      "description": "A responsive team/people grid composing the @willink-labs/react primitives (Card + Avatar + HoverCard + Badge) — member cards with an avatar (image or initials fallback), name, role badge, and an optional HoverCard bio popover. Copy-to-own via `npx shadcn add @willink/team-grid`; the members are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/team-grid/team-grid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "article-card",
+      "type": "registry:block",
+      "title": "Article card",
+      "description": "A blog/article preview card composing the @willink-labs/react primitives (Card + Badge + Avatar + Button) — a category badge, title, excerpt, an author avatar + date footer, and a read-more link. Copy-to-own via `npx shadcn add @willink/article-card`; the content is yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/article-card/article-card.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/article-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat-highlight",
+      "type": "registry:block",
+      "title": "Stat highlight",
+      "description": "A single rich KPI/metric highlight card composing the @willink-labs/react primitives (Card + Progress + Badge) — a label, a large value, a trend badge, and a goal Progress bar. Complements the stats row block. Copy-to-own via `npx shadcn add @willink/stat-highlight`; the metric is yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
+      "files": [
+        {
+          "path": "registry/blocks/stat-highlight/stat-highlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/stat-highlight.tsx"
+        }
+      ]
     }
   ]
 }
