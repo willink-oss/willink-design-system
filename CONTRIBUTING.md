@@ -53,7 +53,7 @@ flutter test
 
 ### Component checklist (when adding a new component)
 
-- [ ] Component file in `packages/react/src/<component>/`
+- [ ] Component file in `packages/react/src/components/<component>/<component>.tsx`
 - [ ] Unit test with `@testing-library/react` + `jest-axe` (a11y assertion)
 - [ ] Safelist update in `packages/tailwind-preset/src/safelist.css` if the component emits new utility class strings
 - [ ] CHANGELOG entry in `packages/react/CHANGELOG.md`
