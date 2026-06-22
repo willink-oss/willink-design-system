@@ -27,7 +27,7 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 
 ---
 
-## Components (1.9.0・42 total)
+## Components (42 total — 39 shipped in 1.8.0, 3 unreleased for 1.9.0)
 
 ### Phase 0-3 core set (7・0.1.0-0.4.x)
 
@@ -88,7 +88,7 @@ dist は先頭に `'use client'` directive を同梱する (1.4.1+)。全 compon
 | `Collapsible` | compound (Collapsible / Trigger / Content) | Radix Collapsible |
 | `ToggleGroup` | variant default / outline × size sm / md / lg × type single / multiple・built on `toggleVariants` | Radix ToggleGroup |
 
-### v1.9.0 additions (3)
+### v1.9.0 additions (3・unreleased — in CHANGELOG [Unreleased], not yet on npm)
 
 | Component | Variants / Parts | Headless |
 |---|---|---|
