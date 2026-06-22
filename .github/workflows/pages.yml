@@ -24,7 +24,7 @@ jobs:
       NEXT_PUBLIC_BASE_PATH: /willink-design-system
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6
