@@ -2,8 +2,9 @@
  * ADR-0008 Layer 1 motion contract の regression gate。
  *
  * `animate-(fade|dialog|sheet|accordion|pulse)` を使うコンポーネントは、必ず
- * `motion-reduce:(animate|transition)-none` を併記して `prefers-reduced-motion`
- * で動きを止めなければならない (Layer-1 の可読契約)。
+ * `motion-reduce:animate-none` を併記して `prefers-reduced-motion` で動きを
+ * 止めなければならない (Layer-1 の可読契約)。`transition-none` は CSS transition
+ * しか止めず animation を止めないため、`animate-*` には `animate-none` が必須。
  *
  * DropdownMenu / Select がこの Layer-1 を欠いたまま出荷された再発 (issue #78) を
  * 構造的に防止する静的ゲート。check-tokens.test.ts と同じ walk() で components/
@@ -37,10 +38,10 @@ function stripComments(src: string): string {
 }
 
 const ANIMATE = /animate-(fade|dialog|sheet|accordion|pulse)/;
-const MOTION_REDUCE = /motion-reduce:(animate|transition)-none/;
+const MOTION_REDUCE = /motion-reduce:animate-none/;
 
 describe("check-motion-contract (ADR-0008 Layer 1)", () => {
-  it("every animated component declares motion-reduce:(animate|transition)-none", () => {
+  it("every animated component declares motion-reduce:animate-none", () => {
     const violations: string[] = [];
     for (const file of walk(COMPONENTS_DIR)) {
       const content = stripComments(readFileSync(file, "utf8"));
