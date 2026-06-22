@@ -161,7 +161,7 @@
       "name": "settings-form",
       "type": "registry:block",
       "title": "Settings form",
-      "description": "An account/preferences settings surface composing the @willink-labs/react primitives (Tabs + Card + FormField + Input + Switch + Select + RadioGroup + Separator + Button) — tabbed sections of grouped setting rows (text fields, toggles, selects, radios) with a save/cancel footer. Copy-to-own via `npx shadcn add @willink/settings-form`; the fields and behaviour are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "description": "An account/preferences settings surface composing the @willink-labs/react primitives (Tabs + Card + Label + Input + Switch + Select + RadioGroup + Separator + Button) — tabbed sections of grouped setting rows (text fields, toggles, selects, radios) with a save/cancel footer. Copy-to-own via `npx shadcn add @willink/settings-form`; the fields and behaviour are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
       "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
       "files": [
         {
@@ -301,7 +301,7 @@
       "name": "newsletter-signup",
       "type": "registry:block",
       "title": "Newsletter signup",
-      "description": "A card-framed newsletter signup composing the @willink-labs/react primitives (Card + FormField + Input + Checkbox + Button + toast) — email validation, a consent checkbox, and a success toast (mount <Toaster/> once at your app root). Copy-to-own via `npx shadcn add @willink/newsletter-signup`; the copy is yours and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "description": "A card-framed newsletter signup composing the @willink-labs/react primitives (Card + FormField + Input + Checkbox + Label + Button + toast) — email validation, a consent checkbox, and a success toast (mount <Toaster/> once at your app root). Copy-to-own via `npx shadcn add @willink/newsletter-signup`; the copy is yours and the `--color-brand` theming comes from the npm packages (ADR-0020).",
       "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
       "files": [
         {
@@ -357,7 +357,7 @@
       "name": "range-filter",
       "type": "registry:block",
       "title": "Range filter",
-      "description": "A faceted number/price range filter composing the @willink-labs/react primitives (Popover + Slider + Badge + Button) — a popover trigger showing the current range as a badge, a two-thumb slider with a formatter, and apply/reset actions wired to onApply. Copy-to-own via `npx shadcn add @willink/range-filter`; the range and formatter are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
+      "description": "A faceted number/price range filter composing the @willink-labs/react primitives (Popover + Slider + Badge + Button + Label) — a popover trigger showing the current range as a badge, a two-thumb slider with a formatter, and apply/reset actions wired to onApply. Copy-to-own via `npx shadcn add @willink/range-filter`; the range and formatter are yours to edit and the `--color-brand` theming comes from the npm packages (ADR-0020).",
       "dependencies": ["@willink-labs/react", "@willink-labs/tailwind-preset"],
       "files": [
         {
