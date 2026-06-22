@@ -3,8 +3,9 @@
 All notable changes to `@willink-labs/react` will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project follows the **0.x semver convention** (minor bumps may include
-breaking changes; pin with `~0.1.0` for exact-minor stability).
+and this project follows strict [SemVer 2.0.0](https://semver.org/) since v1.0.0
+(per-surface classification rules in [ADR-0010](../../docs/adr/0010-semver-policy.md);
+pre-1.0 releases used the 0.x convention). Pin with `~1.8.0` for exact-minor stability.
 
 ## [Unreleased]
 
