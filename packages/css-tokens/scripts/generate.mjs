@@ -47,8 +47,14 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const tokensRoot = path.resolve(__dirname, "../../tokens/src");
-const pkgRoot = path.resolve(__dirname, "..");
-const outDir = path.resolve(__dirname, "../src");
+// Output root is overridable via CSS_TOKENS_OUT_DIR so the parity gate can
+// regenerate into a temp dir without clobbering the committed files.
+// Default = the css-tokens package root (unchanged behaviour).
+const outRoot = process.env.CSS_TOKENS_OUT_DIR
+  ? path.resolve(process.env.CSS_TOKENS_OUT_DIR)
+  : path.resolve(__dirname, "..");
+const pkgRoot = outRoot;
+const outDir = path.join(outRoot, "src");
 
 const primitive = JSON.parse(
   fs.readFileSync(path.join(tokensRoot, "primitive.json"), "utf8"),
