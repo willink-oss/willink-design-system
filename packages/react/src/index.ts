@@ -29,6 +29,8 @@ export {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  type AccordionItemProps,
+  type AccordionTriggerProps,
 } from "./components/accordion";
 
 // PR6: Dialog (Radix)
