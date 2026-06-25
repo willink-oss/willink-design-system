@@ -9,6 +9,21 @@ in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
 `@willink-labs/react`) move in lockstep — every release bumps all three to the
 same minor.
 
+## [1.9.0] — 2026-06-26
+
+### Added — `spacing` + `font-size` primitive scales
+
+Two new primitive scale groups, **additive** (no existing token changed):
+
+- `spacing.{xs,sm,md,lg,xl,2xl}` = 4 / 8 / 16 / 24 / 32 / 48 px (rem) (#164)
+- `font-size.{xs,sm,base,lg,xl,2xl,3xl}` = 12 / 14 / 16 / 18 / 20 / 24 / 30 px
+  (rem) (#165)
+
+Values match what consumers already use via the Tailwind preset. These are the
+SSOT the PULSE Flutter package (`pulse_theme`) code-generates its `PulseSpacing`
+/ `PulseFontSize` from, and `@willink-labs/css-tokens` now emits the matching
+`--spacing-*` / `--font-size-*` CSS variables.
+
 ## [1.8.0] — 2026-06-19
 
 ### Lockstep bump (no token change)
