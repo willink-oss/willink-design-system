@@ -7,7 +7,7 @@ and this project follows strict [SemVer 2.0.0](https://semver.org/) since v1.0.0
 (per-surface classification rules in [ADR-0010](../../docs/adr/0010-semver-policy.md);
 pre-1.0 releases used the 0.x convention). Pin with `~1.8.0` for exact-minor stability.
 
-## [Unreleased]
+## [1.9.0] — 2026-06-26
 
 ### Added
 

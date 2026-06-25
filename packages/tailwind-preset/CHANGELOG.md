@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows the **0.x semver convention** (minor bumps may include
 breaking changes; pin with `~0.2.0` for exact-minor stability).
 
-## [Unreleased]
+## [1.9.0] — 2026-06-26
+
+Lockstep bump. The `spacing` / `font-size` scales added to `@willink-labs/tokens`
+this release are preset-irrelevant (Tailwind already ships those scales); the
+preset is unchanged apart from the safelist fix below.
 
 ### Fixed
 

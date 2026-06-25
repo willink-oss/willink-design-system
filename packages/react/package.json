@@ -1,6 +1,6 @@
 {
   "name": "@willink-labs/react",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "i-Willink Design System React components — shadcn 拡張 / Radix UI 個別採用 / Tailwind v4 semantic token",
   "license": "MIT",
   "private": false,
