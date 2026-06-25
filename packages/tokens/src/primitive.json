@@ -78,6 +78,14 @@
     "xl":   { "$value": "1rem",    "$type": "dimension" },
     "full": { "$value": "9999px",  "$type": "dimension" }
   },
+  "spacing": {
+    "xs":  { "$value": "0.25rem", "$type": "dimension" },
+    "sm":  { "$value": "0.5rem",  "$type": "dimension" },
+    "md":  { "$value": "1rem",    "$type": "dimension" },
+    "lg":  { "$value": "1.5rem",  "$type": "dimension" },
+    "xl":  { "$value": "2rem",    "$type": "dimension" },
+    "2xl": { "$value": "3rem",    "$type": "dimension" }
+  },
   "duration": {
     "fast": { "$value": "150ms", "$type": "duration" },
     "base": { "$value": "250ms", "$type": "duration" },
