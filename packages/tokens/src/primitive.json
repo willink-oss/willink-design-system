@@ -86,6 +86,15 @@
     "xl":  { "$value": "2rem",    "$type": "dimension" },
     "2xl": { "$value": "3rem",    "$type": "dimension" }
   },
+  "font-size": {
+    "xs":   { "$value": "0.75rem",  "$type": "dimension" },
+    "sm":   { "$value": "0.875rem", "$type": "dimension" },
+    "base": { "$value": "1rem",     "$type": "dimension" },
+    "lg":   { "$value": "1.125rem", "$type": "dimension" },
+    "xl":   { "$value": "1.25rem",  "$type": "dimension" },
+    "2xl":  { "$value": "1.5rem",   "$type": "dimension" },
+    "3xl":  { "$value": "1.875rem", "$type": "dimension" }
+  },
   "duration": {
     "fast": { "$value": "150ms", "$type": "duration" },
     "base": { "$value": "250ms", "$type": "duration" },
