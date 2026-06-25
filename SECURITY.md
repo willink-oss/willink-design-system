@@ -19,12 +19,12 @@ Include as much of the following as possible:
 
 | Version | Supported |
 |---|---|
-| Latest minor (current `0.x`) | Yes |
+| Latest minor (current `1.x`) | Yes |
 | Older minors | No — please upgrade |
 
-We are pre-1.0. Security fixes are applied only to the latest released minor of each package (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`, `@willink-labs/react`, `willink_theme`). Older minors are not patched; we recommend upgrading.
+Security fixes are applied only to the latest released minor of each npm package (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`, `@willink-labs/react`, `@willink-labs/css-tokens`). The Flutter DS now lives in the separate [PULSE](https://github.com/willink-oss/pulse_theme) package (`pulse_theme`); the legacy `willink_theme` package is being superseded. Older minors are not patched; we recommend upgrading.
 
-Once we reach 1.0, this policy will be revised to cover at least the previous major.
+The packages are post-1.0 and follow strict SemVer ([ADR-0010](./docs/adr/0010-semver-policy.md)).
 
 ---
 
