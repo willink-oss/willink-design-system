@@ -31,6 +31,9 @@ jobs:
       - name: Guardrails (anti-yak-shaving check)
         run: pnpm guardrails
 
+      - name: Contrast audit (WCAG 2.1 — ADR-0013 / ADR-0016 / ADR-0018)
+        run: pnpm check-contrast
+
       - name: Tests (vitest across packages)
         run: pnpm -r --if-present test
 
