@@ -2,9 +2,37 @@
 
 All notable changes to `@willink-labs/tailwind-preset` will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project follows the **0.x semver convention** (minor bumps may include
-breaking changes; pin with `~0.2.0` for exact-minor stability).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+Since 1.0.0 this project follows strict [SemVer 2.0](https://semver.org/)
+([ADR-0010](../../docs/adr/0010-semver-policy.md)).
+
+## [2.0.0] — 2026-08-03
+
+### Changed — BREAKING: the brand base is fit-ai blue
+
+- `--color-brand` moves from the violet `#7c3aed` to `#1d5fd0` — fit-ai's own
+  `brand.primaryDeep`. Because the 50–950 scale is `color-mix(in oklch, …)`
+  derived from this one token (0.11.0+), the whole ramp follows automatically;
+  no per-step block changed.
+- `--shadow-glow` follows the new brand (`rgba(29, 95, 208, 0.3)`).
+
+White text on the new brand is **5.83:1**, up from 5.17:1 on the violet. The
+contrast gate (`pnpm check-contrast`) passes in both modes, including the rows
+that specifically check this preset's `color-mix` approximation against the
+contract's literals.
+
+**Staying violet is one line**, and that is the point of the derived scale:
+
+```css
+:root { --color-brand: #7c3aed; }
+```
+
+Noted rather than hidden: the derived `brand-500` is close to, but not
+byte-identical with, the contract's `#2e7bff`. Deriving eleven steps from one
+input is what makes a one-line re-brand possible, and it has always meant the
+preset approximates the literal scale — 2.0.0 does not change that trade, but it
+is more visible now that a specific fit-ai hex is what is being approximated.
+Consumers needing the exact values use `@willink-labs/css-tokens`.
 
 ## [1.9.0] — 2026-06-26
 

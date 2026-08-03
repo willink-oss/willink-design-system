@@ -67,7 +67,7 @@ import { Button, Badge } from "@willink-labs/react";
 
 ### 4. Customizing colors (single-brand baseline since 0.8.0)
 
-DS は willink purple (`#7C3AED`) を baseline として ship。consumer が他色を使いたい場合は `:root` で `--color-brand` を override するだけで、scale 全段 (`brand-50`〜`brand-950`) と state tokens (hover / active / soft) が自動派生する (0.11.0+):
+DS は **fit-ai blue (`#1D5FD0`)** を baseline として ship（2.0.0 で violet `#7C3AED` から変更 — [tokens CHANGELOG](./packages/tokens/CHANGELOG.md)）。consumer が他色を使いたい場合は `:root` で `--color-brand` を override するだけで、scale 全段 (`brand-50`〜`brand-950`) と state tokens (hover / active / soft) が自動派生する (0.11.0+)。**violet に留まりたい場合もこの 1 行**（`--color-brand: #7c3aed;`）で足りる:
 
 ```css
 /* your-app/globals.css */
@@ -88,7 +88,7 @@ DS は willink purple (`#7C3AED`) を baseline として ship。consumer が他�
 
 That's it. The numeric scale (`brand-50` 〜 `brand-950`) and state tokens (`brand-hover` / `-active` / `-soft` / `-soft-fg`) all derive from `--color-brand` via `color-mix(in oklch, …)`. Every DS component and every consumer utility (`text-brand-600`, `bg-brand-soft` etc.) follows automatically — no per-step alias block, no missed steps.
 
-> **Upgrading from 0.10.0?** This is a breaking change. Consumers that overrode `--color-brand` along with an 11-step alias block (`--color-brand-50: var(--color-blue-50)` etc.) can delete the alias block — the OKLCH derivation does the same job from a single override. Visual drift for the i-willink baseline is ~1–2% per channel (imperceptible on solids, subtle on long gradients). Browsers without `color-mix` support (pre-2023) fall back to the i-willink violet baseline via a `@supports` hex fallback emitted by Tailwind v4.
+> **Upgrading from 0.10.0?** This is a breaking change. Consumers that overrode `--color-brand` along with an 11-step alias block (`--color-brand-50: var(--color-blue-50)` etc.) can delete the alias block — the OKLCH derivation does the same job from a single override. Visual drift for the i-willink baseline is ~1–2% per channel (imperceptible on solids, subtle on long gradients). Browsers without `color-mix` support (pre-2023) fall back to the i-willink baseline via a `@supports` hex fallback emitted by Tailwind v4 (that baseline is fit-ai blue since 2.0.0, violet before it).
 
 Flutter (Material 3) consumers do the equivalent by `copyWith`:
 

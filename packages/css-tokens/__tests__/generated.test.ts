@@ -33,7 +33,8 @@ function countDarkExtensions(node: unknown): number {
 describe("@willink-labs/css-tokens generated files", () => {
   it("tokens.css contains primitive color scale + semantic + motion roles + brand shorthand", () => {
     const css = readCss("tokens.css");
-    expect(css).toContain("--color-brand-600: #7c3aed");
+    // fit-ai `brand.primaryDeep` — the 2.0.0 brand base (was violet #7c3aed).
+    expect(css).toContain("--color-brand-600: #1d5fd0");
     expect(css).toContain("--color-brand: var(--color-brand-600)");
     expect(css).toContain("--color-bg: #ffffff");
     expect(css).toContain("--motion-modal-enter: var(--duration-fast)");

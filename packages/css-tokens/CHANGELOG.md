@@ -4,6 +4,25 @@ All notable changes to `@willink-labs/css-tokens` will be documented in this fil
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). This package moves in lockstep with `@willink-labs/{tokens,tailwind-preset,react}` — it joins the monorepo at `0.13.0` so its version number aligns with the rest of the system from day one. (See ADR-0011 for the rationale.)
 
+## [2.0.0] — 2026-08-03
+
+### Changed — BREAKING: regenerated on the fit-ai brand ramp
+
+`tokens.css` / `tokens.scale.css` are regenerated from `@willink-labs/tokens`
+2.0.0, so every `--color-brand-*` value changes: `--color-brand-600` is now
+`#1d5fd0` (fit-ai `brand.primaryDeep`, was violet `#7c3aed`) and
+`--color-brand-500` is `#2e7bff` (fit-ai `brand.primary`). `--shadow-glow`
+follows the new brand.
+
+No variable was added, renamed, or removed — this package emits exactly what the
+contract holds, so the break is visual only. See the
+[`@willink-labs/tokens` 2.0.0 entry](../tokens/CHANGELOG.md) for why the primary
+action uses `#1d5fd0` rather than fit-ai's headline `#2e7bff` (white text on the
+latter is 3.89:1, below WCAG AA).
+
+Consumers that must stay violet pin `~1.9.0`; unlike the Tailwind preset, this
+package emits literals, so there is no single token to override here.
+
 ## [1.9.0] — 2026-06-26
 
 ### Added
