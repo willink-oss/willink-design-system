@@ -16,18 +16,18 @@
       "950": { "$value": "#020617", "$type": "color" }
     },
     "brand": {
-      "$description": "i-willink primary scale — vibrant violet. brand-600 #7c3aed = primary action, brand-500 = glow shadow base",
-      "50":  { "$value": "#f5f3ff", "$type": "color" },
-      "100": { "$value": "#ede9fe", "$type": "color" },
-      "200": { "$value": "#ddd6fe", "$type": "color" },
-      "300": { "$value": "#c4b5fd", "$type": "color" },
-      "400": { "$value": "#a78bfa", "$type": "color" },
-      "500": { "$value": "#8b5cf6", "$type": "color" },
-      "600": { "$value": "#7c3aed", "$type": "color" },
-      "700": { "$value": "#6d28d9", "$type": "color" },
-      "800": { "$value": "#5b21b6", "$type": "color" },
-      "900": { "$value": "#4c1d95", "$type": "color" },
-      "950": { "$value": "#2e1065", "$type": "color" }
+      "$description": "i-willink primary scale — fit-ai blue. Single hue (OKLCH H=260.6) through the two fit-ai brand anchors: brand-500 #2e7bff = fit-ai brand.primary (glow / ring / dark-mode hover), brand-600 #1d5fd0 = fit-ai brand.primaryDeep = primary action (white ink 5.83:1)",
+      "50":  { "$value": "#f0f6ff", "$type": "color" },
+      "100": { "$value": "#dbeaff", "$type": "color" },
+      "200": { "$value": "#bdd9ff", "$type": "color" },
+      "300": { "$value": "#94bfff", "$type": "color" },
+      "400": { "$value": "#5f9dff", "$type": "color" },
+      "500": { "$value": "#2e7bff", "$type": "color" },
+      "600": { "$value": "#1d5fd0", "$type": "color" },
+      "700": { "$value": "#144dad", "$type": "color" },
+      "800": { "$value": "#113f8e", "$type": "color" },
+      "900": { "$value": "#113573", "$type": "color" },
+      "950": { "$value": "#0b2045", "$type": "color" }
     },
     "blue": {
       "$description": "ClubLink primary + i-willink gradient secondary",
@@ -108,6 +108,6 @@
     "$description": "i-willink premium tech: soft for default, glow for primary action (brand-500 with 20% / 40% on hover)",
     "soft": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow", "$extensions": { "willink.dark": { "$value": "0 4px 20px -2px rgba(0, 0, 0, 0.4)" } } },
     "md":   { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05)", "$type": "shadow", "$extensions": { "willink.dark": { "$value": "0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.4)" } } },
-    "glow": { "$value": "0 0 20px -5px rgba(124, 58, 237, 0.3)", "$type": "shadow" }
+    "glow": { "$value": "0 0 20px -5px rgba(29, 95, 208, 0.3)", "$type": "shadow" }
   }
 }

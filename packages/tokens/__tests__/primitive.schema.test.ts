@@ -37,10 +37,25 @@ describe("primitive.json", () => {
     expect(primitive.color.neutral["950"].$value).toBe("#020617");
   });
 
-  it("brand scale is i-willink.com 準拠 (vibrant violet)", () => {
-    expect(primitive.color.brand["500"].$value).toBe("#8b5cf6");
-    expect(primitive.color.brand["600"].$value).toBe("#7c3aed");
-    expect(primitive.color.brand["700"].$value).toBe("#6d28d9");
+  // The two anchors are fit-ai's own brand tokens, reproduced exactly (2.0.0).
+  // Pinned because the ramp between them is generated: a regeneration that
+  // drifted off an anchor would recolor every i-Willink product at once, and
+  // nothing else in this repo would notice.
+  it("brand scale reproduces the fit-ai anchors exactly", () => {
+    expect(primitive.color.brand["500"].$value).toBe("#2e7bff"); // fit-ai brand.primary
+    expect(primitive.color.brand["600"].$value).toBe("#1d5fd0"); // fit-ai brand.primaryDeep
+    expect(primitive.color.brand["700"].$value).toBe("#144dad");
+  });
+
+  // `blue` is the generic scale and must NOT track the brand — before 2.0.0 the
+  // brand was violet, so "brand" and "blue" were obviously different things.
+  // Now that the brand is itself blue, this is the assertion that keeps the
+  // palette from collapsing into one hue.
+  it("the generic blue scale stays independent of the brand", () => {
+    expect(primitive.color.blue["600"].$value).toBe("#2563eb");
+    expect(primitive.color.blue["600"].$value).not.toBe(
+      primitive.color.brand["600"].$value,
+    );
   });
 
   it("has AI accent primitives (cyan + pink)", () => {

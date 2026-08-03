@@ -2,12 +2,49 @@
 
 All notable changes to `@willink-labs/tokens` will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project follows the **0.x semver convention** (minor bumps may include
-breaking changes; pin with `~0.12.0` for exact-minor stability). The npm packages
-in this monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
-`@willink-labs/react`) move in lockstep — every release bumps all three to the
-same minor.
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+Since 1.0.0 this project follows strict [SemVer 2.0](https://semver.org/)
+([ADR-0010](../../docs/adr/0010-semver-policy.md)). The npm packages in this
+monorepo (`@willink-labs/tokens`, `@willink-labs/tailwind-preset`,
+`@willink-labs/css-tokens`, `@willink-labs/react`) move in lockstep — every
+release bumps all four to the same version.
+
+## [2.0.0] — 2026-08-03
+
+### Changed — BREAKING: the brand is fit-ai blue, not violet
+
+The `color.brand` scale moves from the violet ramp (`brand-600 #7c3aed`) to a
+blue one derived from fit-ai's own brand tokens.
+
+| step | 1.9.0 | 2.0.0 | |
+|---|---|---|---|
+| `brand-500` | `#8b5cf6` | **`#2e7bff`** | = fit-ai `brand.primary` |
+| `brand-600` | `#7c3aed` | **`#1d5fd0`** | = fit-ai `brand.primaryDeep` |
+
+Those two steps are fit-ai's tokens reproduced **exactly**. The other nine are
+generated along the single OKLCH hue both anchors share (H = 260.6), so the ramp
+is one continuous scale rather than two palettes stitched together.
+
+`shadow.glow` follows the new `brand-600` (`rgba(29, 95, 208, 0.3)`).
+
+**Why `brand-600` is not fit-ai's headline `#2e7bff`.** White text on `#2e7bff`
+reaches only **3.89:1** — below WCAG AA. fit-ai itself ships
+`primary: #2e7bff / onPrimary: white` and carries that shortfall; adopting it
+verbatim would import the defect into every product at once. fit-ai already
+defines a deeper anchor for exactly this, so the primary action uses it:
+white on `#1d5fd0` is **5.83:1**, better than the 5.17:1 the violet ramp gave.
+fit-ai's headline colour keeps its identity role at `brand-500` — glow, ring,
+dark-mode hover, and the `secondary` fill (which pairs with dark ink, 5.18:1).
+
+**This is a visual break for every consumer.** Nothing in the API changed and no
+token was added or removed, so a build will not fail — the brand colour simply
+changes. Products that intend to stay violet must pin `~1.9.0` or override
+`--color-brand` (see `@willink-labs/tailwind-preset`, where one override still
+re-derives the whole ramp).
+
+`color.blue` is untouched and deliberately still `#2563eb` at 600: it is the
+generic scale, and now that the brand is itself blue, keeping the two distinct
+is what stops the palette collapsing into a single hue. A test asserts it.
 
 ## [1.9.0] — 2026-06-26
 

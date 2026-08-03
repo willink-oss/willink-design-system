@@ -32,17 +32,17 @@
   --color-neutral-800: #1e293b;
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
-  --color-brand-50: #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c4b5fd;
-  --color-brand-400: #a78bfa;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
-  --color-brand-950: #2e1065;
+  --color-brand-50: #f0f6ff;
+  --color-brand-100: #dbeaff;
+  --color-brand-200: #bdd9ff;
+  --color-brand-300: #94bfff;
+  --color-brand-400: #5f9dff;
+  --color-brand-500: #2e7bff;
+  --color-brand-600: #1d5fd0;
+  --color-brand-700: #144dad;
+  --color-brand-800: #113f8e;
+  --color-brand-900: #113573;
+  --color-brand-950: #0b2045;
   --color-blue-50: #eff6ff;
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
@@ -92,7 +92,7 @@
   --ease-emphasized: cubic-bezier(0.3, 0, 0, 1.1);
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 20px -5px rgba(124, 58, 237, 0.3);
+  --shadow-glow: 0 0 20px -5px rgba(29, 95, 208, 0.3);
 
   /* Group shorthand — `--color-brand` (no subscript) maps to brand-600.
    * Mirrors the convention in @willink-labs/tailwind-preset. */

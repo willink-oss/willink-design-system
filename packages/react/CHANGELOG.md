@@ -7,6 +7,26 @@ and this project follows strict [SemVer 2.0.0](https://semver.org/) since v1.0.0
 (per-surface classification rules in [ADR-0010](../../docs/adr/0010-semver-policy.md);
 pre-1.0 releases used the 0.x convention). Pin with `~1.8.0` for exact-minor stability.
 
+## [2.0.0] — 2026-08-03
+
+Lockstep bump — **no source change in this package**, and that is the design
+working rather than an omission: every component styles through semantic token
+classes, so the brand change lands without a single component being touched.
+
+### Changed — BREAKING (inherited): components render in fit-ai blue
+
+`@willink-labs/tokens` 2.0.0 replaces the violet brand ramp with one derived
+from fit-ai's brand anchors. Anything painted with a brand role — the primary
+`Button`, focus rings, `Badge` soft variants, the brand gradients — changes
+colour. No prop, class name, or export changed.
+
+All 287 tests pass unchanged, and the contrast gate passes in both modes: white
+on the new primary is 5.83:1, up from 5.17:1.
+
+See the [`@willink-labs/tokens` 2.0.0 entry](../tokens/CHANGELOG.md). To stay
+violet, override `--color-brand` in your `globals.css` — one line, because the
+preset re-derives the scale from it.
+
 ## [1.9.0] — 2026-06-26
 
 ### Added

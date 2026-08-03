@@ -2,7 +2,8 @@
  * @willink-labs/tailwind-preset
  *
  * Tailwind v4 preset for i-Willink Design System.
- * Single brand baseline = i-willink (vibrant violet, premium tech feel).
+ * Single brand baseline = i-willink (fit-ai blue). Changed in 2.0.0 — see the
+ * brand base block below.
  *
  * Usage (one line — that's all):
  *   @import "@willink-labs/tailwind-preset/preset.css";
@@ -50,12 +51,25 @@
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
 
-  /* === Brand base (vibrant violet — i-willink default) ===
+  /* === Brand base (fit-ai blue — i-willink default) ===
    * The brand axis center. Consumers override this single token to swap
    * the entire brand palette — the 50–950 scale below is derived from it
    * via color-mix(in oklch, …) so every step follows automatically.
+   *
+   * 2.0.0 changed this from the violet #7c3aed to fit-ai's own
+   * `brand.primaryDeep`. White text on it clears WCAG AA at 5.83:1 (the
+   * lighter `brand.primary` #2e7bff, which is what the token contract puts at
+   * brand-500, only reaches 3.89:1 and so cannot carry white labels).
+   *
+   * Known, pre-existing divergence: this preset *derives* the numeric scale
+   * from one input, while @willink-labs/tokens and @willink-labs/css-tokens
+   * carry per-step literals. The derived brand-500 is therefore close to, but
+   * not byte-identical with, the contract's #2e7bff. That trade dates to
+   * 0.11.0 and is what lets a consumer re-brand by setting one token; nothing
+   * here makes it worse, but it does mean the preset is the one surface where
+   * fit-ai's exact accent is approximated rather than reproduced.
    */
-  --color-brand: #7c3aed;
+  --color-brand: #1d5fd0;
 
   /* === Brand scale (50–950) — OKLCH-derived from --color-brand (0.11.0+)
    * Mix ratios are tuned so the derived scale closely matches Tailwind's
@@ -194,7 +208,7 @@
   /* === Shadow === */
   --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
   --shadow-md:   0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 20px -5px rgba(124, 58, 237, 0.3);
+  --shadow-glow: 0 0 20px -5px rgba(29, 95, 208, 0.3);
 
   /* === Motion primitives (consumer override base) === */
   --duration-fast:    150ms;
