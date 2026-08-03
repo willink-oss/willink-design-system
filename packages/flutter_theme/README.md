@@ -1,5 +1,21 @@
 # willink_theme
 
+> ## ⚠️ Discontinued — use [`pulse_theme`](https://pub.dev/packages/pulse_theme) instead
+>
+> i-Willink's Flutter design system is now **PULSE**
+> ([willink-oss/pulse_theme](https://github.com/willink-oss/pulse_theme)). PULSE is
+> mobile-first, code-generates its tokens from the same `@willink-labs/tokens`
+> contract this package hand-mirrored, and is where every future change lands.
+>
+> **This package will not receive token updates or new components.** 1.5.0 keeps
+> working and keeps resolving; only a security issue would produce another release.
+>
+> Migrating is mostly a rename (`Willink*` → `Pulse*`) — see the
+> [migration guide](https://github.com/willink-oss/willink-design-system/blob/main/docs/MIGRATION-willink-theme-to-pulse.md).
+> The one step that fails *silently* if done wrong is re-branding: pass your
+> `ColorScheme` **to** `PulseTheme.light(colorScheme: …)` rather than
+> `copyWith`-ing it onto the built theme.
+
 Material 3 theme for i-Willink Design System Flutter apps — `ThemeData` factory,
 spacing / token constants, and **9 brand-aware components** on a single-brand
 baseline. The Flutter counterpart of

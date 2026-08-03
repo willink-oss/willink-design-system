@@ -10,7 +10,8 @@ i-Willink 企業デザインシステム。トークン駆動で全プロダク�
 
 - **何を統一するか**: 配色 (brand / semantic) / タイポ / 角丸 / 影 / モーション / スペーシング
 - **誰が consumer か**: i-willink.com / clublink-platform / その他自社プロダクト全般
-- **どう配布するか**: npmjs.org public (`@willink-labs/*` scope・OIDC Trusted Publisher) + pub.dev (`willink_theme`・OIDC Trusted Publisher) — auth / PAT 不要
+- **どう配布するか**: npmjs.org public (`@willink-labs/*` scope・OIDC Trusted Publisher) — auth / PAT 不要
+- **Flutter / モバイルは?**: このリポジトリでは扱わない。[PULSE](https://github.com/willink-oss/pulse_theme) (`pulse_theme` on pub.dev) が Flutter の正であり、同じトークン契約を消費する ([ADR-0022](./docs/adr/0022-pulse-supersedes-willink-theme.md))
 
 ## Packages
 
@@ -20,7 +21,16 @@ i-Willink 企業デザインシステム。トークン駆動で全プロダク�
 | `@willink-labs/tailwind-preset` | Tailwind v4 `@theme` で CSS 変数を吐く preset (willink baseline・consumer 側で `:root` override で色変更可) |
 | `@willink-labs/css-tokens` | Framework-agnostic CSS variables 出力 (Tailwind 非ユーザー / Astro / Vue / Svelte 用)。**WordPress の公式 consumption path** ([ADR-0014](./docs/adr/0014-wordpress-consumption.md)・esperanza-wp-theme / wp-modern-starter-kit で pilot 済・専用 WP package は作らない) — 0.13.0 新設 |
 | `@willink-labs/react` | shadcn/ui を semantic token に書き換えた React コンポーネント (**42 components**・Storybook catalog 付き) |
-| `willink_theme` (pub.dev) | Material 3 ThemeData + **9 Flutter components** (Button / EmptyState / ErrorState / LoadingState / SectionCard / TabBar / BottomSheet / SnackBar / ProgressIndicator) — npm とは独立 versioning ([ADR-0011](./docs/adr/0011-flutter-independent-versioning.md)) |
+| ~~`willink_theme` (pub.dev)~~ | **廃止**。Flutter DS は [PULSE](https://github.com/willink-oss/pulse_theme) に移管した。新規採用も既存移行も `pulse_theme` を使う — [ADR-0022](./docs/adr/0022-pulse-supersedes-willink-theme.md) / [移行ガイド](./docs/MIGRATION-willink-theme-to-pulse.md) |
+
+このリポジトリ**以外**で公開されている、同じトークン契約を消費するパッケージ:
+
+| パッケージ | リポジトリ | 役割 |
+|---|---|---|
+| `pulse_theme` (pub.dev) | [willink-oss/pulse_theme](https://github.com/willink-oss/pulse_theme) | PULSE の Flutter バインディング — Material 3 ThemeData + 9 components。Dart のトークンクラスは `@willink-labs/tokens` から codegen される |
+| `@willink-labs/pulse` (npm) | 同上 | PULSE の Web バインディング — `--pulse-*` CSS 変数。`css-tokens` が生トークンの投影なのに対し、こちらは PULSE 独自のセマンティック層 (radius roles / tap-target 契約) を持つ。`--pulse-` prefix なので同一文書で共存できる |
+
+> `@willink-labs` scope でありながらこのモノレポに無いのは意図的。PULSE のトークンは `@willink-labs/tokens` から生成されるが、**PULSE 自身の決定**（セマンティック radius など）は PULSE が所有するので、両バインディングが 1 リポジトリ・1 タグで一緒に出る。
 
 ## Quick start (consumer 側)
 
@@ -107,10 +117,10 @@ OS 設定に自動追従（`prefers-color-scheme`）。明示制御は `<html da
 `fg`（最強の本文）と `muted`（最弱の補助）の間に **5 段の foreground emphasis role** を追加。Tailwind では `text-fg-strong` / `text-fg-emphasis` / `text-fg-secondary` / `text-fg-subtle` / `text-fg-faint`、非 Tailwind は `@willink-labs/css-tokens` の `--color-fg-*` 変数で消費。全段が neutral step alias なので dark mode で自動 flip する。contrast 契約は role 別（strong/emphasis ≥ 7 AAA、secondary ≥ 4.5 AA、subtle/faint は本文用途外の documented baseline）— 詳細は [ADR-0016](./docs/adr/0016-text-emphasis-roles.md)。consumer は自前の `text-neutral-*` / local `fg-*` を `text-fg-*` に置き換え可能。
 
 ```dart
-// Flutter 側 (willink_theme 1.5.0+)
+// Flutter 側 — PULSE (pulse_theme)。同じ semantic role を Material 3 に射影する
 MaterialApp(
-  theme: WillinkTheme.willink(),
-  darkTheme: WillinkTheme.willinkDark(),
+  theme: PulseTheme.light(),
+  darkTheme: PulseTheme.dark(),
   themeMode: ThemeMode.system,
 )
 ```
