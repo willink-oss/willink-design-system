@@ -13,7 +13,7 @@ This is the design system that powers i-Willink products (Next.js apps, Flutter 
 | `packages/tokens` | DTCG-compatible JSON tokens (primitive + semantic). Single source of truth. |
 | `packages/tailwind-preset` | Tailwind v4 `@theme` preset (willink baseline). Consumers customize via `:root { --color-brand: ... }` override. |
 | `packages/react` | shadcn-inspired React components on Radix primitives. 39 components shipped in 1.8.0 (+ Command / NavigationMenu / Menubar unreleased for 1.9.0 = 42 total). |
-| `packages/flutter_theme` | Material 3 `ThemeData` factory + 9 Flutter components (EmptyState / ErrorState / LoadingState / SectionCard / WillinkButton / TabBar / BottomSheet / SnackBar / ProgressIndicator). Published to pub.dev as `willink_theme`. |
+| `packages/flutter_theme` | **Deprecated.** Published to pub.dev as `willink_theme`, superseded by [PULSE](https://github.com/willink-oss/pulse_theme) ([ADR-0022](./docs/adr/0022-pulse-supersedes-willink-theme.md)). Kept in-tree for history and for security-only patches to the last release; **new Flutter work goes to `pulse_theme`, not here.** |
 
 ---
 
@@ -101,7 +101,7 @@ No PR to this repo is required for consumer-side color overrides. PRs to change 
 Two independent release channels ([ADR-0011](./docs/adr/0011-flutter-independent-versioning.md)):
 
 - **npm group** — `tokens` / `tailwind-preset` / `css-tokens` / `react` move in **lockstep**: one release PR bumps all four to the same version; packages without source changes get an explicit lockstep-marker CHANGELOG entry. Tag `vX.Y.Z` publishes all four via OIDC Trusted Publisher.
-- **`willink_theme`** — versions independently. Flutter PRs bump `pubspec.yaml` + CHANGELOG per change; tag `flutter-vX.Y.Z` publishes to pub.dev via OIDC Trusted Publisher.
+- **`willink_theme`** — **deprecated; no further feature releases.** It versioned independently via `flutter-vX.Y.Z` tags, and that path still works for a security-only patch to the last release. Flutter feature work belongs to [PULSE](https://github.com/willink-oss/pulse_theme), which releases from its own repo ([ADR-0022](./docs/adr/0022-pulse-supersedes-willink-theme.md)).
 
 Cut procedure (what must be verified is defined in [ADR-0012](./docs/adr/0012-release-verification-policy.md), Layer 2):
 
@@ -121,7 +121,8 @@ Two channels per registry ([ADR-0019](./docs/adr/0019-autonomous-beta-channel.md
 
   ```bash
   npm i @willink-labs/react@beta        # npm consumers
-  # pubspec.yaml:  willink_theme: 1.6.0-beta.1   # Flutter consumers pin explicitly
+  # Flutter consumers pin explicitly, in the PULSE repo's own release flow:
+  # pubspec.yaml:  pulse_theme: 1.1.0-beta.1
   ```
 
 The version string decides the channel: a SemVer pre-release (`X.Y.Z-beta.N`) routes to a non-`latest` dist-tag; `publish.yml` enforces this and refuses to publish a pre-release to `latest`. A normal `^`-constraint never auto-upgrades to a beta.
