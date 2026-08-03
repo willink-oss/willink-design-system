@@ -24,17 +24,21 @@ class WillinkPrimitives {
   static const Color neutral950 = Color(0xFF020617);
 
   // === Brand (vibrant violet — i-Willink default) ===
-  static const Color brand50 = Color(0xFFF5F3FF);
-  static const Color brand100 = Color(0xFFEDE9FE);
-  static const Color brand200 = Color(0xFFDDD6FE);
-  static const Color brand300 = Color(0xFFC4B5FD);
-  static const Color brand400 = Color(0xFFA78BFA);
-  static const Color brand500 = Color(0xFF8B5CF6);
-  static const Color brand600 = Color(0xFF7C3AED);
-  static const Color brand700 = Color(0xFF6D28D9);
-  static const Color brand800 = Color(0xFF5B21B6);
-  static const Color brand900 = Color(0xFF4C1D95);
-  static const Color brand950 = Color(0xFF2E1065);
+  // fit-ai blue since tokens 2.0.0 (was violet). This package is deprecated in
+  // favour of PULSE (ADR-0022) and takes no feature releases — the mirror is
+  // updated anyway because `tokens_sync_test.dart` holds it to the SSOT, and a
+  // deprecated package is still allowed to be self-consistent.
+  static const Color brand50 = Color(0xFFF0F6FF);
+  static const Color brand100 = Color(0xFFDBEAFF);
+  static const Color brand200 = Color(0xFFBDD9FF);
+  static const Color brand300 = Color(0xFF94BFFF);
+  static const Color brand400 = Color(0xFF5F9DFF);
+  static const Color brand500 = Color(0xFF2E7BFF);
+  static const Color brand600 = Color(0xFF1D5FD0);
+  static const Color brand700 = Color(0xFF144DAD);
+  static const Color brand800 = Color(0xFF113F8E);
+  static const Color brand900 = Color(0xFF113573);
+  static const Color brand950 = Color(0xFF0B2045);
 
   // === Blue (general-purpose · consumer override で brand を blue 系にしたい時の primitive) ===
   static const Color blue50 = Color(0xFFEFF6FF);

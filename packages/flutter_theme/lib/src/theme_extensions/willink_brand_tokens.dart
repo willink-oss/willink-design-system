@@ -162,7 +162,7 @@ class WillinkBrandTokens extends ThemeExtension<WillinkBrandTokens> {
   /// is brand-colored, not black-anchored, so it reads on both surfaces.
   static const List<BoxShadow> _willinkShadowGlow = [
     BoxShadow(
-      color: Color(0x4C7C3AED), // rgba(124, 58, 237, 0.3)
+      color: Color(0x4C1D5FD0), // rgba(29, 95, 208, 0.3) — brand-600 @ 30%
       offset: Offset(0, 0),
       blurRadius: 20,
       spreadRadius: -5,
