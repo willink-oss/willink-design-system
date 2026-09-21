@@ -268,8 +268,8 @@ importers:
         specifier: workspace:*
         version: link:../tokens
       axe-core:
-        specifier: ^4.12.1
-        version: 4.12.1
+        specifier: ^4.13.0
+        version: 4.13.0
       jest-axe:
         specifier: ^10.0.0
         version: 10.0.0
