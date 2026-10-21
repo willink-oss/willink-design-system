@@ -1,6 +1,6 @@
 # Accessibility — WCAG 2.1 AA Compliance Matrix
 
-> Coverage as of 0.13.0 (2026-05-17). Each cell records the result of static review + automated `jest-axe` checks + manual keyboard / screen-reader smoke tests. "Pass" means the requirement is met as the component is shipped; consumer-side mis-use (missing labels, low-contrast token override, etc.) can still cause a fail.
+> Coverage as of npm lockstep 1.9.0 (React / tailwind-preset / tokens / css-tokens) + Flutter willink_theme 1.5.0 (2026-07-07). Each cell records the result of static review + automated `jest-axe` checks + manual keyboard / screen-reader smoke tests. "Pass" means the requirement is met as the component is shipped; consumer-side mis-use (missing labels, low-contrast token override, etc.) can still cause a fail.
 
 ## Success criteria audited
 
